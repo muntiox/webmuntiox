@@ -20,7 +20,6 @@ import { Route as WorkEspigaRouteImport } from './routes/work/espiga'
 import { Route as WorkCommo2RouteImport } from './routes/work/commo2'
 import { Route as BlogPost2RouteImport } from './routes/blog/post-2'
 import { Route as BlogPost1RouteImport } from './routes/blog/post-1'
-import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
@@ -77,11 +76,6 @@ const BlogPost1Route = BlogPost1RouteImport.update({
   path: '/post-1',
   getParentRoute: () => BlogRoute,
 } as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -90,7 +84,6 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/purpose': typeof PurposeRoute
   '/resume': typeof ResumeRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
   '/work/commo2': typeof WorkCommo2Route
@@ -104,7 +97,6 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/purpose': typeof PurposeRoute
   '/resume': typeof ResumeRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
   '/work/commo2': typeof WorkCommo2Route
@@ -119,7 +111,6 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/purpose': typeof PurposeRoute
   '/resume': typeof ResumeRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
   '/work/commo2': typeof WorkCommo2Route
@@ -135,7 +126,6 @@ export interface FileRouteTypes {
     | '/projects'
     | '/purpose'
     | '/resume'
-    | '/blog/$slug'
     | '/blog/post-1'
     | '/blog/post-2'
     | '/work/commo2'
@@ -149,7 +139,6 @@ export interface FileRouteTypes {
     | '/projects'
     | '/purpose'
     | '/resume'
-    | '/blog/$slug'
     | '/blog/post-1'
     | '/blog/post-2'
     | '/work/commo2'
@@ -163,7 +152,6 @@ export interface FileRouteTypes {
     | '/projects'
     | '/purpose'
     | '/resume'
-    | '/blog/$slug'
     | '/blog/post-1'
     | '/blog/post-2'
     | '/work/commo2'
@@ -262,24 +250,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogPost1RouteImport
       parentRoute: typeof BlogRoute
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
-    }
   }
 }
 
 interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
   BlogPost1Route: typeof BlogPost1Route
   BlogPost2Route: typeof BlogPost2Route
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
   BlogPost1Route: BlogPost1Route,
   BlogPost2Route: BlogPost2Route,
 }
