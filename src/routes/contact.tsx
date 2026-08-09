@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 
 export const Route = createFileRoute('/contact')({
-  component: ContactPage,
+  component: () => <div style={{background:'#070709', color:'white', minHeight:'100vh', padding:'2rem'}}>TEST</div>,
 })
 
 function FloatingNav() {
@@ -55,6 +55,7 @@ function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setSubmitted(true)
     const form = e.currentTarget
     const formData = new FormData(form)
     fetch('/contact.html', {
