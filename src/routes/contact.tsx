@@ -122,7 +122,7 @@ function ContactPage() {
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: '0.95rem',
             fontWeight: 300,
-            color: 'rgba(242,238,231,0.9)',
+            color: 'rgba(242,238,231,0.7)',
             lineHeight: 1.8,
             marginBottom: '3rem',
           }}
@@ -148,12 +148,10 @@ function ContactPage() {
             name="contact"
             method="POST"
             data-netlify="true"
-            netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="contact-form"
           >
             <input type="hidden" name="form-name" value="contact" />
-            <p hidden><label>No rellenar: <input name="bot-field" /></label></p>
 
             <div className="form-group">
               <label htmlFor="name" className="form-label">Name</label>
