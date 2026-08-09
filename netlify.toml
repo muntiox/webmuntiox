@@ -1,14 +1,6 @@
 [build]
-  command = "vite build"
-  publish = "dist/client"
-
-[dev]
-  command = "npm run dev"
-  targetPort = 3000
-  port = 8888
-
-[build.environment]
-  NETLIFY_USE_DETECTED_FRAMEWORK = "false"
+  command = "npm run build"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
