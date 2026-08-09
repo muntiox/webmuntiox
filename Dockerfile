@@ -7,7 +7,7 @@ RUN npm run build
 
 FROM node:lts-alpine
 WORKDIR /app
-COPY --from=build /app/.output ./.output
+COPY --from=build /app/dist ./dist
 COPY --from=build /app/package*.json ./
 EXPOSE 3000
 CMD ["node", "dist/server/server.js"]
