@@ -10,4 +10,4 @@ WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package*.json ./
 EXPOSE 3000
-CMD ["node", "dist/server/server.js"]
+CMD ["sh", "-c", "node dist/server/server.js 2>&1"]
