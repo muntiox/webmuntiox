@@ -186,7 +186,15 @@ function Nav() {
 // ── MUNTIOX intro + Hero ─────────────────────────────────────────────
 type HeroPhase = 'muntiox' | 'flash' | 'content'
 function Hero() {
-  const [phase, setPhase] = useState<HeroPhase>('muntiox')
+  const [phase, setPhase] = useState<HeroPhase>('content')
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('introSeen')) {
+      setPhase('muntiox')
+    }
+    setReady(true)
+  }, [])
 
   useEffect(() => {
     if (phase === 'muntiox' || phase === 'flash') {
@@ -211,6 +219,7 @@ function Hero() {
     if (phase !== 'muntiox') return
     const a = audioRef.current
     if (a) { a.currentTime = 0; a.play().catch(() => {}) }
+    sessionStorage.setItem('introSeen', '1')
     setPhase('flash')
     setTimeout(() => setPhase('content'), 500)
   }
@@ -224,6 +233,8 @@ function Hero() {
       window.removeEventListener('keydown', triggerFlash)
     }
   }, [phase])
+
+  if (!ready) return <section className="mxo-hero" style={{ background: '#070709' }} />
 
   return (
     <section className="mxo-hero">
@@ -264,7 +275,7 @@ function Hero() {
       {/* Normal content after flash */}
       {phase === 'content' && (
         <div className="mxo-hero-content pre-flash-hide" style={{ animation: 'mxoFadeIn 0.6s ease forwards' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 700, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>
           <p className="mxo-statement">
             Creative strategy<br/>
             <CorrectionOnly /><br/>
