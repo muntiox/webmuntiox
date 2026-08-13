@@ -18,6 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkRccoonRouteImport } from './routes/work/rccoon'
 import { Route as WorkEspigaRouteImport } from './routes/work/espiga'
 import { Route as WorkCommo2RouteImport } from './routes/work/commo2'
+import { Route as BlogPost3RouteImport } from './routes/blog/post-3'
 import { Route as BlogPost2RouteImport } from './routes/blog/post-2'
 import { Route as BlogPost1RouteImport } from './routes/blog/post-1'
 
@@ -66,6 +67,11 @@ const WorkCommo2Route = WorkCommo2RouteImport.update({
   path: '/work/commo2',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogPost3Route = BlogPost3RouteImport.update({
+  id: '/post-3',
+  path: '/post-3',
+  getParentRoute: () => BlogRoute,
+} as any)
 const BlogPost2Route = BlogPost2RouteImport.update({
   id: '/post-2',
   path: '/post-2',
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/resume': typeof ResumeRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
+  '/blog/post-3': typeof BlogPost3Route
   '/work/commo2': typeof WorkCommo2Route
   '/work/espiga': typeof WorkEspigaRoute
   '/work/rccoon': typeof WorkRccoonRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/resume': typeof ResumeRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
+  '/blog/post-3': typeof BlogPost3Route
   '/work/commo2': typeof WorkCommo2Route
   '/work/espiga': typeof WorkEspigaRoute
   '/work/rccoon': typeof WorkRccoonRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/resume': typeof ResumeRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
+  '/blog/post-3': typeof BlogPost3Route
   '/work/commo2': typeof WorkCommo2Route
   '/work/espiga': typeof WorkEspigaRoute
   '/work/rccoon': typeof WorkRccoonRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/resume'
     | '/blog/post-1'
     | '/blog/post-2'
+    | '/blog/post-3'
     | '/work/commo2'
     | '/work/espiga'
     | '/work/rccoon'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/resume'
     | '/blog/post-1'
     | '/blog/post-2'
+    | '/blog/post-3'
     | '/work/commo2'
     | '/work/espiga'
     | '/work/rccoon'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/resume'
     | '/blog/post-1'
     | '/blog/post-2'
+    | '/blog/post-3'
     | '/work/commo2'
     | '/work/espiga'
     | '/work/rccoon'
@@ -236,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkCommo2RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/post-3': {
+      id: '/blog/post-3'
+      path: '/post-3'
+      fullPath: '/blog/post-3'
+      preLoaderRoute: typeof BlogPost3RouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/blog/post-2': {
       id: '/blog/post-2'
       path: '/post-2'
@@ -256,11 +275,13 @@ declare module '@tanstack/react-router' {
 interface BlogRouteChildren {
   BlogPost1Route: typeof BlogPost1Route
   BlogPost2Route: typeof BlogPost2Route
+  BlogPost3Route: typeof BlogPost3Route
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogPost1Route: BlogPost1Route,
   BlogPost2Route: BlogPost2Route,
+  BlogPost3Route: BlogPost3Route,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
