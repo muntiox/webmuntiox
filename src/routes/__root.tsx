@@ -1,7 +1,6 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect } from 'react'
 import '../styles.css'
-
 export const Route = createRootRoute({
   notFoundComponent: () => (
     <div style={{ minHeight: '100vh', background: '#070709', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '2rem' }}>
@@ -12,12 +11,15 @@ export const Route = createRootRoute({
   ),
   component: RootComponent,
 })
-
 function RootComponent() {
   useEffect(() => {
     document.body.classList.add('flash-triggered')
     document.body.classList.add('nav-lit')
   }, [])
-
+  // Add classes immediately before React hydrates
+  if (typeof document !== 'undefined') {
+    document.body.classList.add('flash-triggered')
+    document.body.classList.add('nav-lit')
+  }
   return <Outlet />
 }
