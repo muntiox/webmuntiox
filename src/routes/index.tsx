@@ -1,11 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-
 export const Route = createFileRoute('/')(
   { component: Portfolio }
 )
-
-// ── Keyboard click ───────────────────────────────────────────────────
 function playKeyClick() {
   try {
     const kctx = new (window.AudioContext || (window as any).webkitAudioContext)()
@@ -18,8 +15,6 @@ function playKeyClick() {
     src.connect(f); f.connect(g); g.connect(kctx.destination); src.start()
   } catch(e) {}
 }
-
-// ── Correction animation ─────────────────────────────────────────────
 type CorrectionPhase = 'idle' | 'typing-wrong' | 'striking' | 'erasing' | 'typing-only' | 'done'
 function CorrectionOnly() {
   const [phase, setPhase] = useState<CorrectionPhase>('idle')
@@ -28,9 +23,7 @@ function CorrectionOnly() {
   const wrong = 'for brands'; const only = 'only for brands'
   useEffect(() => {
     const start = () => setTimeout(() => setPhase('typing-wrong'), 600)
-    // Already triggered (return visitor via sessionStorage)
     if (document.body.classList.contains('flash-triggered')) { start(); return }
-    // Wait for flash trigger
     const obs = new MutationObserver(() => {
       if (document.body.classList.contains('flash-triggered')) { obs.disconnect(); start() }
     })
@@ -68,8 +61,6 @@ function CorrectionOnly() {
     </span>
   )
 }
-
-// ── Grain ────────────────────────────────────────────────────────────
 function Grain() {
   return (
     <svg className="mxo-grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -78,8 +69,6 @@ function Grain() {
     </svg>
   )
 }
-
-// ── Electric cursor ──────────────────────────────────────────────────
 function ElectricCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
@@ -106,8 +95,6 @@ function ElectricCursor() {
     </>
   )
 }
-
-// ── Lightning canvas ─────────────────────────────────────────────────
 function Lightning() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
@@ -116,12 +103,8 @@ function Lightning() {
     canvas.width = window.innerWidth; canvas.height = window.innerHeight
     const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
     window.addEventListener('resize', resize)
-
     function bolt(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, roughness: number, depth: number) {
-      if (depth === 0) {
-        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke()
-        return
-      }
+      if (depth === 0) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); return }
       const mx = (x1 + x2) / 2 + (Math.random() - 0.5) * roughness
       const my = (y1 + y2) / 2 + (Math.random() - 0.5) * roughness * 0.3
       bolt(ctx, x1, y1, mx, my, roughness / 2, depth - 1)
@@ -134,17 +117,13 @@ function Lightning() {
         ctx.globalAlpha = 1
       }
     }
-
     let raf: number
     let timer: ReturnType<typeof setTimeout>
-
     const flash = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       const x = Math.random() * canvas.width
       ctx.strokeStyle = Math.random() > 0.5 ? 'rgba(139,0,255,0.85)' : 'rgba(0,200,255,0.75)'
-      ctx.lineWidth = 1.5
-      ctx.shadowBlur = 12
-      ctx.shadowColor = ctx.strokeStyle
+      ctx.lineWidth = 1.5; ctx.shadowBlur = 12; ctx.shadowColor = ctx.strokeStyle
       bolt(ctx, x, 0, x + (Math.random() - 0.5) * 200, canvas.height * (0.4 + Math.random() * 0.5), 120, 7)
       ctx.shadowBlur = 0
       setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 80)
@@ -155,35 +134,6 @@ function Lightning() {
   }, [])
   return <canvas ref={canvasRef} className="mxo-lightning" aria-hidden />
 }
-
-// ── Wave divider ─────────────────────────────────────────────────────
-function Wave({ flip = false }: { flip?: boolean }) {
-  return (
-    <div className={`mxo-wave ${flip ? 'mxo-wave--flip' : ''}`}>
-      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1350,20 1440,40 L1440,80 L0,80 Z" fill="rgba(139,0,255,0.06)"/>
-        <path d="M0,50 C200,20 400,70 600,50 C800,30 1000,70 1200,50 C1320,38 1380,55 1440,50" fill="none" stroke="rgba(139,0,255,0.25)" strokeWidth="1"/>
-      </svg>
-    </div>
-  )
-}
-
-// ── Marquee ──────────────────────────────────────────────────────────
-function Marquee() {
-  const items = ['Creative Strategy','×','Content Creation','×','Digital Strategy','×','Brand Identity','×','Community Building','×','MUNTIOX','×','Ethical Brands','×','Real Impact','×']
-  const doubled = [...items, ...items]
-  return (
-    <div className="mxo-marquee-outer">
-      <div className="mxo-marquee-track">
-        {doubled.map((item, i) => (
-          <span key={i} className="mxo-marquee-item">{item === '×' ? <span>×</span> : item}</span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-// ── Full-screen nav ──────────────────────────────────────────────────
 function Nav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -202,7 +152,6 @@ function Nav() {
         <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
         <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
       </button>
-
       {open && (
         <div className="mxo-fullnav" onClick={() => setOpen(false)}>
           <button className="mxo-fullnav-close" onClick={() => setOpen(false)} aria-label="Close">✕</button>
@@ -222,27 +171,16 @@ function Nav() {
     </>
   )
 }
-
-// ── Hero ─────────────────────────────────────────────────────────────
 function Hero() {
   return (
     <section className="mxo-hero">
-      {/* Background photos */}
       <video className="mxo-hero-video" autoPlay muted loop playsInline preload="none">
         <source src="/videos/hero.mp4" type="video/mp4"/>
       </video>
       <video className="mxo-hero-clouds" autoPlay muted loop playsInline preload="none">
         <source src="/videos/clouds.mp4" type="video/mp4"/>
       </video>
-      <video className="mxo-hero-video" autoPlay muted loop playsInline preload="none">
-        <source src="/videos/hero.mp4" type="video/mp4"/>
-      </video>
-      <video className="mxo-hero-clouds" autoPlay muted loop playsInline preload="none">
-        <source src="/videos/clouds.mp4" type="video/mp4"/>
-      </video>
-      {/* Electric glow */}
       <div className="mxo-hero-glow" />
-
       <div className="mxo-hero-content pre-flash-hide">
         <p className="mxo-statement">
           Creative strategy <CorrectionOnly /><br/>
@@ -257,8 +195,12 @@ function Hero() {
     </section>
   )
 }
-
-// ── Portfolio root ───────────────────────────────────────────────────
+// ── Latest post — update this when you publish a new post ────────────
+const latestPost = {
+  date: '13/08/26',
+  title: 'Make your time count',
+  description: 'We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?',
+}
 function Portfolio() {
   return (
     <>
@@ -267,20 +209,19 @@ function Portfolio() {
       <Nav/>
       <main>
         <Hero/>
-        <div className="pre-flash-hide">
-        </div>
-      </main>
-        <Reveal><div style={{ position: 'relative', zIndex: 2, padding: '5rem clamp(1.5rem, 5vw, 5rem)', borderTop: '1px solid rgba(237,234,226,0.08)' }} className="pre-flash-hide">
+        <div className="pre-flash-hide" style={{ position: 'relative', zIndex: 2, padding: '5rem clamp(1.5rem, 5vw, 5rem)', borderTop: '1px solid rgba(237,234,226,0.08)' }}>
           <p className="mxo-eyebrow">Latest writing</p>
-          <a href="/blog" style={{ textDecoration: 'none', color: 'inherit', display: 'block', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', maxWidth: '720px', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
+          <a href="/blog"
+            style={{ textDecoration: 'none', color: 'inherit', display: 'block', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', maxWidth: '720px', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = '#c86c2e'; e.currentTarget.style.background = 'rgba(200,108,46,0.08)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.2)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(237,234,226,0.12)'; e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
-            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#edeae2', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>Make your time count</h3>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', maxWidth: '600px', marginBottom: '1.5rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · {latestPost.date}</p>
+            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#edeae2', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>{latestPost.title}</h3>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', maxWidth: '600px', marginBottom: '1.5rem' }}>{latestPost.description}</p>
             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read →</span>
           </a>
-        </div></Reveal>
+        </div>
+      </main>
       <footer className="mxo-footer pre-flash-hide">
         <p className="mxo-footer-copy">© {new Date().getFullYear()} Itxaso Muntión — MUNTIOX</p>
       </footer>
