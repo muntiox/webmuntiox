@@ -227,12 +227,20 @@ function Nav() {
 function Hero() {
   return (
     <section className="mxo-hero">
+      {/* Background photos */}
       <video className="mxo-hero-video" autoPlay muted loop playsInline preload="none" style={{ filter: 'brightness(2) saturate(0)' }}>
         <source src="/videos/hero.mp4" type="video/mp4"/>
       </video>
       <video className="mxo-hero-clouds" autoPlay muted loop playsInline preload="none">
         <source src="/videos/clouds.mp4" type="video/mp4"/>
       </video>
+      <video className="mxo-hero-video" autoPlay muted loop playsInline preload="none" style={{ filter: 'brightness(2) saturate(0)' }}>
+        <source src="/videos/hero.mp4" type="video/mp4"/>
+      </video>
+      <video className="mxo-hero-clouds" autoPlay muted loop playsInline preload="none">
+        <source src="/videos/clouds.mp4" type="video/mp4"/>
+      </video>
+      {/* Electric glow */}
 
       <div className="mxo-hero-content pre-flash-hide">
         <p className="mxo-statement">
