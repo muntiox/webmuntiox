@@ -375,13 +375,16 @@ function Portfolio() {
         <Reveal><div className="mxo-featured pre-flash-hide" style={{ borderTop: '1px solid rgba(237,234,226,0.08)' }}>
           <p className="mxo-eyebrow">Latest writing</p>
           <a href="/blog"
-            style={{ textDecoration: 'none', color: 'inherit', display: 'block', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', maxWidth: '720px', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
+            style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '340px 1fr', gap: '3rem', alignItems: 'center', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = '#c86c2e'; e.currentTarget.style.background = 'rgba(200,108,46,0.08)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.2)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(237,234,226,0.12)'; e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
-            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#edeae2', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>Make your time count</h3>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', maxWidth: '600px', marginBottom: '1.5rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
-            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read →</span>
+            <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '320px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
+            <div>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
+              <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 400, color: '#edeae2', lineHeight: 1.05, letterSpacing: '0.02em', marginBottom: '1.2rem' }}>Make your time count</h3>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', marginBottom: '1.5rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read →</span>
+            </div>
           </a>
         </div></Reveal>
       </main>
