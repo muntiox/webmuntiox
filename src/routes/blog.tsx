@@ -1,10 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-
 export const Route = createFileRoute('/blog')({
   component: BlogPage,
 })
-
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -15,7 +13,6 @@ function FloatingNav() {
   ]
   return (
     <>
-      {/* Home top left */}
       <a href="/" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
         letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.6)',
@@ -48,7 +45,6 @@ function FloatingNav() {
     </>
   )
 }
-
 function Post({ post, onClose }: { post: any; onClose: () => void }) {
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
@@ -57,48 +53,37 @@ function Post({ post, onClose }: { post: any; onClose: () => void }) {
           mixBlendMode: 'normal', opacity: 0.5, filter: 'brightness(1)', zIndex: 0, pointerEvents: 'none' }}>
         <source src="/videos/blog.mp4" type="video/mp4"/>
       </video>
-
       <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100 }}>
         <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#c86c2e', padding: '0.6rem 1.2rem', border: 'none', cursor: 'pointer' }}>← Back</button>
       </div>
-
       <article style={{ maxWidth: '720px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '2rem' }}>Essay · {post.date}</p>
-
         <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#edeae2', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '3rem' }}>{post.title}</h1>
-
         {post.content.map((p: string, i: number) => (
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-
         <blockquote style={{ borderLeft: '3px solid #c86c2e', padding: '1.2rem 0 1.2rem 2rem', margin: '3rem 0', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#edeae2', lineHeight: 1.3, letterSpacing: '0.02em' }}>
           {post.quote}
         </blockquote>
-
         {post.content2.map((p: string, i: number) => (
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-
         <div style={{ margin: '3rem 0' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '0.5rem' }}>Worth watching</p>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(237,234,226,0.4)', marginBottom: '1rem', fontStyle: 'italic' }}>{post.videoLabel}</p>
           <iframe src={post.videoSrc} style={{ width: '100%', aspectRatio: '16/9', border: 'none' }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
         </div>
-
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#edeae2', marginBottom: '1.8rem' }}>{post.closing}</p>
-
         <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(237,234,226,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.5)', background: 'none', border: 'none', cursor: 'pointer' }}>← All posts</button>
-          <a href={post.cta.href} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: post.id === 2 ? 'rgba(237,234,226,0.5)' : '#c86c2e', textDecoration: 'none' }}><span style={{ color: post.id === 2 ? 'rgba(237,234,226,0.5)' : '#c86c2e' }}>{post.cta.label}</span></a>
+          <a href={post.cta.href} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.5)', textDecoration: 'none' }}>{post.cta.label}</a>
         </div>
       </article>
     </div>
   )
 }
-
-function BlogPage() {
-const posts = [
+export const posts = [
   {
     id: 1,
     title: 'The permission you never needed',
@@ -147,13 +132,35 @@ const posts = [
     closing: `Perhaps we didn't fail to reach the dream. Perhaps we just upgraded it.`,
     videoSrc: 'https://www.youtube.com/embed/TGZMSmcuiXM',
     videoLabel: 'Sebastian Junger — Tribe: On Homecoming and Belonging',
-    cta: { label: "I'm building something around this idea →", href: '/work/commo2', color: '#ffffff' },
+    cta: { label: "I'm building something around this idea →", href: '/work/commo2' },
+  },
+  {
+    id: 3,
+    title: 'Make your time count',
+    date: '13/08/26',
+    description: "We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?",
+    content: [
+      `We are going to spend a huge portion of our lives working. That's not a complaint — it's just true. And once you accept it, a question follows that most people never stop to actually answer: if you're going to spend that much time on something, why not point it at something that matters?`,
+      `I didn't arrive here easily. I went through years of vegetarianism before I went vegan. I watched, slowly, as I couldn't look away anymore — from what happens in slaughterhouses, in laboratories, in the places we choose not to see. And the more I understood, the less I could pretend I didn't.`,
+      `That's how activism tends to start. Not with a decision, but with a moment when you realise you've been living with your eyes closed — and that someone, at some point, opened them for you.`,
+    ],
+    quote: `If we were the animals, we would want someone to speak for us.`,
+    content2: [
+      `That's what drove me into the streets. Into vigils. Into organisations and actions and moments that felt risky and necessary in equal measure. Not rage — love. A love for beings who have no platform, no vote, no way to make themselves heard. And an inability to accept that indifference was the only reasonable response.`,
+      `I've managed social media for an anti-speciesist NGO in Valencia. I've done activism with Anonymous for the Voiceless in Spain and in other countries. I've stood in the streets of Munich for causes I believe in. And through all of it, I kept thinking: this is what communication is actually for. Not to sell things. To shift something. To make a person stop, feel, and perhaps decide differently.`,
+      `That's what led me to want to do this work — content, strategy, storytelling — inside organisations that give a damn. Because the tools are the same whether you use them for a brand that doesn't care or for one that does. But the hours feel completely different.`,
+      `There's a kind of exhaustion that comes from spending your attention on things you don't believe in. And there's something else — harder to name but easy to recognise — that comes from spending it on things you do.`,
+      `We don't talk enough about how much of our lives we hand over when we choose where to work. Or how much we get back when we choose carefully.`,
+    ],
+    closing: `Your attention is not infinite. Neither is your time. Point both somewhere worth it.`,
+    videoSrc: 'https://www.youtube.com/embed/X4Qm9cGRub0',
+    videoLabel: 'Gary Yourofsky — The Most Important Speech You Will Ever Hear',
+    cta: { label: 'This is also who I am →', href: '/purpose' },
   },
 ]
+function BlogPage() {
   const [selected, setSelected] = useState<typeof posts[0] | null>(null)
-
   if (selected) return <Post post={selected} onClose={() => setSelected(null)} />
-
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
       <video autoPlay muted loop playsInline preload="none"
@@ -162,13 +169,11 @@ const posts = [
         <source src="/videos/blog.mp4" type="video/mp4"/>
       </video>
       <FloatingNav />
-
       <div style={{ maxWidth: '860px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1.5rem' }}>Writing</p>
         <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#edeae2', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '5rem' }}>Things worth saying.</h1>
-
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {posts.map((post) => (
+          {[...posts].reverse().map((post) => (
             <div key={post.id} onClick={() => setSelected(post)}
               style={{ cursor: 'pointer', display: 'block', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', backdropFilter: 'blur(4px)', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = '#c86c2e'; e.currentTarget.style.background = 'rgba(200,108,46,0.08)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.2)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
