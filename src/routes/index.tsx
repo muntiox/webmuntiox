@@ -134,13 +134,13 @@ function Lightning() {
 }
 // ── Marquee ──────────────────────────────────────────────────────────
 function Marquee() {
-  const items = ['Creative Strategy','×','Content Creation','×','Digital Strategy','×','Brand Identity','×','Community Building','×','MUNTIOX','×','Ethical Brands','×','Real Impact','×']
+  const items = ['Creative Strategy','\u00d7','Content Creation','\u00d7','Digital Strategy','\u00d7','Brand Identity','\u00d7','Community Building','\u00d7','MUNTIOX','\u00d7','Ethical Brands','\u00d7','Real Impact','\u00d7']
   const doubled = [...items, ...items]
   return (
     <div className="mxo-marquee-outer">
       <div className="mxo-marquee-track">
         {doubled.map((item, i) => (
-          <span key={i} className="mxo-marquee-item">{item === '×' ? <span>×</span> : item}</span>
+          <span key={i} className="mxo-marquee-item">{item === '\u00d7' ? <span>\u00d7</span> : item}</span>
         ))}
       </div>
     </div>
@@ -177,7 +177,7 @@ function Nav() {
               </a>
             ))}
           </div>
-          <p className="mxo-fullnav-bottom">Itxaso Mutión — Content Creator & Digital Strategist</p>
+          <p className="mxo-fullnav-bottom">Itxaso Muti\u00f3n \u2014 Content Creator & Digital Strategist</p>
         </div>
       )}
     </>
@@ -257,7 +257,7 @@ function Hero() {
       )}
       {phase === 'content' && (
         <div className="mxo-hero-content pre-flash-hide" style={{ animation: 'mxoFadeIn 0.6s ease forwards' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Mutión</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX \u2014 Itxaso Muti\u00f3n</p>
           <p className="mxo-statement">
             Creative strategy<br/>
             <CorrectionOnly /><br/>
@@ -361,32 +361,35 @@ function Portfolio() {
             <a href="/work/rccoon" className="mxo-featured-item">
               <img src="/photos/rccoon-logo.png" alt="RCCOON" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">RCCOON</h3>
-              <p className="mxo-featured-sub">Citizen Action · Digital Strategy · Community · 2020—2026</p>
-              <span className="mxo-featured-cta">Come snoop around →</span>
+              <p className="mxo-featured-sub">Citizen Action \u00b7 Digital Strategy \u00b7 Community \u00b7 2020\u20142026</p>
+              <span className="mxo-featured-cta">Come snoop around \u2192</span>
             </a>
             <a href="/work/commo2" onClick={e => { e.preventDefault(); window.location.href='/work/commo2' }} className="mxo-featured-item">
               <img src="/photos/commo2-logo.png" alt="Commo2" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">Commo2</h3>
-              <p className="mxo-featured-sub">Strategy · Branding · Digital Ecosystem · 2024—2025</p>
-              <span className="mxo-featured-cta">Move in →</span>
+              <p className="mxo-featured-sub">Strategy \u00b7 Branding \u00b7 Digital Ecosystem \u00b7 2024\u20142025</p>
+              <span className="mxo-featured-cta">Move in \u2192</span>
             </a>
           </div>
         </div></Reveal>
-        <Reveal><div className="mxo-featured pre-flash-hide" style={{ borderTop: '1px solid rgba(237,234,226,0.08)' }}>
-          <p className="mxo-eyebrow">Latest writing</p>
+        <Reveal><div className="pre-flash-hide" style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
+          <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>Latest writing</p>
           <a href="/blog"
-            style={{ textDecoration: 'none', color: 'inherit', display: 'block', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', maxWidth: '720px', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = '#c86c2e'; e.currentTarget.style.background = 'rgba(200,108,46,0.08)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.2)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(237,234,226,0.12)'; e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
-            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#edeae2', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>Make your time count</h3>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', maxWidth: '600px', marginBottom: '1.5rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
-            <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read →</span>
+            style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', width: '100%', transition: 'background 0.3s ease, box-shadow 0.3s ease' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(200,108,46,0.06)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.15)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none' }}>
+            <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
+            <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay \u00b7 13/08/26</p>
+              <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 5rem)', fontWeight: 400, color: '#edeae2', lineHeight: 1.0, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>Make your time count</h3>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', marginBottom: '2rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read \u2192</span>
+            </div>
           </a>
         </div></Reveal>
       </main>
       <footer className="mxo-footer pre-flash-hide">
-        <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Mutión</p>
+        <p className="mxo-footer-copy">\u00a9 {new Date().getFullYear()} MUNTIOX \u2014 Itxaso Muti\u00f3n</p>
       </footer>
     </>
   )
