@@ -1,26 +1,27 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
+
 export const Route = createFileRoute('/')(
   { component: Portfolio }
 )
+
 // ── Keyboard click ───────────────────────────────────────────────────
 function playKeyClick() {}
+
 // ── Correction animation ─────────────────────────────────────────────
+// Ahora arranca sola al montar (ya no depende del click/flash inicial)
 type CorrectionPhase = 'idle' | 'typing-wrong' | 'striking' | 'erasing' | 'typing-only' | 'done'
 function CorrectionOnly() {
   const [phase, setPhase] = useState<CorrectionPhase>('idle')
   const [wrongText, setWrongText] = useState('')
   const [onlyText, setOnlyText] = useState('')
   const wrong = 'for brands'; const only = 'only for brands'
+
   useEffect(() => {
-    const start = () => setTimeout(() => setPhase('typing-wrong'), 600)
-    if (document.body.classList.contains('flash-triggered')) { start(); return }
-    const obs = new MutationObserver(() => {
-      if (document.body.classList.contains('flash-triggered')) { obs.disconnect(); start() }
-    })
-    obs.observe(document.body, { attributes: true, attributeFilter: ['class'] })
-    return () => obs.disconnect()
+    const t = setTimeout(() => setPhase('typing-wrong'), 600)
+    return () => clearTimeout(t)
   }, [])
+
   useEffect(() => {
     if (phase === 'typing-wrong') {
       let i = 0
@@ -39,6 +40,7 @@ function CorrectionOnly() {
       return () => clearInterval(iv)
     }
   }, [phase])
+
   const showCursor = phase !== 'idle' && phase !== 'done'
   return (
     <span className="correction-wrapper">
@@ -52,6 +54,7 @@ function CorrectionOnly() {
     </span>
   )
 }
+
 // ── Grain ────────────────────────────────────────────────────────────
 function Grain() {
   return (
@@ -61,6 +64,7 @@ function Grain() {
     </svg>
   )
 }
+
 // ── Electric cursor ──────────────────────────────────────────────────
 function ElectricCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
@@ -88,6 +92,7 @@ function ElectricCursor() {
     </>
   )
 }
+
 // ── Lightning canvas ─────────────────────────────────────────────────
 function Lightning() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -132,20 +137,22 @@ function Lightning() {
   }, [])
   return <canvas ref={canvasRef} className="mxo-lightning" aria-hidden />
 }
+
 // ── Marquee ──────────────────────────────────────────────────────────
 function Marquee() {
-  const items = ['Creative Strategy','\u00d7','Content Creation','\u00d7','Digital Strategy','\u00d7','Brand Identity','\u00d7','Community Building','\u00d7','MUNTIOX','\u00d7','Ethical Brands','\u00d7','Real Impact','\u00d7']
+  const items = ['Creative Strategy', '×', 'Content Creation', '×', 'Digital Strategy', '×', 'Brand Identity', '×', 'Community Building', '×', 'MUNTIOX', '×', 'Ethical Brands', '×', 'Real Impact', '×']
   const doubled = [...items, ...items]
   return (
     <div className="mxo-marquee-outer">
       <div className="mxo-marquee-track">
         {doubled.map((item, i) => (
-          <span key={i} className="mxo-marquee-item">{item === '\u00d7' ? <span>\u00d7</span> : item}</span>
+          <span key={i} className="mxo-marquee-item">{item}</span>
         ))}
       </div>
     </div>
   )
 }
+
 // ── Full-screen nav ──────────────────────────────────────────────────
 function Nav() {
   const [open, setOpen] = useState(false)
@@ -177,54 +184,23 @@ function Nav() {
               </a>
             ))}
           </div>
-          <p className="mxo-fullnav-bottom">Itxaso Muti\u00f3n \u2014 Content Creator & Digital Strategist</p>
+          <p className="mxo-fullnav-bottom">Itxaso Muntión — Content Creator &amp; Digital Strategist</p>
         </div>
       )}
     </>
   )
 }
-// ── MUNTIOX intro + Hero ─────────────────────────────────────────────
-type HeroPhase = 'muntiox' | 'flash' | 'content'
+
+// ── Hero (sin intro de click / flash) ──────────────────────────────────
 function Hero() {
-  const [phase, setPhase] = useState<HeroPhase>('muntiox')
+  const [ready, setReady] = useState(false)
   useEffect(() => {
-    if (sessionStorage.getItem('introSeen')) {
-      setPhase('content')
-    }
+    // Pequeño delay solo para permitir que la animación de entrada (Reveal-style)
+    // se vea suave; el contenido ya está en el DOM desde el primer render.
+    const t = setTimeout(() => setReady(true), 30)
+    return () => clearTimeout(t)
   }, [])
-  useEffect(() => {
-    if (phase === 'muntiox' || phase === 'flash') {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [phase])
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  useEffect(() => {
-    const a = new Audio('/music/photo-sound.mp3')
-    a.volume = 0.6
-    a.preload = 'auto'
-    a.load()
-    audioRef.current = a
-  }, [])
-  const triggerFlash = () => {
-    if (phase !== 'muntiox') return
-    const a = audioRef.current
-    if (a) { a.currentTime = 0; a.play().catch(() => {}) }
-    sessionStorage.setItem('introSeen', '1')
-    setPhase('flash')
-    setTimeout(() => setPhase('content'), 500)
-  }
-  useEffect(() => {
-    if (phase !== 'muntiox') return
-    window.addEventListener('click', triggerFlash)
-    window.addEventListener('keydown', triggerFlash)
-    return () => {
-      window.removeEventListener('click', triggerFlash)
-      window.removeEventListener('keydown', triggerFlash)
-    }
-  }, [phase])
+
   return (
     <section className="mxo-hero">
       <video className="mxo-hero-video" autoPlay muted loop playsInline preload="none">
@@ -234,59 +210,28 @@ function Hero() {
         <source src="/videos/index.mp4" type="video/mp4"/>
       </video>
       <div className="mxo-hero-glow" />
-      {phase === 'content' && (
-        <div style={{}} />
-      )}
-      {phase === 'flash' && (
-        <div style={{ position: 'fixed', inset: 0, background: '#ffffff', zIndex: 9000, pointerEvents: 'none', animation: 'heroFlash 0.5s ease forwards' }} />
-      )}
-      {phase === 'muntiox' && (
-        <div style={{
-          position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 3,
-        }}>
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'radial-gradient(ellipse at center, rgba(200,108,46,0.18) 0%, transparent 70%)',
-            animation: 'mxoGlow 1.6s ease forwards',
-            pointerEvents: 'none',
-          }} />
-          <div style={{ animation: 'mxoFadeIn 0.8s ease forwards', textAlign: 'center' }}>
-            <p className="mxo-statement" style={{ margin: 0 }}>MUNTIOX</p>
-          </div>
+      <div className="mxo-hero-content" style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>
+        <p className="mxo-statement">
+          Creative strategy<br/>
+          <CorrectionOnly /><br/>
+          that want to make<br/>
+          a difference
+        </p>
+        <p className="mxo-tagline">
+          <span className="highlighter">
+            <span className="highlighter__text">Until &apos;responsible brand&apos; becomes redundant.</span>
+          </span>
+        </p>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
+          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#C86A2A', padding: '1rem 2.5rem', textDecoration: 'none' }}>Projects</a>
+          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#c86c2e', padding: '1rem 2.5rem', textDecoration: 'none' }}>Let&apos;s talk</a>
         </div>
-      )}
-      {phase === 'content' && (
-        <div className="mxo-hero-content pre-flash-hide" style={{ animation: 'mxoFadeIn 0.6s ease forwards' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX \u2014 Itxaso Muti\u00f3n</p>
-          <p className="mxo-statement">
-            Creative strategy<br/>
-            <CorrectionOnly /><br/>
-            that want to make<br/>
-            a difference
-          </p>
-          <p className="mxo-tagline">
-            <span className="highlighter">
-              <span className="highlighter__text">Until &apos;responsible brand&apos; becomes redundant.</span>
-            </span>
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-            <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#C86A2A', padding: '1rem 2.5rem', textDecoration: 'none' }}>Projects</a>
-            <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#c86c2e', padding: '1rem 2.5rem', textDecoration: 'none' }}>Let&apos;s talk</a>
-          </div>
-        </div>
-      )}
-      <style>{`
-        @keyframes heroFlash { 0%{opacity:0} 20%{opacity:1} 100%{opacity:0} }
-        @keyframes hintPulse { 0%,100%{opacity:0.4} 50%{opacity:0.15} }
-        @keyframes mxoFadeIn { from{opacity:0} to{opacity:1} }
-        @keyframes mxoGlow {
-          0%   { opacity: 0; transform: scale(0.8); }
-          100% { opacity: 1; transform: scale(1.4); }
-        }
-      `}</style>
+      </div>
     </section>
   )
 }
+
 // ── Reveal on scroll ─────────────────────────────────────────────────
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -311,6 +256,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     </div>
   )
 }
+
 function Portfolio() {
   return (
     <>
@@ -328,7 +274,7 @@ function Portfolio() {
             ))}
           </div>
         </div>
-        <Reveal><div className="mxo-manifesto pre-flash-hide">
+        <Reveal><div className="mxo-manifesto">
           <h2 className="mxo-manifesto-title">This is a Portfolio...<br/>but I&apos;m not looking to be chosen</h2>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)' }}>The main purpose of this website is simple: to showcase my work and convince people to choose me. But I also want to choose my next job. Does that sound unusual?</p>
           <p className="mxo-manifesto-body">I don&apos;t believe in working with everyone. I believe in working with the right people. The projects we choose become part of who we are. They shape our perspective, influence our decisions, and define the impact we leave behind.</p>
@@ -336,7 +282,7 @@ function Portfolio() {
           <p className="mxo-manifesto-body">Every project is an opportunity to leave the world a little better than we found it. That&apos;s the kind of work I want to be part of.</p>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: '#edeae2' }}>And that&apos;s why I want to choose you, too.</p>
         </div></Reveal>
-        <Reveal><div className="mxo-skills pre-flash-hide">
+        <Reveal><div className="mxo-skills">
           <p className="mxo-eyebrow">What I do</p>
           <div style={{ display: 'flex', alignItems: 'stretch', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
             <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem, 8vw, 6rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.85, letterSpacing: '0.02em' }}>6+</span>
@@ -355,24 +301,24 @@ function Portfolio() {
             </div>
           </div>
         </div></Reveal>
-        <Reveal><div className="mxo-featured pre-flash-hide">
+        <Reveal><div className="mxo-featured">
           <p className="mxo-eyebrow">Featured</p>
           <div className="mxo-featured-grid">
             <a href="/work/rccoon" className="mxo-featured-item">
               <img src="/photos/rccoon-logo.png" alt="RCCOON" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">RCCOON</h3>
-              <p className="mxo-featured-sub">Citizen Action \u00b7 Digital Strategy \u00b7 Community \u00b7 2020\u20142026</p>
-              <span className="mxo-featured-cta">Come snoop around \u2192</span>
+              <p className="mxo-featured-sub">Citizen Action · Digital Strategy · Community · 2020—2026</p>
+              <span className="mxo-featured-cta">Come snoop around →</span>
             </a>
             <a href="/work/commo2" onClick={e => { e.preventDefault(); window.location.href='/work/commo2' }} className="mxo-featured-item">
               <img src="/photos/commo2-logo.png" alt="Commo2" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">Commo2</h3>
-              <p className="mxo-featured-sub">Strategy \u00b7 Branding \u00b7 Digital Ecosystem \u00b7 2024\u20142025</p>
-              <span className="mxo-featured-cta">Move in \u2192</span>
+              <p className="mxo-featured-sub">Strategy · Branding · Digital Ecosystem · 2024—2025</p>
+              <span className="mxo-featured-cta">Move in →</span>
             </a>
           </div>
         </div></Reveal>
-        <Reveal><div className="pre-flash-hide" style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
+        <Reveal><div style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
           <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>Latest writing</p>
           <a href="/blog"
             style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', width: '100%', transition: 'background 0.3s ease, box-shadow 0.3s ease' }}
@@ -380,16 +326,16 @@ function Portfolio() {
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none' }}>
             <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
             <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>
-              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay \u00b7 13/08/26</p>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
               <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 5rem)', fontWeight: 400, color: '#edeae2', lineHeight: 1.0, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>Make your time count</h3>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', marginBottom: '2rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
-              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read \u2192</span>
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read →</span>
             </div>
           </a>
         </div></Reveal>
       </main>
-      <footer className="mxo-footer pre-flash-hide">
-        <p className="mxo-footer-copy">\u00a9 {new Date().getFullYear()} MUNTIOX \u2014 Itxaso Muti\u00f3n</p>
+      <footer className="mxo-footer">
+        <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
       </footer>
     </>
   )
