@@ -3,12 +3,11 @@ import { useEffect, useRef } from 'react'
 import '../styles.css'
 
 // ── Heartbeat background — fixed behind the whole site ────────────────
-// Home ('/') = garnet core beating on black.
-// Other pages = light (white/pink) with a soft frame that beats, calm centre.
 function Heartbeat({ variant }: { variant: 'home' | 'inner' }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const variantRef = useRef(variant)
-  variantRef.current = variant
+  useEffect(() => { variantRef.current = variant }, [variant])
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -41,38 +40,36 @@ function Heartbeat({ variant }: { variant: 'home' | 'inner' }) {
       ctx.clearRect(0, 0, W, H)
 
       if (variantRef.current === 'home') {
-        // Garnet core beating on near-black
         ctx.fillStyle = '#050506'; ctx.fillRect(0, 0, W, H)
         const base = Math.min(W, H) * 0.5, r = base * (1 + beat * 0.16)
-        let g = ctx.createRadialGradient(cx, cy * 0.92, 0, cx, cy * 0.92, r * 1.8)
+        const g = ctx.createRadialGradient(cx, cy * 0.92, 0, cx, cy * 0.92, r * 1.8)
         g.addColorStop(0, rgba(GARNET2, 0.32 + beat * 0.22))
         g.addColorStop(0.35, rgba(GARNET, 0.18 + beat * 0.12))
         g.addColorStop(0.7, rgba(WINE, 0.10))
         g.addColorStop(1, rgba(WINE, 0))
         ctx.fillStyle = g; ctx.fillRect(0, 0, W, H)
       } else {
-        // Inner pages: light base (white → soft pink), beating frame, calm centre
+        // Inner pages: WHITE base, soft pink wash, beating pink frame, calm centre
         ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H)
-        // soft pink wash overall
-        let base = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.75)
-        base.addColorStop(0, rgba([255, 255, 255], 1))
-        base.addColorStop(0.55, rgba(PINK, 0.10))
-        base.addColorStop(1, rgba(PINK, 0.22))
-        ctx.fillStyle = base; ctx.fillRect(0, 0, W, H)
-        // beating frame: strong pink at edges, transparent centre — the frame pulses
-        const inner = Math.min(W, H) * (0.30 - beat * 0.05)
-        const outer = Math.max(W, H) * 0.85
-        let frame = ctx.createRadialGradient(cx, cy, inner, cx, cy, outer)
-        frame.addColorStop(0, rgba(PINK, 0))
-        frame.addColorStop(0.6, rgba(PINK, 0.10 + beat * 0.10))
-        frame.addColorStop(1, rgba(PINK, 0.35 + beat * 0.22))
-        ctx.fillStyle = frame; ctx.fillRect(0, 0, W, H)
+        const wash = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.75)
+        wash.addColorStop(0, rgba([255, 255, 255], 1))
+        wash.addColorStop(0.55, rgba(PINK, 0.10))
+        wash.addColorStop(1, rgba(PINK, 0.20))
+        ctx.fillStyle = wash; ctx.fillRect(0, 0, W, H)
+        const inner = Math.min(W, H) * (0.32 - beat * 0.05)
+        const outer = Math.max(W, H) * 0.88
+        const fr = ctx.createRadialGradient(cx, cy, inner, cx, cy, outer)
+        fr.addColorStop(0, rgba(PINK, 0))
+        fr.addColorStop(0.6, rgba(PINK, 0.12 + beat * 0.10))
+        fr.addColorStop(1, rgba(PINK, 0.38 + beat * 0.22))
+        ctx.fillStyle = fr; ctx.fillRect(0, 0, W, H)
       }
       raf = requestAnimationFrame(frame)
     }
     raf = requestAnimationFrame(frame)
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize) }
   }, [])
+
   return (
     <canvas
       ref={canvasRef}
@@ -101,12 +98,11 @@ function RootComponent() {
     document.body.classList.add('flash-triggered')
     document.body.classList.add('nav-lit')
   }, [])
-  if (typeof document !== 'undefined') {
-    document.body.classList.add('flash-triggered')
-    document.body.classList.add('nav-lit')
-    // page marker on body so CSS can theme inner pages (garnet text) vs home (pink text)
+
+  // Keep the body page-marker in sync on every navigation (reliable)
+  useEffect(() => {
     document.body.setAttribute('data-page', variant)
-  }
+  }, [variant])
 
   return (
     <>

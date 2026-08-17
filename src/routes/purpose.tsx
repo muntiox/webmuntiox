@@ -17,15 +17,15 @@ function FloatingNav() {
       {/* Home top left */}
       <a href="/" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.6)',
+        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(138,35,51,0.6)',
         textDecoration: 'none' }}>← Home</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
       </button>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
@@ -33,10 +33,10 @@ function FloatingNav() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
               <a key={l.href} href={l.href} className="mxo-fullnav-link"
-                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: 'rgb(237, 234, 226)', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c86c2e')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#edeae2')}>
-                <span style={{ fontSize: '0.55em', color: 'rgba(200,108,46,0.7)', letterSpacing: '0.2em' }}>0{i+1}</span>
+                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
+                <span style={{ fontSize: '0.55em', color: '#d9737a', letterSpacing: '0.2em' }}>0{i+1}</span>
                 {l.label}
               </a>
             ))}
@@ -79,13 +79,13 @@ function Photo({ src, alt = '', width = PHOTO_W, height = PHOTO_H }: { src: stri
   )
 }
 function Pull({ children }: { children: ReactNode }) {
-  return <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '18.4px', color: '#edeae2', lineHeight: '34.96px', letterSpacing: '0.04em', margin: '0 0 1.2rem' }}>{children}</p>
+  return <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '18.4px', color: '#8a2333', lineHeight: '34.96px', letterSpacing: '0.04em', margin: '0 0 1.2rem' }}>{children}</p>
 }
 function Body({ children }: { children: ReactNode }) {
-  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', marginBottom: '1.2rem' }}>{children}</p>
+  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', marginBottom: '1.2rem' }}>{children}</p>
 }
 function Accent({ children }: { children: ReactNode }) {
-  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', marginBottom: '1.2rem' }}>{children}</p>
+  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', marginBottom: '1.2rem' }}>{children}</p>
 }
 function Row({ children, reverse = false }: { children: ReactNode; reverse?: boolean }) {
   return <div style={{ display: 'flex', gap: '5rem', alignItems: 'center', flexDirection: reverse ? 'row-reverse' : 'row', marginBottom: '8rem' }}>{children}</div>
@@ -94,16 +94,13 @@ function TextBlock({ children }: { children: ReactNode }) {
   return <div style={{ flex: 1, paddingTop: 0 }}>{children}</div>
 }
 function Divider() {
-  return <div style={{ width: '40px', height: '1px', background: '#c86c2e', margin: '4rem 0' }} />
+  return <div style={{ width: '40px', height: '1px', background: '#8a2333', margin: '4rem 0' }} />
 }
-
 type Slide = { src: string; body: string; accent?: string; pull?: string }
-
 function PolaroidCollage({ slides }: { slides: Slide[] }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [active, setActive] = useState<number | null>(null)
-
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -114,7 +111,6 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
     obs.observe(el)
     return () => obs.disconnect()
   }, [])
-
   const positions = [
     { top: '0%',  left: '1%',  rotate: '-3deg',  delay: '0s' },
     { top: '2%',  left: '26%', rotate: '2deg',   delay: '0.07s' },
@@ -125,10 +121,8 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
     { top: '52%', left: '54%', rotate: '1.5deg', delay: '0.24s' },
     { top: '51%', left: '78%', rotate: '-3deg',  delay: '0.31s' },
   ]
-
   const prev = () => setActive(v => v !== null ? (v - 1 + slides.length) % slides.length : null)
   const next = () => setActive(v => v !== null ? (v + 1) % slides.length : null)
-
   return (
     <>
       {/* Modal */}
@@ -155,8 +149,8 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
               {slides[active].pull && <Pull>{slides[active].pull}</Pull>}
               {slides[active].accent && <Accent>{slides[active].accent}</Accent>}
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '2.5rem' }}>
-                <button onClick={prev} style={{ background: 'none', border: '1px solid rgba(237,234,226,0.25)', color: 'rgba(237,234,226,0.6)', fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', padding: '0.6rem 1.2rem', cursor: 'pointer', transition: 'border-color 0.2s, color 0.2s' }}>← Prev</button>
-                <button onClick={next} style={{ background: 'none', border: '1px solid rgba(237,234,226,0.25)', color: 'rgba(237,234,226,0.6)', fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', padding: '0.6rem 1.2rem', cursor: 'pointer', transition: 'border-color 0.2s, color 0.2s' }}>Next →</button>
+                <button onClick={prev} style={{ background: 'none', border: '1px solid rgba(237,234,226,0.25)', color: 'rgba(138,35,51,0.6)', fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', padding: '0.6rem 1.2rem', cursor: 'pointer', transition: 'border-color 0.2s, color 0.2s' }}>← Prev</button>
+                <button onClick={next} style={{ background: 'none', border: '1px solid rgba(237,234,226,0.25)', color: 'rgba(138,35,51,0.6)', fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', padding: '0.6rem 1.2rem', cursor: 'pointer', transition: 'border-color 0.2s, color 0.2s' }}>Next →</button>
                 <button onClick={() => setActive(null)} style={{ background: 'none', border: 'none', color: 'rgba(237,234,226,0.35)', fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', cursor: 'pointer', marginLeft: 'auto' }}>Close ✕</button>
               </div>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.52rem', letterSpacing: '0.2em', color: 'rgba(237,234,226,0.2)', marginTop: '1rem' }}>{active + 1} / {slides.length}</p>
@@ -164,7 +158,6 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
           </div>
         </div>
       )}
-
       {/* Collage */}
       <div ref={ref} style={{
         position: 'relative', width: '100%', height: '480px',
@@ -206,15 +199,14 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
     </>
   )
 }
-
 function PurposePage() {
   return (
-    <div style={{ minHeight: '100vh', background: '#070709', color: '#F2EEE7', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
       <FloatingNav />
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         {/* ── CHAPTER 1: PURPOSE ─────────────────────────────────── */}
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1.5rem' }}>Purpose</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#F2EEE7', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 700 }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1.5rem' }}>Purpose</p>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#8a2333', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 700 }}>
           When creativity and strategy align with a higher purpose
         </h1>
         <div style={{ maxWidth: 640, marginBottom: '8rem' }}>
@@ -224,13 +216,12 @@ function PurposePage() {
         </div>
         <Divider />
         {/* ── CHAPTER 2: PERSON ──────────────────────────────────── */}
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', margin: '4rem 0 6rem' }}>The person behind it</p>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', margin: '4rem 0 6rem' }}>The person behind it</p>
         {/* Quote block */}
-        <div style={{ borderLeft: '3px solid #C86A2A', paddingLeft: '3rem', marginBottom: '6rem', maxWidth: 640 }}>
+        <div style={{ borderLeft: '3px solid #8a2333', paddingLeft: '3rem', marginBottom: '6rem', maxWidth: 640 }}>
           <Body>I've always had an almost irrational urge to build things, projects, ideas, communities. Things that didn't exist yesterday.</Body>
           <Body>Watching an idea slowly become something real, something that helps, inspires or moves someone, still feels like magic to me, not because I dream of building companies, but because I love building possibilities.</Body>
         </div>
-
         <PolaroidCollage slides={[
           { src: '/photos/who-am-i/little-me.jpg', body: 'Some of my earliest memories involve headphones far too big for my head. I only remember disappearing into whatever was playing — completely gone. That never really stopped.', pull: 'The medium changes. The intention never does.' },
           { src: '/photos/who-am-i/me.jpg', body: "I've often been told I'm too sensitive. For a long time, I believed it was a flaw. Now I think it's the whole point.", accent: 'Attention is the purest form of love I know. Everything I create begins there.' },
@@ -241,7 +232,6 @@ function PurposePage() {
           { src: '/photos/who-am-i/joves-me.jpg', body: "I've spent years building alongside people who believed, like I do, that another world is actually possible. None of those projects were ever really about content or strategy.", accent: 'They were always about helping someone understand, feel, or care about something. Helping someone.' },
           { src: '/photos/who-am-i/barro-dana.jpg', body: "Sometimes the most important thing you can do is show up. Not with a plan. Not with the right words. Just — there.", accent: 'Presence is its own kind of message.' },
         ]} />
-
         {/* Closing */}
         <div style={{ maxWidth: 640, marginTop: '2rem' }}>
           <Body>The older I get, the more I learn about the world's injustices, and strangely... the more determined I become to protect my joy.</Body>

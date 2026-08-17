@@ -525,9 +525,9 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-fullnav-close { color: rgba(237,234,226,0.5); cursor: pointer; z-index: 2; background: transparent; border: none; font-size: 1.5rem; transition: color 0.2s; position: absolute; top: 2rem; right: 2.5rem; }
 .mxo-fullnav-close:hover { color: #d9737a; }
 .mxo-fullnav-links { z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; position: relative; }
-.mxo-fullnav-link { letter-spacing: 0.06em; color: #edeae2; align-items: baseline; gap: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 10vw, 9rem); line-height: 1; text-decoration: none; transition: color 0.15s, letter-spacing 0.3s; animation: fullnav-in 0.4s both; display: flex; }
-.mxo-fullnav-link:hover { color: #d9737a; letter-spacing: 0.12em; }
-.mxo-fullnav-num { color: rgba(217,115,122,0.7); letter-spacing: 0.2em; font-size: 0.55em; }
+.mxo-fullnav-link { letter-spacing: 0.06em; color: #ffffff; align-items: baseline; gap: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 10vw, 9rem); line-height: 1; text-decoration: none; transition: color 0.15s, letter-spacing 0.3s; animation: fullnav-in 0.4s both; display: flex; }
+.mxo-fullnav-link:hover { color: #d9737a; letter-spacing: 0.06em; }
+.mxo-fullnav-num { color: #d9737a; letter-spacing: 0.2em; font-size: 0.55em; }
 .mxo-fullnav-bottom { letter-spacing: 0.3em; text-transform: uppercase; color: rgba(237,234,226,0.2); z-index: 2; font-size: 0.6rem; position: absolute; bottom: 2.5rem; }
 .mxo-section-video { object-fit: cover; pointer-events: none; z-index: 0; mix-blend-mode: normal; width: 100%; height: 100%; position: fixed; inset: 0; }
 .mxo-about-video { opacity: 0.5; object-position: right center; }
