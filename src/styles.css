@@ -691,3 +691,36 @@ body[data-page="inner"] .mxo-nav {
   background: rgba(255,255,255,0.35) !important;
   border-bottom: 1px solid rgba(138,35,51,0.15) !important;
 }
+
+
+/* ═══ MODAL TEXT — white on dark popup (photo modals) ═══════════════ */
+.mxo-modal-text,
+.mxo-modal-text p,
+.mxo-modal-text span {
+  color: #ffffff !important;
+}
+body[data-page="inner"] .mxo-modal-text,
+body[data-page="inner"] .mxo-modal-text p,
+body[data-page="inner"] .mxo-modal-text span {
+  color: #ffffff !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   INNER PAGES — global neutralisers so the veins background shows
+   (these pages set their own dark bg + cream text via inline styles;
+    we can't edit every file, so we override broadly here)
+═══════════════════════════════════════════════════════════════════ */
+/* Kill full-page black backgrounds on inner pages so the canvas shows.
+   Target direct page-wrapper divs that use min-height:100vh. */
+body[data-page="inner"] > #root > div,
+body[data-page="inner"] #root > div[style*="100vh"] {
+  background: transparent !important;
+}
+/* Any element whose inline bg is the old near-black becomes transparent */
+body[data-page="inner"] [style*="#070709"],
+body[data-page="inner"] [style*="#050506"],
+body[data-page="inner"] [style*="rgb(7, 7, 9)"] {
+  background-color: transparent !important;
+  background: transparent !important;
+}

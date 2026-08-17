@@ -144,7 +144,7 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
               <img src={slides[active].src} alt="" style={{ width: '320px', height: '400px', objectFit: 'cover', display: 'block' }} />
             </div>
             {/* Text */}
-            <div style={{ flex: 1 }}>
+            <div className="mxo-modal-text" style={{ flex: 1 }}>
               <Body>{slides[active].body}</Body>
               {slides[active].pull && <Pull>{slides[active].pull}</Pull>}
               {slides[active].accent && <Accent>{slides[active].accent}</Accent>}
