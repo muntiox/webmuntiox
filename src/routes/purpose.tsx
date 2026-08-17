@@ -210,11 +210,6 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
 function PurposePage() {
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#F2EEE7', position: 'relative' }}>
-      <video autoPlay muted loop playsInline preload="none"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          mixBlendMode: 'normal', opacity: 0.5, filter: 'brightness(1)', zIndex: 0, pointerEvents: 'none' }}>
-        <source src="/videos/other-one.mp4" type="video/mp4"/>
-      </video>
       <FloatingNav />
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         {/* ── CHAPTER 1: PURPOSE ─────────────────────────────────── */}

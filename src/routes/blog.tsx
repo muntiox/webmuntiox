@@ -48,11 +48,6 @@ function FloatingNav() {
 function Post({ post, onClose }: { post: any; onClose: () => void }) {
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
-      <video autoPlay muted loop playsInline preload="none"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          mixBlendMode: 'normal', opacity: 0.5, filter: 'brightness(1)', zIndex: 0, pointerEvents: 'none' }}>
-        <source src="/videos/blog.mp4" type="video/mp4"/>
-      </video>
       <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100 }}>
         <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#c86c2e', padding: '0.6rem 1.2rem', border: 'none', cursor: 'pointer' }}>← Back</button>
       </div>
@@ -163,11 +158,6 @@ function BlogPage() {
   if (selected) return <Post post={selected} onClose={() => setSelected(null)} />
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
-      <video autoPlay muted loop playsInline preload="none"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          mixBlendMode: 'normal', opacity: 0.5, filter: 'brightness(1)', zIndex: 0, pointerEvents: 'none' }}>
-        <source src="/videos/blog.mp4" type="video/mp4"/>
-      </video>
       <FloatingNav />
       <div style={{ maxWidth: '860px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1.5rem' }}>Writing</p>

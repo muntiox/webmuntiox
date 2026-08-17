@@ -58,11 +58,6 @@ function ContactPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
-      <video autoPlay muted loop playsInline preload="none"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          mixBlendMode: 'normal', opacity: 0.5, filter: 'brightness(1)', zIndex: 0, pointerEvents: 'none' }}>
-        <source src="/videos/contact.mp4" type="video/mp4"/>
-      </video>
       <FloatingNav />
       <div style={{ maxWidth: '600px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
         <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 300, color: '#edeae2', lineHeight: 1.1, marginBottom: '1.5rem' }}>

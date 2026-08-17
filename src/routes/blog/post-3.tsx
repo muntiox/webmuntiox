@@ -5,11 +5,6 @@ export const Route = createFileRoute('/blog/post-3')({
 function Post3Page() {
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
-      <video autoPlay muted loop playsInline preload="none"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          mixBlendMode: 'normal', opacity: 0.55, filter: 'brightness(0.75)', zIndex: 0, pointerEvents: 'none' }}>
-        <source src="/videos/blog.mp4" type="video/mp4"/>
-      </video>
       <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100 }}>
         <Link to="/blog" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', textDecoration: 'none', background: '#c86c2e', padding: '0.6rem 1.2rem' }}>← Back</Link>
       </div>

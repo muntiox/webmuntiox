@@ -203,12 +203,6 @@ function Hero() {
 
   return (
     <section className="mxo-hero">
-      <video className="mxo-hero-video" autoPlay muted loop playsInline preload="none">
-        <source src="/videos/hero.mp4" type="video/mp4"/>
-      </video>
-      <video className="mxo-hero-clouds" autoPlay muted loop playsInline preload="none">
-        <source src="/videos/index.mp4" type="video/mp4"/>
-      </video>
       <div className="mxo-hero-glow" />
       <div className="mxo-hero-content" style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease' }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>

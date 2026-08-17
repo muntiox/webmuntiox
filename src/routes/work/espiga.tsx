@@ -56,11 +56,6 @@ function EspigaPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#070709', color: '#F2EEE7', position: 'relative' }}>
-      <video autoPlay muted loop playsInline preload="none"
-        style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          mixBlendMode: 'normal', opacity: 0.5, filter: 'brightness(1)', zIndex: 0, pointerEvents: 'none' }}>
-        <source src="/videos/projects.mp4" type="video/mp4"/>
-      </video>
       <FloatingNav />
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '8rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
