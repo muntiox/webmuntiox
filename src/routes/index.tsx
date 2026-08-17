@@ -142,14 +142,12 @@ function Hero() {
     return () => clearTimeout(t)
   }, [])
   return (
-    <section className="mxo-hero" style={{ flexDirection: 'column', alignItems: 'stretch', padding: 0, minHeight: 'auto' }}>
-      {/* Cabecera: foto a todo el ancho */}
-      <div style={{ position: 'relative', width: '100%', height: '60vh', minHeight: '380px', overflow: 'hidden' }}>
-        <img src="/photos/index-fondo.jpg" alt="MUNTIOX" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,6,0.25) 0%, rgba(5,5,6,0.1) 40%, rgba(5,5,6,0.85) 100%)' }} />
-      </div>
-      {/* Texto del hero, debajo de la foto */}
-      <div className="mxo-hero-content" style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease', padding: '3rem clamp(1.5rem, 4vw, 4rem) 5rem' }}>
+    <section className="mxo-hero" style={{ position: 'relative', flexDirection: 'column', alignItems: 'stretch', padding: 0, minHeight: '90vh', overflow: 'hidden' }}>
+      {/* Foto de fondo, a todo el alto de la sección */}
+      <img src="/photos/index-fondo.jpg" alt="MUNTIOX" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,6,0.25) 0%, rgba(5,5,6,0.1) 40%, rgba(5,5,6,0.85) 100%)', zIndex: 1 }} />
+      {/* Texto del hero, superpuesto sobre la foto */}
+      <div className="mxo-hero-content" style={{ position: 'relative', zIndex: 2, opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease', padding: '3rem clamp(1.5rem, 4vw, 4rem) 5rem', marginTop: 'auto' }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>
         <p className="mxo-statement">
           Creative strategy<br/>
