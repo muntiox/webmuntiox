@@ -1,10 +1,14 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router'
+import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import '../styles.css'
 
-// ── Heartbeat background ("Dentro") — fixed behind the whole site ──────
-function Heartbeat() {
+// ── Heartbeat background — fixed behind the whole site ────────────────
+// Home ('/') = garnet core beating on black.
+// Other pages = light (white/pink) with a soft frame that beats, calm centre.
+function Heartbeat({ variant }: { variant: 'home' | 'inner' }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const variantRef = useRef(variant)
+  variantRef.current = variant
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -19,7 +23,8 @@ function Heartbeat() {
     resize()
     window.addEventListener('resize', resize)
 
-    const GARNET = [122, 26, 38], GARNET2 = [150, 40, 55], WINE = [74, 14, 26]
+    const GARNET = [138, 35, 51], GARNET2 = [165, 50, 66], WINE = [74, 14, 26]
+    const PINK = [217, 115, 122]
     const rgba = (c: number[], a: number) => `rgba(${c[0]},${c[1]},${c[2]},${Math.max(0, a)})`
     const heartbeat = (t: number) => {
       const cycle = t % 1
@@ -31,21 +36,38 @@ function Heartbeat() {
     let t = 0, raf = 0
     const frame = () => {
       t += 0.004
-      ctx.clearRect(0, 0, W, H)
-      ctx.fillStyle = '#050506'; ctx.fillRect(0, 0, W, H)
       const beat = heartbeat(t * 0.9)
-      const cx = W * 0.5, cy = H * 0.46
-      const base = Math.min(W, H) * 0.5, r = base * (1 + beat * 0.16)
-      let g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 1.8)
-      g.addColorStop(0, rgba(GARNET2, 0.32 + beat * 0.22))
-      g.addColorStop(0.35, rgba(GARNET, 0.18 + beat * 0.12))
-      g.addColorStop(0.7, rgba(WINE, 0.10))
-      g.addColorStop(1, rgba(WINE, 0))
-      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H)
-      let g2 = ctx.createRadialGradient(cx, cy, 0, cx, cy, r * 0.5)
-      g2.addColorStop(0, rgba([190, 70, 85], 0.10 + beat * 0.10))
-      g2.addColorStop(1, rgba(GARNET, 0))
-      ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H)
+      const cx = W * 0.5, cy = H * 0.5
+      ctx.clearRect(0, 0, W, H)
+
+      if (variantRef.current === 'home') {
+        // Garnet core beating on near-black
+        ctx.fillStyle = '#050506'; ctx.fillRect(0, 0, W, H)
+        const base = Math.min(W, H) * 0.5, r = base * (1 + beat * 0.16)
+        let g = ctx.createRadialGradient(cx, cy * 0.92, 0, cx, cy * 0.92, r * 1.8)
+        g.addColorStop(0, rgba(GARNET2, 0.32 + beat * 0.22))
+        g.addColorStop(0.35, rgba(GARNET, 0.18 + beat * 0.12))
+        g.addColorStop(0.7, rgba(WINE, 0.10))
+        g.addColorStop(1, rgba(WINE, 0))
+        ctx.fillStyle = g; ctx.fillRect(0, 0, W, H)
+      } else {
+        // Inner pages: light base (white → soft pink), beating frame, calm centre
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H)
+        // soft pink wash overall
+        let base = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.75)
+        base.addColorStop(0, rgba([255, 255, 255], 1))
+        base.addColorStop(0.55, rgba(PINK, 0.10))
+        base.addColorStop(1, rgba(PINK, 0.22))
+        ctx.fillStyle = base; ctx.fillRect(0, 0, W, H)
+        // beating frame: strong pink at edges, transparent centre — the frame pulses
+        const inner = Math.min(W, H) * (0.30 - beat * 0.05)
+        const outer = Math.max(W, H) * 0.85
+        let frame = ctx.createRadialGradient(cx, cy, inner, cx, cy, outer)
+        frame.addColorStop(0, rgba(PINK, 0))
+        frame.addColorStop(0.6, rgba(PINK, 0.10 + beat * 0.10))
+        frame.addColorStop(1, rgba(PINK, 0.35 + beat * 0.22))
+        ctx.fillStyle = frame; ctx.fillRect(0, 0, W, H)
+      }
       raf = requestAnimationFrame(frame)
     }
     raf = requestAnimationFrame(frame)
@@ -63,15 +85,18 @@ function Heartbeat() {
 export const Route = createRootRoute({
   notFoundComponent: () => (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '2rem' }}>
-      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '6rem', color: '#edeae2', lineHeight: 1 }}>404</p>
-      <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)' }}>This page doesn't exist.</p>
-      <a href="/" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none' }}>← Home</a>
+      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '6rem', color: '#8a2333', lineHeight: 1 }}>404</p>
+      <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#8a2333' }}>This page doesn't exist.</p>
+      <a href="/" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#8a2333', padding: '1rem 2.5rem', textDecoration: 'none' }}>← Home</a>
     </div>
   ),
   component: RootComponent,
 })
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const variant: 'home' | 'inner' = pathname === '/' ? 'home' : 'inner'
+
   useEffect(() => {
     document.body.classList.add('flash-triggered')
     document.body.classList.add('nav-lit')
@@ -79,10 +104,13 @@ function RootComponent() {
   if (typeof document !== 'undefined') {
     document.body.classList.add('flash-triggered')
     document.body.classList.add('nav-lit')
+    // page marker on body so CSS can theme inner pages (garnet text) vs home (pink text)
+    document.body.setAttribute('data-page', variant)
   }
+
   return (
     <>
-      <Heartbeat />
+      <Heartbeat variant={variant} />
       <Outlet />
     </>
   )
