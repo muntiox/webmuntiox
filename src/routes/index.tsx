@@ -1,27 +1,21 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
-
 export const Route = createFileRoute('/')(
   { component: Portfolio }
 )
-
 // ── Keyboard click ───────────────────────────────────────────────────
 function playKeyClick() {}
-
 // ── Correction animation ─────────────────────────────────────────────
-// Ahora arranca sola al montar (ya no depende del click/flash inicial)
 type CorrectionPhase = 'idle' | 'typing-wrong' | 'striking' | 'erasing' | 'typing-only' | 'done'
 function CorrectionOnly() {
   const [phase, setPhase] = useState<CorrectionPhase>('idle')
   const [wrongText, setWrongText] = useState('')
   const [onlyText, setOnlyText] = useState('')
   const wrong = 'for brands'; const only = 'only for brands'
-
   useEffect(() => {
     const t = setTimeout(() => setPhase('typing-wrong'), 600)
     return () => clearTimeout(t)
   }, [])
-
   useEffect(() => {
     if (phase === 'typing-wrong') {
       let i = 0
@@ -40,7 +34,6 @@ function CorrectionOnly() {
       return () => clearInterval(iv)
     }
   }, [phase])
-
   const showCursor = phase !== 'idle' && phase !== 'done'
   return (
     <span className="correction-wrapper">
@@ -54,7 +47,6 @@ function CorrectionOnly() {
     </span>
   )
 }
-
 // ── Grain ────────────────────────────────────────────────────────────
 function Grain() {
   return (
@@ -64,7 +56,6 @@ function Grain() {
     </svg>
   )
 }
-
 // ── Electric cursor ──────────────────────────────────────────────────
 function ElectricCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
@@ -92,52 +83,6 @@ function ElectricCursor() {
     </>
   )
 }
-
-// ── Lightning canvas ─────────────────────────────────────────────────
-function Lightning() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  useEffect(() => {
-    const canvas = canvasRef.current; if (!canvas) return
-    const ctx = canvas.getContext('2d')!
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
-    window.addEventListener('resize', resize)
-    function bolt(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, roughness: number, depth: number) {
-      if (depth === 0) {
-        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke()
-        return
-      }
-      const mx = (x1 + x2) / 2 + (Math.random() - 0.5) * roughness
-      const my = (y1 + y2) / 2 + (Math.random() - 0.5) * roughness * 0.3
-      bolt(ctx, x1, y1, mx, my, roughness / 2, depth - 1)
-      bolt(ctx, mx, my, x2, y2, roughness / 2, depth - 1)
-      if (Math.random() < 0.3) {
-        const bx = mx + (Math.random() - 0.5) * roughness
-        const by = my + Math.random() * roughness
-        ctx.globalAlpha = 0.3
-        bolt(ctx, mx, my, bx, by, roughness / 3, depth - 2)
-        ctx.globalAlpha = 1
-      }
-    }
-    let timer: ReturnType<typeof setTimeout>
-    const flash = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      const x = Math.random() * canvas.width
-      ctx.strokeStyle = Math.random() > 0.5 ? 'rgba(139,0,255,0.85)' : 'rgba(0,200,255,0.75)'
-      ctx.lineWidth = 1.5
-      ctx.shadowBlur = 12
-      ctx.shadowColor = ctx.strokeStyle
-      bolt(ctx, x, 0, x + (Math.random() - 0.5) * 200, canvas.height * (0.4 + Math.random() * 0.5), 120, 7)
-      ctx.shadowBlur = 0
-      setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 80)
-      timer = setTimeout(flash, 3000 + Math.random() * 8000)
-    }
-    timer = setTimeout(flash, 1500 + Math.random() * 3000)
-    return () => { clearTimeout(timer); window.removeEventListener('resize', resize) }
-  }, [])
-  return <canvas ref={canvasRef} className="mxo-lightning" aria-hidden />
-}
-
 // ── Marquee ──────────────────────────────────────────────────────────
 function Marquee() {
   const items = ['Creative Strategy', '×', 'Content Creation', '×', 'Digital Strategy', '×', 'Brand Identity', '×', 'Community Building', '×', 'MUNTIOX', '×', 'Ethical Brands', '×', 'Real Impact', '×']
@@ -152,7 +97,6 @@ function Marquee() {
     </div>
   )
 }
-
 // ── Full-screen nav ──────────────────────────────────────────────────
 function Nav() {
   const [open, setOpen] = useState(false)
@@ -190,21 +134,22 @@ function Nav() {
     </>
   )
 }
-
-// ── Hero (sin intro de click / flash) ──────────────────────────────────
+// ── Hero con cabecera de foto a todo el ancho ─────────────────────────
 function Hero() {
   const [ready, setReady] = useState(false)
   useEffect(() => {
-    // Pequeño delay solo para permitir que la animación de entrada (Reveal-style)
-    // se vea suave; el contenido ya está en el DOM desde el primer render.
     const t = setTimeout(() => setReady(true), 30)
     return () => clearTimeout(t)
   }, [])
-
   return (
-    <section className="mxo-hero">
-      <div className="mxo-hero-glow" />
-      <div className="mxo-hero-content" style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+    <section className="mxo-hero" style={{ flexDirection: 'column', alignItems: 'stretch', padding: 0, minHeight: 'auto' }}>
+      {/* Cabecera: foto a todo el ancho */}
+      <div style={{ position: 'relative', width: '100%', height: '60vh', minHeight: '380px', overflow: 'hidden' }}>
+        <img src="/photos/index-fondo.jpg" alt="MUNTIOX" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,6,0.25) 0%, rgba(5,5,6,0.1) 40%, rgba(5,5,6,0.85) 100%)' }} />
+      </div>
+      {/* Texto del hero, debajo de la foto */}
+      <div className="mxo-hero-content" style={{ opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease', padding: '3rem clamp(1.5rem, 4vw, 4rem) 5rem' }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>
         <p className="mxo-statement">
           Creative strategy<br/>
@@ -218,14 +163,13 @@ function Hero() {
           </span>
         </p>
         <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#C86A2A', padding: '1rem 2.5rem', textDecoration: 'none' }}>Projects</a>
-          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#C86A2A', padding: '1rem 2.5rem', textDecoration: 'none' }}>Let&apos;s talk</a>
+          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none' }}>Projects</a>
+          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none' }}>Let&apos;s talk</a>
         </div>
       </div>
     </section>
   )
 }
-
 // ── Reveal on scroll ─────────────────────────────────────────────────
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -250,7 +194,6 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     </div>
   )
 }
-
 function Portfolio() {
   return (
     <>
@@ -316,7 +259,7 @@ function Portfolio() {
           <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>Latest writing</p>
           <a href="/blog"
             style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', width: '100%', transition: 'background 0.3s ease, box-shadow 0.3s ease' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(200,108,46,0.06)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.15)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(217,115,122,0.06)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(217,115,122,0.15)' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none' }}>
             <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
             <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>
