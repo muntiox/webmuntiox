@@ -21,7 +21,7 @@ function Post2Page() {
             background: '#d9737a', 
             padding: '0.6rem 1.2rem',
             borderRadius: '4px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
           }}
         >
           ← Back
@@ -53,7 +53,7 @@ function Post2Page() {
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.82)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
         
-        <div style={{ margin: '3.5rem 0', padding: '1.5rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+        <div style={{ margin: '3.5rem 0', padding: '1.5rem', background: 'rgba(255, 255, 255, 0.04)', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '0.5rem' }}>Worth watching</p>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.85rem', fontWeight: 400, color: '#ffffff', marginBottom: '1.2rem' }}>Mia Birdsong — As lonely as we are, we can choose community</p>
           <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
