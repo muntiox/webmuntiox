@@ -528,7 +528,7 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-fullnav-link { letter-spacing: 0.06em; color: #ffffff; align-items: baseline; gap: 1.5rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 10vw, 9rem); line-height: 1; text-decoration: none; transition: color 0.15s, letter-spacing 0.3s; animation: fullnav-in 0.4s both; display: flex; }
 .mxo-fullnav-link:hover { color: #d9737a; letter-spacing: 0.06em; }
 .mxo-fullnav-num { color: #d9737a; letter-spacing: 0.2em; font-size: 0.55em; }
-.mxo-fullnav-bottom { letter-spacing: 0.3em; text-transform: uppercase; color: rgba(237,234,226,0.2); z-index: 2; font-size: 0.6rem; position: absolute; bottom: 2.5rem; }
+.mxo-fullnav-bottom { letter-spacing: 0.3em; text-transform: uppercase; color: #ffffff; z-index: 2; font-size: 0.6rem; position: absolute; bottom: 2.5rem; }
 .mxo-section-video { object-fit: cover; pointer-events: none; z-index: 0; mix-blend-mode: normal; width: 100%; height: 100%; position: fixed; inset: 0; }
 .mxo-about-video { opacity: 0.5; object-position: right center; }
 .mxo-contact-video { opacity: 0.5; object-position: center center; }
@@ -875,3 +875,9 @@ body[data-page="inner"] .mxo-nav {
   background: rgba(20,6,10,0.4) !important;
   border-bottom: 1px solid rgba(255,255,255,0.12) !important;
 }
+
+
+/* ═══ Menu bottom line — pure white everywhere ═════════════════════ */
+.mxo-fullnav-bottom { color: #ffffff !important; opacity: 1 !important; }
+body[data-page="inner"] .mxo-fullnav-bottom,
+body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity: 1 !important; }

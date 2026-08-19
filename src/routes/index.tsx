@@ -162,8 +162,8 @@ function Hero() {
           </span>
         </p>
         <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none' }}>Projects</a>
-          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none' }}>Let&apos;s talk</a>
+          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>Projects</a>
+          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>Let&apos;s talk</a>
         </div>
       </div>
     </section>
