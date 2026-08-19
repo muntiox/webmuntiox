@@ -15,31 +15,31 @@ function FloatingNav() {
     <>
       <a href="/" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.6)',
+        letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8a2333',
         textDecoration: 'none' }}>← Home</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
       </button>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
-          <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(237,234,226,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
+          <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
               <a key={l.href} href={l.href} className="mxo-fullnav-link"
-                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: 'rgb(237, 234, 226)', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c86c2e')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#edeae2')}>
-                <span style={{ fontSize: '0.55em', color: 'rgba(200,108,46,0.7)', letterSpacing: '0.2em' }}>0{i+1}</span>
+                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
+                <span style={{ fontSize: '0.55em', color: '#d9737a', letterSpacing: '0.2em' }}>0{i+1}</span>
                 {l.label}
               </a>
             ))}
           </div>
-          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.2)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
+          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
         </div>
       )}
     </>
@@ -47,32 +47,32 @@ function FloatingNav() {
 }
 function Post({ post, onClose }: { post: any; onClose: () => void }) {
   return (
-    <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
       <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100 }}>
-        <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#c86c2e', padding: '0.6rem 1.2rem', border: 'none', cursor: 'pointer' }}>← Back</button>
+        <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#8a2333', padding: '0.6rem 1.2rem', border: 'none', cursor: 'pointer' }}>← Back</button>
       </div>
       <article style={{ maxWidth: '720px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '2rem' }}>Essay · {post.date}</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#edeae2', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '3rem' }}>{post.title}</h1>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '2rem' }}>Essay · {post.date}</p>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#8a2333', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '3rem' }}>{post.title}</h1>
         {post.content.map((p: string, i: number) => (
-          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', marginBottom: '1.8rem' }}>{p}</p>
+          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-        <blockquote style={{ borderLeft: '3px solid #c86c2e', padding: '1.2rem 0 1.2rem 2rem', margin: '3rem 0', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#edeae2', lineHeight: 1.3, letterSpacing: '0.02em' }}>
+        <blockquote style={{ borderLeft: '3px solid #8a2333', padding: '1.2rem 0 1.2rem 2rem', margin: '3rem 0', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#8a2333', lineHeight: 1.3, letterSpacing: '0.02em' }}>
           {post.quote}
         </blockquote>
         {post.content2.map((p: string, i: number) => (
-          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', marginBottom: '1.8rem' }}>{p}</p>
+          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
         <div style={{ margin: '3rem 0' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '0.5rem' }}>Worth watching</p>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(237,234,226,0.4)', marginBottom: '1rem', fontStyle: 'italic' }}>{post.videoLabel}</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(138,35,51,0.6)', marginBottom: '0.5rem' }}>Worth watching</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(138,35,51,0.6)', marginBottom: '1rem', fontStyle: 'italic' }}>{post.videoLabel}</p>
           <iframe src={post.videoSrc} style={{ width: '100%', aspectRatio: '16/9', border: 'none' }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
         </div>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#edeae2', marginBottom: '1.8rem' }}>{post.closing}</p>
-        <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(237,234,226,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.5)', background: 'none', border: 'none', cursor: 'pointer' }}>← All posts</button>
-          <a href={post.cta.href} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.5)', textDecoration: 'none' }}>{post.cta.label}</a>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#8a2333', marginBottom: '1.8rem' }}>{post.closing}</p>
+        <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(138,35,51,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.6)', background: 'none', border: 'none', cursor: 'pointer' }}>← All posts</button>
+          <a href={post.cta.href} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.6)', textDecoration: 'none' }}>{post.cta.label}</a>
         </div>
       </article>
     </div>
@@ -157,20 +157,20 @@ function BlogPage() {
   const [selected, setSelected] = useState<typeof posts[0] | null>(null)
   if (selected) return <Post post={selected} onClose={() => setSelected(null)} />
   return (
-    <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
       <FloatingNav />
       <div style={{ maxWidth: '860px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1.5rem' }}>Writing</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#edeae2', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '5rem' }}>Things worth saying.</h1>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1.5rem' }}>Writing</p>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#8a2333', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '5rem' }}>Things worth saying.</h1>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {[...posts].reverse().map((post) => (
             <div key={post.id} onClick={() => setSelected(post)}
-              style={{ cursor: 'pointer', display: 'block', padding: '2.5rem', border: '1px solid rgba(237,234,226,0.12)', background: 'rgba(7,7,9,0.55)', backdropFilter: 'blur(4px)', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = '#c86c2e'; e.currentTarget.style.background = 'rgba(200,108,46,0.08)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(200,108,46,0.2)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(237,234,226,0.12)'; e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
-              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1rem' }}>{post.date}</p>
-              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#edeae2', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>{post.title}</h2>
-              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.9)', lineHeight: '34.96px', maxWidth: '600px' }}>{post.description}</p>
+              style={{ cursor: 'pointer', display: 'block', padding: '2.5rem', border: '1px solid rgba(138,35,51,0.18)', background: 'rgba(255,255,255,0.55)', backdropFilter: 'blur(4px)', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = '#8a2333'; e.currentTarget.style.background = 'rgba(217,115,122,0.12)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(138,35,51,0.15)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(138,35,51,0.18)'; e.currentTarget.style.background = 'rgba(255,255,255,0.55)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1rem' }}>{post.date}</p>
+              <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#8a2333', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>{post.title}</h2>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.9)', lineHeight: '34.96px', maxWidth: '600px' }}>{post.description}</p>
             </div>
           ))}
         </div>

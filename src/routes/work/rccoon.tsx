@@ -1,10 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
-
 export const Route = createFileRoute('/work/rccoon')({
   component: RccoonProject,
 })
-
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -18,37 +16,36 @@ function FloatingNav() {
       {/* Home top left */}
       <a href="/projects" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.6)',
+        letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8a2333',
         textDecoration: 'none' }}>← Back to projects</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
       </button>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
-          <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(237,234,226,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
+          <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
               <a key={l.href} href={l.href} className="mxo-fullnav-link"
-                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: 'rgb(237, 234, 226)', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c86c2e')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#edeae2')}>
-                <span style={{ fontSize: '0.55em', color: 'rgba(200,108,46,0.7)', letterSpacing: '0.2em' }}>0{i+1}</span>
+                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
+                <span style={{ fontSize: '0.55em', color: '#d9737a', letterSpacing: '0.2em' }}>0{i+1}</span>
                 {l.label}
               </a>
             ))}
           </div>
-          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.2)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
+          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
         </div>
       )}
     </>
   )
 }
-
 function RccoonProject() {
 const categories = [
   { title: 'Brand Identity', desc: "Logo design, visual system and brand assets for RCCOON's evolving identity. Building a recognisable presence across every touchpoint.", images: ['/photos/rccoon-head.png', '/photos/rccoon-globe.png', '/photos/rccoon-colours.png', '/photos/rccoon-infographic.png'] },
@@ -72,55 +69,50 @@ const categories = [
   { title: 'Community Coordination', desc: 'Volunteer team management — onboarding new members, assigning roles, organising responsibilities. Online coordination during the DANA emergency in Valencia.', images: ['/photos/community-coordination/posting.png'] },
   { title: 'Campaign Operations', desc: 'Signature collection campaigns, citizen mobilisation logistics, on-the-ground coordination. Where digital strategy meets street-level action.', pdf: '/docs/rccoon-campaign-ops.pdf', pdfNote: 'During the DANA emergency in Valencia, we put together this document to help affected people and volunteers self-organise — coordinating resources, needs and actions in real time.' },
 ]
-
 const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Adobe Suite']
   return (
-    <div style={{ minHeight: '100vh', background: '#070709', fontFamily: "'Bebas Neue', sans-serif" }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', fontFamily: "'Bebas Neue', sans-serif" }}>
       <FloatingNav />
-
       <article style={{ maxWidth: '860px', margin: '0 auto', padding: '10rem 3.5rem 6rem', position: 'relative', zIndex: 1 }}>
         <header style={{ marginBottom: '5rem' }}>
-          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#C86A2A' }} />
+          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#8a2333' }} />
             Volunteer Project · 2020 — 2026
           </p>
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 400, color: '#F2EEE7', lineHeight: 1.15, marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.8rem)', fontWeight: 400, color: '#8a2333', lineHeight: 1.15, marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
             <img src="/photos/rccoon-logo.png" alt="RCCOON logo" style={{ height: '80px', width: 'auto' }} />
             RCCOON · Citizen Action
           </h1>
-          <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#F2EEE7', lineHeight: 1.85, maxWidth: 720, marginBottom: '2rem' }}>
+          <p style={{ fontSize: '1.1rem', fontWeight: 300, color: '#8a2333', lineHeight: 1.85, maxWidth: 720, marginBottom: '2rem' }}>
             A grassroots movement turning awareness into action — social, environmental and animal justice. I've been building its digital identity from the ground up alongside a friend, as volunteers.
           </p>
-          <p style={{ fontSize: '18.4px', fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,234,226,0.9)', lineHeight: '34.96px', maxWidth: 720, marginBottom: '2rem' }}>
+          <p style={{ fontSize: '18.4px', fontWeight: 300, fontStyle: 'italic', color: 'rgba(138,35,51,0.9)', lineHeight: '34.96px', maxWidth: 720, marginBottom: '2rem' }}>
             This collaboration came to an end in 2026 — we're now focused on bigger things.
           </p>
-
           {/* Story */}
-          <div style={{ marginTop: '3rem', padding: '2rem 0 2rem 2rem', borderLeft: '2px solid rgba(200,108,46, 0.3)', maxWidth: 720 }}>
-            <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1.2rem' }}>
+          <div style={{ marginTop: '3rem', padding: '2rem 0 2rem 2rem', borderLeft: '2px solid rgba(138,35,51,0.3)', maxWidth: 720 }}>
+            <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1.2rem' }}>
               The story
             </p>
-            <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.9)', lineHeight: '34.96px', marginBottom: '1rem' }}>
-              It started in 2020 as <strong style={{ fontWeight: 500, color: '#F2EEE7' }}>Joves i Solidaris</strong> — a volunteer portal focused purely on connecting people with local causes. Just volunteering. No campaigns, no activism.
+            <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.9)', lineHeight: '34.96px', marginBottom: '1rem' }}>
+              It started in 2020 as <strong style={{ fontWeight: 500, color: '#8a2333' }}>Joves i Solidaris</strong> — a volunteer portal focused purely on connecting people with local causes. Just volunteering. No campaigns, no activism.
             </p>
-            <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.9)', lineHeight: '34.96px' }}>
-              Over time we realised something was missing. Volunteering wasn't enough — citizens needed to take real action, step into the streets, and demand change. That's how <strong style={{ fontWeight: 500, color: '#F2EEE7' }}>RCCOON</strong> was born: a natural evolution from quiet support into active, citizen-led movement.
+            <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.9)', lineHeight: '34.96px' }}>
+              Over time we realised something was missing. Volunteering wasn't enough — citizens needed to take real action, step into the streets, and demand change. That's how <strong style={{ fontWeight: 500, color: '#8a2333' }}>RCCOON</strong> was born: a natural evolution from quiet support into active, citizen-led movement.
             </p>
           </div>
         </header>
-
         <section>
-          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '3rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#C86A2A' }} />
+          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '3rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#8a2333' }} />
             What I do
           </p>
-
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {categories.map((cat, i) => (
               <div
                 key={cat.title}
                 style={{
-                  background: 'rgba(20,5,5,0.6)',
+                  background: 'rgba(255,255,255,0.55)',
                   border: 'none',
                   padding: '2rem',
                   display: 'flex',
@@ -132,28 +124,28 @@ const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Adobe Suite']
                 onMouseEnter={e => {
                   e.currentTarget.style.transform = 'translateY(-3px)'
                   e.currentTarget.style.boxShadow = '0 8px 24px rgba(26,37,32,0.10)'
-                  e.currentTarget.style.borderColor = 'rgba(200,108,46,0.4)'
+                  e.currentTarget.style.borderColor = 'rgba(138,35,51,0.4)'
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.transform = 'translateY(0)'
                   e.currentTarget.style.boxShadow = 'none'
-                  e.currentTarget.style.borderColor = 'rgba(200,108,46,0.18)'
+                  e.currentTarget.style.borderColor = 'rgba(138,35,51,0.18)'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#edeae2', letterSpacing: '0.1em' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#8a2333', letterSpacing: '0.1em' }}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 500, color: '#F2EEE7', lineHeight: 1.3 }}>{cat.title}</h3>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 500, color: '#8a2333', lineHeight: 1.3 }}>{cat.title}</h3>
                 </div>
-                <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.9)', lineHeight: '34.96px' }}>{cat.desc}</p>
+                <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.9)', lineHeight: '34.96px' }}>{cat.desc}</p>
                 {'pdf' in cat && cat.pdf && (
                   <div style={{ marginTop: '1rem' }}>
                     {'pdfNote' in cat && cat.pdfNote && (
-                      <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.9)', lineHeight: '34.96px', marginBottom: '1rem' }}>{cat.pdfNote as string}</p>
+                      <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.9)', lineHeight: '34.96px', marginBottom: '1rem' }}>{cat.pdfNote as string}</p>
                     )}
                     <a href={cat.pdf as string} download
-                      style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#F2EEE7', background: '#C86A2A', padding: '0.8rem 2rem', textDecoration: 'none', display: 'inline-block' }}>
+                      style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#8a2333', background: '#8a2333', padding: '0.8rem 2rem', textDecoration: 'none', display: 'inline-block' }}>
                       Download PDF →
                     </a>
                   </div>
@@ -193,39 +185,36 @@ const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Adobe Suite']
             ))}
           </div>
         </section>
-
         <section style={{ marginTop: '5rem', paddingTop: '4rem', borderTop: '1px solid rgba(26,37,32,0.10)' }}>
-          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#C86A2A' }} />
+          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#8a2333' }} />
             Tools & Production
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
             {tools.map(t => (
               <div key={t} style={{
-                background: '#c86c2e',
-                color: '#fafaf7',
+                background: '#8a2333',
+                color: '#ffffff',
                 padding: '0.8rem 0.8rem',
                 fontSize: '0.65rem',
                 fontWeight: 500,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
                 textAlign: 'center',
-                boxShadow: '0 2px 8px rgba(200,108,46,0.15)',
+                boxShadow: '0 2px 8px rgba(138,35,51,0.15)',
               }}>{t}</div>
             ))}
           </div>
         </section>
-
-        <blockquote style={{ background: 'rgba(20,5,5,0.5)', border: '1px solid rgba(200,108,46,0.2)', borderLeft: '3px solid #C86A2A', padding: '2.5rem 2.5rem', fontSize: '1.35rem', fontStyle: 'italic', fontWeight: 300, color: '#F2EEE7', lineHeight: 1.5, margin: '5rem 0 4rem', maxWidth: 720 }}>
+        <blockquote style={{ background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(138,35,51,0.2)', borderLeft: '3px solid #8a2333', padding: '2.5rem 2.5rem', fontSize: '1.35rem', fontStyle: 'italic', fontWeight: 300, color: '#8a2333', lineHeight: 1.5, margin: '5rem 0 4rem', maxWidth: 720 }}>
           Turn empathy into responsibility, and responsibility into action.
         </blockquote>
-
         <div style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid rgba(26,37,32,0.10)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.9)' }}>
+          <p style={{ fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.9)' }}>
             Learn more about the project at{' '}
-            <a href="https://rccoon.org" target="_blank" rel="noopener noreferrer" style={{ color: '#edeae2', textDecoration: 'none', borderBottom: '1px solid #5b2dd1' }}>rccoon.org</a>
+            <a href="https://rccoon.org" target="_blank" rel="noopener noreferrer" style={{ color: '#8a2333', textDecoration: 'none', borderBottom: '1px solid #8a2333' }}>rccoon.org</a>
           </p>
-          <Link to="/projects" style={{ fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#F2EEE7', textDecoration: 'none' }}>← Back to projects</Link>
+          <Link to="/projects" style={{ fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8a2333', textDecoration: 'none' }}>← Back to projects</Link>
         </div>
       </article>
     </div>

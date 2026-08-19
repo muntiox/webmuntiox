@@ -4,13 +4,13 @@ export const Route = createFileRoute('/blog/post-3')({
 })
 function Post3Page() {
   return (
-    <div style={{ minHeight: '100vh', background: '#070709', color: '#edeae2', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
       <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100 }}>
-        <Link to="/blog" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', textDecoration: 'none', background: '#c86c2e', padding: '0.6rem 1.2rem' }}>← Back</Link>
+        <Link to="/blog" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', textDecoration: 'none', background: '#8a2333', padding: '0.6rem 1.2rem' }}>← Back</Link>
       </div>
       <article style={{ maxWidth: '720px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#c86c2e', marginBottom: '2rem' }}>Essay · 2026</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#edeae2', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '3rem' }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '2rem' }}>Essay · 2026</p>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#8a2333', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '3rem' }}>
           Make your<br/>time count
         </h1>
         {[
@@ -18,9 +18,9 @@ function Post3Page() {
           `I didn't arrive here easily. I went through years of vegetarianism before I went vegan. I watched, slowly, as I couldn't look away anymore — from what happens in slaughterhouses, in laboratories, in the places we choose not to see. And the more I understood, the less I could pretend I didn't.`,
           `That's how activism tends to start. Not with a decision, but with a moment when you realise you've been living with your eyes closed — and that someone, at some point, opened them for you.`,
         ].map((p, i) => (
-          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.72)', marginBottom: '1.8rem' }}>{p}</p>
+          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.85)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-        <blockquote style={{ borderLeft: '3px solid #c86c2e', padding: '1.2rem 0 1.2rem 2rem', margin: '3rem 0', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#edeae2', lineHeight: 1.3, letterSpacing: '0.02em' }}>
+        <blockquote style={{ borderLeft: '3px solid #8a2333', padding: '1.2rem 0 1.2rem 2rem', margin: '3rem 0', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#8a2333', lineHeight: 1.3, letterSpacing: '0.02em' }}>
           If we were the animals, we would want someone to speak for us.
         </blockquote>
         {[
@@ -30,14 +30,14 @@ function Post3Page() {
           `There's a kind of exhaustion that comes from spending your attention on things you don't believe in. And there's something else — harder to name but easy to recognise — that comes from spending it on things you do.`,
           `We don't talk enough about how much of our lives we hand over when we choose where to work. Or how much we get back when we choose carefully.`,
         ].map((p, i) => (
-          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.72)', marginBottom: '1.8rem' }}>{p}</p>
+          <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.85)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#edeae2', marginBottom: '1.8rem' }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#8a2333', marginBottom: '1.8rem' }}>
           Your attention is not infinite. Neither is your time. Point both somewhere worth it.
         </p>
-        <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(237,234,226,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/blog" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.5)', textDecoration: 'none' }}>← All posts</Link>
-          <Link to="/purpose" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.5)', textDecoration: 'none' }}>This is also who I am →</Link>
+        <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(138,35,51,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Link to="/blog" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.6)', textDecoration: 'none' }}>← All posts</Link>
+          <Link to="/purpose" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.6)', textDecoration: 'none' }}>This is also who I am →</Link>
         </div>
       </article>
     </div>

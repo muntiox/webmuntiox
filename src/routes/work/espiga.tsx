@@ -1,10 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
-
 export const Route = createFileRoute('/work/espiga')({
   component: EspigaPage,
 })
-
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -18,57 +16,52 @@ function FloatingNav() {
       {/* Home top left */}
       <a href="/projects" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.6)',
+        letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8a2333',
         textDecoration: 'none' }}>← Back to projects</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#edeae2' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
       </button>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
-          <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(237,234,226,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
+          <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
               <a key={l.href} href={l.href} className="mxo-fullnav-link"
-                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: 'rgb(237, 234, 226)', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#c86c2e')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#edeae2')}>
-                <span style={{ fontSize: '0.55em', color: 'rgba(200,108,46,0.7)', letterSpacing: '0.2em' }}>0{i+1}</span>
+                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '144px', fontWeight: 300, lineHeight: '144px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.5rem', transition: 'color 0.15s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
+                <span style={{ fontSize: '0.55em', color: '#d9737a', letterSpacing: '0.2em' }}>0{i+1}</span>
                 {l.label}
               </a>
             ))}
           </div>
-          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.2)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
+          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
         </div>
       )}
     </>
   )
 }
-
 function EspigaPage() {
   const [selected, setSelected] = useState<number | null>(null)
   const total = 24
   const photos = [1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
-
   return (
-    <div style={{ minHeight: '100vh', background: '#070709', color: '#F2EEE7', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
       <FloatingNav />
-
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '8rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
-
         <div style={{ marginBottom: '4rem' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#edeae2', marginBottom: '1rem' }}>2023 · Freelance</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1rem' }}>2023 · Freelance</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.2rem' }}>
             <img src="/photos/laespiga-logo.png" alt="Casa l'Espiga" style={{ height: '80px', width: 'auto', objectFit: 'contain' }} />
-            <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#F2EEE7', lineHeight: 1, letterSpacing: '0.02em', margin: 0 }}>Casa l&apos;Espiga</h1>
+            <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#8a2333', lineHeight: 1, letterSpacing: '0.02em', margin: 0 }}>Casa l&apos;Espiga</h1>
           </div>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)', maxWidth: 620 }}>A full weekend in a rural retreat in the Delta del Ebro — just me and a camera. Photo &amp; video content for a place that deserved to be seen.</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', maxWidth: 620 }}>A full weekend in a rural retreat in the Delta del Ebro — just me and a camera. Photo &amp; video content for a place that deserved to be seen.</p>
         </div>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.75rem' }}>
           {photos.map(n => (
             <img key={n} src={`/photos/espiga/espiga-photo-${n}.jpg`} alt=""
@@ -80,7 +73,6 @@ function EspigaPage() {
           ))}
         </div>
       </div>
-
       {selected !== null && (
         <div onClick={() => setSelected(null)}
           style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.92)', zIndex: 999, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
@@ -97,9 +89,9 @@ function EspigaPage() {
         </div>
       )}
     <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto', padding: '0 3.5rem 6rem' }}>
-        <div style={{ paddingTop: '3rem', borderTop: '1px solid rgba(242,238,231,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#edeae2', lineHeight: '34.96px', textDecoration: 'none' }}>← Back to projects</Link>
-          <a href="https://www.instagram.com/casalespiga/" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#edeae2', lineHeight: '34.96px', textDecoration: 'none' }}>@casalespiga →</a>
+        <div style={{ paddingTop: '3rem', borderTop: '1px solid rgba(138,35,51,0.12)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Link to="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#8a2333', lineHeight: '34.96px', textDecoration: 'none' }}>← Back to projects</Link>
+          <a href="https://www.instagram.com/casalespiga/" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#8a2333', lineHeight: '34.96px', textDecoration: 'none' }}>@casalespiga →</a>
         </div>
       </div>
     </div>
