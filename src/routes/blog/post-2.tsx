@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+
 export const Route = createFileRoute('/blog/post-2')({
   component: Post2Page,
 })
+
 function Post2Page() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
@@ -33,9 +35,9 @@ function Post2Page() {
         ))}
         <div style={{ margin: '3rem 0' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '1rem' }}>Worth watching</p>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(255,255,255,0.55)', marginBottom: '1rem', fontStyle: 'italic' }}>Sebastian Junger — Why veterans miss war (on tribe, belonging and community)</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(255,255,255,0.55)', marginBottom: '1rem', fontStyle: 'italic' }}>Mia Birdsong — As lonely as we are, we can choose community</p>
           <iframe
-            src="https://www.youtube.com/embed/iEBRB1OjEWs"
+            src="https://www.youtube.com/embed/aJm40A_rK-8"
             style={{ width: '100%', aspectRatio: '16/9', border: 'none' }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -46,7 +48,7 @@ function Post2Page() {
         ].map((p, i) => (
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.82)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#ffffff', marginBottom: '1.8rem' }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight 700, lineHeight: '34.96px', color: '#ffffff', marginBottom: '1.8rem' }}>
           Perhaps we didn't fail to reach the dream. Perhaps we just upgraded it.
         </p>
         <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

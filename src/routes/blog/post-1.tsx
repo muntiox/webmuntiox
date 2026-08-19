@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+
 export const Route = createFileRoute('/blog/post-1')({
   component: Post1Page,
 })
+
 function Post1Page() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
@@ -34,9 +36,9 @@ function Post1Page() {
         ))}
         <div style={{ margin: '3rem 0' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '1rem' }}>Worth watching</p>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(255,255,255,0.55)', marginBottom: '1rem', fontStyle: 'italic' }}>Simon Sinek — How great leaders inspire action</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(255,255,255,0.55)', marginBottom: '1rem', fontStyle: 'italic' }}>Seth Godin — Stop waiting for permission</p>
           <iframe
-            src="https://www.youtube.com/embed/qp0HIF3SfI4"
+            src="https://www.youtube.com/embed/V8K3f-fO_H4"
             style={{ width: '100%', aspectRatio: '16/9', border: 'none' }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

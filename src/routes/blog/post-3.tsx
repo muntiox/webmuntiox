@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+
 export const Route = createFileRoute('/blog/post-3')({
   component: Post3Page,
 })
+
 function Post3Page() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
@@ -32,12 +34,22 @@ function Post3Page() {
         ].map((p, i) => (
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.82)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
+        <div style={{ margin: '3rem 0' }}>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', marginBottom: '1rem' }}>Worth watching</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(255,255,255,0.55)', marginBottom: '1rem', fontStyle: 'italic' }}>Ed Winters — Every argument against veganism</p>
+          <iframe
+            src="https://www.youtube.com/embed/byTxzzvijim"
+            style={{ width: '100%', aspectRatio: '16/9', border: 'none' }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#ffffff', marginBottom: '1.8rem' }}>
           Your attention is not infinite. Neither is your time. Point both somewhere worth it.
         </p>
         <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/blog" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>← All posts</Link>
-          <Link to="/purpose" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>This is also who I am →</Link>
+          <Link to="/purpose" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight 300, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>This is also who I am →</Link>
         </div>
       </article>
     </div>
