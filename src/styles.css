@@ -724,3 +724,45 @@ body[data-page="inner"] [style*="rgb(7, 7, 9)"] {
   background-color: transparent !important;
   background: transparent !important;
 }
+
+
+/* ═══ Buttons with garnet fill keep WHITE text on inner pages ═══════ */
+body[data-page="inner"] a[style*="background: #8a2333"],
+body[data-page="inner"] a[style*="background:#8a2333"],
+body[data-page="inner"] button[style*="background: #8a2333"],
+body[data-page="inner"] button[style*="background:#8a2333"] {
+  color: #ffffff !important;
+}
+
+
+/* ═══ Fullscreen MENU always white links + pink numbers (beats data-page) ═══ */
+body[data-page="inner"] .mxo-fullnav-link,
+body[data-page="inner"] a.mxo-fullnav-link {
+  color: #ffffff !important;
+}
+body[data-page="inner"] .mxo-fullnav-link:hover {
+  color: #d9737a !important;
+}
+body[data-page="inner"] .mxo-fullnav-num {
+  color: #d9737a !important;
+}
+
+
+/* ═══ Menu overlay (#04020a) — all text white, beats data-page ═══════ */
+body[data-page="inner"] div[style*="#04020a"] p,
+body[data-page="inner"] div[style*="#04020a"] button,
+body[data-page="inner"] div[style*="#04020a"] span {
+  color: #ffffff !important;
+}
+/* keep the pink numbers pink even inside the overlay */
+body[data-page="inner"] div[style*="#04020a"] .mxo-fullnav-num,
+body[data-page="inner"] div[style*="#04020a"] a > span {
+  color: #d9737a !important;
+}
+/* menu links stay white, hover pink */
+body[data-page="inner"] div[style*="#04020a"] a.mxo-fullnav-link {
+  color: #ffffff !important;
+}
+body[data-page="inner"] div[style*="#04020a"] a.mxo-fullnav-link:hover {
+  color: #d9737a !important;
+}
