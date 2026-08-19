@@ -1,6 +1,31 @@
 import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
+
+// ── Thin vertical guide down the far left edge (site-wide) ──────────
+function SideLine() {
+  return (
+    <div className="mxo-side-line" aria-hidden="true">
+      <span>MUNTIOX — Itxaso Muntión</span>
+    </div>
+  )
+}
+
+// ── Fast heart-pulse flash on every route change ─────────────────────
+function RoutePulse() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const [active, setActive] = useState(false)
+  const prevRef = useRef(pathname)
+  useEffect(() => {
+    if (prevRef.current === pathname) return
+    prevRef.current = pathname
+    setActive(false)
+    const raf = requestAnimationFrame(() => setActive(true))
+    const t = setTimeout(() => setActive(false), 600)
+    return () => { cancelAnimationFrame(raf); clearTimeout(t) }
+  }, [pathname])
+  return <div className={`mxo-route-pulse${active ? ' is-active' : ''}`} aria-hidden="true" />
+}
 
 // ── Heartbeat background — fixed behind the whole site ────────────────
 // Home ('/') = garnet core beating on black.
@@ -194,6 +219,8 @@ function RootComponent() {
   return (
     <>
       <Heartbeat variant={variant} />
+      <RoutePulse />
+      <SideLine />
       <Outlet />
     </>
   )

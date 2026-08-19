@@ -452,7 +452,37 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-contact[style*="opacity: 1"] .mxo-eyebrow::before { width: 32px; margin-right: 1rem; }
 .mxo-body { color: rgba(237,234,226,0.72); margin-bottom: 1.4rem; font-size: clamp(0.88rem, 1.4vw, 1rem); font-weight: 300; line-height: 1.85; }
 .mxo-tagline { color: #fff !important; font-size: clamp(0.9rem, 1.6vw, 1.1rem) !important; font-weight: 300; }
-.mxo-tagline .highlighter__text { color: #fff !important; text-decoration-color: rgba(217,115,122,0.8) !important; }
+/* ─── Highlighter sweep (brand phrase underline-on-hover) ──────────
+   Base = thin static underline. Hover = pink highlighter marker
+   sweeps left→right under every letter, like drawing with a pen. */
+.highlighter { position: relative; display: inline-block; cursor: default; }
+.highlighter__text { position: relative; z-index: 1; }
+.highlighter::after {
+  content: ''; position: absolute; left: 0; bottom: -0.08em;
+  width: 100%; height: 0.32em;
+  background: rgba(217,115,122,0.22);
+  transform: scaleX(1); transform-origin: left;
+  z-index: 0; transition: background 0.3s ease;
+}
+.highlighter:hover::after {
+  background: #d9737a;
+  animation: highlighterSweep 0.5s ease forwards;
+}
+@keyframes highlighterSweep {
+  0%   { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
+}
+.mxo-tagline .highlighter__text { color: #fff !important; }
+/* Top-left brand tag: small bar + label, same pink sweep on hover */
+.mxo-brand-tag { display: inline-flex; align-items: center; gap: 0.65em; cursor: default; }
+.mxo-brand-tag__bar { width: 3px; height: 0.85em; background: #d9737a; flex-shrink: 0; transition: height 0.3s ease, transform 0.3s ease; }
+.mxo-brand-tag:hover .mxo-brand-tag__bar { height: 1.1em; }
+.mxo-brand-tag__text { position: relative; }
+.mxo-brand-tag__text::after {
+  content: ''; position: absolute; left: 0; bottom: -0.35em; height: 2px; width: 0;
+  background: #d9737a; transition: width 0.4s ease;
+}
+.mxo-brand-tag:hover .mxo-brand-tag__text::after { width: 100%; }
 .mxo-title-accent { letter-spacing: 0.5em; text-transform: uppercase; color: #d9737a; margin-bottom: -0.5rem; margin-left: 0.15em; font-family: 'Bebas Neue', sans-serif; font-size: 0.6rem; font-weight: 500; display: block; }
 .mxo-vert-text { display: none !important; }
 .mxo-about { padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem); position: relative; overflow: hidden; }
@@ -494,8 +524,62 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .contact-form .form-textarea:focus { outline: none; border-bottom-color: #d9737a !important; box-shadow: 0 1px 0 rgba(217,115,122,0.5) !important; }
 .contact-form .form-submit { background: #d9737a !important; animation: none !important; }
 .contact-form .form-submit:hover { box-shadow: 0 0 20px rgba(217,115,122,0.5) !important; }
-.mxo-footer { border-top: 1px solid rgba(237,234,226,0.08); padding: 2.5rem clamp(1.5rem, 5vw, 5rem); }
+.mxo-footer {
+  border-top: 1px solid rgba(237,234,226,0.08);
+  padding: 2.5rem clamp(1.5rem, 5vw, 5rem);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem;
+}
 .mxo-footer-copy { letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,234,226,0.22); font-size: 0.62rem; }
+/* Social links — typographic, matching the marquee's × separators */
+.mxo-footer-social { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+.mxo-footer-social a {
+  font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(237,234,226,0.45); text-decoration: none;
+  transition: color 0.25s ease;
+}
+.mxo-footer-social a:hover { color: #d9737a; }
+.mxo-footer-social span { color: rgba(217,115,122,0.5); font-size: 0.6rem; }
+/* Logo lockup — icon + wordmark, bottom-right of footer */
+.mxo-footer-logo { display: inline-flex; align-items: center; gap: 0.55em; text-decoration: none; }
+.mxo-footer-logo img { width: 18px; height: 18px; object-fit: contain; display: block; }
+.mxo-footer-logo span { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.14em; font-size: 1rem; color: #d9737a; }
+@media (max-width: 640px) {
+  .mxo-footer { flex-direction: column; align-items: flex-start; }
+}
+/* ─── Side line (note 5) — thin vertical guide down the far left ─── */
+.mxo-side-line {
+  position: fixed; left: clamp(0.9rem, 2.4vw, 2.2rem); top: 0; bottom: 0; width: 1px;
+  background: currentColor; opacity: 0.14;
+  z-index: 5; pointer-events: none;
+}
+.mxo-side-line span {
+  position: absolute; left: 0.9rem; bottom: 2.2rem;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase; white-space: nowrap;
+  color: currentColor; opacity: 0.4;
+}
+@media (max-width: 768px) { .mxo-side-line { display: none; } }
+/* ─── Video section (note 6) ────────────────────────────────────── */
+.mxo-video-section { position: relative; width: 100%; overflow: hidden; line-height: 0; }
+.mxo-video-section video { width: 100%; height: clamp(280px, 52vw, 640px); object-fit: cover; display: block; }
+/* ─── Heart-pulse route transition (note 3) ─────────────────────── */
+.mxo-route-pulse {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.mxo-route-pulse::before {
+  content: ''; width: 60vmax; height: 60vmax; border-radius: 50%;
+  background: radial-gradient(circle, rgba(217,115,122,0.9) 0%, rgba(138,35,51,0.4) 45%, rgba(138,35,51,0) 72%);
+  opacity: 0; transform: scale(0);
+}
+.mxo-route-pulse.is-active::before { animation: routePulse 0.55s cubic-bezier(0.2,0.8,0.3,1) forwards; }
+@keyframes routePulse {
+  0%   { opacity: 0.95; transform: scale(0); }
+  45%  { opacity: 0.6; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
 .mxo-marquee-outer { z-index: 3; background: rgba(217,115,122,0.06); border-top: 1px solid rgba(217,115,122,0.25); border-bottom: 1px solid rgba(217,115,122,0.25); width: 100%; padding: 1rem 0; position: relative; overflow: hidden; }
 .mxo-marquee-track { width: max-content; animation: marquee-scroll 22s linear infinite; display: flex; }
 .mxo-marquee-track:hover { animation-play-state: paused; }
@@ -533,18 +617,18 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-about-video { opacity: 0.5; object-position: right center; }
 .mxo-contact-video { opacity: 0.5; object-position: center center; }
 .mxo-about-text, .mxo-contact-inner { z-index: 2; position: relative; }
-.mxo-manifesto { z-index: 2; max-width: 100%; margin: 0; padding: 4rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-manifesto { z-index: 2; max-width: 1100px; margin: 0 auto; padding: 4rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-manifesto-question { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.1; }
 .mxo-manifesto-body { color: rgba(237,234,226,0.72); margin-bottom: 1.6rem; font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 1.6vw, 1.15rem); font-weight: 300; line-height: 1.9; }
 .mxo-manifesto-closing { color: rgba(237,234,226,0.9); letter-spacing: 0.02em; margin-top: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 3.5vw, 2.5rem); line-height: 1.1; }
 .mxo-manifesto-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; }
 .mxo-cv-cta { z-index: 2; padding: 0 clamp(1.5rem, 5vw, 5rem); position: relative; }
-.mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 100%; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills-groups { grid-template-columns: 1fr 1fr; gap: 1rem 3rem; max-width: 100%; display: grid; }
 .mxo-skills-group { flex-direction: column; gap: 0.6rem; display: flex; }
 .mxo-skill-tag { letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,234,226,0.72); cursor: default; border: 1px solid rgba(237,234,226,0.15); padding: 0.8rem 1.2rem; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 400; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
 .mxo-skill-tag:hover { color: #fff; background: rgba(217,115,122,0.08); border-color: #d9737a; transform: translateY(-2px); box-shadow: 0 0 20px rgba(217,115,122,0.25); }
-.mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-featured-card { color: inherit; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 900px; text-decoration: none; display: grid; }
 .mxo-featured-video { aspect-ratio: 16/9; object-fit: cover; width: 100%; display: block; }
 .mxo-featured-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 1rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; }
@@ -568,6 +652,10 @@ button:not(.mxo-nav-trigger),
 .form-label, .form-input, .form-textarea,
 .success-title, .success-text, .mxo-fullnav-bottom { font-family: 'Outfit', sans-serif !important; }
 .correction-wrapper, .correction-wrapper span, .correction-strike { font-family: 'Bebas Neue', sans-serif !important; }
+.correction-strike { position: relative; }
+.correction-strike::after { content: ''; position: absolute; left: -0.05em; right: -0.05em; top: 52%; height: 2px; background: #d9737a; transform: scaleX(1); }
+.correction-cursor { display: inline-block; width: 0.06em; height: 0.85em; margin-left: 0.05em; background: #d9737a; vertical-align: -0.05em; animation: blink 0.9s step-end infinite; }
+.correction-only { color: #d9737a !important; -webkit-text-fill-color: #d9737a !important; }
 /* Override nav for dark site */
 .mar-nav, .mxo-nav,
 body.nav-lit .mxo-nav,

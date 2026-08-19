@@ -35,12 +35,21 @@ function CorrectionOnly() {
     }
   }, [phase])
   const showCursor = phase !== 'idle' && phase !== 'done'
+  // "only" (the first word) renders in the brand's pink; the rest stays white
+  const onlyWord = 'only'
+  const onlyPink = onlyText.slice(0, onlyWord.length)
+  const onlyRest = onlyText.slice(onlyWord.length)
   return (
     <span className="correction-wrapper">
       {phase !== 'idle' && (
         <>
           {phase !== 'typing-only' && phase !== 'done' && wrongText && <span className={phase === 'striking' ? 'correction-strike' : ''}>{wrongText}</span>}
-          {(phase === 'typing-only' || phase === 'done') && onlyText && <span>{onlyText}</span>}
+          {(phase === 'typing-only' || phase === 'done') && onlyText && (
+            <>
+              <span className="correction-only">{onlyPink}</span>
+              {onlyRest && <span>{onlyRest}</span>}
+            </>
+          )}
           {showCursor && <span className="correction-cursor" />}
         </>
       )}
@@ -149,7 +158,10 @@ function Hero() {
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,6,0.35) 0%, rgba(5,5,6,0.15) 35%, rgba(5,5,6,0.9) 100%)', zIndex: 1 }} />
       {/* Texto del hero, ENCIMA de la foto */}
       <div className="mxo-hero-content" style={{ position: 'relative', zIndex: 2, opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease', padding: '3rem clamp(1.5rem, 4vw, 4rem) 5rem', maxWidth: '900px', marginLeft: 0, marginRight: 'auto', textAlign: 'left', width: '100%' }}>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.45)', marginBottom: '1.2rem' }}>MUNTIOX — Itxaso Muntión</p>
+        <p className="mxo-brand-tag" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.55)', marginBottom: '1.2rem' }}>
+          <span className="mxo-brand-tag__bar" aria-hidden="true" />
+          <span className="mxo-brand-tag__text">MUNTIOX — Itxaso Muntión</span>
+        </p>
         <p className="mxo-statement">
           Creative strategy<br/>
           <CorrectionOnly /><br/>
@@ -218,6 +230,9 @@ function Portfolio() {
           <p className="mxo-manifesto-body">Every project is an opportunity to leave the world a little better than we found it. That&apos;s the kind of work I want to be part of.</p>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: '#edeae2' }}>And that&apos;s why I want to choose you, too.</p>
         </div></Reveal>
+        <Reveal><div className="mxo-video-section">
+          <video src="/videos/index.mp4" autoPlay muted loop playsInline aria-hidden="true" />
+        </div></Reveal>
         <Reveal><div className="mxo-skills">
           <p className="mxo-eyebrow">What I do</p>
           <div style={{ display: 'flex', alignItems: 'stretch', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
@@ -272,6 +287,13 @@ function Portfolio() {
       </main>
       <footer className="mxo-footer">
         <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
+        <div className="mxo-footer-social">
+          <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+        <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
+          <img src="/photos/Logo/X-logo.png" alt="" aria-hidden="true" />
+          <span>MUNTIOX</span>
+        </a>
       </footer>
     </>
   )
