@@ -56,6 +56,16 @@ function CorrectionOnly() {
     </span>
   )
 }
+// ── Instagram glyph (generic monoline camera icon, currentColor) ──────
+function InstagramIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
 // ── Grain ────────────────────────────────────────────────────────────
 function Grain() {
   return (
@@ -158,11 +168,9 @@ function Hero() {
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,6,0.35) 0%, rgba(5,5,6,0.15) 35%, rgba(5,5,6,0.9) 100%)', zIndex: 1 }} />
       {/* Texto del hero, ENCIMA de la foto */}
       <div className="mxo-hero-content" style={{ position: 'relative', zIndex: 2, opacity: ready ? 1 : 0, transition: 'opacity 0.5s ease', padding: '3rem clamp(1.5rem, 4vw, 4rem) 5rem', maxWidth: '900px', marginLeft: 0, marginRight: 'auto', textAlign: 'left', width: '100%' }}>
-        <p className="mxo-brand-tag" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, letterSpacing: '0.2em', color: 'rgba(237,234,226,0.55)', marginBottom: '1.2rem' }}>
-          <span className="mxo-brand-tag__bar" aria-hidden="true" />
-          <span className="mxo-brand-tag__text">MUNTIOX — Itxaso Muntión</span>
-        </p>
-        <p className="mxo-statement">
+        {/* The "MUNTIOX — Itxaso Muntión" label now lives in __root.tsx as a
+            fixed top-left badge (BrandBadge) so it stays put through scroll. */}
+        <p className="mxo-statement" style={{ marginTop: '2.2rem' }}>
           Creative strategy<br/>
           <CorrectionOnly /><br/>
           that want to make<br/>
@@ -231,7 +239,12 @@ function Portfolio() {
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: '#edeae2' }}>And that&apos;s why I want to choose you, too.</p>
         </div></Reveal>
         <Reveal><div className="mxo-video-section">
-          <video src="/videos/index.mp4" autoPlay muted loop playsInline aria-hidden="true" />
+          <video src="/videos/pruebavideoindex1.mp4" autoPlay muted loop playsInline aria-hidden="true" />
+          <div className="mxo-video-overlay">
+            {['Creative Strategy', 'Content Creation', 'Digital Strategy', 'Brand Identity'].map(label => (
+              <div key={label} className="mxo-video-box"><span>{label}</span></div>
+            ))}
+          </div>
         </div></Reveal>
         <Reveal><div className="mxo-skills">
           <p className="mxo-eyebrow">What I do</p>
@@ -286,14 +299,19 @@ function Portfolio() {
         </div></Reveal>
       </main>
       <footer className="mxo-footer">
-        <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
-        <div className="mxo-footer-social">
-          <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer">Instagram</a>
-        </div>
         <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
           <img src="/photos/Logo/X-logo.png" alt="" aria-hidden="true" />
           <span>MUNTIOX</span>
         </a>
+        <div className="mxo-footer-right">
+          <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
+          <div className="mxo-footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
+              <InstagramIcon /> Instagram
+            </a>
+          </div>
+        </div>
       </footer>
     </>
   )

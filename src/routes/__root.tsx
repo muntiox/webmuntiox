@@ -2,11 +2,17 @@ import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
 
-// ── Thin vertical guide down the far left edge (site-wide) ──────────
-function SideLine() {
+// ── Persistent top-left brand badge (home only — inner pages already
+//    have their own "← Home" link in this exact corner) ──────────────
+//    Permanent highlighter mark (not hover-triggered): a solid pink
+//    stroke sits behind/over the letters, so the text switches to a
+//    dark ink for contrast and stays legible on any background,
+//    all the way through scroll.
+function BrandBadge() {
   return (
-    <div className="mxo-side-line" aria-hidden="true">
-      <span>MUNTIOX — Itxaso Muntión</span>
+    <div className="mxo-brand-badge" aria-hidden="true">
+      <span className="mxo-brand-badge__bar" />
+      <span className="mxo-brand-badge__mark">MUNTIOX — Itxaso Muntión</span>
     </div>
   )
 }
@@ -220,7 +226,7 @@ function RootComponent() {
     <>
       <Heartbeat variant={variant} />
       <RoutePulse />
-      <SideLine />
+      {variant === 'home' && <BrandBadge />}
       <Outlet />
     </>
   )
