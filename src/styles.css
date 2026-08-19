@@ -766,3 +766,112 @@ body[data-page="inner"] div[style*="#04020a"] a.mxo-fullnav-link {
 body[data-page="inner"] div[style*="#04020a"] a.mxo-fullnav-link:hover {
   color: #d9737a !important;
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   DEEP GARNET INNER THEME  (overrides earlier light-inner rules)
+   Dark garnet background → WHITE text, PINK buttons
+═══════════════════════════════════════════════════════════════════ */
+body[data-page="inner"] { color: #ffffff !important; }
+
+/* Titles / headings / body → white */
+body[data-page="inner"] .mxo-title,
+body[data-page="inner"] .mxo-statement,
+body[data-page="inner"] .mxo-about-heading,
+body[data-page="inner"] .mxo-work-title,
+body[data-page="inner"] .mxo-project-name,
+body[data-page="inner"] .mxo-contact-heading,
+body[data-page="inner"] .mxo-manifesto-title,
+body[data-page="inner"] .mxo-manifesto-question,
+body[data-page="inner"] .mxo-manifesto-closing,
+body[data-page="inner"] .mxo-featured-title,
+body[data-page="inner"] .mxo-mobile-link,
+body[data-page="inner"] p,
+body[data-page="inner"] li,
+body[data-page="inner"] .mxo-body,
+body[data-page="inner"] .mxo-project-body,
+body[data-page="inner"] .mxo-manifesto-body,
+body[data-page="inner"] .mxo-about-body,
+body[data-page="inner"] .mxo-quote,
+body[data-page="inner"] .mxo-project-sub,
+body[data-page="inner"] .mxo-project-year,
+body[data-page="inner"] .mxo-eyebrow,
+body[data-page="inner"] .mxo-footer-copy,
+body[data-page="inner"] .mxo-project-cta {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+/* Soften big paragraphs a touch */
+body[data-page="inner"] .mxo-body,
+body[data-page="inner"] .mxo-project-body,
+body[data-page="inner"] .mxo-manifesto-body {
+  color: rgba(255,255,255,0.82) !important;
+}
+/* Links → white (menu handled separately below) */
+body[data-page="inner"] a { color: #ffffff !important; }
+/* Eyebrow underline / accents → pink */
+body[data-page="inner"] .mxo-eyebrow::before,
+body[data-page="inner"] .section-label::before { background: #d9737a !important; }
+
+/* Cards → dark translucent with white text */
+body[data-page="inner"] .mxo-featured-item,
+body[data-page="inner"] .mxo-skill-tag {
+  background: rgba(0,0,0,0.25) !important;
+  border-color: rgba(255,255,255,0.15) !important;
+  color: #ffffff !important;
+}
+body[data-page="inner"] .mxo-featured-item:hover,
+body[data-page="inner"] .mxo-skill-tag:hover {
+  background: rgba(217,115,122,0.18) !important;
+  border-color: #d9737a !important;
+  box-shadow: 0 0 22px rgba(217,115,122,0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Buttons → pink fill, white text */
+body[data-page="inner"] .form-submit,
+body[data-page="inner"] .contact-form .form-submit {
+  background: #d9737a !important;
+  color: #ffffff !important;
+}
+/* Garnet-bg inline buttons from earlier become pink now */
+body[data-page="inner"] a[style*="background: #8a2333"],
+body[data-page="inner"] a[style*="background:#8a2333"],
+body[data-page="inner"] button[style*="background: #8a2333"],
+body[data-page="inner"] button[style*="background:#8a2333"] {
+  background: #d9737a !important;
+  color: #ffffff !important;
+}
+
+/* Form fields → white ink on dark */
+body[data-page="inner"] .contact-form .form-input,
+body[data-page="inner"] .contact-form .form-textarea {
+  color: #ffffff !important;
+  border-bottom-color: rgba(255,255,255,0.3) !important;
+}
+body[data-page="inner"] .contact-form .form-input::placeholder,
+body[data-page="inner"] .contact-form .form-textarea::placeholder { color: rgba(255,255,255,0.4) !important; }
+body[data-page="inner"] .contact-form .form-input:focus,
+body[data-page="inner"] .contact-form .form-textarea:focus {
+  border-bottom-color: #d9737a !important;
+  box-shadow: 0 1px 0 rgba(217,115,122,0.5) !important;
+}
+body[data-page="inner"] .form-label { color: rgba(255,255,255,0.6) !important; }
+
+/* Borders → faint white */
+body[data-page="inner"] .mxo-project { border-top-color: rgba(255,255,255,0.15) !important; }
+body[data-page="inner"] .mxo-project:last-child { border-bottom-color: rgba(255,255,255,0.15) !important; }
+body[data-page="inner"] .mxo-skills,
+body[data-page="inner"] .mxo-featured,
+body[data-page="inner"] .mxo-latest-post { border-top-color: rgba(255,255,255,0.12) !important; }
+
+/* Hamburger lines → white on dark pages */
+body[data-page="inner"] .mxo-nav-trigger span,
+body[data-page="inner"] button[aria-label="Open menu"] span { background: #ffffff !important; }
+
+/* Top nav bar translucent dark */
+body[data-page="inner"] .mar-nav,
+body[data-page="inner"] .mxo-nav {
+  background: rgba(20,6,10,0.4) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+}

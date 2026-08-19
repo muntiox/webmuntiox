@@ -17,15 +17,15 @@ function FloatingNav() {
       {/* Home top left */}
       <a href="/" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(138,35,51,0.6)',
+        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)',
         textDecoration: 'none' }}>← Home</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
       </button>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
@@ -79,13 +79,13 @@ function Photo({ src, alt = '', width = PHOTO_W, height = PHOTO_H }: { src: stri
   )
 }
 function Pull({ children }: { children: ReactNode }) {
-  return <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '18.4px', color: '#8a2333', lineHeight: '34.96px', letterSpacing: '0.04em', margin: '0 0 1.2rem' }}>{children}</p>
+  return <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '18.4px', color: '#ffffff', lineHeight: '34.96px', letterSpacing: '0.04em', margin: '0 0 1.2rem' }}>{children}</p>
 }
 function Body({ children }: { children: ReactNode }) {
-  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', marginBottom: '1.2rem' }}>{children}</p>
+  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '1.2rem' }}>{children}</p>
 }
 function Accent({ children }: { children: ReactNode }) {
-  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: 'rgba(138,35,51,0.9)', marginBottom: '1.2rem' }}>{children}</p>
+  return <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '1.2rem' }}>{children}</p>
 }
 function Row({ children, reverse = false }: { children: ReactNode; reverse?: boolean }) {
   return <div style={{ display: 'flex', gap: '5rem', alignItems: 'center', flexDirection: reverse ? 'row-reverse' : 'row', marginBottom: '8rem' }}>{children}</div>
@@ -94,7 +94,7 @@ function TextBlock({ children }: { children: ReactNode }) {
   return <div style={{ flex: 1, paddingTop: 0 }}>{children}</div>
 }
 function Divider() {
-  return <div style={{ width: '40px', height: '1px', background: '#8a2333', margin: '4rem 0' }} />
+  return <div style={{ width: '40px', height: '1px', background: '#d9737a', margin: '4rem 0' }} />
 }
 type Slide = { src: string; body: string; accent?: string; pull?: string }
 function PolaroidCollage({ slides }: { slides: Slide[] }) {
@@ -201,12 +201,12 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
 }
 function PurposePage() {
   return (
-    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         {/* ── CHAPTER 1: PURPOSE ─────────────────────────────────── */}
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', marginBottom: '1.5rem' }}>Purpose</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#8a2333', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 700 }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1.5rem' }}>Purpose</p>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#ffffff', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 700 }}>
           When creativity and strategy align with a higher purpose
         </h1>
         <div style={{ maxWidth: 640, marginBottom: '8rem' }}>
@@ -216,9 +216,9 @@ function PurposePage() {
         </div>
         <Divider />
         {/* ── CHAPTER 2: PERSON ──────────────────────────────────── */}
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#8a2333', margin: '4rem 0 6rem' }}>The person behind it</p>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', margin: '4rem 0 6rem' }}>The person behind it</p>
         {/* Quote block */}
-        <div style={{ borderLeft: '3px solid #8a2333', paddingLeft: '3rem', marginBottom: '6rem', maxWidth: 640 }}>
+        <div style={{ borderLeft: '3px solid #d9737a', paddingLeft: '3rem', marginBottom: '6rem', maxWidth: 640 }}>
           <Body>I've always had an almost irrational urge to build things, projects, ideas, communities. Things that didn't exist yesterday.</Body>
           <Body>Watching an idea slowly become something real, something that helps, inspires or moves someone, still feels like magic to me, not because I dream of building companies, but because I love building possibilities.</Body>
         </div>

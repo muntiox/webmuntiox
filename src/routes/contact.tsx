@@ -15,15 +15,15 @@ function FloatingNav() {
     <>
       <a href="/" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
         fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: '#8a2333',
+        letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff',
         textDecoration: 'none' }}>← Home</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#8a2333' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
       </button>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
@@ -52,39 +52,39 @@ function ContactPage() {
     setSubmitted(true)
   }
   return (
-    <div style={{ minHeight: '100vh', background: 'transparent', color: '#8a2333', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
       <div style={{ maxWidth: '600px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 300, color: '#8a2333', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-          Let's make something<br /><span style={{ color: '#8a2333' }}>worth making</span>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '1.5rem' }}>
+          Let's make something<br /><span style={{ color: '#d9737a' }}>worth making</span>
         </h1>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(138,35,51,0.85)', lineHeight: '34.96px', marginBottom: '3rem' }}>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: '34.96px', marginBottom: '3rem' }}>
           If your project seeks to connect authentically and generate real impact, I'd love to hear from you.
         </p>
         {submitted ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '3rem 0' }}>
-            <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#8a2333' }}>Message received.</p>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.9rem', fontWeight: 300, color: 'rgba(138,35,51,0.7)', lineHeight: 1.8 }}>Thank you for writing. I'll be in touch soon.</p>
+            <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#ffffff' }}>Message received.</p>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.9rem', fontWeight: 300, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>Thank you for writing. I'll be in touch soon.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(138,35,51,0.6)' }}>Name</label>
+              <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)' }}>Name</label>
               <input name="name" type="text" required placeholder="Your name"
-                style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(138,35,51,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#8a2333', outline: 'none', width: '100%' }} />
+                style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#ffffff', outline: 'none', width: '100%' }} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(138,35,51,0.6)' }}>Email</label>
+              <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)' }}>Email</label>
               <input name="email" type="email" required placeholder="you@email.com"
-                style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(138,35,51,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#8a2333', outline: 'none', width: '100%' }} />
+                style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#ffffff', outline: 'none', width: '100%' }} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(138,35,51,0.6)' }}>Message</label>
+              <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)' }}>Message</label>
               <textarea name="message" required placeholder="Tell me about your project, your vision, your world..." rows={5}
-                style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(138,35,51,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#8a2333', outline: 'none', width: '100%', resize: 'none' }} />
+                style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#ffffff', outline: 'none', width: '100%', resize: 'none' }} />
             </div>
             <button type="submit"
-              style={{ alignSelf: 'flex-start', fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#8a2333', border: 'none', padding: '1rem 2.5rem', cursor: 'pointer' }}>
+              style={{ alignSelf: 'flex-start', fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', border: 'none', padding: '1rem 2.5rem', cursor: 'pointer' }}>
               Send message
             </button>
           </form>

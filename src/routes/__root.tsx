@@ -90,7 +90,7 @@ function Heartbeat({ variant }: { variant: 'home' | 'inner' }) {
     const drawVein = (v: Vein, beat: number, flowHead: number) => {
       ctx.beginPath()
       for (let k = 0; k < v.pts.length; k++) { const p = v.pts[k]; if (k === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y) }
-      ctx.strokeStyle = rgba(GARNET, 0.13 + beat * 0.05)
+      ctx.strokeStyle = rgba([170, 50, 66], 0.18 + beat * 0.08)
       ctx.lineWidth = 1.1; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke()
       if (flowHead <= 0) return
       const headLen = v.len * flowHead
@@ -133,16 +133,17 @@ function Heartbeat({ variant }: { variant: 'home' | 'inner' }) {
         const target = Math.min(1, cycle / 0.5)
         flow += (target - flow) * 0.2
 
-        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H)
+        ctx.fillStyle = '#2a0c12'; ctx.fillRect(0, 0, W, H)
         const outer = Math.sqrt(W * W + H * H) * 0.75
         const start = 0.28 * (1 - beat * 0.06)
+        const RING = [150, 40, 55]
         const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, outer)
-        g.addColorStop(0, rgba(GARNET, 0))
-        g.addColorStop(Math.max(0.01, start), rgba(GARNET, 0))
-        g.addColorStop(Math.min(0.99, start + 0.14), rgba(GARNET, 0.08 + beat * 0.08))
-        g.addColorStop(Math.min(0.99, start + 0.30), rgba(GARNET, 0.28 + beat * 0.14))
-        g.addColorStop(Math.min(0.99, start + 0.48), rgba(GARNET, 0.55 + beat * 0.14))
-        g.addColorStop(1, rgba(GARNET, 0.90))
+        g.addColorStop(0, rgba(RING, 0))
+        g.addColorStop(Math.max(0.01, start), rgba(RING, 0))
+        g.addColorStop(Math.min(0.99, start + 0.14), rgba(RING, 0.10 + beat * 0.10))
+        g.addColorStop(Math.min(0.99, start + 0.30), rgba(RING, 0.30 + beat * 0.16))
+        g.addColorStop(Math.min(0.99, start + 0.48), rgba(RING, 0.55 + beat * 0.16))
+        g.addColorStop(1, rgba([120, 25, 38], 0.75))
         ctx.fillStyle = g; ctx.fillRect(0, 0, W, H)
 
         for (let i = 0; i < veins.length; i++) {
