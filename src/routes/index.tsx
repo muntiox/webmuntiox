@@ -231,8 +231,15 @@ function Portfolio() {
         <Reveal><div className="mxo-video-section">
           <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
           <div className="mxo-video-overlay">
-            {['Purposeful.', 'Honest.', 'Alive.', 'Unmistakably yours.'].map(label => (
-              <div key={label} className="mxo-video-box"><span>{label}</span></div>
+            {[
+              { title: 'Vegan brands, done right.', body: 'Ethical food and lifestyle projects that deserve a voice as strong as their values.' },
+              { title: 'Travel with a conscience.', body: 'Ethical agencies and conscious stays — content that moves people to go, gently.' },
+              { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
+            ].map(box => (
+              <div key={box.title} className="mxo-video-box">
+                <h3>{box.title}</h3>
+                <p>{box.body}</p>
+              </div>
             ))}
           </div>
         </div></Reveal>
@@ -256,16 +263,29 @@ function Portfolio() {
           </div>
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
-          <div className="mxo-about-me-photo">
-            <img src="/photos/me-index.jpg" alt="Itxaso Muntión" />
+          <div className="mxo-about-me-hero">
+            <img className="mxo-about-me-bg" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
+            <div className="mxo-about-me-scrim" aria-hidden="true" />
+            <div className="mxo-about-me-hero-text">
+              <p className="mxo-eyebrow">Not the LinkedIn version</p>
+              <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
+            </div>
           </div>
-          <div className="mxo-about-me-text">
-            <p className="mxo-eyebrow">Not the LinkedIn version</p>
-            <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
-            <p className="mxo-about-me-body">My path hasn&apos;t been a straight line, and I stopped apologising for that a while ago. I get curious about too many things at once — photography, strategy, the way a community forms around an idea — so instead of picking one lane, I built a way of working that moves between all of them.</p>
-            <p className="mxo-about-me-body">I don&apos;t wait to feel ready before I start something. Most of what actually matters in my work, I learned by doing it first and understanding it after. When something becomes part of my life, I find a way to make it mine — even when, at the start, it looks impossible.</p>
-            <p className="mxo-about-me-body">I&apos;d rather understand something properly than have a fast opinion about it. I care about people as much as I care about the work, probably more — and I still believe, stubbornly, that a good story can move something real.</p>
-            <p className="mxo-about-me-closing">I don&apos;t wait for the right opportunity. I create it.</p>
+          <div className="mxo-about-me-content">
+            <div className="mxo-about-me-copy">
+              <p>Todavía no lo sé.<br/>Nos han enseñado a prepararnos para las cosas como si algún día fuera a llegar ese momento en el que, por fin, supiéramos exactamente qué estamos haciendo.</p>
+              <p>La carrera adecuada.<br/>Los años de experiencia adecuados.<br/>El momento adecuado.<br/>La seguridad de que va a salir bien.</p>
+              <p>Pero casi todo lo interesante empieza un poco antes de sentirse preparado.<br/>Hay cosas que solo se aprenden cuando ya estás dentro. Cuando toca preguntar, equivocarse, volver a intentarlo y descubrir que, después de todo, no era tan grave no saber.</p>
+              <p>Quizá por eso nunca he entendido demasiado bien la obsesión por tener una única dirección.<br/>Hay demasiadas cosas interesantes.</p>
+              <p>Una imagen puede llevar a una historia.<br/>Una historia puede llevar a una persona.<br/>Una persona puede cambiar de opinión.<br/>Puede mirar algo de otra manera.<br/>Puede hacer algo que antes no habría hecho.</p>
+              <p className="mxo-about-me-emph">Y ahí es donde creo que empieza lo interesante.</p>
+              <p>Porque crear contenido, en realidad, puede hacerlo cualquiera.<br/>Lo difícil es hacer que algo de lo que has creado se quede dentro de alguien.</p>
+              <p>Que le haga pensar.<br/>Que le despierte curiosidad.<br/>Que le mueva algo.<br/>Que le haga mirar a otra persona, a una idea o al mundo de una manera un poco diferente.</p>
+              <p className="mxo-about-me-emph">Eso es lo que me interesa.</p>
+              <p>La imagen, el vídeo, las palabras, una estrategia, una comunidad… son herramientas. Lo que de verdad me importa es qué hacemos con ellas y qué conseguimos mover al otro lado de la pantalla.</p>
+              <p>Quizá por eso nunca me ha preocupado demasiado tener una única etiqueta.<br/>Me interesa aprender cosas distintas porque nunca sé cuál va a ser la herramienta que necesite para contar algo bien.</p>
+              <p className="mxo-about-me-closing">Y quizá tampoco hace falta saber exactamente qué vendrá después.<br/>A veces basta con empezar y ver qué podemos mover.</p>
+            </div>
             <p className="mxo-about-me-aside">Also: vegan, curious, usually mid-idea.</p>
           </div>
         </section></Reveal>
