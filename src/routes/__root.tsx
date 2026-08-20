@@ -3,15 +3,16 @@ import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
 
 // ── Persistent top-left brand badge — on every page, fixed through
-//    scroll. On inner pages it sits just below the existing "← Home"
-//    link (same corner) so the two don't overlap. Plain white label +
-//    a small pink rule.
-function BrandBadge({ inner }: { inner: boolean }) {
+//    scroll. Doubles as the way back home: the per-page "← Home" /
+//    "← Back to projects" links have been removed from that corner,
+//    so clicking the badge is now how you return to "/". Plain white
+//    label + a small pink rule.
+function BrandBadge() {
   return (
-    <div className={`mxo-brand-badge${inner ? ' mxo-brand-badge--inner' : ''}`} aria-hidden="true">
+    <a href="/" className="mxo-brand-badge" aria-label="MUNTIOX — Itxaso Muntión, go to home">
       <span className="mxo-brand-badge__bar" />
       <span className="mxo-brand-badge__mark">MUNTIOX — Itxaso Muntión</span>
-    </div>
+    </a>
   )
 }
 
@@ -253,7 +254,7 @@ function RootComponent() {
     <>
       <Heartbeat variant={variant} />
       <RoutePulse />
-      <BrandBadge inner={variant !== 'home'} />
+      <BrandBadge />
       <Outlet />
       <SiteFooter />
     </>

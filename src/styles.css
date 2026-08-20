@@ -474,20 +474,21 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 }
 .mxo-tagline .highlighter__text { color: #fff !important; }
 /* Fixed top-left brand badge — every page, fixed through scroll.
-   Plain white label + a small pink rule on the left. On inner pages
-   it sits below the existing "← Home" link so they don't overlap. */
+   Plain white label + a small pink rule on the left. Doubles as the
+   home link now that the per-page "← Home" links are gone, so it's a
+   real <a>, not a decorative div. */
 .mxo-brand-badge {
   position: fixed; top: 1.4rem; left: 1.8rem; z-index: 90;
   display: inline-flex; align-items: center; gap: 0.6em;
   font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 400;
-  letter-spacing: 0.14em; pointer-events: none;
+  letter-spacing: 0.14em; text-decoration: none; cursor: pointer;
+  opacity: 1; transition: opacity 0.2s ease;
 }
-.mxo-brand-badge--inner { top: 2.6rem; }
+.mxo-brand-badge:hover { opacity: 0.75; }
 .mxo-brand-badge__bar { width: 3px; height: 0.9em; background: #d9737a; flex-shrink: 0; }
 .mxo-brand-badge__mark { color: #ffffff; }
 @media (max-width: 640px) {
   .mxo-brand-badge { font-size: 0.62rem; top: 1.1rem; left: 1.1rem; letter-spacing: 0.08em; }
-  .mxo-brand-badge--inner { top: 2.3rem; }
 }
 .mxo-title-accent { letter-spacing: 0.5em; text-transform: uppercase; color: #d9737a; margin-bottom: -0.5rem; margin-left: 0.15em; font-family: 'Bebas Neue', sans-serif; font-size: 0.6rem; font-weight: 500; display: block; }
 .mxo-vert-text { display: none !important; }
@@ -656,18 +657,19 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-skills-group { flex-direction: column; gap: 0.6rem; display: flex; }
 .mxo-skill-tag { letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,234,226,0.72); cursor: default; border: 1px solid rgba(237,234,226,0.15); padding: 0.8rem 1.2rem; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 400; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
 .mxo-skill-tag:hover { color: #fff; background: rgba(217,115,122,0.08); border-color: #d9737a; transform: translateY(-2px); box-shadow: 0 0 20px rgba(217,115,122,0.25); }
-/* ─── About-me editorial pause — photo banner + text below ─────────
-   Same visual language as the Hero: the photo sits behind the title,
-   with a garnet-tinted scrim for legibility. The banner height is
-   capped near the photo's native resolution so it stays sharp — the
-   full essay then continues in a normal readable block underneath,
-   rather than stretching the photo across all that copy. ─────────── */
+/* ─── About-me editorial pause — full-bleed photo, garnet frame ────
+   Reference: full-width dramatic photo letterboxed between two garnet
+   bars, eyebrow + title + short copy overlaid directly on the image.
+   Text is kept short on purpose so it all lives on the photo instead
+   of spilling into a block below — that's also what keeps the photo
+   banner capped near its native resolution, so it stays sharp. ──── */
 .mxo-about-me {
   position: relative; z-index: 2;
+  background: #2a0c12;
+  padding: clamp(1.2rem, 3vw, 2.2rem) 0;
   border-top: 1px solid rgba(237,234,226,0.08);
-  background: rgba(5,5,6,0.4);
 }
-.mxo-about-me-hero { position: relative; overflow: hidden; height: clamp(420px, 55vw, 620px); }
+.mxo-about-me-frame { position: relative; overflow: hidden; height: clamp(460px, 60vw, 640px); }
 .mxo-about-me-bg {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; display: block;
@@ -676,43 +678,31 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-about-me-scrim {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(5,5,6,0.7) 0%, rgba(5,5,6,0.12) 38%, rgba(5,5,6,0.55) 78%, rgba(5,5,6,0.94) 100%),
-    linear-gradient(115deg, rgba(138,35,51,0.35) 0%, transparent 55%);
+    linear-gradient(180deg, rgba(5,5,6,0.35) 0%, rgba(5,5,6,0.05) 30%, rgba(5,5,6,0.4) 62%, rgba(5,5,6,0.9) 100%),
+    linear-gradient(115deg, rgba(138,35,51,0.3) 0%, transparent 55%);
 }
 .mxo-about-me-hero-text {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-  padding: 0 clamp(1.5rem, 6vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 640px;
+  padding: 0 clamp(1.5rem, 6vw, 6rem) clamp(2rem, 4.5vw, 3.2rem);
 }
 .mxo-about-me-title {
   font-family: 'Bebas Neue', sans-serif; font-weight: 400;
   font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05;
   color: #edeae2; letter-spacing: 0.02em; margin-bottom: 0;
 }
-.mxo-about-me-content {
-  position: relative; z-index: 2; max-width: 680px;
-  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem);
-}
-.mxo-about-me-copy p {
+.mxo-about-me-rule { display: block; width: 56px; height: 2px; background: #d9737a; margin: 1.3rem 0 1.4rem; }
+.mxo-about-me-copy {
   font-family: 'Outfit', sans-serif; font-weight: 300;
-  font-size: clamp(0.92rem, 1.3vw, 1.02rem); line-height: 1.85;
-  color: rgba(237,234,226,0.82); margin-bottom: 1.3rem;
-}
-.mxo-about-me-emph {
-  font-family: 'Bebas Neue', sans-serif !important; font-weight: 400 !important;
-  font-size: clamp(1.2rem, 2vw, 1.5rem) !important; color: #edeae2 !important;
-  letter-spacing: 0.01em;
-}
-.mxo-about-me-closing {
-  font-family: 'Bebas Neue', sans-serif !important; font-weight: 400 !important;
-  font-size: clamp(1.3rem, 2.2vw, 1.7rem) !important; color: #d9737a !important;
-  letter-spacing: 0.01em; margin-top: 1rem !important;
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem); line-height: 1.75;
+  color: rgba(237,234,226,0.88); margin-bottom: 0;
 }
 .mxo-about-me-aside {
-  font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 400;
-  letter-spacing: 0.08em; color: rgba(237,234,226,0.55); margin-top: 1.5rem;
+  font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.08em; color: rgba(237,234,226,0.5); margin-top: 1.2rem;
 }
 @media (max-width: 768px) {
-  .mxo-about-me-content { max-width: 100%; padding: 2.5rem 1.5rem 3.5rem; }
+  .mxo-about-me-frame { height: clamp(520px, 130vw, 680px); }
+  .mxo-about-me-hero-text { max-width: 100%; }
 }
 .mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-featured-card { color: inherit; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 900px; text-decoration: none; display: grid; }

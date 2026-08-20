@@ -263,30 +263,16 @@ function Portfolio() {
           </div>
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
-          <div className="mxo-about-me-hero">
+          <div className="mxo-about-me-frame">
             <img className="mxo-about-me-bg" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
             <div className="mxo-about-me-scrim" aria-hidden="true" />
             <div className="mxo-about-me-hero-text">
               <p className="mxo-eyebrow">Not the LinkedIn version</p>
               <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
+              <span className="mxo-about-me-rule" aria-hidden="true" />
+              <p className="mxo-about-me-copy">Todavía no lo sé, y está bien. Lo interesante casi siempre empieza un poco antes de sentirse preparada: toca preguntar, equivocarse, y descubrir que no pasaba nada por no saber. Una imagen puede llevar a una historia, una historia a una persona, y una persona puede cambiar de opinión — eso es lo que me interesa. Tampoco hace falta saber qué vendrá después. A veces basta con empezar.</p>
+              <p className="mxo-about-me-aside">Also: vegan, curious, usually mid-idea.</p>
             </div>
-          </div>
-          <div className="mxo-about-me-content">
-            <div className="mxo-about-me-copy">
-              <p>Todavía no lo sé.<br/>Nos han enseñado a prepararnos para las cosas como si algún día fuera a llegar ese momento en el que, por fin, supiéramos exactamente qué estamos haciendo.</p>
-              <p>La carrera adecuada.<br/>Los años de experiencia adecuados.<br/>El momento adecuado.<br/>La seguridad de que va a salir bien.</p>
-              <p>Pero casi todo lo interesante empieza un poco antes de sentirse preparado.<br/>Hay cosas que solo se aprenden cuando ya estás dentro. Cuando toca preguntar, equivocarse, volver a intentarlo y descubrir que, después de todo, no era tan grave no saber.</p>
-              <p>Quizá por eso nunca he entendido demasiado bien la obsesión por tener una única dirección.<br/>Hay demasiadas cosas interesantes.</p>
-              <p>Una imagen puede llevar a una historia.<br/>Una historia puede llevar a una persona.<br/>Una persona puede cambiar de opinión.<br/>Puede mirar algo de otra manera.<br/>Puede hacer algo que antes no habría hecho.</p>
-              <p className="mxo-about-me-emph">Y ahí es donde creo que empieza lo interesante.</p>
-              <p>Porque crear contenido, en realidad, puede hacerlo cualquiera.<br/>Lo difícil es hacer que algo de lo que has creado se quede dentro de alguien.</p>
-              <p>Que le haga pensar.<br/>Que le despierte curiosidad.<br/>Que le mueva algo.<br/>Que le haga mirar a otra persona, a una idea o al mundo de una manera un poco diferente.</p>
-              <p className="mxo-about-me-emph">Eso es lo que me interesa.</p>
-              <p>La imagen, el vídeo, las palabras, una estrategia, una comunidad… son herramientas. Lo que de verdad me importa es qué hacemos con ellas y qué conseguimos mover al otro lado de la pantalla.</p>
-              <p>Quizá por eso nunca me ha preocupado demasiado tener una única etiqueta.<br/>Me interesa aprender cosas distintas porque nunca sé cuál va a ser la herramienta que necesite para contar algo bien.</p>
-              <p className="mxo-about-me-closing">Y quizá tampoco hace falta saber exactamente qué vendrá después.<br/>A veces basta con empezar y ver qué podemos mover.</p>
-            </div>
-            <p className="mxo-about-me-aside">Also: vegan, curious, usually mid-idea.</p>
           </div>
         </section></Reveal>
         <Reveal><div className="mxo-featured">

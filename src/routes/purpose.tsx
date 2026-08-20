@@ -14,11 +14,6 @@ function FloatingNav() {
   ]
   return (
     <>
-      {/* Home top left */}
-      <a href="/" style={{ position: 'fixed', top: '1.4rem', left: '1.8rem', zIndex: 100,
-        fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', fontWeight: 500,
-        letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)',
-        textDecoration: 'none' }}>← Home</a>
       <button onClick={() => setOpen(true)} aria-label="Open menu"
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
