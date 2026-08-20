@@ -657,52 +657,62 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-skills-group { flex-direction: column; gap: 0.6rem; display: flex; }
 .mxo-skill-tag { letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,234,226,0.72); cursor: default; border: 1px solid rgba(237,234,226,0.15); padding: 0.8rem 1.2rem; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 400; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
 .mxo-skill-tag:hover { color: #fff; background: rgba(217,115,122,0.08); border-color: #d9737a; transform: translateY(-2px); box-shadow: 0 0 20px rgba(217,115,122,0.25); }
-/* ─── About-me editorial pause — full-bleed photo, garnet frame ────
-   Reference: full-width dramatic photo letterboxed between two garnet
-   bars, eyebrow + title + short copy overlaid directly on the image.
-   Text is kept short on purpose so it all lives on the photo instead
-   of spilling into a block below — that's also what keeps the photo
-   banner capped near its native resolution, so it stays sharp. ──── */
+/* ─── About-me editorial pause — whole photo right, text card
+   overlapping on top, left ─────────────────────────────────────────
+   The full, uncropped photo sits right-aligned; a text card floats
+   over its left edge with a slight rotation — elegant disorder rather
+   than a tidy grid. Photo keeps its natural width/height (no cover
+   crop), so it's shown whole and stays sharp. Stacks cleanly on
+   mobile, photo first, full width, nothing cropped off. ──────────── */
 .mxo-about-me {
   position: relative; z-index: 2;
-  background: #2a0c12;
-  padding: clamp(1.2rem, 3vw, 2.2rem) 0;
+  background: rgba(5,5,6,0.4);
+  padding: clamp(4rem, 8vw, 7rem) 0;
   border-top: 1px solid rgba(237,234,226,0.08);
+  overflow: hidden;
 }
-.mxo-about-me-frame { position: relative; overflow: hidden; height: clamp(460px, 60vw, 640px); }
-.mxo-about-me-bg {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; display: block;
+.mxo-about-me-inner {
+  position: relative; max-width: 1200px; margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  display: flex; justify-content: flex-end;
+}
+.mxo-about-me-photo-wrap { width: min(62%, 640px); }
+.mxo-about-me-photo {
+  width: 100%; height: auto; display: block;
   filter: grayscale(1) contrast(1.05);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
 }
-.mxo-about-me-scrim {
-  position: absolute; inset: 0; pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(5,5,6,0.35) 0%, rgba(5,5,6,0.05) 30%, rgba(5,5,6,0.4) 62%, rgba(5,5,6,0.9) 100%),
-    linear-gradient(115deg, rgba(138,35,51,0.3) 0%, transparent 55%);
-}
-.mxo-about-me-hero-text {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 640px;
-  padding: 0 clamp(1.5rem, 6vw, 6rem) clamp(2rem, 4.5vw, 3.2rem);
+.mxo-about-me-card {
+  position: absolute; left: clamp(0.5rem, 3vw, 2rem); top: 12%;
+  width: min(420px, 46%);
+  background: rgba(5,5,6,0.94);
+  border: 1px solid rgba(217,115,122,0.3);
+  border-left: 3px solid #d9737a;
+  padding: clamp(1.8rem, 3.5vw, 2.6rem);
+  transform: rotate(-1.2deg);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+  z-index: 3;
 }
 .mxo-about-me-title {
   font-family: 'Bebas Neue', sans-serif; font-weight: 400;
-  font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05;
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.05;
   color: #edeae2; letter-spacing: 0.02em; margin-bottom: 0;
 }
-.mxo-about-me-rule { display: block; width: 56px; height: 2px; background: #d9737a; margin: 1.3rem 0 1.4rem; }
+.mxo-about-me-rule { display: block; width: 48px; height: 2px; background: #d9737a; margin: 1.1rem 0 1.2rem; }
 .mxo-about-me-copy {
   font-family: 'Outfit', sans-serif; font-weight: 300;
-  font-size: clamp(0.88rem, 1.2vw, 0.98rem); line-height: 1.75;
-  color: rgba(237,234,226,0.88); margin-bottom: 0;
-}
-.mxo-about-me-aside {
-  font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 400;
-  letter-spacing: 0.08em; color: rgba(237,234,226,0.5); margin-top: 1.2rem;
+  font-size: clamp(0.85rem, 1.1vw, 0.94rem); line-height: 1.7;
+  color: rgba(237,234,226,0.85); margin-bottom: 0;
 }
 @media (max-width: 768px) {
-  .mxo-about-me-frame { height: clamp(520px, 130vw, 680px); }
-  .mxo-about-me-hero-text { max-width: 100%; }
+  .mxo-about-me { padding: 0 0 clamp(2.5rem, 8vw, 4rem); overflow: visible; }
+  .mxo-about-me-inner { flex-direction: column; padding: 0; }
+  .mxo-about-me-photo-wrap { width: 100%; }
+  .mxo-about-me-photo { box-shadow: none; }
+  .mxo-about-me-card {
+    position: relative; left: auto; top: auto; margin: -2.5rem 1.2rem 0;
+    width: auto; transform: rotate(-0.6deg);
+  }
 }
 .mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-featured-card { color: inherit; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 900px; text-decoration: none; display: grid; }

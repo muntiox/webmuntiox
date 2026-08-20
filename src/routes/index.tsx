@@ -263,15 +263,15 @@ function Portfolio() {
           </div>
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
-          <div className="mxo-about-me-frame">
-            <img className="mxo-about-me-bg" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
-            <div className="mxo-about-me-scrim" aria-hidden="true" />
-            <div className="mxo-about-me-hero-text">
+          <div className="mxo-about-me-inner">
+            <div className="mxo-about-me-photo-wrap">
+              <img className="mxo-about-me-photo" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
+            </div>
+            <div className="mxo-about-me-card">
               <p className="mxo-eyebrow">Not the LinkedIn version</p>
               <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
               <span className="mxo-about-me-rule" aria-hidden="true" />
               <p className="mxo-about-me-copy">Todavía no lo sé, y está bien. Lo interesante casi siempre empieza un poco antes de sentirse preparada: toca preguntar, equivocarse, y descubrir que no pasaba nada por no saber. Una imagen puede llevar a una historia, una historia a una persona, y una persona puede cambiar de opinión — eso es lo que me interesa. Tampoco hace falta saber qué vendrá después. A veces basta con empezar.</p>
-              <p className="mxo-about-me-aside">Also: vegan, curious, usually mid-idea.</p>
             </div>
           </div>
         </section></Reveal>
