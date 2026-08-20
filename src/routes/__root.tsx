@@ -4,10 +4,7 @@ import '../styles.css'
 
 // ── Persistent top-left brand badge (home only — inner pages already
 //    have their own "← Home" link in this exact corner) ──────────────
-//    Permanent highlighter mark (not hover-triggered): a solid pink
-//    stroke sits behind/over the letters, so the text switches to a
-//    dark ink for contrast and stays legible on any background,
-//    all the way through scroll.
+//    Plain white label + a small pink rule, fixed through scroll.
 function BrandBadge() {
   return (
     <div className="mxo-brand-badge" aria-hidden="true">

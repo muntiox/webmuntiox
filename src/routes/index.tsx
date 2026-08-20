@@ -239,9 +239,9 @@ function Portfolio() {
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: '#edeae2' }}>And that&apos;s why I want to choose you, too.</p>
         </div></Reveal>
         <Reveal><div className="mxo-video-section">
-          <video src="/videos/pruebavideoindex1.mp4" autoPlay muted loop playsInline aria-hidden="true" />
+          <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
           <div className="mxo-video-overlay">
-            {['Creative Strategy', 'Content Creation', 'Digital Strategy', 'Brand Identity'].map(label => (
+            {['Purposeful.', 'Honest.', 'Alive.', 'Unmistakably yours.'].map(label => (
               <div key={label} className="mxo-video-box"><span>{label}</span></div>
             ))}
           </div>
@@ -282,12 +282,10 @@ function Portfolio() {
             </a>
           </div>
         </div></Reveal>
-        <Reveal><div style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
+        <Reveal><div className="mxo-latest-post" style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
           <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>Latest writing</p>
-          <a href="/blog"
-            style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', width: '100%', transition: 'background 0.3s ease, box-shadow 0.3s ease' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(217,115,122,0.06)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(217,115,122,0.15)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(7,7,9,0.55)'; e.currentTarget.style.boxShadow = 'none' }}>
+          <a href="/blog" className="mxo-latest-post-link"
+            style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', border: '1px solid rgba(237,234,226,0.08)', width: '100%' }}>
             <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
             <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
@@ -303,14 +301,12 @@ function Portfolio() {
           <img src="/photos/Logo/X-logo.png" alt="" aria-hidden="true" />
           <span>MUNTIOX</span>
         </a>
-        <div className="mxo-footer-right">
-          <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
-          <div className="mxo-footer-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
-              <InstagramIcon /> Instagram
-            </a>
-          </div>
+        <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
+        <div className="mxo-footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
+            <InstagramIcon /> Instagram
+          </a>
         </div>
       </footer>
     </>
