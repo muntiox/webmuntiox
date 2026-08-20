@@ -2,15 +2,45 @@ import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
 
-// ── Persistent top-left brand badge (home only — inner pages already
-//    have their own "← Home" link in this exact corner) ──────────────
-//    Plain white label + a small pink rule, fixed through scroll.
-function BrandBadge() {
+// ── Persistent top-left brand badge — on every page, fixed through
+//    scroll. On inner pages it sits just below the existing "← Home"
+//    link (same corner) so the two don't overlap. Plain white label +
+//    a small pink rule.
+function BrandBadge({ inner }: { inner: boolean }) {
   return (
-    <div className="mxo-brand-badge" aria-hidden="true">
+    <div className={`mxo-brand-badge${inner ? ' mxo-brand-badge--inner' : ''}`} aria-hidden="true">
       <span className="mxo-brand-badge__bar" />
       <span className="mxo-brand-badge__mark">MUNTIOX — Itxaso Muntión</span>
     </div>
+  )
+}
+
+// ── Global footer — rendered once here so every page shares the exact
+//    same footer (logo, copyright, privacy, Instagram). ───────────────
+function InstagramIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+function SiteFooter() {
+  return (
+    <footer className="mxo-footer">
+      <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
+        <img src="/photos/Logo/X-logo.png" alt="" aria-hidden="true" />
+        <span>MUNTIOX</span>
+      </a>
+      <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
+      <div className="mxo-footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
+          <InstagramIcon /> Instagram
+        </a>
+      </div>
+    </footer>
   )
 }
 
@@ -223,8 +253,9 @@ function RootComponent() {
     <>
       <Heartbeat variant={variant} />
       <RoutePulse />
-      {variant === 'home' && <BrandBadge />}
+      <BrandBadge inner={variant !== 'home'} />
       <Outlet />
+      <SiteFooter />
     </>
   )
 }

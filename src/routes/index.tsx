@@ -56,16 +56,6 @@ function CorrectionOnly() {
     </span>
   )
 }
-// ── Instagram glyph (generic monoline camera icon, currentColor) ──────
-function InstagramIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4.2" />
-      <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
 // ── Grain ────────────────────────────────────────────────────────────
 function Grain() {
   return (
@@ -265,6 +255,20 @@ function Portfolio() {
             </div>
           </div>
         </div></Reveal>
+        <Reveal><section className="mxo-about-me">
+          <div className="mxo-about-me-photo">
+            <img src="/photos/me-index.jpg" alt="Itxaso Muntión" />
+          </div>
+          <div className="mxo-about-me-text">
+            <p className="mxo-eyebrow">Not the LinkedIn version</p>
+            <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
+            <p className="mxo-about-me-body">My path hasn&apos;t been a straight line, and I stopped apologising for that a while ago. I get curious about too many things at once — photography, strategy, the way a community forms around an idea — so instead of picking one lane, I built a way of working that moves between all of them.</p>
+            <p className="mxo-about-me-body">I don&apos;t wait to feel ready before I start something. Most of what actually matters in my work, I learned by doing it first and understanding it after. When something becomes part of my life, I find a way to make it mine — even when, at the start, it looks impossible.</p>
+            <p className="mxo-about-me-body">I&apos;d rather understand something properly than have a fast opinion about it. I care about people as much as I care about the work, probably more — and I still believe, stubbornly, that a good story can move something real.</p>
+            <p className="mxo-about-me-closing">I don&apos;t wait for the right opportunity. I create it.</p>
+            <p className="mxo-about-me-aside">Also: vegan, curious, usually mid-idea.</p>
+          </div>
+        </section></Reveal>
         <Reveal><div className="mxo-featured">
           <p className="mxo-eyebrow">Featured</p>
           <div className="mxo-featured-grid">
@@ -296,19 +300,6 @@ function Portfolio() {
           </a>
         </div></Reveal>
       </main>
-      <footer className="mxo-footer">
-        <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
-          <img src="/photos/Logo/X-logo.png" alt="" aria-hidden="true" />
-          <span>MUNTIOX</span>
-        </a>
-        <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
-        <div className="mxo-footer-links">
-          <a href="/privacy">Privacy Policy</a>
-          <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
-            <InstagramIcon /> Instagram
-          </a>
-        </div>
-      </footer>
     </>
   )
 }
