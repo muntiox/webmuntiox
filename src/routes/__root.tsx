@@ -1,23 +1,25 @@
 import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
-import { CLUE_EVENT, getFoundCount } from '../lib/clues'
+import { CLUE_EVENT, CLUE_IDS, getFoundCount } from '../lib/clues'
+import PixelHeart from '../components/PixelHeart'
 
 // ── Global clue counter — the only site-wide trace of the hidden hunt.
 // Invisible until the first clue is found (the hunt has to announce
 // itself by being discovered, not by advertising itself). After that,
-// a small badge quietly tracks how many have been found, pulsing on
-// every new one, never revealing how many exist in total.
-function ClueCounter() {
+// a row of pixel hearts fills in one by one, game-lives style — six
+// slots, revealed together the moment the first one lights up.
+function ClueHearts() {
   const [count, setCount] = useState(0)
-  const [pulse, setPulse] = useState(false)
+  const [justFilled, setJustFilled] = useState(-1)
   useEffect(() => {
     setCount(getFoundCount())
     const onFound = (e: Event) => {
       const detail = (e as CustomEvent).detail
-      setCount(typeof detail?.count === 'number' ? detail.count : getFoundCount())
-      setPulse(true)
-      const t = setTimeout(() => setPulse(false), 900)
+      const next = typeof detail?.count === 'number' ? detail.count : getFoundCount()
+      setCount(next)
+      setJustFilled(next - 1)
+      const t = setTimeout(() => setJustFilled(-1), 500)
       return () => clearTimeout(t)
     }
     window.addEventListener(CLUE_EVENT, onFound)
@@ -32,26 +34,21 @@ function ClueCounter() {
         position: 'fixed',
         top: '50%',
         left: '1.2rem',
-        transform: `translateY(-50%) scale(${pulse ? 1.35 : 1})`,
-        width: '30px',
-        height: '30px',
-        borderRadius: '50%',
-        background: 'rgba(5,5,6,0.7)',
-        border: '1px solid rgba(217,115,122,0.5)',
+        transform: 'translateY(-50%)',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#d9737a',
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontSize: '0.95rem',
-        boxShadow: pulse ? '0 0 18px 4px rgba(217,115,122,0.6)' : '0 0 10px rgba(217,115,122,0.15)',
-        transition: 'transform 0.5s cubic-bezier(0.2,0.8,0.2,1.4), box-shadow 0.5s ease',
+        gap: '5px',
+        padding: '0.55rem 0.65rem',
+        background: 'rgba(5,5,6,0.6)',
+        border: '1px solid rgba(217,115,122,0.35)',
+        borderRadius: '4px',
         zIndex: 60,
         pointerEvents: 'none',
         userSelect: 'none',
       }}
     >
-      {count}
+      {CLUE_IDS.map((_, i) => (
+        <PixelHeart key={i} filled={i < count} pop={i === justFilled} size={13} />
+      ))}
     </div>
   )
 }
@@ -346,7 +343,7 @@ function RootComponent() {
       <Heartbeat variant={variant} />
       <MapBackground />
       <RoutePulse />
-      <ClueCounter />
+      <ClueHearts />
       <Outlet />
       <SiteFooter />
     </>

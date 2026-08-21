@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
-import { CLUE_TOTAL, getFoundCount } from '../lib/clues'
+import { CLUE_EVENT, CLUE_TOTAL, getFoundCount } from '../lib/clues'
 import ClueDoubleClick from '../components/ClueDoubleClick'
+import TreasureReveal from '../components/TreasureReveal'
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
 })
@@ -50,6 +51,9 @@ function ContactPage() {
   const [foundTrail, setFoundTrail] = useState(false)
   useEffect(() => {
     setFoundTrail(getFoundCount() === CLUE_TOTAL)
+    const onFound = () => setFoundTrail(getFoundCount() === CLUE_TOTAL)
+    window.addEventListener(CLUE_EVENT, onFound)
+    return () => window.removeEventListener(CLUE_EVENT, onFound)
   }, [])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -66,14 +70,7 @@ function ContactPage() {
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: '34.96px', marginBottom: '3rem' }}>
           If your project seeks to connect authentically and generate real impact, I'd love to hear from you.
         </p>
-        {foundTrail && (
-          <div style={{ border: '1px dashed rgba(217,115,122,0.4)', background: 'rgba(217,115,122,0.06)', padding: '1.6rem 1.8rem', marginBottom: '2.5rem' }}>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#d9737a', marginBottom: '0.8rem' }}>You found it.</p>
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.92rem', fontWeight: 300, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8 }}>
-              Not everyone stops to look. If you're reading this, you noticed the small stuff — which happens to be exactly the kind of person I like working with. Skip the pitch. Just tell me what you're thinking below, and I'll read it myself, properly, within 48 hours.
-            </p>
-          </div>
-        )}
+        {foundTrail && <TreasureReveal />}
         {submitted ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '3rem 0' }}>
             <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#ffffff' }}>Message received.</p>

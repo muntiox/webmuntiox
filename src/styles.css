@@ -1066,3 +1066,94 @@ body[data-page="inner"] .mxo-nav {
 .mxo-fullnav-bottom { color: #ffffff !important; opacity: 1 !important; }
 body[data-page="inner"] .mxo-fullnav-bottom,
 body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity: 1 !important; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   TREASURE REVEAL — the payoff on /contact once all 6 clues are found
+═══════════════════════════════════════════════════════════════════ */
+.mxo-treasure-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(217,115,122,0.4);
+  background: rgba(20,6,10,0.4);
+  padding: 2.2rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.mxo-treasure-card-map {
+  position: absolute;
+  inset: 0;
+  background-image: url('/photos/mapafondo.png');
+  background-size: cover;
+  background-position: 50% 40%;
+  opacity: 0.3;
+}
+.mxo-treasure-card-map::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4,2,10,0.35) 0%, rgba(4,2,10,0.78) 100%);
+}
+.mxo-treasure-card-content { position: relative; z-index: 1; }
+.mxo-treasure-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #d9737a;
+  margin-bottom: 1rem;
+}
+.mxo-treasure-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.85;
+  max-width: 560px;
+}
+
+.mxo-treasure-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #04020a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: mxo-overlay-fade 2.4s ease forwards;
+}
+.mxo-treasure-overlay-map {
+  position: absolute;
+  inset: 0;
+  background-image: url('/photos/mapafondo.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.95;
+  clip-path: circle(0% at 50% 50%);
+  animation: mxo-treasure-unfurl 1.3s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.mxo-treasure-overlay-text {
+  position: relative;
+  z-index: 1;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  text-shadow: 0 0 30px rgba(217,115,122,0.6);
+  animation: mxo-overlay-text 1.7s ease 0.55s forwards;
+}
+@keyframes mxo-treasure-unfurl {
+  to { clip-path: circle(75% at 50% 50%); }
+}
+@keyframes mxo-overlay-text {
+  0% { opacity: 0; transform: translateY(12px); }
+  30% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes mxo-overlay-fade {
+  0% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
