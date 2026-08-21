@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
-import TrailMark from '../components/TrailMark'
+import ClueLetter from '../components/ClueLetter'
 export const Route = createFileRoute('/purpose')({
   component: PurposePage,
 })
@@ -198,13 +198,12 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
 function PurposePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
-      <TrailMark href="/projects" storageKey="mxo_trail_1" style={{ bottom: '2.2rem', left: '2rem' }} />
       <FloatingNav />
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         {/* ── CHAPTER 1: PURPOSE ─────────────────────────────────── */}
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1.5rem' }}>Purpose</p>
         <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#ffffff', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 700 }}>
-          When creativity and strategy align with a higher purpose
+          When creativity and strategy al<ClueLetter start={{ x: 13, y: -15 }} rotate={16} storageKey="mxo_trail_1" nextHref="/projects">i</ClueLetter>gn with a higher purpose
         </h1>
         <div style={{ maxWidth: 640, marginBottom: '8rem' }}>
           <Body>When digital strategy meets creative content, the result is communication capable of connecting at deeper levels, inspiring and generating real impact.</Body>
