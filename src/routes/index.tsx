@@ -232,7 +232,7 @@ function Portfolio() {
           <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
           <div className="mxo-video-overlay">
             {[
-              { title: 'Vegan brands, done right.', body: 'Ethical food and lifestyle projects that deserve a voice as strong as their values.' },
+              { title: 'Ethical brands, done right.', body: 'Ethical food and lifestyle projects that deserve a voice as strong as their values.' },
               { title: 'Travel with a conscience.', body: 'Ethical agencies and conscious stays — content that moves people to go, gently.' },
               { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
             ].map(box => (
@@ -271,7 +271,8 @@ function Portfolio() {
               <p className="mxo-eyebrow">Not the LinkedIn version</p>
               <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
               <span className="mxo-about-me-rule" aria-hidden="true" />
-              <p className="mxo-about-me-copy">Todavía no lo sé, y está bien. Lo interesante casi siempre empieza un poco antes de sentirse preparada: toca preguntar, equivocarse, y descubrir que no pasaba nada por no saber. Una imagen puede llevar a una historia, una historia a una persona, y una persona puede cambiar de opinión — eso es lo que me interesa. Tampoco hace falta saber qué vendrá después. A veces basta con empezar.</p>
+              <p className="mxo-about-me-copy">A few years ago I decided to run — badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, try again — and somewhere in that mess, I find out I can.</p>
+              <p className="mxo-about-me-closing">I don't wait for the right opportunity. I create it.</p>
             </div>
           </div>
         </section></Reveal>

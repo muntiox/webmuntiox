@@ -702,7 +702,12 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-about-me-copy {
   font-family: 'Outfit', sans-serif; font-weight: 300;
   font-size: clamp(0.85rem, 1.1vw, 0.94rem); line-height: 1.7;
-  color: rgba(237,234,226,0.85); margin-bottom: 0;
+  color: rgba(237,234,226,0.85); margin-bottom: 1.1rem;
+}
+.mxo-about-me-closing {
+  font-family: 'Bebas Neue', sans-serif; font-weight: 400;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem); line-height: 1.15;
+  color: #d9737a; letter-spacing: 0.01em; margin-bottom: 0;
 }
 @media (max-width: 768px) {
   .mxo-about-me { padding: 0 0 clamp(2.5rem, 8vw, 4rem); overflow: visible; }
