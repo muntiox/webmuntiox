@@ -68,7 +68,7 @@ const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Adobe Suite']
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', fontFamily: "'Bebas Neue', sans-serif" }}>
       <FloatingNav />
-      <article style={{ maxWidth: '860px', margin: '0 auto', padding: '10rem 3.5rem 6rem', position: 'relative', zIndex: 1 }}>
+      <article style={{ maxWidth: '1300px', margin: '0 auto', padding: '10rem 3.5rem 6rem', position: 'relative', zIndex: 1 }}>
         <header style={{ marginBottom: '5rem' }}>
           <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <span style={{ display: 'inline-block', width: 28, height: 1, background: '#d9737a' }} />

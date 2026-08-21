@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import ClueLetter from '../components/ClueLetter'
+import ClueScratch from '../components/ClueScratch'
 export const Route = createFileRoute('/blog')({
   component: BlogPage,
 })
@@ -156,9 +156,9 @@ function BlogPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <div style={{ maxWidth: '860px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1.5rem' }}>Writing</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#ffffff', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '5rem' }}>Things w<ClueLetter start={{ x: 10, y: -12 }} rotate={14} storageKey="mxo_trail_3" nextHref="/contact">o</ClueLetter>rth saying.</h1>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#ffffff', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '5rem' }}>Things worth saying.</h1>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {[...posts].reverse().map((post) => (
             <div key={post.id} onClick={() => setSelected(post)}
@@ -170,6 +170,9 @@ function BlogPage() {
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', maxWidth: '600px' }}>{post.description}</p>
             </div>
           ))}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3rem' }}>
+          <ClueScratch id="blog-scratch" />
         </div>
       </div>
     </div>

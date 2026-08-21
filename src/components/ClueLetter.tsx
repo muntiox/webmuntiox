@@ -1,42 +1,28 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState, useRef } from 'react'
+import { markClueFound } from '../lib/clues'
+import type { ClueId } from '../lib/clues'
 
 // ── Clue letter — part of the site's hidden trail ──────────────────
 // One letter in this word sits slightly out of place, like a stray
 // typo — nudged a few pixels off its baseline and tilted, easy to
 // miss unless you're actually reading closely. Drag it back to where
 // it belongs (its true resting position) and it settles in with a
-// small glow, then quietly carries you to the next page. Nothing
-// announces it; nothing explains it. You just have to notice.
+// small permanent glow. Nothing else happens — it just counts.
 export default function ClueLetter({
   children,
   start,
   rotate = 10,
-  storageKey,
-  nextHref,
+  id,
 }: {
   children: string
   start: { x: number; y: number }
   rotate?: number
-  storageKey: string
-  nextHref: string
+  id: ClueId
 }) {
   const [pos, setPos] = useState(start)
   const [dragging, setDragging] = useState(false)
   const [solved, setSolved] = useState(false)
   const drag = useRef<{ px: number; py: number; ox: number; oy: number } | null>(null)
-
-  useEffect(() => {
-    if (!solved) return
-    try {
-      sessionStorage.setItem(storageKey, '1')
-    } catch {
-      /* sessionStorage unavailable — the letter still settles, it just won't be remembered */
-    }
-    const t = setTimeout(() => {
-      window.location.href = nextHref
-    }, 950)
-    return () => clearTimeout(t)
-  }, [solved, storageKey, nextHref])
 
   const onPointerDown = (e: React.PointerEvent<HTMLSpanElement>) => {
     if (solved) return
@@ -53,14 +39,14 @@ export default function ClueLetter({
     if (!drag.current) return
     drag.current = null
     setDragging(false)
-    setPos((p) => {
-      const dist = Math.hypot(p.x, p.y)
-      if (dist < 16) {
-        setSolved(true)
-        return { x: 0, y: 0 }
-      }
-      return start
-    })
+    const dist = Math.hypot(pos.x, pos.y)
+    if (dist < 16) {
+      setPos({ x: 0, y: 0 })
+      setSolved(true)
+      markClueFound(id)
+    } else {
+      setPos(start)
+    }
   }
 
   return (

@@ -53,7 +53,7 @@ function PrivacyPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <div style={{ maxWidth: '700px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '820px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#d9737a', marginBottom: '1rem' }}>Legal</p>
         <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '2.5rem' }}>
           Privacy Policy

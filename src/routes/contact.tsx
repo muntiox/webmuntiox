@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
+import { CLUE_TOTAL, getFoundCount } from '../lib/clues'
+import ClueDoubleClick from '../components/ClueDoubleClick'
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
 })
-// The three trail marks hidden on /purpose, /projects and /blog each
-// record their own sessionStorage flag when clicked. Land here having
-// found all three and a small reward reveals itself.
-const TRAIL_KEYS = ['mxo_trail_1', 'mxo_trail_2', 'mxo_trail_3']
+// Land here having found every hidden clue across the site and a
+// small reward reveals itself.
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -49,11 +49,7 @@ function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
   const [foundTrail, setFoundTrail] = useState(false)
   useEffect(() => {
-    try {
-      setFoundTrail(TRAIL_KEYS.every((k) => sessionStorage.getItem(k) === '1'))
-    } catch {
-      /* sessionStorage unavailable — no reveal, no harm */
-    }
+    setFoundTrail(getFoundCount() === CLUE_TOTAL)
   }, [])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -62,9 +58,10 @@ function ContactPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '640px' }}>
         <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '1.5rem' }}>
-          Let's make something<br /><span style={{ color: '#d9737a' }}>worth making</span>
+          Let's make something<br /><ClueDoubleClick id="contact-dblclick">worth making</ClueDoubleClick>
         </h1>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: '34.96px', marginBottom: '3rem' }}>
           If your project seeks to connect authentically and generate real impact, I'd love to hear from you.
@@ -106,6 +103,7 @@ function ContactPage() {
             </button>
           </form>
         )}
+      </div>
       </div>
     </div>
   )

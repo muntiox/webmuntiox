@@ -547,7 +547,7 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 }
 /* ─── Video section (note 6) — shorter/more compact, with a row of
    short-copy boxes overlaid on the bottom ───────────────────────── */
-.mxo-video-section { position: relative; width: 100%; overflow: hidden; line-height: 0; }
+.mxo-video-section { position: relative; width: 100%; overflow: hidden; line-height: 0; border: 1px solid rgba(217,115,122,0.35); }
 .mxo-video-section video { width: 100%; height: clamp(460px, 62vw, 760px); object-fit: cover; display: block; }
 .mxo-video-overlay {
   position: absolute; left: 0; right: 0; bottom: clamp(2rem, 5vw, 4rem);
@@ -637,13 +637,13 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-about-video { opacity: 0.5; object-position: right center; }
 .mxo-contact-video { opacity: 0.5; object-position: center center; }
 .mxo-about-text, .mxo-contact-inner { z-index: 2; position: relative; }
-.mxo-manifesto { z-index: 2; max-width: 1100px; margin: 0; padding: 4rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-manifesto { z-index: 2; max-width: 1300px; margin: 0; padding: 4rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-manifesto-question { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.1; }
 .mxo-manifesto-body { color: rgba(237,234,226,0.72); margin-bottom: 1.6rem; font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 1.6vw, 1.15rem); font-weight: 300; line-height: 1.9; }
 .mxo-manifesto-closing { color: rgba(237,234,226,0.9); letter-spacing: 0.02em; margin-top: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 3.5vw, 2.5rem); line-height: 1.1; }
 .mxo-manifesto-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; }
 .mxo-cv-cta { z-index: 2; padding: 0 clamp(1.5rem, 5vw, 5rem); position: relative; }
-.mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1300px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills-groups { grid-template-columns: 1fr 1fr; gap: 1rem 3rem; max-width: 100%; display: grid; }
 .mxo-skills-group { flex-direction: column; gap: 0.6rem; display: flex; }
 .mxo-skill-tag { letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,234,226,0.72); cursor: default; border: 1px solid rgba(237,234,226,0.15); padding: 0.8rem 1.2rem; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 400; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
@@ -666,7 +666,7 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   min-height: clamp(520px, 56vw, 820px);
 }
 .mxo-about-me-card {
-  width: min(480px, 34%); flex-shrink: 0;
+  width: min(560px, 44%); flex-shrink: 0;
   background: rgba(5,5,6,0.94);
   border: 1px solid rgba(217,115,122,0.3);
   border-top: none; border-bottom: none; border-left: none;
@@ -676,6 +676,7 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   z-index: 2;
 }
 .mxo-about-me-photo-wrap {
+  position: relative;
   flex: 1 1 auto; min-width: 0;
   background: rgba(5,5,6,0.94);
   display: flex; align-items: center; justify-content: center;
@@ -683,8 +684,16 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   box-shadow: 0 30px 70px rgba(0,0,0,0.5);
 }
 .mxo-about-me-photo {
-  width: 100%; height: 100%; object-fit: contain; display: block;
+  width: 100%; height: 100%; object-fit: cover; object-position: 72% 22%; display: block;
   filter: grayscale(1) contrast(1.05);
+}
+/* Garnet blend on the left edge of the photo, where it meets the card */
+.mxo-about-me-photo-wrap::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(138,35,51,0.55) 0%, rgba(138,35,51,0.28) 16%, rgba(138,35,51,0.08) 32%, transparent 46%);
+  z-index: 1;
+  pointer-events: none;
 }
 .mxo-about-me-title {
   font-family: 'Bebas Neue', sans-serif; font-weight: 400;
@@ -708,7 +717,7 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   .mxo-about-me-photo-wrap { width: 100%; order: -1; box-shadow: none; min-height: 380px; }
   .mxo-about-me-card { width: auto; box-shadow: none; border: 1px solid rgba(217,115,122,0.3); }
 }
-.mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1300px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-featured-card { color: inherit; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 900px; text-decoration: none; display: grid; }
 .mxo-featured-video { aspect-ratio: 16/9; object-fit: cover; width: 100%; display: block; }
 .mxo-featured-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 1rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; }

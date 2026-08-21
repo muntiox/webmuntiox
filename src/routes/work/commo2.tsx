@@ -46,7 +46,7 @@ function Commo2Page() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <article style={{ maxWidth: 860, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
+      <article style={{ maxWidth: 1300, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         <div style={{ marginBottom: '4rem' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '2rem' }}>Master's Final Project · 2024—2025</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '2.5rem' }}>

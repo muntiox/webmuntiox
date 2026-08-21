@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import ClueLetter from '../components/ClueLetter'
+import ClueHold from '../components/ClueHold'
 export const Route = createFileRoute('/projects')({
   component: ProjectsPage,
 })
@@ -46,11 +46,11 @@ function ProjectsPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '10rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '10rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
         <div style={{ marginBottom: '5rem' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '2rem' }}>Projects</p>
           <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#ffffff', lineHeight: 1, letterSpacing: '0.02em', marginBottom: '1.2rem' }}>Selected Work</h1>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem' }}>This is who I am and where I c<ClueLetter start={{ x: 8, y: -9 }} rotate={12} storageKey="mxo_trail_2" nextHref="/blog">o</ClueLetter>me from.</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem' }}>This is <ClueHold id="projects-hold">who</ClueHold> I am and where I come from.</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {/* RCCOON */}

@@ -1,8 +1,58 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
+import { markClueFound } from '../lib/clues'
 export const Route = createFileRoute('/')(
   { component: Portfolio }
 )
+// ── Clue: click every tag in "What I do" ────────────────────────────
+// Each tag becomes "selected" (and stays that way) the moment it's
+// clicked. Nothing hints that collecting all eight does anything —
+// it just quietly does, once the last one lands.
+function SkillsPicker({ groups }: { groups: string[][] }) {
+  const total = groups.reduce((n, g) => n + g.length, 0)
+  const [selected, setSelected] = useState<Set<string>>(new Set())
+  useEffect(() => {
+    if (selected.size === total) markClueFound('skills-all')
+  }, [selected, total])
+  const toggle = (tag: string) => {
+    setSelected((prev) => {
+      if (prev.has(tag)) return prev
+      const next = new Set(prev)
+      next.add(tag)
+      return next
+    })
+  }
+  return (
+    <div className="mxo-skills-groups">
+      {groups.map((group, gi) => (
+        <div key={gi} className="mxo-skills-group">
+          {group.map((tag) => {
+            const isSel = selected.has(tag)
+            return (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => toggle(tag)}
+                className="mxo-skill-tag"
+                style={{
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  width: '100%',
+                  background: isSel ? 'rgba(217,115,122,0.14)' : 'transparent',
+                  borderColor: isSel ? '#d9737a' : undefined,
+                  color: isSel ? '#fff' : undefined,
+                  boxShadow: isSel ? '0 0 16px rgba(217,115,122,0.2)' : 'none',
+                }}
+              >
+                {tag}
+              </button>
+            )
+          })}
+        </div>
+      ))}
+    </div>
+  )
+}
 // ── Keyboard click ───────────────────────────────────────────────────
 function playKeyClick() {}
 // ── Correction animation ─────────────────────────────────────────────
@@ -255,18 +305,10 @@ function Portfolio() {
             <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem, 8vw, 6rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.85, letterSpacing: '0.02em' }}>6+</span>
             <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(1.7rem, 3.4vw, 2.7rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.92, letterSpacing: '0.03em', display: 'block' }}>years across audiovisual content<br/>&amp; digital strategy</span>
           </div>
-          <div className="mxo-skills-groups">
-            <div className="mxo-skills-group">
-              {['Content Strategy','Brand Identity','Digital Communities','Social Campaigns'].map(s => (
-                <span key={s} className="mxo-skill-tag">{s}</span>
-              ))}
-            </div>
-            <div className="mxo-skills-group">
-              {['Creative Direction','Storytelling','Photo & Video Content','Content Creation'].map(s => (
-                <span key={s} className="mxo-skill-tag">{s}</span>
-              ))}
-            </div>
-          </div>
+          <SkillsPicker groups={[
+            ['Content Strategy','Brand Identity','Digital Communities','Social Campaigns'],
+            ['Creative Direction','Storytelling','Photo & Video Content','Content Creation'],
+          ]} />
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
           <div className="mxo-about-me-inner">

@@ -2,6 +2,12 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import ClueLetter from '../components/ClueLetter'
+import ClueDraggablePolaroid from '../components/ClueDraggablePolaroid'
+
+// The bottom-row photo that ships visibly out of place — drag it home to find it.
+const CLUE_PHOTO_INDEX = 5
+const CLUE_PHOTO_START = { x: 165, y: -95 }
+const CLUE_PHOTO_START_ROTATE = -22
 export const Route = createFileRoute('/purpose')({
   component: PurposePage,
 })
@@ -162,6 +168,24 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
       }}>
         {slides.map((slide, i) => {
           const pos = positions[i % positions.length]
+          if (i === CLUE_PHOTO_INDEX) {
+            return (
+              <ClueDraggablePolaroid
+                key={i}
+                id="purpose-photo"
+                top={pos.top}
+                left={pos.left}
+                homeRotate={pos.rotate}
+                start={CLUE_PHOTO_START}
+                startRotate={CLUE_PHOTO_START_ROTATE}
+                onOpen={() => setActive(i)}
+                visible={visible}
+                delay={pos.delay}
+              >
+                <img src={slide.src} alt="" style={{ width: '100%', height: '130px', objectFit: 'cover', display: 'block', pointerEvents: 'none' }} />
+              </ClueDraggablePolaroid>
+            )
+          }
           return (
             <div key={i} onClick={() => setActive(i)}
               style={{
@@ -199,13 +223,13 @@ function PurposePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         {/* ── CHAPTER 1: PURPOSE ─────────────────────────────────── */}
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1.5rem' }}>Purpose</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#ffffff', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 700 }}>
-          When creativity and strategy al<ClueLetter start={{ x: 13, y: -15 }} rotate={16} storageKey="mxo_trail_1" nextHref="/projects">i</ClueLetter>gn with a higher purpose
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 'normal', color: '#ffffff', lineHeight: '64px', letterSpacing: '0.02em', marginBottom: '4rem', maxWidth: 950 }}>
+          When creativity and strategy al<ClueLetter start={{ x: 13, y: -15 }} rotate={16} id="align-letter">i</ClueLetter>gn with a higher purpose
         </h1>
-        <div style={{ maxWidth: 640, marginBottom: '8rem' }}>
+        <div style={{ maxWidth: 850, marginBottom: '8rem' }}>
           <Body>When digital strategy meets creative content, the result is communication capable of connecting at deeper levels, inspiring and generating real impact.</Body>
           <Body>A commitment to a more ethical planet is not just a personal value — it is the principle behind every project. My experience was born managing digital communities within an association driven by essential values, where I learned that authentic communication doesn't just reach people, it moves them.</Body>
           <Accent>Today I work with brands and organisations that share the vision of a more conscious world, using creativity and digital strategy to craft messages that inspire, transform and connect.</Accent>
@@ -214,7 +238,7 @@ function PurposePage() {
         {/* ── CHAPTER 2: PERSON ──────────────────────────────────── */}
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', margin: '4rem 0 6rem' }}>The person behind it</p>
         {/* Quote block */}
-        <div style={{ borderLeft: '3px solid #d9737a', paddingLeft: '3rem', marginBottom: '6rem', maxWidth: 640 }}>
+        <div style={{ borderLeft: '3px solid #d9737a', paddingLeft: '3rem', marginBottom: '6rem', maxWidth: 850 }}>
           <Body>I've always had an almost irrational urge to build things, projects, ideas, communities. Things that didn't exist yesterday.</Body>
           <Body>Watching an idea slowly become something real, something that helps, inspires or moves someone, still feels like magic to me, not because I dream of building companies, but because I love building possibilities.</Body>
         </div>
@@ -229,7 +253,7 @@ function PurposePage() {
           { src: '/photos/who-am-i/barro-dana.jpg', body: "Sometimes the most important thing you can do is show up. Not with a plan. Not with the right words. Just — there.", accent: 'Presence is its own kind of message.' },
         ]} />
         {/* Closing */}
-        <div style={{ maxWidth: 640, marginTop: '2rem' }}>
+        <div style={{ maxWidth: 850, marginTop: '2rem' }}>
           <Body>The older I get, the more I learn about the world's injustices, and strangely... the more determined I become to protect my joy.</Body>
           <Body>I've met people who know everything that's wrong with the world, but somewhere along the way, they forgot how to laugh. I never want that to happen to me.</Body>
           <Accent>I think there's something quietly revolutionary about choosing to remain joyful. Not despite everything we know, but because of it.</Accent>

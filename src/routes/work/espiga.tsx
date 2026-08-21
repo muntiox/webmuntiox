@@ -48,7 +48,7 @@ function EspigaPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '8rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: 1300, margin: '0 auto', padding: '8rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
         <div style={{ marginBottom: '4rem' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>2023 · Freelance</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.2rem' }}>
@@ -83,7 +83,7 @@ function EspigaPage() {
           <p style={{ position: 'absolute', bottom: '1.5rem', fontFamily: "'Outfit', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.4)' }}>{selected} / {total}</p>
         </div>
       )}
-    <div style={{ position: 'relative', zIndex: 2, maxWidth: 1200, margin: '0 auto', padding: '0 3.5rem 6rem' }}>
+    <div style={{ position: 'relative', zIndex: 2, maxWidth: 1300, margin: '0 auto', padding: '0 3.5rem 6rem' }}>
         <div style={{ paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.12)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>← Back to projects</Link>
           <a href="https://www.instagram.com/casalespiga/" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>@casalespiga →</a>
