@@ -2,20 +2,6 @@ import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
 
-// ── Persistent top-left brand badge — on every page, fixed through
-//    scroll. Doubles as the way back home: the per-page "← Home" /
-//    "← Back to projects" links have been removed from that corner,
-//    so clicking the badge is now how you return to "/". Plain white
-//    label + a small pink rule.
-function BrandBadge() {
-  return (
-    <a href="/" className="mxo-brand-badge" aria-label="MUNTIOX — Itxaso Muntión, go to home">
-      <span className="mxo-brand-badge__bar" />
-      <span className="mxo-brand-badge__mark">MUNTIOX — Itxaso Muntión</span>
-    </a>
-  )
-}
-
 // ── Global footer — rendered once here so every page shares the exact
 //    same footer (logo, copyright, privacy, Instagram). ───────────────
 function InstagramIcon() {
@@ -254,7 +240,6 @@ function RootComponent() {
     <>
       <Heartbeat variant={variant} />
       <RoutePulse />
-      <BrandBadge />
       <Outlet />
       <SiteFooter />
     </>

@@ -270,15 +270,15 @@ function Portfolio() {
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
           <div className="mxo-about-me-inner">
-            <div className="mxo-about-me-photo-wrap">
-              <img className="mxo-about-me-photo" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
-            </div>
             <div className="mxo-about-me-card">
               <p className="mxo-eyebrow">Not the LinkedIn version</p>
               <h2 className="mxo-about-me-title">Not exactly according to plan.</h2>
               <span className="mxo-about-me-rule" aria-hidden="true" />
-              <p className="mxo-about-me-copy">A few years ago I decided to run, badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, try again, try again and try again, and somewhere in that mess, I prove to myself I can. We're never ready, and at the same time, we always are. I'm not the best, and at the same time, I am the best.</p>
+              <p className="mxo-about-me-copy">A few years ago I decided to run, badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, <strong>try again, try again and try again</strong>, and somewhere in that mess, I prove to myself I can. We're never ready, and at the same time, we always are. I'm not the best, and at the same time, I for surely am.</p>
               <p className="mxo-about-me-closing">I don't wait for the right opportunity. I create it.</p>
+            </div>
+            <div className="mxo-about-me-photo-wrap">
+              <img className="mxo-about-me-photo" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
             </div>
           </div>
         </section></Reveal>

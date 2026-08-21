@@ -473,23 +473,6 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   100% { transform: scaleX(1); transform-origin: left; }
 }
 .mxo-tagline .highlighter__text { color: #fff !important; }
-/* Fixed top-left brand badge — every page, fixed through scroll.
-   Plain white label + a small pink rule on the left. Doubles as the
-   home link now that the per-page "← Home" links are gone, so it's a
-   real <a>, not a decorative div. */
-.mxo-brand-badge {
-  position: fixed; top: 1.4rem; left: 1.8rem; z-index: 90;
-  display: inline-flex; align-items: center; gap: 0.6em;
-  font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 400;
-  letter-spacing: 0.14em; text-decoration: none; cursor: pointer;
-  opacity: 1; transition: opacity 0.2s ease;
-}
-.mxo-brand-badge:hover { opacity: 0.75; }
-.mxo-brand-badge__bar { width: 3px; height: 0.9em; background: #d9737a; flex-shrink: 0; }
-.mxo-brand-badge__mark { color: #ffffff; }
-@media (max-width: 640px) {
-  .mxo-brand-badge { font-size: 0.62rem; top: 1.1rem; left: 1.1rem; letter-spacing: 0.08em; }
-}
 .mxo-title-accent { letter-spacing: 0.5em; text-transform: uppercase; color: #d9737a; margin-bottom: -0.5rem; margin-left: 0.15em; font-family: 'Bebas Neue', sans-serif; font-size: 0.6rem; font-weight: 500; display: block; }
 .mxo-vert-text { display: none !important; }
 .mxo-about { padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem); position: relative; overflow: hidden; }
@@ -665,13 +648,13 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-skills-group { flex-direction: column; gap: 0.6rem; display: flex; }
 .mxo-skill-tag { letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,234,226,0.72); cursor: default; border: 1px solid rgba(237,234,226,0.15); padding: 0.8rem 1.2rem; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 400; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
 .mxo-skill-tag:hover { color: #fff; background: rgba(217,115,122,0.08); border-color: #d9737a; transform: translateY(-2px); box-shadow: 0 0 20px rgba(217,115,122,0.25); }
-/* ─── About-me editorial pause — whole photo right, text card
-   overlapping on top, left ─────────────────────────────────────────
-   The full, uncropped photo sits right-aligned; a text card floats
-   over its left edge with a slight rotation — elegant disorder rather
-   than a tidy grid. Photo keeps its natural width/height (no cover
-   crop), so it's shown whole and stays sharp. Stacks cleanly on
-   mobile, photo first, full width, nothing cropped off. ──────────── */
+/* ─── About-me editorial pause — card joined to the whole photo ────
+   Card and photo sit as one continuous block, touching edge to edge,
+   stretched to the same height so both read as equidistant from the
+   section's top and bottom padding — no overlap, no tilt, no stray
+   gaps. Photo uses object-fit:contain (not cover) so it's shown
+   whole, never cropped; any letterbox space blends into the wrap's
+   dark background. Stacks on mobile, photo first, full width. ───── */
 .mxo-about-me {
   position: relative; z-index: 2;
   background: rgba(5,5,6,0.4);
@@ -679,25 +662,30 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   border-top: 1px solid rgba(237,234,226,0.08);
 }
 .mxo-about-me-inner {
-  position: relative; max-width: 1200px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   padding: 0 clamp(1.5rem, 5vw, 4rem);
-  display: flex; justify-content: flex-end;
-}
-.mxo-about-me-photo-wrap { width: min(62%, 640px); }
-.mxo-about-me-photo {
-  width: 100%; height: auto; display: block;
-  filter: grayscale(1) contrast(1.05);
-  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+  display: flex; align-items: stretch;
 }
 .mxo-about-me-card {
-  position: absolute; left: clamp(0.5rem, 3vw, 2rem); top: 6%;
-  width: min(420px, 46%);
+  width: min(420px, 42%); flex-shrink: 0;
   background: rgba(5,5,6,0.94);
   border: 1px solid rgba(217,115,122,0.3);
-  border-left: 3px solid #d9737a;
+  border-right: none;
   padding: clamp(1.8rem, 3.5vw, 2.6rem);
+  display: flex; flex-direction: column; justify-content: center;
   box-shadow: 0 30px 70px rgba(0,0,0,0.55);
-  z-index: 3;
+  z-index: 2;
+}
+.mxo-about-me-photo-wrap {
+  flex: 1 1 auto; min-width: 0;
+  background: rgba(5,5,6,0.94);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+}
+.mxo-about-me-photo {
+  width: 100%; height: 100%; object-fit: contain; display: block;
+  filter: grayscale(1) contrast(1.05);
 }
 .mxo-about-me-title {
   font-family: 'Bebas Neue', sans-serif; font-weight: 400;
@@ -710,20 +698,17 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
   font-size: clamp(0.85rem, 1.1vw, 0.94rem); line-height: 1.7;
   color: rgba(237,234,226,0.85); margin-bottom: 1.1rem;
 }
+.mxo-about-me-copy strong { font-weight: 700; color: #edeae2; }
 .mxo-about-me-closing {
   font-family: 'Bebas Neue', sans-serif; font-weight: 400;
   font-size: clamp(1.1rem, 1.8vw, 1.35rem); line-height: 1.15;
   color: #d9737a; letter-spacing: 0.01em; margin-bottom: 0;
 }
 @media (max-width: 768px) {
-  .mxo-about-me { padding: 0 0 clamp(2.5rem, 8vw, 4rem); overflow: visible; }
+  .mxo-about-me { padding: 0 0 clamp(2.5rem, 8vw, 4rem); }
   .mxo-about-me-inner { flex-direction: column; padding: 0; }
-  .mxo-about-me-photo-wrap { width: 100%; }
-  .mxo-about-me-photo { box-shadow: none; }
-  .mxo-about-me-card {
-    position: relative; left: auto; top: auto; margin: -2.5rem 1.2rem 0;
-    width: auto;
-  }
+  .mxo-about-me-photo-wrap { width: 100%; order: -1; box-shadow: none; min-height: 320px; }
+  .mxo-about-me-card { width: auto; box-shadow: none; border: 1px solid rgba(217,115,122,0.3); }
 }
 .mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1100px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-featured-card { color: inherit; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 900px; text-decoration: none; display: grid; }
