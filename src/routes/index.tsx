@@ -231,9 +231,14 @@ function Portfolio() {
         <Reveal><div className="mxo-video-section">
           <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
           <div className="mxo-video-overlay">
+            <div className="mxo-video-overlay-heading">
+              <p className="mxo-eyebrow">The kind of work I dream about</p>
+              <span className="mxo-video-overlay-aside">(though I&apos;m open to what life teaches me)</span>
+            </div>
+            <div className="mxo-video-boxes">
             {[
-              { title: 'Ethical brands, done right.', body: 'Ethical food and lifestyle projects that deserve a voice as strong as their values.' },
-              { title: 'Travel with a conscience.', body: 'Ethical agencies and conscious stays — content that moves people to go, gently.' },
+              { title: 'Ethical brands, done right.', body: 'Ethical, lifestyle projects that deserve a voice as strong as their values.' },
+              { title: 'Travel with a conscience.', body: 'Responsible agencies and conscious stays — content that moves people to go, gently. I care about travelling quietly, and wish travel could always be this ethical.' },
               { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
             ].map(box => (
               <div key={box.title} className="mxo-video-box">
@@ -241,6 +246,7 @@ function Portfolio() {
                 <p>{box.body}</p>
               </div>
             ))}
+            </div>
           </div>
         </div></Reveal>
         <Reveal><div className="mxo-skills">
@@ -269,9 +275,9 @@ function Portfolio() {
             </div>
             <div className="mxo-about-me-card">
               <p className="mxo-eyebrow">Not the LinkedIn version</p>
-              <h2 className="mxo-about-me-title">Definitely not conventional.</h2>
+              <h2 className="mxo-about-me-title">Not exactly according to plan.</h2>
               <span className="mxo-about-me-rule" aria-hidden="true" />
-              <p className="mxo-about-me-copy">A few years ago I decided to run — badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, try again — and somewhere in that mess, I find out I can.</p>
+              <p className="mxo-about-me-copy">A few years ago I decided to run, badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, try again, try again and try again, and somewhere in that mess, I prove to myself I can. We're never ready, and at the same time, we always are. I'm not the best, and at the same time, I am the best.</p>
               <p className="mxo-about-me-closing">I don't wait for the right opportunity. I create it.</p>
             </div>
           </div>
