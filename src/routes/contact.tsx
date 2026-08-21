@@ -1,8 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
 })
+// The three trail marks hidden on /purpose, /projects and /blog each
+// record their own sessionStorage flag when clicked. Land here having
+// found all three and a small reward reveals itself.
+const TRAIL_KEYS = ['mxo_trail_1', 'mxo_trail_2', 'mxo_trail_3']
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -43,6 +47,14 @@ function FloatingNav() {
 }
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
+  const [foundTrail, setFoundTrail] = useState(false)
+  useEffect(() => {
+    try {
+      setFoundTrail(TRAIL_KEYS.every((k) => sessionStorage.getItem(k) === '1'))
+    } catch {
+      /* sessionStorage unavailable — no reveal, no harm */
+    }
+  }, [])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmitted(true)
@@ -57,6 +69,14 @@ function ContactPage() {
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: '34.96px', marginBottom: '3rem' }}>
           If your project seeks to connect authentically and generate real impact, I'd love to hear from you.
         </p>
+        {foundTrail && (
+          <div style={{ border: '1px dashed rgba(217,115,122,0.4)', background: 'rgba(217,115,122,0.06)', padding: '1.6rem 1.8rem', marginBottom: '2.5rem' }}>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#d9737a', marginBottom: '0.8rem' }}>You found it.</p>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.92rem', fontWeight: 300, color: 'rgba(255,255,255,0.85)', lineHeight: 1.8 }}>
+              Not everyone stops to look. If you're reading this, you noticed the small stuff — which happens to be exactly the kind of person I like working with. Skip the pitch. Just tell me what you're thinking below, and I'll read it myself, properly, within 48 hours.
+            </p>
+          </div>
+        )}
         {submitted ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '3rem 0' }}>
             <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#ffffff' }}>Message received.</p>
@@ -77,6 +97,7 @@ function ContactPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)' }}>Message</label>
               <textarea name="message" required placeholder="Tell me about your project, your vision, your world..." rows={5}
+                defaultValue={foundTrail ? "Found your trail. Here's my idea:\n\n" : undefined}
                 style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#ffffff', outline: 'none', width: '100%', resize: 'none' }} />
             </div>
             <button type="submit"

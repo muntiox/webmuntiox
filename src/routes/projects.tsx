@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
+import TrailMark from '../components/TrailMark'
 export const Route = createFileRoute('/projects')({
   component: ProjectsPage,
 })
@@ -45,6 +46,7 @@ function ProjectsPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
+      <TrailMark href="/blog" storageKey="mxo_trail_2" style={{ top: '7rem', left: '1.4rem' }} />
       <div style={{ maxWidth: 980, margin: '0 auto', padding: '10rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
         <div style={{ marginBottom: '5rem' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '2rem' }}>Projects</p>

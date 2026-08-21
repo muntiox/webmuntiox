@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
+import TrailMark from '../components/TrailMark'
 export const Route = createFileRoute('/purpose')({
   component: PurposePage,
 })
@@ -197,6 +198,7 @@ function PolaroidCollage({ slides }: { slides: Slide[] }) {
 function PurposePage() {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
+      <TrailMark href="/projects" storageKey="mxo_trail_1" style={{ bottom: '2.2rem', left: '2rem' }} />
       <FloatingNav />
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '10rem 3.5rem 8rem', position: 'relative', zIndex: 2 }}>
         {/* ── CHAPTER 1: PURPOSE ─────────────────────────────────── */}
