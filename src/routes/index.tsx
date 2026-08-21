@@ -297,6 +297,12 @@ function Portfolio() {
               <p className="mxo-featured-sub">Strategy · Branding · Digital Ecosystem · 2024—2025</p>
               <span className="mxo-featured-cta">Move in →</span>
             </a>
+            <a href="/purpose" className="mxo-featured-item mxo-featured-item--cta">
+              <p className="mxo-featured-item-eyebrow">Not a project. Not yet.</p>
+              <h3 className="mxo-featured-title">Something you and I could build.</h3>
+              <p className="mxo-featured-sub">The best work doesn&apos;t always start as a brief — sometimes it starts with two people who see the world the same way. If you&apos;ve got an idea, and values to match, I&apos;d love to hear it. This could be the next one.</p>
+              <span className="mxo-featured-cta">Come find me →</span>
+            </a>
           </div>
         </div></Reveal>
         <Reveal><div className="mxo-latest-post" style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
