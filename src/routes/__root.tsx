@@ -56,6 +56,57 @@ function ClueCounter() {
   )
 }
 
+// ── Treasure-map background — the hunt's own map, faint behind
+// every page. Each route peeks at a different corner of the same
+// illustration, so the site itself keeps shifting like the map is
+// being unrolled a little further each time you turn a page. ───────
+const MAP_POSITIONS: Record<string, string> = {
+  '/': '12% 18%',
+  '/purpose': '50% 55%',
+  '/projects': '52% 8%',
+  '/blog': '20% 92%',
+  '/contact': '90% 88%',
+  '/privacy': '88% 12%',
+  '/work/rccoon': '12% 55%',
+  '/work/commo2': '88% 55%',
+  '/work/espiga': '62% 90%',
+  '/resume': '35% 35%',
+}
+const MAP_FALLBACKS = ['15% 30%', '75% 25%', '30% 70%', '70% 75%', '45% 45%']
+function mapPositionFor(pathname: string) {
+  if (MAP_POSITIONS[pathname]) return MAP_POSITIONS[pathname]
+  let h = 0
+  for (let i = 0; i < pathname.length; i++) h = (h * 31 + pathname.charCodeAt(i)) >>> 0
+  return MAP_FALLBACKS[h % MAP_FALLBACKS.length]
+}
+function MapBackground() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const position = mapPositionFor(pathname)
+  return (
+    // Wrapper carries no background of its own — a global inner-page
+    // rule forces `#root`'s direct-child divs transparent (so the
+    // heartbeat canvas shows through page wrappers), which would also
+    // wipe out a background-image set here directly. Nesting one level
+    // deeper keeps the map's own div outside that selector's reach.
+    <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: 'url(/photos/mapafondo.png)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '220vw auto',
+          backgroundPosition: position,
+          opacity: 0.55,
+          mixBlendMode: 'screen',
+          transition: 'background-position 0.7s ease',
+        }}
+      />
+    </div>
+  )
+}
+
 // ── Global footer — rendered once here so every page shares the exact
 //    same footer (logo, copyright, privacy, Instagram). ───────────────
 function InstagramIcon() {
@@ -293,6 +344,7 @@ function RootComponent() {
   return (
     <>
       <Heartbeat variant={variant} />
+      <MapBackground />
       <RoutePulse />
       <ClueCounter />
       <Outlet />
