@@ -65,7 +65,7 @@ const categories = [
   { title: 'Community Coordination', desc: 'Volunteer team management — onboarding new members, assigning roles, organising responsibilities. Online coordination during the DANA emergency in Valencia.', images: ['/photos/community-coordination/posting.png'] },
   { title: 'Campaign Operations', desc: 'Signature collection campaigns, citizen mobilisation logistics, on-the-ground coordination. Where digital strategy meets street-level action.', pdf: '/docs/rccoon-campaign-ops.pdf', pdfNote: 'During the DANA emergency in Valencia, we put together this document to help affected people and volunteers self-organise — coordinating resources, needs and actions in real time.' },
 ]
-const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Adobe Suite']
+const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Photoshop', 'Illustrator', 'Adobe Lightroom', 'After Effects', 'CapCut', 'WordPress']
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', fontFamily: "'Bebas Neue', sans-serif" }}>
       <FloatingNav />

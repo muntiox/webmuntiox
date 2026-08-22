@@ -273,11 +273,11 @@ function Portfolio() {
         </div>
         <Reveal><div className="mxo-manifesto">
           <h2 className="mxo-manifesto-title">This is a Portfolio...<br/>but I&apos;m not looking to be chosen</h2>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(237,234,226,0.9)' }}>The main purpose of this website is simple: to showcase my work and convince people to choose me. But I also want to choose my next job. Does that sound unusual?</p>
+          <p className="mxo-manifesto-body">The main purpose of this website is simple: to showcase my work and convince people to choose me. But I also want to choose my next job. Does that sound unusual?</p>
           <p className="mxo-manifesto-body">I don&apos;t believe in working with everyone. I believe in working with the right people. The projects we choose become part of who we are. They shape our perspective, influence our decisions, and define the impact we leave behind.</p>
           <p className="mxo-manifesto-body">That&apos;s why I choose to collaborate with brands and organisations whose values align with my own, or with those that genuinely want to make a more positive impact. Not because they&apos;re perfect, but because meaningful work starts with the willingness to grow.</p>
           <p className="mxo-manifesto-body">Every project is an opportunity to leave the world a little better than we found it. That&apos;s the kind of work I want to be part of.</p>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: '#edeae2' }}>And that&apos;s why I want to choose you, too.</p>
+          <p className="mxo-manifesto-body">And that&apos;s why I want to choose you, too.</p>
         </div></Reveal>
         <Reveal><div className="mxo-video-section">
           <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
@@ -292,6 +292,8 @@ function Portfolio() {
               { title: 'Ethical brands, done right.', body: 'Ethical, lifestyle projects that deserve a voice as strong as their values.' },
               { title: 'Travel with a conscience.', body: 'Responsible agencies and conscious stays — content that moves people to go, gently. I care about travelling quietly, and wish travel could always be this ethical.' },
               { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
+              { title: 'Animal justice, non-negotiable.', body: 'NGOs and grassroots organisations fighting for the voiceless. Not an add-on to an ethics brief — a cause I show up for fully.' },
+              { title: 'A planet worth defending.', body: 'Environmental NGOs and organisations doing the work the planet actually needs — content and strategy for people fighting for it.' },
             ].map(box => (
               <div key={box.title} className="mxo-video-box">
                 <h3>{box.title}</h3>
