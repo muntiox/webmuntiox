@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { markClueFound } from '../lib/clues'
 import type { ClueId } from '../lib/clues'
 
-// ── Clue: double-click ─────────────────────────────────────────────
-// Looks exactly like ordinary styled text. Double-click it and it
+// ── Clue: click ─────────────────────────────────────────────────────
+// Looks exactly like ordinary styled text. Click it once and it
 // counts — no visible change beyond a soft glow to confirm it landed.
 export default function ClueDoubleClick({ children, id }: { children: string; id: ClueId }) {
   const [solved, setSolved] = useState(false)
   return (
     <span
-      onDoubleClick={() => {
+      onClick={() => {
         if (solved) return
         setSolved(true)
         markClueFound(id)

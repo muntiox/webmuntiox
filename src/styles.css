@@ -1359,15 +1359,15 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
   font-style: normal;
 }
 
-/* Clue hint: a soft, slow glow breathing on the word — nothing gives
-   away that it's clickable, just a little extra shine to make it
-   easier to notice if you're looking. Stops once the clue is found. */
+/* Clue hint: the word visibly shimmers — shifting to the accent color
+   with a real glow behind it — so it reads as "something about this
+   word is different" at a glance. Stops once the clue is found. */
 .mxo-clue-shine {
-  animation: mxo-clue-shine-pulse 2.6s ease-in-out infinite;
+  animation: mxo-clue-shine-pulse 1.8s ease-in-out infinite;
 }
 @keyframes mxo-clue-shine-pulse {
-  0%, 100% { text-shadow: 0 0 0 rgba(217,115,122,0); }
-  50% { text-shadow: 0 0 10px rgba(217,115,122,0.6); }
+  0%, 100% { color: inherit; text-shadow: 0 0 0 rgba(217,115,122,0); }
+  50% { color: #d9737a; text-shadow: 0 0 18px rgba(217,115,122,0.95), 0 0 5px rgba(217,115,122,0.9); }
 }
 
 /* Clue hint: a brief, subtle nudge every 7 seconds — mostly still,
