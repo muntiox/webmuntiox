@@ -1068,49 +1068,12 @@ body[data-page="inner"] .mxo-fullnav-bottom,
 body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity: 1 !important; }
 
 /* ═══════════════════════════════════════════════════════════════════
-   TREASURE REVEAL — the payoff on /contact once all 6 clues are found
+   TREASURE REVEAL — the payoff once all 6 clues are found, anywhere
+   on the site. Fully self-contained: never touches page content
+   underneath (the contact page stays exactly the contact page).
 ═══════════════════════════════════════════════════════════════════ */
-.mxo-treasure-card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(217,115,122,0.4);
-  background: rgba(20,6,10,0.4);
-  padding: 2.2rem 2rem;
-  margin-bottom: 2.5rem;
-}
-.mxo-treasure-card-map {
-  position: absolute;
-  inset: 0;
-  background-image: url('/photos/mapafondo.png');
-  background-size: cover;
-  background-position: 50% 40%;
-  opacity: 0.3;
-}
-.mxo-treasure-card-map::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(4,2,10,0.35) 0%, rgba(4,2,10,0.78) 100%);
-}
-.mxo-treasure-card-content { position: relative; z-index: 1; }
-.mxo-treasure-label {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #d9737a;
-  margin-bottom: 1rem;
-}
-.mxo-treasure-note {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.98rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.88);
-  line-height: 1.85;
-  max-width: 560px;
-}
 
+/* Stage 1 — full-screen unfurl, waits for a click ─────────────────── */
 .mxo-treasure-overlay {
   position: fixed;
   inset: 0;
@@ -1119,9 +1082,11 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
-  animation: mxo-overlay-fade 2.4s ease forwards;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.45s ease;
 }
+.mxo-treasure-overlay.is-dismissing { opacity: 0; }
 .mxo-treasure-overlay-map {
   position: absolute;
   inset: 0;
@@ -1132,28 +1097,182 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
   clip-path: circle(0% at 50% 50%);
   animation: mxo-treasure-unfurl 1.3s cubic-bezier(0.16,1,0.3,1) forwards;
 }
-.mxo-treasure-overlay-text {
+.mxo-treasure-overlay-inner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.mxo-treasure-overlay-text {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(2.5rem, 6vw, 5rem);
   color: #ffffff;
   letter-spacing: 0.04em;
   opacity: 0;
   text-shadow: 0 0 30px rgba(217,115,122,0.6);
-  animation: mxo-overlay-text 1.7s ease 0.55s forwards;
+  animation: mxo-overlay-text-in 1s ease 0.5s forwards;
 }
+.mxo-treasure-overlay-hint {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.mxo-treasure-overlay-hint.is-visible { opacity: 1; animation: mxo-hint-pulse 2.4s ease-in-out infinite; }
 @keyframes mxo-treasure-unfurl {
   to { clip-path: circle(75% at 50% 50%); }
 }
-@keyframes mxo-overlay-text {
+@keyframes mxo-overlay-text-in {
   0% { opacity: 0; transform: translateY(12px); }
-  30% { opacity: 1; transform: translateY(0); }
-  75% { opacity: 1; }
-  100% { opacity: 0; }
+  100% { opacity: 1; transform: translateY(0); }
 }
-@keyframes mxo-overlay-fade {
-  0% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
+@keyframes mxo-hint-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+/* Stage 2 — the note + guestbook, its own screen ──────────────────── */
+.mxo-treasure-note-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: radial-gradient(ellipse at 50% 0%, rgba(150,28,42,0.35) 0%, transparent 60%), #04020a;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  padding: 5rem 1.5rem 4rem;
+}
+.mxo-treasure-note-inner {
+  width: 100%;
+  max-width: 560px;
+  animation: mxo-note-content-in 0.7s ease 0.1s both;
+}
+@keyframes mxo-note-content-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.mxo-treasure-note-hearts {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1.6rem;
+}
+.mxo-treasure-note-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #d9737a;
+  margin-bottom: 1rem;
+}
+.mxo-treasure-note-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.9;
+  padding-left: 1.2rem;
+  border-left: 2px solid rgba(217,115,122,0.5);
+  margin-bottom: 2.8rem;
+}
+.mxo-treasure-home-btn {
+  margin-top: 3rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+.mxo-treasure-home-btn:hover { color: #d9737a; }
+
+/* Guestbook — deliberately unlike the contact form: boxed fields,
+   pixel-heart accents, a "sign the log" feel rather than "send a
+   message". ──────────────────────────────────────────────────────── */
+.mxo-guestbook { margin-top: 0.5rem; }
+.mxo-guestbook-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #d9737a;
+  margin-bottom: 1.1rem;
+}
+.mxo-guestbook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2.2rem;
+  padding: 1.3rem;
+  background: rgba(217,115,122,0.05);
+  border: 1px dashed rgba(217,115,122,0.4);
+}
+.mxo-guestbook-submit {
+  align-self: flex-start;
+  background: #d9737a;
+  border: none;
+  color: #1a0509;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.6rem;
+  cursor: pointer;
+  margin-top: 0.2rem;
+}
+.mxo-guestbook-submit:disabled { opacity: 0.6; cursor: default; }
+.mxo-guestbook-sent {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.6rem;
+}
+.mxo-guestbook-error {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.5);
+}
+.mxo-guestbook-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.mxo-guestbook-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+.mxo-guestbook-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+.mxo-guestbook-message {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 0.2rem;
+}
+.mxo-guestbook-empty {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
 }

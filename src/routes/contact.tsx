@@ -1,13 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState, useEffect } from 'react'
-import { CLUE_EVENT, CLUE_TOTAL, getFoundCount } from '../lib/clues'
+import { useState } from 'react'
 import ClueDoubleClick from '../components/ClueDoubleClick'
-import TreasureReveal from '../components/TreasureReveal'
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
 })
-// Land here having found every hidden clue across the site and a
-// small reward reveals itself.
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
@@ -48,13 +44,6 @@ function FloatingNav() {
 }
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
-  const [foundTrail, setFoundTrail] = useState(false)
-  useEffect(() => {
-    setFoundTrail(getFoundCount() === CLUE_TOTAL)
-    const onFound = () => setFoundTrail(getFoundCount() === CLUE_TOTAL)
-    window.addEventListener(CLUE_EVENT, onFound)
-    return () => window.removeEventListener(CLUE_EVENT, onFound)
-  }, [])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmitted(true)
@@ -70,7 +59,6 @@ function ContactPage() {
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: '34.96px', marginBottom: '3rem' }}>
           If your project seeks to connect authentically and generate real impact, I'd love to hear from you.
         </p>
-        {foundTrail && <TreasureReveal />}
         {submitted ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '3rem 0' }}>
             <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#ffffff' }}>Message received.</p>
@@ -91,7 +79,6 @@ function ContactPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <label style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)' }}>Message</label>
               <textarea name="message" required placeholder="Tell me about your project, your vision, your world..." rows={5}
-                defaultValue={foundTrail ? "Found your trail. Here's my idea:\n\n" : undefined}
                 style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#ffffff', outline: 'none', width: '100%', resize: 'none' }} />
             </div>
             <button type="submit"

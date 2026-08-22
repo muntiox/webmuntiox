@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
 import { CLUE_EVENT, CLUE_IDS, getFoundCount } from '../lib/clues'
 import PixelHeart from '../components/PixelHeart'
+import TreasureReveal from '../components/TreasureReveal'
 
 // ── Global clue counter — the only site-wide trace of the hidden hunt.
-// Invisible until the first clue is found (the hunt has to announce
-// itself by being discovered, not by advertising itself). After that,
-// a row of pixel hearts fills in one by one, game-lives style — six
-// slots, revealed together the moment the first one lights up.
+// A vertical column of six pixel hearts, empty from the start, filling
+// in one by one as clues are found — game-lives style. Always visible,
+// so the "how many are there" question answers itself immediately.
 function ClueHearts() {
   const [count, setCount] = useState(0)
   const [justFilled, setJustFilled] = useState(-1)
@@ -25,7 +25,6 @@ function ClueHearts() {
     window.addEventListener(CLUE_EVENT, onFound)
     return () => window.removeEventListener(CLUE_EVENT, onFound)
   }, [])
-  if (count === 0) return null
   return (
     <div
       aria-hidden="true"
@@ -36,8 +35,9 @@ function ClueHearts() {
         left: '1.2rem',
         transform: 'translateY(-50%)',
         display: 'flex',
-        gap: '5px',
-        padding: '0.55rem 0.65rem',
+        flexDirection: 'column',
+        gap: '10px',
+        padding: '0.7rem 0.55rem',
         background: 'rgba(5,5,6,0.6)',
         border: '1px solid rgba(217,115,122,0.35)',
         borderRadius: '4px',
@@ -344,6 +344,7 @@ function RootComponent() {
       <MapBackground />
       <RoutePulse />
       <ClueHearts />
+      <TreasureReveal />
       <Outlet />
       <SiteFooter />
     </>

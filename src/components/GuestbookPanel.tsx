@@ -1,11 +1,26 @@
 import { useEffect, useState } from 'react'
+import PixelHeart from './PixelHeart'
 
 // ── Guestbook — the small, shared trace left by everyone who found
-// all six clues. Talks to /api/guestbook (a Vercel Function backed by
-// Vercel KV). If that storage isn't provisioned yet, every request
-// fails quietly — the panel just shows nothing to sign into, rather
-// than breaking the page.
+// all six clues. Deliberately styled unlike the real contact form
+// (boxed fields instead of underlines, a pixel heart standing in for
+// a bullet) so it never reads as "another way to get in touch" —
+// it's a signature on the map, not a lead form.
+// Talks to /api/guestbook (a Vercel Function backed by Redis). If
+// that storage isn't provisioned yet, every request fails quietly —
+// the panel just shows nothing to sign into, rather than breaking.
 type Entry = { name: string; message: string; ts: number }
+
+const inputStyle: React.CSSProperties = {
+  background: 'rgba(255,255,255,0.04)',
+  border: '1px solid rgba(217,115,122,0.4)',
+  padding: '0.75rem 0.9rem',
+  fontFamily: "'Outfit', sans-serif",
+  fontSize: '0.88rem',
+  color: '#ffffff',
+  outline: 'none',
+  width: '100%',
+}
 
 export default function GuestbookPanel() {
   const [entries, setEntries] = useState<Entry[] | null>(null)
@@ -54,109 +69,51 @@ export default function GuestbookPanel() {
   if (unavailable) return null
 
   return (
-    <div style={{ marginTop: '2.2rem' }}>
-      <p
-        style={{
-          fontFamily: "'Outfit', sans-serif",
-          fontSize: '0.6rem',
-          fontWeight: 600,
-          letterSpacing: '0.3em',
-          textTransform: 'uppercase',
-          color: '#d9737a',
-          marginBottom: '1rem',
-        }}
-      >
-        Who else made it here
+    <div className="mxo-guestbook">
+      <p className="mxo-guestbook-label">
+        <PixelHeart filled size={11} /> Who else made it here
       </p>
 
       {status === 'sent' ? (
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', marginBottom: '1.6rem' }}>
-          You're on the map now.
-        </p>
+        <p className="mxo-guestbook-sent">You're on the map now.</p>
       ) : (
-        <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '2rem', maxWidth: '420px' }}>
+        <form onSubmit={submit} className="mxo-guestbook-form">
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name or initials"
             maxLength={40}
             required
-            style={{
-              background: 'transparent',
-              border: 'none',
-              borderBottom: '1px solid rgba(255,255,255,0.3)',
-              padding: '0.6rem 0',
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: '0.9rem',
-              color: '#ffffff',
-              outline: 'none',
-            }}
+            style={inputStyle}
           />
           <input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="A message, if you'd like (optional)"
             maxLength={140}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              borderBottom: '1px solid rgba(255,255,255,0.3)',
-              padding: '0.6rem 0',
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: '0.9rem',
-              color: '#ffffff',
-              outline: 'none',
-            }}
+            style={inputStyle}
           />
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            style={{
-              alignSelf: 'flex-start',
-              background: 'transparent',
-              border: '1px solid #d9737a',
-              color: '#d9737a',
-              fontFamily: "'Outfit', sans-serif",
-              fontSize: '0.62rem',
-              fontWeight: 600,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              padding: '0.7rem 1.4rem',
-              cursor: status === 'sending' ? 'default' : 'pointer',
-              opacity: status === 'sending' ? 0.6 : 1,
-            }}
-          >
+          <button type="submit" disabled={status === 'sending'} className="mxo-guestbook-submit">
             {status === 'sending' ? 'Signing…' : 'Sign the map'}
           </button>
-          {status === 'error' && (
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)' }}>
-              Couldn't reach the guestbook right now — try again in a moment.
-            </p>
-          )}
+          {status === 'error' && <p className="mxo-guestbook-error">Couldn't reach the guestbook right now — try again in a moment.</p>}
         </form>
       )}
 
       {entries && entries.length > 0 && (
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.7rem', maxWidth: '480px' }}>
+        <ul className="mxo-guestbook-list">
           {entries.map((e, i) => (
-            <li key={i} style={{ borderLeft: '2px solid rgba(217,115,122,0.4)', paddingLeft: '0.9rem' }}>
-              <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.05rem', color: '#ffffff', letterSpacing: '0.02em' }}>
-                {e.name}
-              </span>
-              {e.message && (
-                <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.2rem' }}>
-                  {e.message}
-                </p>
-              )}
+            <li key={i}>
+              <PixelHeart filled size={9} />
+              <div>
+                <span className="mxo-guestbook-name">{e.name}</span>
+                {e.message && <p className="mxo-guestbook-message">{e.message}</p>}
+              </div>
             </li>
           ))}
         </ul>
       )}
-      {entries && entries.length === 0 && (
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)' }}>
-          Nobody's signed yet. Be the first.
-        </p>
-      )}
+      {entries && entries.length === 0 && <p className="mxo-guestbook-empty">Nobody's signed yet. Be the first.</p>}
     </div>
   )
 }
