@@ -6,6 +6,7 @@ export const Route = createFileRoute('/privacy')({
 function FloatingNav() {
   const [open, setOpen] = useState(false)
   const links = [
+    { href: '/', label: 'Muntiox' },
     { href: '/purpose', label: 'Purpose' },
     { href: '/projects', label: 'Projects' },
     { href: '/blog', label: 'Blog' },
@@ -22,7 +23,7 @@ function FloatingNav() {
         <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
       </button>
       {open && (
-        <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }} onClick={() => setOpen(false)}>
+        <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', overflowY: 'auto', padding: '3rem 0' }} onClick={() => setOpen(false)}>
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
