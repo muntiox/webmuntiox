@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../components/LanguageSwitcher'
-import { useLanguage } from '../lib/i18n'
+import { useLanguage, langPath } from '../lib/i18n'
 import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/privacy')({
   component: PrivacyPage,
@@ -101,7 +101,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -124,10 +124,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
     </div>
   )
 }
-function PrivacyPage() {
+export function PrivacyPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/privacy' })
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
@@ -159,7 +159,7 @@ function PrivacyPage() {
           <p>{c.s7body}</p>
         </Section>
         <Section title={c.s8}>
-          <p>{c.s8pre}<Link to="/contact" style={{ color: '#d9737a' }}>{c.s8link}</Link>{c.s8mid}<a href="mailto:imungar@protonmail.com" style={{ color: '#d9737a' }}>imungar@protonmail.com</a>{c.s8post}<Link to="/legal" style={{ color: '#d9737a' }}>{c.s8legalLink}</Link>{c.s8end}</p>
+          <p>{c.s8pre}<Link to={langPath(lang, '/contact')} style={{ color: '#d9737a' }}>{c.s8link}</Link>{c.s8mid}<a href="mailto:imungar@protonmail.com" style={{ color: '#d9737a' }}>imungar@protonmail.com</a>{c.s8post}<Link to={langPath(lang, '/legal')} style={{ color: '#d9737a' }}>{c.s8legalLink}</Link>{c.s8end}</p>
         </Section>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginTop: '3rem' }}>{c.updated} {new Date().toLocaleDateString(c.locale, { year: 'numeric', month: 'long' })}</p>
       </div>

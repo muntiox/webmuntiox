@@ -1,37 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://muntiox.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/" />
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/" />
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://muntiox.com/purpose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/purpose" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/purpose" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/purpose" />
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/purpose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/purpose" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/purpose" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/purpose" />
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muntiox.com/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/projects" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/projects" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/projects" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/projects" />
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://muntiox.com/work/rccoon</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/work/rccoon" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/work/rccoon" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/work/rccoon" />
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/work/rccoon</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/work/rccoon" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/work/rccoon" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/work/rccoon" />
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://muntiox.com/work/commo2</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/work/commo2" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/work/commo2" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/work/commo2" />
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/work/commo2</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/work/commo2" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/work/commo2" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/work/commo2" />
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://muntiox.com/work/espiga</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/work/espiga" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/work/espiga" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/work/espiga" />
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/work/espiga</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/work/espiga" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/work/espiga" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/work/espiga" />
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://muntiox.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/blog" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/blog" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/blog" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/blog" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -42,16 +120,49 @@
   </url>
   <url>
     <loc>https://muntiox.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/contact" />
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/contact" />
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://muntiox.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/privacy" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/privacy" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://muntiox.com/legal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/legal" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/legal" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/legal" />
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://muntiox.com/es/legal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://muntiox.com/legal" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://muntiox.com/es/legal" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://muntiox.com/legal" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

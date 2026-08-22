@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { markClueFound } from '../lib/clues'
 import HeartbeatSound from '../components/HeartbeatSound'
-import { useLanguage } from '../lib/i18n'
+import { useLanguage, langPath } from '../lib/i18n'
 import { usePageMeta } from '../lib/usePageMeta'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 export const Route = createFileRoute('/')(
@@ -334,7 +334,7 @@ function Nav() {
           <button className="mxo-fullnav-close" onClick={() => setOpen(false)} aria-label={c.close}>&#x2715;</button>
           <div className="mxo-fullnav-links" onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link" onClick={() => setOpen(false)}
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link" onClick={() => setOpen(false)}
                 style={{ animationDelay: `${i * 0.08}s` }}>
                 <span className="mxo-fullnav-num">0{i + 1}</span>
                 {l.label}
@@ -378,8 +378,8 @@ function Hero() {
           </span>
         </p>
         <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaProjects}</a>
-          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaContact}</a>
+          <a href={langPath(lang, '/projects')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaProjects}</a>
+          <a href={langPath(lang, '/contact')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaContact}</a>
         </div>
       </div>
     </section>
@@ -409,10 +409,10 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     </div>
   )
 }
-function Portfolio() {
+export function Portfolio() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/' })
   return (
     <>
       <ElectricCursor/>
@@ -480,19 +480,19 @@ function Portfolio() {
         <Reveal><div className="mxo-featured">
           <p className="mxo-eyebrow">{c.featured.eyebrow}</p>
           <div className="mxo-featured-grid">
-            <a href="/work/rccoon" className="mxo-featured-item">
+            <a href={langPath(lang, '/work/rccoon')} className="mxo-featured-item">
               <img src="/photos/rccoon-logo.png" alt="RCCOON" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">RCCOON</h3>
               <p className="mxo-featured-sub">{c.featured.rccoonSub}</p>
               <span className="mxo-featured-cta">{c.featured.rccoonCta}</span>
             </a>
-            <a href="/work/commo2" onClick={e => { e.preventDefault(); window.location.href='/work/commo2' }} className="mxo-featured-item">
+            <a href={langPath(lang, '/work/commo2')} className="mxo-featured-item">
               <img src="/photos/commo2-logo.png" alt="Commo2" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">Commo2</h3>
               <p className="mxo-featured-sub">{c.featured.commo2Sub}</p>
               <span className="mxo-featured-cta">{c.featured.commo2Cta}</span>
             </a>
-            <a href="/purpose" className="mxo-featured-item mxo-featured-item--cta">
+            <a href={langPath(lang, '/purpose')} className="mxo-featured-item mxo-featured-item--cta">
               <p className="mxo-featured-item-eyebrow">{c.featured.ctaEyebrow}</p>
               <h3 className="mxo-featured-title">{c.featured.ctaTitle}</h3>
               <p className="mxo-featured-sub">{c.featured.ctaSub}</p>
@@ -502,7 +502,7 @@ function Portfolio() {
         </div></Reveal>
         <Reveal><div className="mxo-latest-post" style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
           <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>{c.latest.eyebrow}</p>
-          <a href="/blog" className="mxo-latest-post-link"
+          <a href={langPath(lang, '/blog')} className="mxo-latest-post-link"
             style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', border: '1px solid rgba(237,234,226,0.08)', width: '100%' }}>
             <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
             <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>

@@ -4,7 +4,16 @@ import '../styles.css'
 import { CLUE_EVENT, CLUE_IDS, getFoundCount } from '../lib/clues'
 import PixelHeart from '../components/PixelHeart'
 import TreasureReveal from '../components/TreasureReveal'
-import { LanguageProvider, useLanguage } from '../lib/i18n'
+import { LanguageProvider, useLanguage, langPath } from '../lib/i18n'
+
+// Strips a leading /es off a pathname — used here just to map an /es/*
+// URL back onto the same curated map position / heartbeat variant as
+// its English sibling, so both language versions of a page look the same.
+function stripEsPrefixForRoot(pathname: string): string {
+  if (pathname === '/es') return '/'
+  if (pathname.startsWith('/es/')) return pathname.slice(3)
+  return pathname
+}
 
 // ── Restart control — clears clue progress and the "seen the reveal"
 // flag, then reloads. A small circular-arrow icon, same faintness as
@@ -133,7 +142,7 @@ function mapPositionFor(pathname: string) {
 }
 function MapBackground() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const position = mapPositionFor(pathname)
+  const position = mapPositionFor(stripEsPrefixForRoot(pathname))
   return (
     // Wrapper carries no background of its own — a global inner-page
     // rule forces `#root`'s direct-child divs transparent (so the
@@ -176,14 +185,14 @@ function SiteFooter() {
   const legalLabel = lang === 'es' ? 'Aviso Legal' : 'Legal Notice'
   return (
     <footer className="mxo-footer">
-      <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
+      <a href={langPath(lang, '/')} className="mxo-footer-logo" aria-label="MUNTIOX — home">
         <img src="/photos/Logo/X-logo.png" alt="" aria-hidden="true" />
         <span>MUNTIOX</span>
       </a>
       <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
       <div className="mxo-footer-links">
-        <a href="/privacy">{privacyLabel}</a>
-        <a href="/legal">{legalLabel}</a>
+        <a href={langPath(lang, '/privacy')}>{privacyLabel}</a>
+        <a href={langPath(lang, '/legal')}>{legalLabel}</a>
         <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
           <InstagramIcon /> Instagram
         </a>
@@ -386,7 +395,7 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const variant: 'home' | 'inner' = pathname === '/' ? 'home' : 'inner'
+  const variant: 'home' | 'inner' = stripEsPrefixForRoot(pathname) === '/' ? 'home' : 'inner'
 
   useEffect(() => {
     document.body.classList.add('flash-triggered')

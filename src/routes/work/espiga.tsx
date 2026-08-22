@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
-import { useLanguage } from '../../lib/i18n'
+import { useLanguage, langPath } from '../../lib/i18n'
 import { usePageMeta } from '../../lib/usePageMeta'
 export const Route = createFileRoute('/work/espiga')({
   component: EspigaPage,
@@ -55,7 +55,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -70,10 +70,10 @@ function FloatingNav() {
     </>
   )
 }
-function EspigaPage() {
+export function EspigaPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/work/espiga' })
   const [selected, setSelected] = useState<number | null>(null)
   const total = 24
   const photos = [1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
@@ -117,7 +117,7 @@ function EspigaPage() {
       )}
     <div style={{ position: 'relative', zIndex: 2, maxWidth: 1300, margin: '0 auto', padding: '0 3.5rem 6rem' }}>
         <div style={{ paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.12)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>{c.back}</Link>
+          <Link to={langPath(lang, '/projects')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>{c.back}</Link>
           <a href="https://www.instagram.com/casalespiga/" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>@casalespiga →</a>
         </div>
       </div>

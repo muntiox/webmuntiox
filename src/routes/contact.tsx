@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import ClueDoubleClick from '../components/ClueDoubleClick'
 import LanguageSwitcher from '../components/LanguageSwitcher'
-import { useLanguage } from '../lib/i18n'
+import { useLanguage, langPath } from '../lib/i18n'
 import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
@@ -78,7 +78,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -93,10 +93,10 @@ function FloatingNav() {
     </>
   )
 }
-function ContactPage() {
+export function ContactPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/contact' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

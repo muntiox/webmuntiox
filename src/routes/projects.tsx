@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import ClueHold from '../components/ClueHold'
 import LanguageSwitcher from '../components/LanguageSwitcher'
-import { useLanguage } from '../lib/i18n'
+import { useLanguage, langPath } from '../lib/i18n'
 import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/projects')({
   component: ProjectsPage,
@@ -184,7 +184,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -199,10 +199,10 @@ function FloatingNav() {
     </>
   )
 }
-function ProjectsPage() {
+export function ProjectsPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/projects' })
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
@@ -226,7 +226,7 @@ function ProjectsPage() {
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', marginBottom: '1.2rem' }}>{c.rccoon.sub}</p>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', maxWidth: 680, marginBottom: '1rem' }}>{c.rccoon.body}</p>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontStyle: 'italic', fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', marginBottom: '1.5rem' }}>&quot;{c.rccoon.quote}&quot;</p>
-            <Link to="/work/rccoon" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, color: '#ffffff', textDecoration: 'none' }}>{c.rccoon.cta}</Link>
+            <Link to={langPath(lang, '/work/rccoon')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, color: '#ffffff', textDecoration: 'none' }}>{c.rccoon.cta}</Link>
           </div>
           {/* Sopelazabalik */}
           <div style={{ padding: '3.5rem 0', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
@@ -255,7 +255,7 @@ function ProjectsPage() {
             </div>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', marginBottom: '1rem' }}>{c.espiga.sub}</p>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', maxWidth: 680, marginBottom: '1rem' }}>{c.espiga.body}</p>
-            <Link to="/work/espiga" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none', display: 'inline-block', marginTop: '1.5rem' }}>{c.espiga.cta}</Link>
+            <Link to={langPath(lang, '/work/espiga')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none', display: 'inline-block', marginTop: '1.5rem' }}>{c.espiga.cta}</Link>
           </div>
           {/* Commo2 */}
           <div style={{ padding: '3.5rem 0', borderTop: '1px solid rgba(255,255,255,0.15)' }}>
@@ -271,7 +271,7 @@ function ProjectsPage() {
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', maxWidth: 680, marginBottom: '1rem' }}>{c.commo2.body}</p>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontStyle: 'italic', fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', marginBottom: '1.5rem' }}>&quot;{c.commo2.quote}&quot;</p>
             <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', display: 'block', marginBottom: '1rem' }}>{c.commo2.note}</span>
-            <a href="/work/commo2" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, color: '#ffffff', textDecoration: 'none' }}>{c.commo2.cta}</a>
+            <a href={langPath(lang, '/work/commo2')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, color: '#ffffff', textDecoration: 'none' }}>{c.commo2.cta}</a>
           </div>
           {/* Club Open Minded */}
           <div style={{ padding: '3.5rem 0', borderTop: '1px solid rgba(255,255,255,0.15)' }}>

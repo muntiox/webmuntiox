@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import ClueLetter from '../components/ClueLetter'
 import ClueDraggablePolaroid from '../components/ClueDraggablePolaroid'
 import LanguageSwitcher from '../components/LanguageSwitcher'
-import { useLanguage } from '../lib/i18n'
+import { useLanguage, langPath } from '../lib/i18n'
 import { usePageMeta } from '../lib/usePageMeta'
 
 // The bottom-row photo that ships visibly out of place — drag it home to find it.
@@ -117,7 +117,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -312,10 +312,10 @@ const SLIDE_PHOTOS = [
   '/photos/who-am-i/joves-me.jpg',
   '/photos/who-am-i/barro-dana.jpg',
 ]
-function PurposePage() {
+export function PurposePage() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/purpose' })
   const slides = c.slides.map((s, i) => ({ ...s, src: SLIDE_PHOTOS[i] }))
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import PixelHeart from './PixelHeart'
+import { useLanguage, langPath } from '../lib/i18n'
 
 // ── Guestbook — the small, shared trace left by everyone who found
 // every clue. Deliberately styled unlike the real contact form
@@ -31,6 +32,7 @@ const inputStyle: React.CSSProperties = {
 }
 
 export default function GuestbookPanel() {
+  const { lang } = useLanguage()
   const [entries, setEntries] = useState<Entry[] | null>(null)
   const [unavailable, setUnavailable] = useState(false)
   const [name, setName] = useState('')
@@ -103,7 +105,7 @@ export default function GuestbookPanel() {
         <form onSubmit={submit} className="mxo-guestbook-form">
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.68rem', fontWeight: 300, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, margin: '0 0 0.4rem' }}>
             Your name and message will be shown publicly on this page. See the{' '}
-            <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>privacy policy</Link>.
+            <Link to={langPath(lang, '/privacy')} style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>privacy policy</Link>.
           </p>
           <input
             value={name}

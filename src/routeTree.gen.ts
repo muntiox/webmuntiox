@@ -12,15 +12,27 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as PurposeRouteImport } from './routes/purpose'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as WorkRccoonRouteImport } from './routes/work/rccoon'
 import { Route as WorkEspigaRouteImport } from './routes/work/espiga'
 import { Route as WorkCommo2RouteImport } from './routes/work/commo2'
+import { Route as EsPurposeRouteImport } from './routes/es/purpose'
+import { Route as EsProjectsRouteImport } from './routes/es/projects'
+import { Route as EsPrivacyRouteImport } from './routes/es/privacy'
+import { Route as EsLegalRouteImport } from './routes/es/legal'
+import { Route as EsContactRouteImport } from './routes/es/contact'
+import { Route as EsBlogRouteImport } from './routes/es/blog'
 import { Route as BlogPost3RouteImport } from './routes/blog/post-3'
 import { Route as BlogPost2RouteImport } from './routes/blog/post-2'
 import { Route as BlogPost1RouteImport } from './routes/blog/post-1'
+import { Route as EsWorkRccoonRouteImport } from './routes/es/work/rccoon'
+import { Route as EsWorkEspigaRouteImport } from './routes/es/work/espiga'
+import { Route as EsWorkCommo2RouteImport } from './routes/es/work/commo2'
 
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
@@ -35,6 +47,16 @@ const PurposeRoute = PurposeRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -52,6 +74,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsIndexRoute = EsIndexRouteImport.update({
+  id: '/es/',
+  path: '/es/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkRccoonRoute = WorkRccoonRouteImport.update({
   id: '/work/rccoon',
   path: '/work/rccoon',
@@ -65,6 +92,36 @@ const WorkEspigaRoute = WorkEspigaRouteImport.update({
 const WorkCommo2Route = WorkCommo2RouteImport.update({
   id: '/work/commo2',
   path: '/work/commo2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsPurposeRoute = EsPurposeRouteImport.update({
+  id: '/es/purpose',
+  path: '/es/purpose',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsProjectsRoute = EsProjectsRouteImport.update({
+  id: '/es/projects',
+  path: '/es/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsPrivacyRoute = EsPrivacyRouteImport.update({
+  id: '/es/privacy',
+  path: '/es/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsLegalRoute = EsLegalRouteImport.update({
+  id: '/es/legal',
+  path: '/es/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsContactRoute = EsContactRouteImport.update({
+  id: '/es/contact',
+  path: '/es/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBlogRoute = EsBlogRouteImport.update({
+  id: '/es/blog',
+  path: '/es/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogPost3Route = BlogPost3RouteImport.update({
@@ -82,49 +139,100 @@ const BlogPost1Route = BlogPost1RouteImport.update({
   path: '/post-1',
   getParentRoute: () => BlogRoute,
 } as any)
+const EsWorkRccoonRoute = EsWorkRccoonRouteImport.update({
+  id: '/es/work/rccoon',
+  path: '/es/work/rccoon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsWorkEspigaRoute = EsWorkEspigaRouteImport.update({
+  id: '/es/work/espiga',
+  path: '/es/work/espiga',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsWorkCommo2Route = EsWorkCommo2RouteImport.update({
+  id: '/es/work/commo2',
+  path: '/es/work/commo2',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/purpose': typeof PurposeRoute
   '/resume': typeof ResumeRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
   '/blog/post-3': typeof BlogPost3Route
+  '/es/blog': typeof EsBlogRoute
+  '/es/contact': typeof EsContactRoute
+  '/es/legal': typeof EsLegalRoute
+  '/es/privacy': typeof EsPrivacyRoute
+  '/es/projects': typeof EsProjectsRoute
+  '/es/purpose': typeof EsPurposeRoute
   '/work/commo2': typeof WorkCommo2Route
   '/work/espiga': typeof WorkEspigaRoute
   '/work/rccoon': typeof WorkRccoonRoute
+  '/es/': typeof EsIndexRoute
+  '/es/work/commo2': typeof EsWorkCommo2Route
+  '/es/work/espiga': typeof EsWorkEspigaRoute
+  '/es/work/rccoon': typeof EsWorkRccoonRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/purpose': typeof PurposeRoute
   '/resume': typeof ResumeRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
   '/blog/post-3': typeof BlogPost3Route
+  '/es/blog': typeof EsBlogRoute
+  '/es/contact': typeof EsContactRoute
+  '/es/legal': typeof EsLegalRoute
+  '/es/privacy': typeof EsPrivacyRoute
+  '/es/projects': typeof EsProjectsRoute
+  '/es/purpose': typeof EsPurposeRoute
   '/work/commo2': typeof WorkCommo2Route
   '/work/espiga': typeof WorkEspigaRoute
   '/work/rccoon': typeof WorkRccoonRoute
+  '/es': typeof EsIndexRoute
+  '/es/work/commo2': typeof EsWorkCommo2Route
+  '/es/work/espiga': typeof EsWorkEspigaRoute
+  '/es/work/rccoon': typeof EsWorkRccoonRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
+  '/legal': typeof LegalRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/purpose': typeof PurposeRoute
   '/resume': typeof ResumeRoute
   '/blog/post-1': typeof BlogPost1Route
   '/blog/post-2': typeof BlogPost2Route
   '/blog/post-3': typeof BlogPost3Route
+  '/es/blog': typeof EsBlogRoute
+  '/es/contact': typeof EsContactRoute
+  '/es/legal': typeof EsLegalRoute
+  '/es/privacy': typeof EsPrivacyRoute
+  '/es/projects': typeof EsProjectsRoute
+  '/es/purpose': typeof EsPurposeRoute
   '/work/commo2': typeof WorkCommo2Route
   '/work/espiga': typeof WorkEspigaRoute
   '/work/rccoon': typeof WorkRccoonRoute
+  '/es/': typeof EsIndexRoute
+  '/es/work/commo2': typeof EsWorkCommo2Route
+  '/es/work/espiga': typeof EsWorkEspigaRoute
+  '/es/work/rccoon': typeof EsWorkRccoonRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,55 +240,103 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/legal'
+    | '/privacy'
     | '/projects'
     | '/purpose'
     | '/resume'
     | '/blog/post-1'
     | '/blog/post-2'
     | '/blog/post-3'
+    | '/es/blog'
+    | '/es/contact'
+    | '/es/legal'
+    | '/es/privacy'
+    | '/es/projects'
+    | '/es/purpose'
     | '/work/commo2'
     | '/work/espiga'
     | '/work/rccoon'
+    | '/es/'
+    | '/es/work/commo2'
+    | '/es/work/espiga'
+    | '/es/work/rccoon'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/blog'
     | '/contact'
+    | '/legal'
+    | '/privacy'
     | '/projects'
     | '/purpose'
     | '/resume'
     | '/blog/post-1'
     | '/blog/post-2'
     | '/blog/post-3'
+    | '/es/blog'
+    | '/es/contact'
+    | '/es/legal'
+    | '/es/privacy'
+    | '/es/projects'
+    | '/es/purpose'
     | '/work/commo2'
     | '/work/espiga'
     | '/work/rccoon'
+    | '/es'
+    | '/es/work/commo2'
+    | '/es/work/espiga'
+    | '/es/work/rccoon'
   id:
     | '__root__'
     | '/'
     | '/blog'
     | '/contact'
+    | '/legal'
+    | '/privacy'
     | '/projects'
     | '/purpose'
     | '/resume'
     | '/blog/post-1'
     | '/blog/post-2'
     | '/blog/post-3'
+    | '/es/blog'
+    | '/es/contact'
+    | '/es/legal'
+    | '/es/privacy'
+    | '/es/projects'
+    | '/es/purpose'
     | '/work/commo2'
     | '/work/espiga'
     | '/work/rccoon'
+    | '/es/'
+    | '/es/work/commo2'
+    | '/es/work/espiga'
+    | '/es/work/rccoon'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
+  LegalRoute: typeof LegalRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
   PurposeRoute: typeof PurposeRoute
   ResumeRoute: typeof ResumeRoute
+  EsBlogRoute: typeof EsBlogRoute
+  EsContactRoute: typeof EsContactRoute
+  EsLegalRoute: typeof EsLegalRoute
+  EsPrivacyRoute: typeof EsPrivacyRoute
+  EsProjectsRoute: typeof EsProjectsRoute
+  EsPurposeRoute: typeof EsPurposeRoute
   WorkCommo2Route: typeof WorkCommo2Route
   WorkEspigaRoute: typeof WorkEspigaRoute
   WorkRccoonRoute: typeof WorkRccoonRoute
+  EsIndexRoute: typeof EsIndexRoute
+  EsWorkCommo2Route: typeof EsWorkCommo2Route
+  EsWorkEspigaRoute: typeof EsWorkEspigaRoute
+  EsWorkRccoonRoute: typeof EsWorkRccoonRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -206,6 +362,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -225,6 +395,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/': {
+      id: '/es/'
+      path: '/es'
+      fullPath: '/es/'
+      preLoaderRoute: typeof EsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work/rccoon': {
@@ -248,6 +425,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkCommo2RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/purpose': {
+      id: '/es/purpose'
+      path: '/es/purpose'
+      fullPath: '/es/purpose'
+      preLoaderRoute: typeof EsPurposeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/projects': {
+      id: '/es/projects'
+      path: '/es/projects'
+      fullPath: '/es/projects'
+      preLoaderRoute: typeof EsProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/privacy': {
+      id: '/es/privacy'
+      path: '/es/privacy'
+      fullPath: '/es/privacy'
+      preLoaderRoute: typeof EsPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/legal': {
+      id: '/es/legal'
+      path: '/es/legal'
+      fullPath: '/es/legal'
+      preLoaderRoute: typeof EsLegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/contact': {
+      id: '/es/contact'
+      path: '/es/contact'
+      fullPath: '/es/contact'
+      preLoaderRoute: typeof EsContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/blog': {
+      id: '/es/blog'
+      path: '/es/blog'
+      fullPath: '/es/blog'
+      preLoaderRoute: typeof EsBlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/post-3': {
       id: '/blog/post-3'
       path: '/post-3'
@@ -268,6 +487,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/post-1'
       preLoaderRoute: typeof BlogPost1RouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/es/work/rccoon': {
+      id: '/es/work/rccoon'
+      path: '/es/work/rccoon'
+      fullPath: '/es/work/rccoon'
+      preLoaderRoute: typeof EsWorkRccoonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/work/espiga': {
+      id: '/es/work/espiga'
+      path: '/es/work/espiga'
+      fullPath: '/es/work/espiga'
+      preLoaderRoute: typeof EsWorkEspigaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/work/commo2': {
+      id: '/es/work/commo2'
+      path: '/es/work/commo2'
+      fullPath: '/es/work/commo2'
+      preLoaderRoute: typeof EsWorkCommo2RouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -290,12 +530,24 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
+  LegalRoute: LegalRoute,
+  PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
   PurposeRoute: PurposeRoute,
   ResumeRoute: ResumeRoute,
+  EsBlogRoute: EsBlogRoute,
+  EsContactRoute: EsContactRoute,
+  EsLegalRoute: EsLegalRoute,
+  EsPrivacyRoute: EsPrivacyRoute,
+  EsProjectsRoute: EsProjectsRoute,
+  EsPurposeRoute: EsPurposeRoute,
   WorkCommo2Route: WorkCommo2Route,
   WorkEspigaRoute: WorkEspigaRoute,
   WorkRccoonRoute: WorkRccoonRoute,
+  EsIndexRoute: EsIndexRoute,
+  EsWorkCommo2Route: EsWorkCommo2Route,
+  EsWorkEspigaRoute: EsWorkEspigaRoute,
+  EsWorkRccoonRoute: EsWorkRccoonRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

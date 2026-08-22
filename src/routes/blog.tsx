@@ -3,7 +3,7 @@ import { useState } from 'react'
 import CluePlate from '../components/CluePlate'
 import ClueScratch from '../components/ClueScratch'
 import LanguageSwitcher from '../components/LanguageSwitcher'
-import { useLanguage } from '../lib/i18n'
+import { useLanguage, langPath } from '../lib/i18n'
 import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/blog')({
   component: BlogPage,
@@ -196,7 +196,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -211,7 +211,7 @@ function FloatingNav() {
     </>
   )
 }
-function Post({ post, onClose, essayLabel, allPostsLabel }: { post: any; onClose: () => void; essayLabel: string; allPostsLabel: string }) {
+function Post({ post, onClose, essayLabel, allPostsLabel, lang }: { post: any; onClose: () => void; essayLabel: string; allPostsLabel: string; lang: import('../lib/i18n').Lang }) {
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
@@ -231,13 +231,13 @@ function Post({ post, onClose, essayLabel, allPostsLabel }: { post: any; onClose
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#ffffff', marginBottom: '1.8rem' }}>{post.closing}</p>
         <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', background: 'none', border: 'none', cursor: 'pointer' }}>{allPostsLabel}</button>
-          <a href={post.cta.href} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>{post.cta.label}</a>
+          <a href={langPath(lang, post.cta.href)} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>{post.cta.label}</a>
         </div>
       </article>
     </div>
   )
 }
-function BlogPage() {
+export function BlogPage() {
   const { lang } = useLanguage()
   const p = pageCopy[lang]
   const posts = POSTS[lang]
@@ -245,9 +245,10 @@ function BlogPage() {
   const selected = selectedId !== null ? posts.find(post => post.id === selectedId) ?? null : null
   usePageMeta(
     selected ? `${selected.title} — Itxaso Muntión` : p.metaTitle,
-    selected ? selected.description : p.metaDescription
+    selected ? selected.description : p.metaDescription,
+    { lang, path: '/blog' }
   )
-  if (selected) return <Post post={selected} onClose={() => setSelectedId(null)} essayLabel={p.essay} allPostsLabel={p.allPosts} />
+  if (selected) return <Post post={selected} onClose={() => setSelectedId(null)} essayLabel={p.essay} allPostsLabel={p.allPosts} lang={lang} />
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />

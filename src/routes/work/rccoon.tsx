@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
-import { useLanguage } from '../../lib/i18n'
+import { useLanguage, langPath } from '../../lib/i18n'
 import { usePageMeta } from '../../lib/usePageMeta'
 export const Route = createFileRoute('/work/rccoon')({
   component: RccoonProject,
@@ -103,7 +103,7 @@ function FloatingNav() {
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', zIndex: 2 }} onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
-              <a key={l.href} href={l.href} className="mxo-fullnav-link"
+              <a key={l.href} href={langPath(lang, l.href)} className="mxo-fullnav-link"
                 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '92px', fontWeight: 300, lineHeight: '92px', color: '#ffffff', textDecoration: 'none', display: 'flex', alignItems: 'baseline', gap: '1.2rem', transition: 'color 0.15s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#d9737a')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#ffffff')}>
@@ -118,10 +118,10 @@ function FloatingNav() {
     </>
   )
 }
-function RccoonProject() {
+export function RccoonProject() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  usePageMeta(c.metaTitle, c.metaDescription)
+  usePageMeta(c.metaTitle, c.metaDescription, { lang, path: '/work/rccoon' })
   const categories = c.categories.map((cat, i) => {
     const media = [
       { images: ['/photos/rccoon-head.png', '/photos/rccoon-globe.png', '/photos/rccoon-colours.png', '/photos/rccoon-infographic.png'] },
@@ -292,7 +292,7 @@ function RccoonProject() {
             {c.learnMorePre}{' '}
             <a href="https://rccoon.org" target="_blank" rel="noopener noreferrer" style={{ color: '#ffffff', textDecoration: 'none', borderBottom: '1px solid #8a2333' }}>rccoon.org</a>
           </p>
-          <Link to="/projects" style={{ fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', textDecoration: 'none' }}>{c.back}</Link>
+          <Link to={langPath(lang, '/projects')} style={{ fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', textDecoration: 'none' }}>{c.back}</Link>
         </div>
       </article>
     </div>
