@@ -73,6 +73,8 @@ const copy = {
     latest: {
       eyebrow: 'Latest writing',
       essay: 'Essay · 13/08/26',
+      postTitle: 'Make your time count',
+      postExcerpt: 'We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?',
       read: 'Read →',
     },
   },
@@ -139,6 +141,8 @@ const copy = {
     latest: {
       eyebrow: 'Lo último que he escrito',
       essay: 'Ensayo · 13/08/26',
+      postTitle: 'Haz que tu tiempo cuente',
+      postExcerpt: 'Vamos a pasar una parte enorme de nuestras vidas trabajando. Entonces, ¿por qué no dirigir ese tiempo hacia algo que realmente importa?',
       read: 'Leer →',
     },
   },
@@ -310,14 +314,16 @@ function Nav() {
   ]
   return (
     <>
-      <button onClick={() => setOpen(true)} aria-label={c.openMenu}
-        style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
-          background: 'none', border: 'none', cursor: 'pointer',
-          display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#F2EEE7' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#F2EEE7' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#F2EEE7' }}/>
-      </button>
+      <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100, display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <LanguageSwitcher />
+        <button onClick={() => setOpen(true)} aria-label={c.openMenu}
+          style={{ background: 'none', border: 'none', cursor: 'pointer',
+            display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
+          <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#F2EEE7' }}/>
+          <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#F2EEE7' }}/>
+          <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#F2EEE7' }}/>
+        </button>
+      </div>
       {open && (
         <div className="mxo-fullnav" onClick={() => setOpen(false)}>
           <button className="mxo-fullnav-close" onClick={() => setOpen(false)} aria-label={c.close}>&#x2715;</button>
@@ -329,9 +335,6 @@ function Nav() {
                 {l.label}
               </a>
             ))}
-          </div>
-          <div onClick={e => e.stopPropagation()}>
-            <LanguageSwitcher />
           </div>
           <p className="mxo-fullnav-bottom">{c.bottom}</p>
         </div>
@@ -498,8 +501,8 @@ function Portfolio() {
             <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
             <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>{c.latest.essay}</p>
-              <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 5rem)', fontWeight: 400, color: '#edeae2', lineHeight: 1.0, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>Make your time count</h3>
-              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', marginBottom: '2rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
+              <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 5rem)', fontWeight: 400, color: '#edeae2', lineHeight: 1.0, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>{c.latest.postTitle}</h3>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', marginBottom: '2rem' }}>{c.latest.postExcerpt}</p>
               <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>{c.latest.read}</span>
             </div>
           </a>

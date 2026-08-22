@@ -1,28 +1,50 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
+import { useLanguage } from '../../lib/i18n'
 export const Route = createFileRoute('/work/espiga')({
   component: EspigaPage,
 })
+// ── Page copy — English + Spanish ────────────────────────────────────
+const navCopy = {
+  en: { home: 'Back home', purpose: 'Purpose', projects: 'Projects', blog: 'Blog', contact: 'Contact', openMenu: 'Open menu', bottom: 'Itxaso Muntión — Content Creator & Digital Strategist' },
+  es: { home: 'Inicio', purpose: 'Propósito', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto', openMenu: 'Abrir menú', bottom: 'Itxaso Muntión — Creadora de Contenido y Estratega Digital' },
+}
+const copy = {
+  en: {
+    eyebrow: '2023 · Freelance',
+    intro: 'A full weekend in a rural retreat in the Delta del Ebro — just me and a camera. Photo & video content for a place that deserved to be seen.',
+    back: '← Back to projects',
+  },
+  es: {
+    eyebrow: '2023 · Freelance',
+    intro: 'Un fin de semana entero en un retiro rural en el Delta del Ebro — solo yo y una cámara. Contenido de foto y vídeo para un lugar que merecía ser visto.',
+    back: '← Volver a proyectos',
+  },
+}
 function FloatingNav() {
+  const { lang } = useLanguage()
+  const n = navCopy[lang]
   const [open, setOpen] = useState(false)
   const links = [
-    { href: '/', label: 'Back home' },
-    { href: '/purpose', label: 'Purpose' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/', label: n.home },
+    { href: '/purpose', label: n.purpose },
+    { href: '/projects', label: n.projects },
+    { href: '/blog', label: n.blog },
+    { href: '/contact', label: n.contact },
   ]
   return (
     <>
-      <button onClick={() => setOpen(true)} aria-label="Open menu"
-        style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
-          background: 'none', border: 'none', cursor: 'pointer',
-          display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
-        <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
-      </button>
+      <div style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100, display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <LanguageSwitcher />
+        <button onClick={() => setOpen(true)} aria-label={n.openMenu}
+          style={{ background: 'none', border: 'none', cursor: 'pointer',
+            display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
+          <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+          <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+          <span style={{ display: 'block', width: '24px', height: '1.5px', background: '#ffffff' }}/>
+        </button>
+      </div>
       {open && (
         <div style={{ position: 'fixed', inset: 0, background: '#04020a', zIndex: 999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', overflowY: 'auto', padding: '2rem 0' }} onClick={() => setOpen(false)}>
           <button style={{ position: 'absolute', top: '2rem', right: '2.5rem', background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '1.5rem', cursor: 'pointer', zIndex: 2 }} onClick={() => setOpen(false)}>✕</button>
@@ -37,14 +59,15 @@ function FloatingNav() {
               </a>
             ))}
           </div>
-          <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', bottom: '5.2rem', zIndex: 2 }}><LanguageSwitcher /></div>
-          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
+          <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', zIndex: 2 }}>{n.bottom}</p>
         </div>
       )}
     </>
   )
 }
 function EspigaPage() {
+  const { lang } = useLanguage()
+  const c = copy[lang]
   const [selected, setSelected] = useState<number | null>(null)
   const total = 24
   const photos = [1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
@@ -53,12 +76,12 @@ function EspigaPage() {
       <FloatingNav />
       <div style={{ maxWidth: 1300, margin: '0 auto', padding: '8rem 3.5rem 6rem', position: 'relative', zIndex: 2 }}>
         <div style={{ marginBottom: '4rem' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>2023 · Freelance</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>{c.eyebrow}</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.2rem' }}>
             <img src="/photos/laespiga-logo.png" alt="Casa l'Espiga" style={{ height: '80px', width: 'auto', objectFit: 'contain' }} />
             <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#ffffff', lineHeight: 1, letterSpacing: '0.02em', margin: 0 }}>Casa l&apos;Espiga</h1>
           </div>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', maxWidth: 620 }}>A full weekend in a rural retreat in the Delta del Ebro — just me and a camera. Photo &amp; video content for a place that deserved to be seen.</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', maxWidth: 620 }}>{c.intro}</p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.75rem' }}>
           {photos.map(n => (
@@ -88,7 +111,7 @@ function EspigaPage() {
       )}
     <div style={{ position: 'relative', zIndex: 2, maxWidth: 1300, margin: '0 auto', padding: '0 3.5rem 6rem' }}>
         <div style={{ paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.12)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Link to="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>← Back to projects</Link>
+          <Link to="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>{c.back}</Link>
           <a href="https://www.instagram.com/casalespiga/" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#ffffff', lineHeight: '34.96px', textDecoration: 'none' }}>@casalespiga →</a>
         </div>
       </div>

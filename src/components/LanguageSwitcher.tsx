@@ -1,13 +1,13 @@
 import { SUPPORTED_LANGS, useLanguage } from '../lib/i18n'
 
-// ── Language switcher — a small row of flags inside the full-screen
-// nav, below the links. Only English and Spanish do anything for now;
-// more languages join this row as they get translated. Deliberately
-// undramatic: no label, the flags speak for themselves.
+// ── Language switcher — a small row of flags, always visible next to
+// the hamburger icon (not tucked inside the menu) so it's findable
+// without opening anything. Only English and Spanish do anything for
+// now; more languages join this row as they get translated.
 export default function LanguageSwitcher() {
   const { lang, setLang } = useLanguage()
   return (
-    <div style={{ display: 'flex', gap: '0.9rem', marginTop: '2.2rem' }}>
+    <div style={{ display: 'flex', gap: '0.5rem' }}>
       {SUPPORTED_LANGS.map((l) => (
         <button
           key={l.code}
@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
           aria-pressed={lang === l.code}
           title={l.label}
           style={{
-            fontSize: '1.4rem',
+            fontSize: '1.15rem',
             lineHeight: 1,
             background: 'none',
             border: 'none',
