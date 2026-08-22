@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
 import { useLanguage } from '../../lib/i18n'
+import { usePageMeta } from '../../lib/usePageMeta'
 export const Route = createFileRoute('/work/espiga')({
   component: EspigaPage,
 })
@@ -12,11 +13,15 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'La Espiga — Itxaso Muntión',
+    metaDescription: 'Photo & video content from a rural retreat in the Delta del Ebro — a place that deserved to be seen.',
     eyebrow: '2023 · Freelance',
     intro: 'A full weekend in a rural retreat in the Delta del Ebro — just me and a camera. Photo & video content for a place that deserved to be seen.',
     back: '← Back to projects',
   },
   es: {
+    metaTitle: 'La Espiga — Itxaso Muntión',
+    metaDescription: 'Contenido de foto y vídeo de un retiro rural en el Delta del Ebro — un lugar que merecía ser visto.',
     eyebrow: '2023 · Freelance',
     intro: 'Un fin de semana entero en un retiro rural en el Delta del Ebro — solo yo y una cámara. Contenido de foto y vídeo para un lugar que merecía ser visto.',
     back: '← Volver a proyectos',
@@ -68,6 +73,7 @@ function FloatingNav() {
 function EspigaPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   const [selected, setSelected] = useState<number | null>(null)
   const total = 24
   const photos = [1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]

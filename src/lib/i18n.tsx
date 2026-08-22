@@ -36,6 +36,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  // Keep <html lang="..."> in sync with the selected language — matters
+  // for screen readers and for search engines reading the actual
+  // rendered document, not just the static index.html default.
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
+
   const setLang = (l: Lang) => {
     setLangState(l)
     try {

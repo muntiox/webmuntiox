@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { markClueFound } from '../lib/clues'
 import HeartbeatSound from '../components/HeartbeatSound'
 import { useLanguage } from '../lib/i18n'
+import { usePageMeta } from '../lib/usePageMeta'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 export const Route = createFileRoute('/')(
   { component: Portfolio }
@@ -11,6 +12,8 @@ export const Route = createFileRoute('/')(
 // falling back to English until it gets its own entry here.
 const copy = {
   en: {
+    metaTitle: 'MUNTIOX — Itxaso Muntión | Creative Strategy for Brands That Want to Change the World',
+    metaDescription: 'Content creator and digital strategist helping conscious brands and organisations craft messages that inspire, transform and connect.',
     nav: { purpose: 'Purpose', projects: 'Projects', blog: 'Blog', contact: 'Contact', openMenu: 'Open menu', close: 'Close', bottom: 'Itxaso Muntión — Content Creator & Digital Strategist' },
     correction: { wrong: 'for brands', only: 'only for brands', onlyWord: 'only' },
     hero: {
@@ -79,6 +82,8 @@ const copy = {
     },
   },
   es: {
+    metaTitle: 'MUNTIOX — Itxaso Muntión | Estrategia Creativa para Marcas que Quieren Cambiar el Mundo',
+    metaDescription: 'Creadora de contenido y estratega digital que ayuda a marcas y organizaciones conscientes a crear mensajes que inspiran, transforman y conectan.',
     nav: { purpose: 'Propósito', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto', openMenu: 'Abrir menú', close: 'Cerrar', bottom: 'Itxaso Muntión — Creadora de Contenido y Estratega Digital' },
     correction: { wrong: 'para marcas', only: 'solo para marcas', onlyWord: 'solo' },
     hero: {
@@ -407,6 +412,7 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 function Portfolio() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   return (
     <>
       <ElectricCursor/>

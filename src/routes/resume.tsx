@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { allJobs, allEducations } from 'content-collections'
+import { usePageMeta } from '../lib/usePageMeta'
 
 export const Route = createFileRoute('/resume')({
   component: Resume,
 })
 
 function Resume() {
+  usePageMeta(
+    'Trayectoria — Itxaso Muntión',
+    'Experiencia profesional y formación de Itxaso Muntión, creadora de contenido y estratega digital.'
+  )
   return (
     <div
       style={{

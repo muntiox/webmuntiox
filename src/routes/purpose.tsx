@@ -5,6 +5,7 @@ import ClueLetter from '../components/ClueLetter'
 import ClueDraggablePolaroid from '../components/ClueDraggablePolaroid'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import { useLanguage } from '../lib/i18n'
+import { usePageMeta } from '../lib/usePageMeta'
 
 // The bottom-row photo that ships visibly out of place — drag it home to find it.
 const CLUE_PHOTO_INDEX = 5
@@ -20,6 +21,8 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'Purpose — Itxaso Muntión',
+    metaDescription: "Why I do what I do: attention, ethics, and choosing joy on purpose. The story behind Itxaso Muntión's work.",
     eyebrow: 'Purpose',
     titlePre: 'When creativity and strategy al',
     titleLetter: 'i',
@@ -52,6 +55,8 @@ const copy = {
     close: 'Close ✕',
   },
   es: {
+    metaTitle: 'Propósito — Itxaso Muntión',
+    metaDescription: 'Por qué hago lo que hago: atención, ética y elegir la alegría a propósito. La historia detrás del trabajo de Itxaso Muntión.',
     eyebrow: 'Propósito',
     titlePre: 'Cuando la creatividad y la estrategia se al',
     titleLetter: 'i',
@@ -310,6 +315,7 @@ const SLIDE_PHOTOS = [
 function PurposePage() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   const slides = c.slides.map((s, i) => ({ ...s, src: SLIDE_PHOTOS[i] }))
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>

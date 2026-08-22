@@ -118,6 +118,7 @@ const MAP_POSITIONS: Record<string, string> = {
   '/blog': '20% 92%',
   '/contact': '90% 88%',
   '/privacy': '88% 12%',
+  '/legal': '22% 78%',
   '/work/rccoon': '12% 55%',
   '/work/commo2': '88% 55%',
   '/work/espiga': '62% 90%',
@@ -172,6 +173,7 @@ function InstagramIcon() {
 function SiteFooter() {
   const { lang } = useLanguage()
   const privacyLabel = lang === 'es' ? 'Política de Privacidad' : 'Privacy Policy'
+  const legalLabel = lang === 'es' ? 'Aviso Legal' : 'Legal Notice'
   return (
     <footer className="mxo-footer">
       <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
@@ -181,6 +183,7 @@ function SiteFooter() {
       <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
       <div className="mxo-footer-links">
         <a href="/privacy">{privacyLabel}</a>
+        <a href="/legal">{legalLabel}</a>
         <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
           <InstagramIcon /> Instagram
         </a>

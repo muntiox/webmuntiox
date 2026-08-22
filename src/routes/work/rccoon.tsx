@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
 import { useLanguage } from '../../lib/i18n'
+import { usePageMeta } from '../../lib/usePageMeta'
 export const Route = createFileRoute('/work/rccoon')({
   component: RccoonProject,
 })
@@ -12,6 +13,8 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'RCCOON · Citizen Action — Itxaso Muntión',
+    metaDescription: "A grassroots movement turning awareness into action — social, environmental and animal justice. Digital identity built as a volunteer.",
     eyebrow: 'Volunteer Project · 2020 — 2026',
     title: 'RCCOON · Citizen Action',
     intro: "A grassroots movement turning awareness into action — social, environmental and animal justice. I've been building its digital identity from the ground up alongside a friend, as volunteers.",
@@ -41,6 +44,8 @@ const copy = {
     back: '← Back to projects',
   },
   es: {
+    metaTitle: 'RCCOON · Acción Ciudadana — Itxaso Muntión',
+    metaDescription: 'Un movimiento de base que convierte la concienciación en acción — justicia social, medioambiental y animal. Identidad digital construida como voluntaria.',
     eyebrow: 'Proyecto de Voluntariado · 2020 — 2026',
     title: 'RCCOON · Acción Ciudadana',
     intro: 'Un movimiento de base que convierte la concienciación en acción — justicia social, medioambiental y animal. He estado construyendo su identidad digital desde cero junto a un amigo, como voluntarios.',
@@ -116,6 +121,7 @@ function FloatingNav() {
 function RccoonProject() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   const categories = c.categories.map((cat, i) => {
     const media = [
       { images: ['/photos/rccoon-head.png', '/photos/rccoon-globe.png', '/photos/rccoon-colours.png', '/photos/rccoon-infographic.png'] },

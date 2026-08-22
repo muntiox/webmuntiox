@@ -3,6 +3,7 @@ import { useState } from 'react'
 import ClueHold from '../components/ClueHold'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import { useLanguage } from '../lib/i18n'
+import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/projects')({
   component: ProjectsPage,
 })
@@ -13,6 +14,8 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'Projects — Itxaso Muntión',
+    metaDescription: 'Selected work in content strategy, campaigns and digital storytelling for brands and organisations that want to make a real difference.',
     eyebrow: 'Projects',
     title: 'Selected Work',
     introPre: 'This is ',
@@ -82,6 +85,8 @@ const copy = {
     cvEs: 'Download CV — ES →',
   },
   es: {
+    metaTitle: 'Proyectos — Itxaso Muntión',
+    metaDescription: 'Trabajo seleccionado en estrategia de contenido, campañas y narrativa digital para marcas y organizaciones que quieren generar un impacto real.',
     eyebrow: 'Proyectos',
     title: 'Trabajo Seleccionado',
     introPre: 'Esto es ',
@@ -197,6 +202,7 @@ function FloatingNav() {
 function ProjectsPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />

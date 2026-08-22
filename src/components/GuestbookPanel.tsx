@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from '@tanstack/react-router'
 import PixelHeart from './PixelHeart'
 
 // ── Guestbook — the small, shared trace left by everyone who found
@@ -100,6 +101,10 @@ export default function GuestbookPanel() {
         </p>
       ) : (
         <form onSubmit={submit} className="mxo-guestbook-form">
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.68rem', fontWeight: 300, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, margin: '0 0 0.4rem' }}>
+            Your name and message will be shown publicly on this page. See the{' '}
+            <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>privacy policy</Link>.
+          </p>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}

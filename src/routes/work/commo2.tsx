@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../../components/LanguageSwitcher'
 import { useLanguage } from '../../lib/i18n'
+import { usePageMeta } from '../../lib/usePageMeta'
 export const Route = createFileRoute('/work/commo2')({
   component: Commo2Page,
 })
@@ -12,6 +13,8 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'Commo2 — Itxaso Muntión',
+    metaDescription: 'A content brand for people who share flats and deserve to feel at home. Master’s final project on home optimisation and shared living.',
     eyebrow: "Master's Final Project · 2024—2025",
     tagline: 'A content brand for people who share flats and deserve to feel at home.',
     tags: ['Home Optimisation', 'Sustainability', 'Emotional Wellbeing', 'Affiliate Marketing', 'Content Strategy', 'SEO', 'Brand Positioning', 'Shared Living'],
@@ -30,6 +33,8 @@ const copy = {
     back: '← Back to projects',
   },
   es: {
+    metaTitle: 'Commo2 — Itxaso Muntión',
+    metaDescription: 'Una marca de contenido para quienes comparten piso y merecen sentirse en casa. Trabajo Fin de Máster sobre optimización del hogar y vida compartida.',
     eyebrow: 'Trabajo Fin de Máster · 2024—2025',
     tagline: 'Una marca de contenido para quienes comparten piso y merecen sentirse en casa.',
     tags: ['Optimización del Hogar', 'Sostenibilidad', 'Bienestar Emocional', 'Marketing de Afiliación', 'Estrategia de Contenido', 'SEO', 'Posicionamiento de Marca', 'Vida Compartida'],
@@ -94,6 +99,7 @@ function FloatingNav() {
 function Commo2Page() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />

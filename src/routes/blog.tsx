@@ -4,6 +4,7 @@ import CluePlate from '../components/CluePlate'
 import ClueScratch from '../components/ClueScratch'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import { useLanguage } from '../lib/i18n'
+import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/blog')({
   component: BlogPage,
 })
@@ -13,8 +14,16 @@ const navCopy = {
   es: { home: 'Inicio', purpose: 'Propósito', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto', openMenu: 'Abrir menú', bottom: 'Itxaso Muntión — Creadora de Contenido y Estratega Digital' },
 }
 const pageCopy = {
-  en: { eyebrow: 'Writing', title: 'Things worth saying.', essay: 'Essay', allPosts: '← All posts' },
-  es: { eyebrow: 'Escritura', title: 'Cosas que merece la pena decir.', essay: 'Ensayo', allPosts: '← Todos los posts' },
+  en: {
+    metaTitle: 'Blog — Itxaso Muntión',
+    metaDescription: 'Essays on attention, ethics and creative strategy — things worth saying, from Itxaso Muntión.',
+    eyebrow: 'Writing', title: 'Things worth saying.', essay: 'Essay', allPosts: '← All posts',
+  },
+  es: {
+    metaTitle: 'Blog — Itxaso Muntión',
+    metaDescription: 'Ensayos sobre atención, ética y estrategia creativa — cosas que merece la pena decir, de Itxaso Muntión.',
+    eyebrow: 'Escritura', title: 'Cosas que merece la pena decir.', essay: 'Ensayo', allPosts: '← Todos los posts',
+  },
 }
 // ── The essays themselves — English + Spanish, same ids and links ───
 const POSTS = {
@@ -234,6 +243,10 @@ function BlogPage() {
   const posts = POSTS[lang]
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const selected = selectedId !== null ? posts.find(post => post.id === selectedId) ?? null : null
+  usePageMeta(
+    selected ? `${selected.title} — Itxaso Muntión` : p.metaTitle,
+    selected ? selected.description : p.metaDescription
+  )
   if (selected) return <Post post={selected} onClose={() => setSelectedId(null)} essayLabel={p.essay} allPostsLabel={p.allPosts} />
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>

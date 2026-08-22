@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /blog/post-1
+Disallow: /blog/post-2
+Disallow: /blog/post-3
+
+Sitemap: https://muntiox.com/sitemap.xml

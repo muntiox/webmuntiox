@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import { useLanguage } from '../lib/i18n'
+import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/privacy')({
   component: PrivacyPage,
 })
@@ -12,38 +13,62 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'Privacy Policy — Itxaso Muntión',
+    metaDescription: 'What this site collects, why, and how to exercise your data protection rights.',
     eyebrow: 'Legal',
     title: 'Privacy Policy',
+    controller: 'Data controller: Itxaso Muntión — contact at imungar@protonmail.com.',
     s1: 'What this site collects',
-    s1body: 'This is a personal portfolio. It does not run analytics or advertising trackers, and it does not sell or share personal data with third parties.',
+    s1body: 'This is a personal portfolio. It does not run analytics or advertising trackers, and it does not sell or share personal data with third parties. Personal data is only collected in two places: the contact form, and the guestbook you can sign after finding every hidden clue on the site.',
     s2: 'Contact form',
-    s2body: "If you fill in the contact form, the name, email address and message you submit are sent via Netlify Forms so I can read and reply to your message. That's the only use of that information.",
-    s3: 'Cookies',
-    s3body: 'No tracking or advertising cookies are set. The site may use strictly technical, session-level storage needed to make pages work correctly.',
-    s4: 'Hosting',
-    s4body: 'This site is hosted on Netlify, which may process technical server logs (like IP address and browser type) as part of delivering the site — standard for any web host.',
-    s5: 'Questions',
-    s5pre: 'If you have any questions about this policy or your data, reach out via the ',
-    s5link: 'contact page',
-    s5post: '.',
+    s2body: 'If you fill in the contact form, the name, email address and message you submit are sent by email so I can read and reply to you. Nothing else is done with that information, and it is not stored in any database — it only exists as an email in my inbox.',
+    s3: 'Guestbook',
+    s3body: "If you find every hidden clue on the site and choose to sign the guestbook, the name (or initials) and optional message you submit are stored and shown publicly to other visitors, as a kind of shared signature. That data is stored with Upstash (a database provider) via Vercel, the company that hosts this site. If you'd like your entry removed, write to the email below and I'll take it down.",
+    s4: 'Cookies and local storage',
+    s4body: "No tracking or advertising cookies are set — in fact, this site doesn't use HTTP cookies at all. It does use your browser's local storage for a few strictly functional things you control directly: your language choice, your progress in the hidden clue hunt, and whether you've already signed the guestbook. None of that is shared with anyone or used to track you across sites.",
+    s5: 'Fonts',
+    s5body: 'The typefaces used on this site are self-hosted — served from this same domain rather than from a third-party font provider — so visiting this site does not send your IP address anywhere else just to display text.',
+    s6: 'Hosting',
+    s6body: 'This site is hosted on Vercel, which may process technical server logs (like IP address and browser type) as part of delivering the site — standard for any web host.',
+    s7: 'Your rights',
+    s7body: 'You can ask to access, correct or delete any personal data you have submitted through this site (contact form or guestbook), at any time, by writing to the email below.',
+    s8: 'Questions',
+    s8pre: 'If you have any questions about this policy or your data, reach out via the ',
+    s8link: 'contact page',
+    s8mid: ' or write directly to ',
+    s8post: '. See also the ',
+    s8legalLink: 'legal notice',
+    s8end: ' for the full identification of who runs this site.',
     updated: 'Last updated:',
     locale: 'en-GB',
   },
   es: {
+    metaTitle: 'Política de Privacidad — Itxaso Muntión',
+    metaDescription: 'Qué recoge esta web, para qué, y cómo ejercer tus derechos de protección de datos.',
     eyebrow: 'Legal',
     title: 'Política de Privacidad',
+    controller: 'Responsable del tratamiento: Itxaso Muntión — contacto en imungar@protonmail.com.',
     s1: 'Qué recoge esta web',
-    s1body: 'Este es un portfolio personal. No utiliza analíticas ni rastreadores publicitarios, y no vende ni comparte datos personales con terceros.',
+    s1body: 'Este es un portfolio personal. No utiliza analíticas ni rastreadores publicitarios, y no vende ni comparte datos personales con terceros. Solo se recogen datos personales en dos sitios: el formulario de contacto, y el libro de visitas que puedes firmar tras encontrar todas las pistas ocultas de la web.',
     s2: 'Formulario de contacto',
-    s2body: 'Si rellenas el formulario de contacto, el nombre, la dirección de email y el mensaje que envíes se transmiten a través de Netlify Forms para que pueda leer y responder tu mensaje. Ese es el único uso que se le da a esa información.',
-    s3: 'Cookies',
-    s3body: 'No se instalan cookies de seguimiento ni publicitarias. La web puede usar almacenamiento estrictamente técnico, a nivel de sesión, necesario para que las páginas funcionen correctamente.',
-    s4: 'Alojamiento',
-    s4body: 'Esta web está alojada en Netlify, que puede procesar registros técnicos del servidor (como la IP y el tipo de navegador) como parte de servir la web — algo estándar en cualquier hosting.',
-    s5: 'Preguntas',
-    s5pre: 'Si tienes alguna pregunta sobre esta política o tus datos, escríbeme desde la ',
-    s5link: 'página de contacto',
-    s5post: '.',
+    s2body: 'Si rellenas el formulario de contacto, el nombre, la dirección de email y el mensaje que envíes se transmiten por correo electrónico para que pueda leerlos y responderte. No se hace ningún otro uso de esa información, y no se guarda en ninguna base de datos — solo existe como un email en mi bandeja de entrada.',
+    s3: 'Libro de visitas',
+    s3body: 'Si encuentras todas las pistas ocultas de la web y decides firmar el libro de visitas, el nombre (o iniciales) y el mensaje opcional que envíes se almacenan y se muestran públicamente a otras personas visitantes, como una especie de firma compartida. Esos datos se almacenan con Upstash (un proveedor de bases de datos) a través de Vercel, la empresa que aloja esta web. Si quieres que se elimine tu entrada, escribe al email de abajo y la retiraré.',
+    s4: 'Cookies y almacenamiento local',
+    s4body: 'No se instalan cookies de seguimiento ni publicitarias — de hecho, esta web no usa cookies HTTP en absoluto. Sí usa el almacenamiento local de tu navegador para algunas cosas estrictamente funcionales que tú mismo controlas: tu idioma elegido, tu progreso en la búsqueda de pistas ocultas, y si ya has firmado el libro de visitas. Nada de eso se comparte con nadie ni se usa para rastrearte por otras webs.',
+    s5: 'Tipografías',
+    s5body: 'Las tipografías de esta web están autoalojadas — se sirven desde este mismo dominio en vez de desde un proveedor externo de fuentes — así que visitar esta web no envía tu dirección IP a ningún otro sitio solo para mostrar el texto.',
+    s6: 'Alojamiento',
+    s6body: 'Esta web está alojada en Vercel, que puede procesar registros técnicos del servidor (como la IP y el tipo de navegador) como parte de servir la web — algo estándar en cualquier hosting.',
+    s7: 'Tus derechos',
+    s7body: 'Puedes pedir acceder, corregir o eliminar cualquier dato personal que hayas enviado a través de esta web (formulario de contacto o libro de visitas), en cualquier momento, escribiendo al email de abajo.',
+    s8: 'Preguntas',
+    s8pre: 'Si tienes alguna pregunta sobre esta política o tus datos, escríbeme desde la ',
+    s8link: 'página de contacto',
+    s8mid: ' o directamente a ',
+    s8post: '. Consulta también el ',
+    s8legalLink: 'aviso legal',
+    s8end: ' para la identificación completa de quién gestiona esta web.',
     updated: 'Última actualización:',
     locale: 'es-ES',
   },
@@ -102,14 +127,16 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function PrivacyPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
+  usePageMeta(c.metaTitle, c.metaDescription)
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
       <FloatingNav />
       <div style={{ maxWidth: '820px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#d9737a', marginBottom: '1rem' }}>{c.eyebrow}</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '2.5rem' }}>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '1rem' }}>
           {c.title}
         </h1>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', marginBottom: '2.5rem' }}>{c.controller}</p>
         <Section title={c.s1}>
           <p>{c.s1body}</p>
         </Section>
@@ -123,7 +150,16 @@ function PrivacyPage() {
           <p>{c.s4body}</p>
         </Section>
         <Section title={c.s5}>
-          <p>{c.s5pre}<a href="/contact" style={{ color: '#d9737a' }}>{c.s5link}</a>{c.s5post}</p>
+          <p>{c.s5body}</p>
+        </Section>
+        <Section title={c.s6}>
+          <p>{c.s6body}</p>
+        </Section>
+        <Section title={c.s7}>
+          <p>{c.s7body}</p>
+        </Section>
+        <Section title={c.s8}>
+          <p>{c.s8pre}<Link to="/contact" style={{ color: '#d9737a' }}>{c.s8link}</Link>{c.s8mid}<a href="mailto:imungar@protonmail.com" style={{ color: '#d9737a' }}>imungar@protonmail.com</a>{c.s8post}<Link to="/legal" style={{ color: '#d9737a' }}>{c.s8legalLink}</Link>{c.s8end}</p>
         </Section>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginTop: '3rem' }}>{c.updated} {new Date().toLocaleDateString(c.locale, { year: 'numeric', month: 'long' })}</p>
       </div>

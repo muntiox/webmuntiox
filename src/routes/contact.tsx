@@ -3,6 +3,7 @@ import { useState } from 'react'
 import ClueDoubleClick from '../components/ClueDoubleClick'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 import { useLanguage } from '../lib/i18n'
+import { usePageMeta } from '../lib/usePageMeta'
 export const Route = createFileRoute('/contact')({
   component: ContactPage,
 })
@@ -13,6 +14,8 @@ const navCopy = {
 }
 const copy = {
   en: {
+    metaTitle: 'Contact — Itxaso Muntión',
+    metaDescription: "Get in touch about a project that seeks to connect authentically and generate real impact.",
     titleLine1: "Let's make something",
     titleWorth: 'worth making',
     intro: "If your project seeks to connect authentically and generate real impact, I'd love to hear from you.",
@@ -25,8 +28,12 @@ const copy = {
     labelMessage: 'Message',
     placeholderMessage: 'Tell me about your project, your vision, your world...',
     send: 'Send message',
+    sending: 'Sending…',
+    sendError: "Something went wrong and the message didn't go through. Try again, or write directly to imungar@protonmail.com.",
   },
   es: {
+    metaTitle: 'Contacto — Itxaso Muntión',
+    metaDescription: 'Escríbeme si tu proyecto busca conectar de forma auténtica y generar un impacto real.',
     titleLine1: 'Hagamos algo',
     titleWorth: 'que merezca la pena hacer',
     intro: 'Si tu proyecto busca conectar de forma auténtica y generar un impacto real, me encantaría saber de ti.',
@@ -39,6 +46,8 @@ const copy = {
     labelMessage: 'Mensaje',
     placeholderMessage: 'Cuéntame sobre tu proyecto, tu visión, tu mundo...',
     send: 'Enviar mensaje',
+    sending: 'Enviando…',
+    sendError: 'Algo ha fallado y el mensaje no ha llegado. Inténtalo de nuevo, o escribe directamente a imungar@protonmail.com.',
   },
 }
 function FloatingNav() {
@@ -87,10 +96,29 @@ function FloatingNav() {
 function ContactPage() {
   const { lang } = useLanguage()
   const c = copy[lang]
-  const [submitted, setSubmitted] = useState(false)
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  usePageMeta(c.metaTitle, c.metaDescription)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSubmitted(true)
+    const form = e.currentTarget
+    const data = new FormData(form)
+    setStatus('sending')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          message: data.get('message'),
+        }),
+      })
+      if (!res.ok) throw new Error('send failed')
+      setStatus('sent')
+      form.reset()
+    } catch {
+      setStatus('error')
+    }
   }
   return (
     <div style={{ minHeight: '100vh', background: 'transparent', color: '#ffffff', position: 'relative' }}>
@@ -103,7 +131,7 @@ function ContactPage() {
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.82)', lineHeight: '34.96px', marginBottom: '3rem' }}>
           {c.intro}
         </p>
-        {submitted ? (
+        {status === 'sent' ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '3rem 0' }}>
             <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#ffffff' }}>{c.receivedTitle}</p>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.9rem', fontWeight: 300, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>{c.receivedBody}</p>
@@ -125,9 +153,12 @@ function ContactPage() {
               <textarea name="message" required placeholder={c.placeholderMessage} rows={5}
                 style={{ background: 'transparent', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem 0', fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, color: '#ffffff', outline: 'none', width: '100%', resize: 'none' }} />
             </div>
-            <button type="submit"
-              style={{ alignSelf: 'flex-start', fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', border: 'none', padding: '1rem 2.5rem', cursor: 'pointer' }}>
-              {c.send}
+            {status === 'error' && (
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.8rem', fontWeight: 300, color: '#d9737a', lineHeight: 1.6 }}>{c.sendError}</p>
+            )}
+            <button type="submit" disabled={status === 'sending'}
+              style={{ alignSelf: 'flex-start', fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', border: 'none', padding: '1rem 2.5rem', cursor: status === 'sending' ? 'default' : 'pointer', opacity: status === 'sending' ? 0.6 : 1 }}>
+              {status === 'sending' ? c.sending : c.send}
             </button>
           </form>
         )}
