@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import PixelHeart from './PixelHeart'
 
 // ── Guestbook — the small, shared trace left by everyone who found
-// all six clues. Deliberately styled unlike the real contact form
+// every clue. Deliberately styled unlike the real contact form
 // (boxed fields instead of underlines, a pixel heart standing in for
 // a bullet) so it never reads as "another way to get in touch" —
 // it's a signature on the map, not a lead form.

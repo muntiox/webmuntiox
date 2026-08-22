@@ -56,7 +56,7 @@ function NoteScreen({ onHome }: { onHome: () => void }) {
         </div>
         <p className="mxo-treasure-note-label">You found it.</p>
         <p className="mxo-treasure-note-text">
-          Curiosity is a virtue — and a rare one. X marks the spot, and you found it. You stopped. Six times. I
+          Curiosity is a virtue — and a rare one. X marks the spot, and you found it. You stopped. Seven times. I
           like people who look twice — that kind of attention is rare. Thank you for looking closely. Leave your
           own grain of sand below, and share something with the others who stopped too, if you'd like.
         </p>

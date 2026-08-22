@@ -13,6 +13,7 @@ export const CLUE_IDS = [
   'blog-scratch',
   'projects-hold',
   'contact-dblclick',
+  'privacy-sevenlives',
 ] as const
 
 export type ClueId = (typeof CLUE_IDS)[number]

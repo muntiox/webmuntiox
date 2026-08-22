@@ -6,9 +6,10 @@ import PixelHeart from '../components/PixelHeart'
 import TreasureReveal from '../components/TreasureReveal'
 
 // ── Global clue counter — the only site-wide trace of the hidden hunt.
-// A vertical column of six pixel hearts, empty from the start, filling
-// in one by one as clues are found — game-lives style. Always visible,
-// so the "how many are there" question answers itself immediately.
+// A vertical column of seven pixel hearts, empty from the start, filling
+// in one by one as clues are found — game-lives style (seven lives, like
+// a cat). Always visible, so the "how many are there" question answers
+// itself immediately, but kept deliberately faint in the top-left corner.
 function ClueHearts() {
   const [count, setCount] = useState(0)
   const [justFilled, setJustFilled] = useState(-1)
@@ -31,15 +32,14 @@ function ClueHearts() {
       title={`${count} found — there's more`}
       style={{
         position: 'fixed',
-        top: '50%',
-        left: '1.2rem',
-        transform: 'translateY(-50%)',
+        top: '1.6rem',
+        left: '1rem',
         display: 'flex',
         flexDirection: 'column',
         gap: '10px',
         padding: '0.7rem 0.55rem',
-        background: 'rgba(5,5,6,0.6)',
-        border: '1px solid rgba(217,115,122,0.35)',
+        background: 'rgba(5,5,6,0.4)',
+        border: '1px solid rgba(217,115,122,0.2)',
         borderRadius: '4px',
         zIndex: 60,
         pointerEvents: 'none',
@@ -95,7 +95,7 @@ function MapBackground() {
           backgroundRepeat: 'no-repeat',
           backgroundSize: '220vw auto',
           backgroundPosition: position,
-          opacity: 0.55,
+          opacity: 0.32,
           mixBlendMode: 'screen',
           transition: 'background-position 0.7s ease',
         }}
