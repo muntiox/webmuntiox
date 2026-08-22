@@ -452,16 +452,16 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-contact[style*="opacity: 1"] .mxo-eyebrow::before { width: 32px; margin-right: 1rem; }
 .mxo-body { color: rgba(237,234,226,0.72); margin-bottom: 1.4rem; font-size: clamp(0.88rem, 1.4vw, 1rem); font-weight: 300; line-height: 1.85; }
 .mxo-tagline { color: #fff !important; font-size: clamp(0.9rem, 1.6vw, 1.1rem) !important; font-weight: 300; }
-/* ─── Highlighter sweep (brand phrase underline-on-hover) ──────────
-   Base = thin static underline. Hover = pink highlighter marker
-   sweeps left→right under every letter, like drawing with a pen. */
+/* ─── Highlighter sweep (brand phrase, no static underline) ────────
+   No mark at rest. Hover = pink highlighter marker sweeps
+   left→right under every letter, like drawing with a pen. */
 .highlighter { position: relative; display: inline-block; cursor: default; }
 .highlighter__text { position: relative; z-index: 1; }
 .highlighter::after {
   content: ''; position: absolute; left: 0; bottom: -0.08em;
   width: 100%; height: 0.32em;
-  background: rgba(217,115,122,0.22);
-  transform: scaleX(1); transform-origin: left;
+  background: transparent;
+  transform: scaleX(0); transform-origin: left;
   z-index: 0; transition: background 0.3s ease;
 }
 .highlighter:hover::after {
