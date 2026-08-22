@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { markClueFound } from '../lib/clues'
 import type { ClueId } from '../lib/clues'
+import { useLanguage } from '../lib/i18n'
 
 // ── Clue: scratch it off ────────────────────────────────────────────
 // A small, unmarked dark panel — could be a broken image, could be
@@ -16,6 +17,8 @@ export default function ClueScratch({
   width?: number
   height?: number
 }) {
+  const { lang } = useLanguage()
+  const foundLabel = lang === 'es' ? 'Encontrado.' : 'Found it.'
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const drawing = useRef(false)
   const [solved, setSolved] = useState(false)
@@ -75,7 +78,7 @@ export default function ClueScratch({
         }}
       >
         <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.04em', color: '#2a0c12' }}>
-          Found it.
+          {foundLabel}
         </span>
       </div>
       {!solved && (

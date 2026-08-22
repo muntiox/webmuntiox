@@ -1,10 +1,11 @@
-import { Outlet, createRootRoute, useRouterState } from '@tanstack/react-router'
+import { Outlet, createRootRoute, useNavigate, useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import '../styles.css'
 import { CLUE_EVENT, CLUE_IDS, getFoundCount } from '../lib/clues'
 import PixelHeart from '../components/PixelHeart'
 import TreasureReveal from '../components/TreasureReveal'
-import { LanguageProvider, useLanguage, langPath } from '../lib/i18n'
+import { LanguageProvider, useLanguage, langPath, langFromPathname } from '../lib/i18n'
+import type { Lang } from '../lib/i18n'
 
 // Strips a leading /es off a pathname — used here just to map an /es/*
 // URL back onto the same curated map position / heartbeat variant as
@@ -78,6 +79,7 @@ function ResetHuntButton() {
 // itself immediately, but kept deliberately faint in the top-left corner.
 // A tiny restart icon sits just below it, for replaying the hunt.
 function ClueHearts() {
+  const { lang } = useLanguage()
   const [count, setCount] = useState(0)
   const [justFilled, setJustFilled] = useState(-1)
   useEffect(() => {
@@ -106,7 +108,7 @@ function ClueHearts() {
         zIndex: 60,
       }}
     >
-      <div aria-hidden="true" title={`${count} found — there's more`} style={{ display: 'flex', flexDirection: 'column', gap: '10px', pointerEvents: 'none', userSelect: 'none' }}>
+      <div aria-hidden="true" title={lang === 'es' ? `${count} encontrados — hay más` : `${count} found — there's more`} style={{ display: 'flex', flexDirection: 'column', gap: '10px', pointerEvents: 'none', userSelect: 'none' }}>
         {CLUE_IDS.map((_, i) => (
           <PixelHeart key={i} filled={i < count} pop={i === justFilled} size={13} />
         ))}
@@ -382,14 +384,131 @@ function Heartbeat({ variant }: { variant: 'home' | 'inner' }) {
   )
 }
 
-export const Route = createRootRoute({
-  notFoundComponent: () => (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '2rem' }}>
-      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '6rem', color: '#8a2333', lineHeight: 1 }}>404</p>
-      <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: '#8a2333' }}>This page doesn't exist.</p>
-      <a href="/" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#8a2333', padding: '1rem 2.5rem', textDecoration: 'none' }}>← Home</a>
+// ── 404 — framed as a blank canvas rather than a dead end. Doesn't
+// rely on LanguageProvider (a not-found route may render outside the
+// usual tree), so language is read straight off the URL — an /es/*
+// typo still gets the Spanish version. The way back home isn't a
+// plain link: it's one big empty pixel heart, like the clue-hunt
+// hearts but bigger and actually interactive — tap it, it fills in,
+// and a beat later it takes you home.
+const notFoundCopy = {
+  en: {
+    eyebrow: '404',
+    title: "You're lost. That's not a bad place to be.",
+    body: "This page doesn't exist — but maybe that's the point. Think of it as a blank canvas: there's nothing here yet, which means anything could be. Fill the heart to head home.",
+    heartLabel: 'Fill the heart to go home',
+    hint: 'tap the heart',
+  },
+  es: {
+    eyebrow: '404',
+    title: 'Te has perdido. Y eso no es malo.',
+    body: 'Esta página no existe — pero quizá esa sea la gracia. Piénsalo como un lienzo en blanco: todavía no hay nada, lo que significa que puede ser cualquier cosa. Llena el corazón para volver a casa.',
+    heartLabel: 'Llena el corazón para volver a casa',
+    hint: 'toca el corazón',
+  },
+}
+
+function NotFoundHeart({ lang, onGoHome }: { lang: Lang; onGoHome: () => void }) {
+  const c = notFoundCopy[lang]
+  const [filled, setFilled] = useState(false)
+  const [pop, setPop] = useState(false)
+
+  const handleClick = () => {
+    if (filled) return
+    setFilled(true)
+    setPop(true)
+    setTimeout(onGoHome, 650)
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-label={c.heartLabel}
+      disabled={filled}
+      style={{
+        background: 'none',
+        border: 'none',
+        padding: '0.6rem',
+        cursor: filled ? 'default' : 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '0.9rem',
+      }}
+    >
+      <PixelHeart filled={filled} pop={pop} size={54} />
+      <span
+        style={{
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: '0.62rem',
+          fontWeight: 500,
+          letterSpacing: '0.25em',
+          textTransform: 'uppercase',
+          color: 'rgba(138,35,51,0.55)',
+          opacity: filled ? 0 : 1,
+          transition: 'opacity 0.4s ease',
+        }}
+      >
+        {c.hint}
+      </span>
+    </button>
+  )
+}
+
+function NotFoundPage() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  const lang = langFromPathname(pathname)
+  const c = notFoundCopy[lang]
+  const navigate = useNavigate()
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: '2rem',
+        padding: '2rem',
+        textAlign: 'center',
+      }}
+    >
+      <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '6rem', color: '#8a2333', lineHeight: 1 }}>{c.eyebrow}</p>
+      <h1
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 'clamp(1.6rem, 4vw, 2.4rem)',
+          fontWeight: 400,
+          color: '#8a2333',
+          lineHeight: 1.25,
+          maxWidth: 560,
+          margin: 0,
+        }}
+      >
+        {c.title}
+      </h1>
+      <p
+        style={{
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: '18.4px',
+          fontWeight: 300,
+          color: '#8a2333',
+          maxWidth: 480,
+          lineHeight: 1.7,
+          margin: 0,
+        }}
+      >
+        {c.body}
+      </p>
+      <NotFoundHeart lang={lang} onGoHome={() => navigate({ to: langPath(lang, '/') })} />
     </div>
-  ),
+  )
+}
+
+export const Route = createRootRoute({
+  notFoundComponent: NotFoundPage,
   component: RootComponent,
 })
 

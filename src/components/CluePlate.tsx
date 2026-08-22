@@ -1,6 +1,24 @@
 import { useState } from 'react'
 import { markClueFound } from '../lib/clues'
 import type { ClueId } from '../lib/clues'
+import { useLanguage } from '../lib/i18n'
+
+const copy = {
+  en: {
+    label: 'Pick a plate',
+    someone: 'Someone',
+    something: 'Something',
+    goodChoice: 'Good choice.',
+    tryAgain: "You can try again. They don't. Choose wisely.",
+  },
+  es: {
+    label: 'Elige un plato',
+    someone: 'Alguien',
+    something: 'Algo',
+    goodChoice: 'Buena elección.',
+    tryAgain: 'Tú puedes intentarlo otra vez. Ellos no. Elige con cuidado.',
+  },
+}
 
 // ── Clue: pick a plate ───────────────────────────────────────────────
 // Two small options, side by side — no drag, no hold, nothing to
@@ -8,6 +26,8 @@ import type { ClueId } from '../lib/clues'
 // one and nothing is lost but a beat: a small reminder, and the
 // choice is still right there to make differently.
 export default function CluePlate({ id }: { id: ClueId }) {
+  const { lang } = useLanguage()
+  const c = copy[lang]
   const [choice, setChoice] = useState<'none' | 'animal' | 'plant'>('none')
   const solved = choice === 'plant'
 
@@ -19,7 +39,7 @@ export default function CluePlate({ id }: { id: ClueId }) {
 
   return (
     <div className="mxo-plate">
-      <p className="mxo-plate-label">Pick a plate</p>
+      <p className="mxo-plate-label">{c.label}</p>
       <div className="mxo-plate-options">
         <button
           type="button"
@@ -30,7 +50,7 @@ export default function CluePlate({ id }: { id: ClueId }) {
           <span className="mxo-plate-emoji" aria-hidden="true">
             🐷
           </span>
-          <span className="mxo-plate-caption">Someone</span>
+          <span className="mxo-plate-caption">{c.someone}</span>
         </button>
         <button
           type="button"
@@ -41,11 +61,11 @@ export default function CluePlate({ id }: { id: ClueId }) {
           <span className="mxo-plate-emoji" aria-hidden="true">
             🥑
           </span>
-          <span className="mxo-plate-caption">Something</span>
+          <span className="mxo-plate-caption">{c.something}</span>
         </button>
       </div>
       <p className={`mxo-plate-msg${choice !== 'none' ? ' is-visible' : ''}${solved ? ' is-right-msg' : ''}`}>
-        {solved ? 'Good choice.' : choice === 'animal' ? "You can try again. They don't. Choose wisely." : ''}
+        {solved ? c.goodChoice : choice === 'animal' ? c.tryAgain : ''}
       </p>
     </div>
   )

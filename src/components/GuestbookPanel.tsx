@@ -20,6 +20,35 @@ type Entry = { name: string; message: string; ts: number }
 // by accident.
 const SIGNED_KEY = 'mxo_guestbook_signed'
 
+const copy = {
+  en: {
+    label: 'Who else made it here',
+    sent: "You're on the map now.",
+    alreadySigned: 'You already left your grain of sand. Time to leave it to the next person.',
+    consentPre: 'Your name and message will be shown publicly on this page. See the',
+    consentLink: 'privacy policy',
+    namePlaceholder: 'Your name or initials',
+    messagePlaceholder: "A message, if you'd like (optional)",
+    signing: 'Signing…',
+    sign: 'Sign the map',
+    error: "Couldn't reach the guestbook right now — try again in a moment.",
+    empty: "Nobody's signed yet. Be the first.",
+  },
+  es: {
+    label: 'Quién más llegó hasta aquí',
+    sent: 'Ya estás en el mapa.',
+    alreadySigned: 'Ya dejaste tu grano de arena. Ahora le toca a la próxima persona.',
+    consentPre: 'Tu nombre y mensaje se mostrarán públicamente en esta página. Consulta la',
+    consentLink: 'política de privacidad',
+    namePlaceholder: 'Tu nombre o iniciales',
+    messagePlaceholder: 'Un mensaje, si quieres (opcional)',
+    signing: 'Firmando…',
+    sign: 'Firmar el mapa',
+    error: 'No se pudo conectar con el libro de visitas ahora mismo — inténtalo de nuevo en un momento.',
+    empty: 'Todavía nadie ha firmado. Sé la primera persona.',
+  },
+}
+
 const inputStyle: React.CSSProperties = {
   background: 'rgba(255,255,255,0.04)',
   border: '1px solid rgba(217,115,122,0.4)',
@@ -33,6 +62,7 @@ const inputStyle: React.CSSProperties = {
 
 export default function GuestbookPanel() {
   const { lang } = useLanguage()
+  const c = copy[lang]
   const [entries, setEntries] = useState<Entry[] | null>(null)
   const [unavailable, setUnavailable] = useState(false)
   const [name, setName] = useState('')
@@ -94,23 +124,23 @@ export default function GuestbookPanel() {
   return (
     <div className="mxo-guestbook">
       <p className="mxo-guestbook-label">
-        <PixelHeart filled size={11} /> Who else made it here
+        <PixelHeart filled size={11} /> {c.label}
       </p>
 
       {signed ? (
         <p className="mxo-guestbook-sent">
-          {status === 'sent' ? "You're on the map now." : "You already left your grain of sand. Time to leave it to the next person."}
+          {status === 'sent' ? c.sent : c.alreadySigned}
         </p>
       ) : (
         <form onSubmit={submit} className="mxo-guestbook-form">
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.68rem', fontWeight: 300, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, margin: '0 0 0.4rem' }}>
-            Your name and message will be shown publicly on this page. See the{' '}
-            <Link to={langPath(lang, '/privacy')} style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>privacy policy</Link>.
+            {c.consentPre}{' '}
+            <Link to={langPath(lang, '/privacy')} style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'underline' }}>{c.consentLink}</Link>.
           </p>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Your name or initials"
+            placeholder={c.namePlaceholder}
             maxLength={40}
             required
             style={inputStyle}
@@ -118,14 +148,14 @@ export default function GuestbookPanel() {
           <input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="A message, if you'd like (optional)"
+            placeholder={c.messagePlaceholder}
             maxLength={140}
             style={inputStyle}
           />
           <button type="submit" disabled={status === 'sending'} className="mxo-guestbook-submit">
-            {status === 'sending' ? 'Signing…' : 'Sign the map'}
+            {status === 'sending' ? c.signing : c.sign}
           </button>
-          {status === 'error' && <p className="mxo-guestbook-error">Couldn't reach the guestbook right now — try again in a moment.</p>}
+          {status === 'error' && <p className="mxo-guestbook-error">{c.error}</p>}
         </form>
       )}
 
@@ -142,7 +172,7 @@ export default function GuestbookPanel() {
           ))}
         </ul>
       )}
-      {entries && entries.length === 0 && <p className="mxo-guestbook-empty">Nobody's signed yet. Be the first.</p>}
+      {entries && entries.length === 0 && <p className="mxo-guestbook-empty">{c.empty}</p>}
     </div>
   )
 }

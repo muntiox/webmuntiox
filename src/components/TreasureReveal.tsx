@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { CLUE_EVENT, CLUE_TOTAL, getFoundCount } from '../lib/clues'
+import { useLanguage, langPath } from '../lib/i18n'
 import PixelHeart from './PixelHeart'
 import GuestbookPanel from './GuestbookPanel'
 
@@ -12,7 +13,28 @@ import GuestbookPanel from './GuestbookPanel'
 // Shown once per browser, ever.
 const SEEN_KEY = 'mxo_treasure_seen'
 
+const copy = {
+  en: {
+    continueLabel: 'Continue',
+    foundIt: 'You found it.',
+    tapToContinue: 'tap to continue',
+    noteText:
+      "Curiosity is a virtue — and a rare one. X marks the spot, and you found it. You stopped. Seven times. I like people who look twice — that kind of attention is rare. Thank you for looking closely. Leave your own grain of sand below, and share something with the others who stopped too, if you'd like.",
+    backHome: '← Back to home',
+  },
+  es: {
+    continueLabel: 'Continuar',
+    foundIt: 'Lo encontraste.',
+    tapToContinue: 'toca para continuar',
+    noteText:
+      'La curiosidad es una virtud — y de las poco comunes. La X marca el lugar, y lo encontraste. Te detuviste. Siete veces. Me gusta la gente que mira dos veces — esa clase de atención es rara. Gracias por mirar de cerca. Deja tu propio grano de arena aquí abajo, y comparte algo con quienes también se detuvieron, si te apetece.',
+    backHome: '← Volver al inicio',
+  },
+}
+
 function RevealOverlay({ onDone }: { onDone: () => void }) {
+  const { lang } = useLanguage()
+  const c = copy[lang]
   const [dismissing, setDismissing] = useState(false)
   const [showHint, setShowHint] = useState(false)
 
@@ -39,13 +61,13 @@ function RevealOverlay({ onDone }: { onDone: () => void }) {
         onClick={dismiss}
         role="button"
         tabIndex={0}
-        aria-label="Continue"
+        aria-label={c.continueLabel}
         onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && dismiss()}
       >
         <div className="mxo-treasure-overlay-map" aria-hidden="true" />
         <div className="mxo-treasure-overlay-inner">
-          <p className="mxo-treasure-overlay-text">You found it.</p>
-          <p className={`mxo-treasure-overlay-hint${showHint ? ' is-visible' : ''}`}>tap to continue</p>
+          <p className="mxo-treasure-overlay-text">{c.foundIt}</p>
+          <p className={`mxo-treasure-overlay-hint${showHint ? ' is-visible' : ''}`}>{c.tapToContinue}</p>
         </div>
       </div>
     </div>
@@ -53,6 +75,8 @@ function RevealOverlay({ onDone }: { onDone: () => void }) {
 }
 
 function NoteScreen({ onHome }: { onHome: () => void }) {
+  const { lang } = useLanguage()
+  const c = copy[lang]
   return (
     // Same escape-hatch wrapper as RevealOverlay above.
     <div className="mxo-treasure-portal">
@@ -63,15 +87,11 @@ function NoteScreen({ onHome }: { onHome: () => void }) {
               <PixelHeart key={i} filled size={12} />
             ))}
           </div>
-          <p className="mxo-treasure-note-label">You found it.</p>
-          <p className="mxo-treasure-note-text">
-            Curiosity is a virtue — and a rare one. X marks the spot, and you found it. You stopped. Seven times. I
-            like people who look twice — that kind of attention is rare. Thank you for looking closely. Leave your
-            own grain of sand below, and share something with the others who stopped too, if you'd like.
-          </p>
+          <p className="mxo-treasure-note-label">{c.foundIt}</p>
+          <p className="mxo-treasure-note-text">{c.noteText}</p>
           <GuestbookPanel />
           <button type="button" className="mxo-treasure-home-btn" onClick={onHome}>
-            ← Back to home
+            {c.backHome}
           </button>
         </div>
       </div>
@@ -80,6 +100,7 @@ function NoteScreen({ onHome }: { onHome: () => void }) {
 }
 
 export default function TreasureReveal() {
+  const { lang } = useLanguage()
   const [stage, setStage] = useState<'hidden' | 'overlay' | 'note'>('hidden')
   const triggeredRef = useRef(false)
   const navigate = useNavigate()
@@ -112,7 +133,7 @@ export default function TreasureReveal() {
 
   const goHome = () => {
     setStage('hidden')
-    navigate({ to: '/' })
+    navigate({ to: langPath(lang, '/') })
   }
 
   return (

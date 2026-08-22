@@ -23,7 +23,7 @@ const STORAGE_KEY = 'mxo_lang'
 // renders the same language for anyone (a visitor or a search engine)
 // who lands on it directly. localStorage is only used to remember a
 // returning visitor's choice for the *next* time they land on '/'.
-function langFromPathname(pathname: string): Lang {
+export function langFromPathname(pathname: string): Lang {
   return pathname === '/es' || pathname.startsWith('/es/') ? 'es' : 'en'
 }
 
