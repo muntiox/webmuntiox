@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
-import ClueSevenLives from '../components/ClueSevenLives'
 export const Route = createFileRoute('/privacy')({
   component: PrivacyPage,
 })
@@ -74,10 +73,7 @@ function PrivacyPage() {
         <Section title="Questions">
           <p>If you have any questions about this policy or your data, reach out via the <a href="/contact" style={{ color: '#d9737a' }}>contact page</a>.</p>
         </Section>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginTop: '3rem' }}>
-          Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long' })}
-          <ClueSevenLives id="privacy-sevenlives">.</ClueSevenLives>
-        </p>
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)', marginTop: '3rem' }}>Last updated: {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long' })}</p>
       </div>
     </div>
   )

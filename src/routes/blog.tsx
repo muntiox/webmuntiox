@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
+import CluePlate from '../components/CluePlate'
 import ClueScratch from '../components/ClueScratch'
 export const Route = createFileRoute('/blog')({
   component: BlogPage,
@@ -57,6 +58,7 @@ function Post({ post, onClose }: { post: any; onClose: () => void }) {
         <blockquote style={{ borderLeft: '3px solid #d9737a', padding: '1.2rem 0 1.2rem 2rem', margin: '3rem 0', fontFamily: "'Bebas Neue', sans-serif", fontSize: '1.6rem', color: '#ffffff', lineHeight: 1.3, letterSpacing: '0.02em' }}>
           {post.quote}
         </blockquote>
+        {post.plateClue && <CluePlate id="vegan-plate" />}
         {post.content2.map((p: string, i: number) => (
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
@@ -148,6 +150,7 @@ export const posts = [
     videoSrc: 'https://www.youtube.com/embed/X4Qm9cGRub0',
     videoLabel: 'Gary Yourofsky — The Most Important Speech You Will Ever Hear',
     cta: { label: 'This is also who I am →', href: '/purpose' },
+    plateClue: true,
   },
 ]
 function BlogPage() {
