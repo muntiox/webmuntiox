@@ -342,9 +342,7 @@ function PurposePage() {
           <Body>{c.closing3}</Body>
           <Accent>{c.closingAccent2}</Accent>
           <Body>{c.closing4}</Body>
-          <div style={{ marginTop: '3rem' }}>
-            <Pull>{c.signature}</Pull>
-          </div>
+          <Body>{c.signature}</Body>
         </div>
       </div>
     </div>
