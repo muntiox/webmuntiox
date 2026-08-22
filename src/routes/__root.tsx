@@ -395,16 +395,14 @@ const notFoundCopy = {
   en: {
     eyebrow: '404',
     title: "You're lost. That's not a bad place to be.",
-    body: "This page doesn't exist — but maybe that's the point. Think of it as a blank canvas: there's nothing here yet, which means anything could be. Fill the heart to head home.",
-    heartLabel: 'Fill the heart to go home',
-    hint: 'tap the heart',
+    body: "This page doesn't exist — but maybe that's the point. Think of it as a blank canvas: there's nothing here yet, which means anything could be. Tap the heart to head home.",
+    heartLabel: 'Tap the heart to go home',
   },
   es: {
     eyebrow: '404',
     title: 'Te has perdido. Y eso no es malo.',
-    body: 'Esta página no existe — pero quizá esa sea la gracia. Piénsalo como un lienzo en blanco: todavía no hay nada, lo que significa que puede ser cualquier cosa. Llena el corazón para volver a casa.',
-    heartLabel: 'Llena el corazón para volver a casa',
-    hint: 'toca el corazón',
+    body: 'Esta página no existe — pero quizá esa sea la gracia. Piénsalo como un lienzo en blanco: todavía no hay nada, lo que significa que puede ser cualquier cosa. Toca el corazón para volver a casa.',
+    heartLabel: 'Toca el corazón para volver a casa',
   },
 }
 
@@ -432,26 +430,9 @@ function NotFoundHeart({ lang, onGoHome }: { lang: Lang; onGoHome: () => void })
         padding: '0.6rem',
         cursor: filled ? 'default' : 'pointer',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '0.9rem',
       }}
     >
       <PixelHeart filled={filled} pop={pop} size={54} />
-      <span
-        style={{
-          fontFamily: "'Outfit', sans-serif",
-          fontSize: '0.62rem',
-          fontWeight: 500,
-          letterSpacing: '0.25em',
-          textTransform: 'uppercase',
-          color: 'rgba(138,35,51,0.55)',
-          opacity: filled ? 0 : 1,
-          transition: 'opacity 0.4s ease',
-        }}
-      >
-        {c.hint}
-      </span>
     </button>
   )
 }
@@ -481,7 +462,7 @@ function NotFoundPage() {
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: 'clamp(1.6rem, 4vw, 2.4rem)',
           fontWeight: 400,
-          color: '#8a2333',
+          color: '#d9737a',
           lineHeight: 1.25,
           maxWidth: 560,
           margin: 0,
