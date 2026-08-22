@@ -7,9 +7,6 @@ export const Route = createFileRoute('/legal')({
   component: LegalPage,
 })
 // ── Page copy — English + Spanish ────────────────────────────────────
-// NOTE: the identifying details below (name/NIF/address) are
-// placeholders — Itxaso needs to send the real ones before this page
-// goes live. Search for "PENDIENTE" / "PENDING" to find every spot.
 const navCopy = {
   en: { home: 'Back home', purpose: 'Purpose', projects: 'Projects', blog: 'Blog', contact: 'Contact', openMenu: 'Open menu', bottom: 'Itxaso Muntión — Content Creator & Digital Strategist' },
   es: { home: 'Inicio', purpose: 'Propósito', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto', openMenu: 'Abrir menú', bottom: 'Itxaso Muntión — Creadora de Contenido y Estratega Digital' },
@@ -20,12 +17,11 @@ const copy = {
     metaDescription: 'Legal identification of the owner of this website, as required by Spanish law (LSSI-CE art. 10).',
     eyebrow: 'Legal',
     title: 'Legal Notice',
-    pendingBanner: '⚠️ PENDING — this page is a placeholder until real identification details are added. Do not consider it complete.',
     s1: 'Ownership of this website',
     s1body: 'In compliance with article 10 of Spanish Law 34/2002 (LSSI-CE), on the Information Society Services, the following identifying details are provided:',
-    name: 'Name / trading name: [PENDING — full legal name or trading name]',
-    taxId: 'Tax ID (NIF): [PENDING]',
-    address: 'Contact address: [PENDING — a city or postal address you\'re comfortable making public]',
+    name: 'Name: Itxaso Muntión',
+    taxId: 'DNI: 71791424Y',
+    address: 'Contact location: València, Spain',
     email: 'Email: imungar@protonmail.com',
     s2: 'Purpose of this website',
     s2body: 'This is a personal portfolio site showcasing creative and digital strategy work, writing, and ways to get in touch about potential collaborations.',
@@ -43,12 +39,11 @@ const copy = {
     metaDescription: 'Identificación legal de la titular de esta web, según exige la LSSI-CE (art. 10).',
     eyebrow: 'Legal',
     title: 'Aviso Legal',
-    pendingBanner: '⚠️ PENDIENTE — esta página es un borrador hasta que se añadan los datos de identificación reales. No la consideres completa.',
     s1: 'Titularidad de esta web',
     s1body: 'En cumplimiento del artículo 10 de la Ley 34/2002 (LSSI-CE), de Servicios de la Sociedad de la Información, se facilitan los siguientes datos identificativos:',
-    name: 'Nombre / nombre comercial: [PENDIENTE — nombre legal completo o nombre comercial]',
-    taxId: 'NIF: [PENDIENTE]',
-    address: 'Dirección de contacto: [PENDIENTE — una ciudad o dirección postal que te parezca bien hacer pública]',
+    name: 'Nombre: Itxaso Muntión',
+    taxId: 'DNI: 71791424Y',
+    address: 'Ubicación de contacto: València, España',
     email: 'Email: imungar@protonmail.com',
     s2: 'Finalidad de esta web',
     s2body: 'Esta es una web de portfolio personal que muestra trabajo de estrategia creativa y digital, escritura, y formas de contactar sobre posibles colaboraciones.',
@@ -122,12 +117,9 @@ function LegalPage() {
       <FloatingNav />
       <div style={{ maxWidth: '820px', margin: '0 auto', padding: '10rem 2rem 6rem', position: 'relative', zIndex: 2 }}>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#d9737a', marginBottom: '1rem' }}>{c.eyebrow}</p>
-        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '2rem' }}>
+        <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 300, color: '#ffffff', lineHeight: 1.1, marginBottom: '2.5rem' }}>
           {c.title}
         </h1>
-        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.8rem', fontWeight: 600, color: '#d9737a', background: 'rgba(217,115,122,0.1)', border: '1px solid rgba(217,115,122,0.35)', padding: '0.9rem 1.1rem', marginBottom: '2.5rem' }}>
-          {c.pendingBanner}
-        </p>
         <Section title={c.s1}>
           <p style={{ marginBottom: '1rem' }}>{c.s1body}</p>
           <p style={{ marginBottom: '0.3rem' }}>{c.name}</p>
