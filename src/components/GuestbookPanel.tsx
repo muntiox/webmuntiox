@@ -11,6 +11,13 @@ import PixelHeart from './PixelHeart'
 // the panel just shows nothing to sign into, rather than breaking.
 type Entry = { name: string; message: string; ts: number }
 
+// One signature per browser — same honor-system approach as the clue
+// hunt itself (a localStorage flag, no accounts). Trivial to get
+// around by clearing site data, but that's fine: this isn't meant to
+// stop a determined visitor, just keep one person from signing twice
+// by accident.
+const SIGNED_KEY = 'mxo_guestbook_signed'
+
 const inputStyle: React.CSSProperties = {
   background: 'rgba(255,255,255,0.04)',
   border: '1px solid rgba(217,115,122,0.4)',
@@ -28,6 +35,7 @@ export default function GuestbookPanel() {
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [alreadySigned, setAlreadySigned] = useState(false)
 
   const load = () => {
     fetch('/api/guestbook')
@@ -41,6 +49,11 @@ export default function GuestbookPanel() {
 
   useEffect(() => {
     load()
+    try {
+      setAlreadySigned(localStorage.getItem(SIGNED_KEY) === '1')
+    } catch {
+      /* storage unavailable — just let them sign */
+    }
   }, [])
 
   const submit = (e: React.FormEvent) => {
@@ -61,6 +74,11 @@ export default function GuestbookPanel() {
         setStatus('sent')
         setName('')
         setMessage('')
+        try {
+          localStorage.setItem(SIGNED_KEY, '1')
+        } catch {
+          /* storage unavailable — the signature still went through */
+        }
         load()
       })
       .catch(() => setStatus('error'))
@@ -68,14 +86,18 @@ export default function GuestbookPanel() {
 
   if (unavailable) return null
 
+  const signed = status === 'sent' || alreadySigned
+
   return (
     <div className="mxo-guestbook">
       <p className="mxo-guestbook-label">
         <PixelHeart filled size={11} /> Who else made it here
       </p>
 
-      {status === 'sent' ? (
-        <p className="mxo-guestbook-sent">You're on the map now.</p>
+      {signed ? (
+        <p className="mxo-guestbook-sent">
+          {status === 'sent' ? "You're on the map now." : "You already left your grain of sand. Time to leave it to the next person."}
+        </p>
       ) : (
         <form onSubmit={submit} className="mxo-guestbook-form">
           <input

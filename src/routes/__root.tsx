@@ -5,11 +5,64 @@ import { CLUE_EVENT, CLUE_IDS, getFoundCount } from '../lib/clues'
 import PixelHeart from '../components/PixelHeart'
 import TreasureReveal from '../components/TreasureReveal'
 
+// ── Restart control — clears clue progress and the "seen the reveal"
+// flag, then reloads. A small circular-arrow icon, same faintness as
+// the hearts, so replaying the hunt is always one click away.
+function ResetHuntButton() {
+  const [hover, setHover] = useState(false)
+  const reset = () => {
+    if (!window.confirm('Restart the hunt? This clears your found clues.')) return
+    try {
+      Object.keys(localStorage).forEach((k) => {
+        if (k.startsWith('mxo_clue_') || k === 'mxo_treasure_seen') localStorage.removeItem(k)
+      })
+    } catch {
+      /* storage unavailable — nothing to clear */
+    }
+    window.location.reload()
+  }
+  return (
+    <button
+      type="button"
+      onClick={reset}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      aria-label="Restart the hunt"
+      title="Restart the hunt"
+      style={{
+        pointerEvents: 'auto',
+        background: 'none',
+        border: 'none',
+        padding: '5px',
+        margin: '2px 0 0 -5px',
+        cursor: 'pointer',
+        display: 'flex',
+      }}
+    >
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke={hover ? '#d9737a' : 'rgba(255,255,255,0.3)'}
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        style={{ transition: 'stroke 0.2s ease' }}
+      >
+        <path d="M3 12a9 9 0 1 1 3 6.7" />
+        <path d="M3 16v-4h4" />
+      </svg>
+    </button>
+  )
+}
+
 // ── Global clue counter — the only site-wide trace of the hidden hunt.
 // A vertical column of seven pixel hearts, empty from the start, filling
 // in one by one as clues are found — game-lives style (seven lives, like
 // a cat). Always visible, so the "how many are there" question answers
 // itself immediately, but kept deliberately faint in the top-left corner.
+// A tiny restart icon sits just below it, for replaying the hunt.
 function ClueHearts() {
   const [count, setCount] = useState(0)
   const [justFilled, setJustFilled] = useState(-1)
@@ -28,23 +81,23 @@ function ClueHearts() {
   }, [])
   return (
     <div
-      aria-hidden="true"
-      title={`${count} found — there's more`}
       style={{
         position: 'fixed',
         top: '1.6rem',
         left: '1.1rem',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'flex-start',
         gap: '10px',
         zIndex: 60,
-        pointerEvents: 'none',
-        userSelect: 'none',
       }}
     >
-      {CLUE_IDS.map((_, i) => (
-        <PixelHeart key={i} filled={i < count} pop={i === justFilled} size={13} />
-      ))}
+      <div aria-hidden="true" title={`${count} found — there's more`} style={{ display: 'flex', flexDirection: 'column', gap: '10px', pointerEvents: 'none', userSelect: 'none' }}>
+        {CLUE_IDS.map((_, i) => (
+          <PixelHeart key={i} filled={i < count} pop={i === justFilled} size={13} />
+        ))}
+      </div>
+      <ResetHuntButton />
     </div>
   )
 }
