@@ -51,7 +51,7 @@ function ProjectsPage() {
         <div style={{ marginBottom: '5rem' }}>
           <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '2rem' }}>Projects</p>
           <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '64px', fontWeight: 400, color: '#ffffff', lineHeight: 1, letterSpacing: '0.02em', marginBottom: '1.2rem' }}>Selected Work</h1>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem' }}>This is <ClueHold id="projects-hold">who</ClueHold> I am and where I come from.</p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '0.5rem' }}>This is <ClueHold id="projects-hold">who I am</ClueHold> and where I come from.</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {/* RCCOON */}

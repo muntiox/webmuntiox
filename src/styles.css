@@ -1425,7 +1425,7 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
    once the clue is found. */
 .mxo-clue-dbl-tick {
   display: inline-block;
-  animation: mxo-clue-dbl-tick 7s ease-in-out infinite;
+  animation: mxo-clue-dbl-tick 3s ease-in-out infinite;
 }
 @keyframes mxo-clue-dbl-tick {
   0%, 90%, 100% { transform: translateY(0); }
