@@ -62,12 +62,6 @@ function Post({ post, onClose }: { post: any; onClose: () => void }) {
         {post.content2.map((p: string, i: number) => (
           <p key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, lineHeight: '34.96px', color: 'rgba(255,255,255,0.9)', marginBottom: '1.8rem' }}>{p}</p>
         ))}
-        <div style={{ margin: '3rem 0' }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '0.5rem' }}>Worth watching</p>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.75rem', fontWeight: 300, color: 'rgba(255,255,255,0.6)', marginBottom: '1rem', fontStyle: 'italic' }}>{post.videoLabel}</p>
-          <iframe src={post.videoSrc} style={{ width: '100%', aspectRatio: '16/9', border: 'none' }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-        </div>
         <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 700, lineHeight: '34.96px', color: '#ffffff', marginBottom: '1.8rem' }}>{post.closing}</p>
         <div style={{ marginTop: '5rem', paddingTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <button onClick={onClose} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', background: 'none', border: 'none', cursor: 'pointer' }}>← All posts</button>
@@ -97,8 +91,6 @@ export const posts = [
       `That's not recklessness. That's probably the sanest response to the world we actually live in.`,
     ],
     closing: `The question was never whether you'd be chosen. It was always whether you'd choose yourself first.`,
-    videoSrc: 'https://www.youtube.com/embed/qp0HIF3SfI4',
-    videoLabel: 'Simon Sinek — How great leaders inspire action',
     cta: { label: 'This is also why I do what I do →', href: '/purpose' },
   },
   {
@@ -124,8 +116,6 @@ export const posts = [
       `A house would be nice. I won't pretend it wouldn't. But a big one — with people you love nearby, walls you've covered with your own things, a kitchen where someone's always cooking something — that sounds less like a compromise and more like exactly what I actually want.`,
     ],
     closing: `Perhaps we didn't fail to reach the dream. Perhaps we just upgraded it.`,
-    videoSrc: 'https://www.youtube.com/embed/TGZMSmcuiXM',
-    videoLabel: 'Sebastian Junger — Tribe: On Homecoming and Belonging',
     cta: { label: "I'm building something around this idea →", href: '/work/commo2' },
   },
   {
@@ -147,8 +137,6 @@ export const posts = [
       `We don't talk enough about how much of our lives we hand over when we choose where to work. Or how much we get back when we choose carefully.`,
     ],
     closing: `Your attention is not infinite. Neither is your time. Point both somewhere worth it.`,
-    videoSrc: 'https://www.youtube.com/embed/X4Qm9cGRub0',
-    videoLabel: 'Gary Yourofsky — The Most Important Speech You Will Ever Hear',
     cta: { label: 'This is also who I am →', href: '/purpose' },
     plateClue: true,
   },
