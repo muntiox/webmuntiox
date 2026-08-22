@@ -33,9 +33,9 @@ const copy = {
     slides: [
       { body: 'Some of my earliest memories involve headphones far too big for my head. I only remember disappearing into whatever was playing — completely gone. That never really stopped.', pull: 'The medium changes. The intention never does.' },
       { body: "I've often been told I'm too sensitive. For a long time, I believed it was a flaw. Now I think it's the whole point.", accent: 'Attention is the purest form of love I know. Everything I create begins there.' },
-      { body: "There's always been this almost irrational urge to build things that don't exist yet. Projects, ideas, communities. And the more I built, the more I started to understand where I actually wanted to go — and for whom. Paying attention changes you. Once you start seeing, you can't just sit with it.", accent: "That's why I don't want to work for just anyone. I believe the most ethical path is the only one worth taking." },
+      { body: "Every project taught me something I hadn't expected to learn. And the more I built, the more I started to understand where I actually wanted to go — and for whom. Paying attention changes you. Once you start seeing, you can't just sit with it.", accent: "That's why I don't want to work for just anyone. I believe the most ethical path is the only one worth taking." },
       { body: 'At some point I realised that compassion stops making sense the moment we start deciding who deserves it.', accent: "Suffering doesn't become acceptable just because we learn to look away from it." },
-      { body: "The more I understand about what's wrong with the world, the more fiercely I want to protect what's still good in it. That's not contradiction — that's survival.", accent: "There's something quietly revolutionary about choosing joy anyway." },
+      { body: "The more I understand about what's wrong with the world, the more fiercely I want to protect what's still good in it. That's not contradiction — that's survival." },
       { body: 'People assume activism comes from anger. Mine comes from love — for animals, for people, for this complicated planet we all share.', accent: "I don't fight because I hate what is. I fight because I can see what could be." },
       { body: "I've spent years building alongside people who believed, like I do, that another world is actually possible. None of those projects were ever really about content or strategy.", accent: 'They were always about helping someone understand, feel, or care about something. Helping someone.' },
       { body: 'Sometimes the most important thing you can do is show up. Not with a plan. Not with the right words. Just — there.', accent: 'Presence is its own kind of message.' },
@@ -46,6 +46,7 @@ const copy = {
     closing3: 'People often ask me what I do. I edit videos, I write, I design, I tell stories... but those are just tools.',
     closingAccent2: 'What I really do is pay attention. Then I try to transform that attention into something another can feel.',
     closing4: "I don't believe content changes the world. I believe people do. If stories have any power at all, it's because they remind us why it's worth caring in the first place.",
+    signature: "I'm Itxaso Muntión — still paying attention, on purpose.",
     prev: '← Prev',
     next: 'Next →',
     close: 'Close ✕',
@@ -64,9 +65,9 @@ const copy = {
     slides: [
       { body: 'Algunos de mis primeros recuerdos incluyen unos auriculares demasiado grandes para mi cabeza. Solo recuerdo desaparecer en lo que estuviera sonando — completamente ida. Eso nunca dejó de pasar.', pull: 'El medio cambia. La intención nunca.' },
       { body: 'Muchas veces me han dicho que soy demasiado sensible. Durante mucho tiempo, creí que era un defecto. Ahora creo que es precisamente el punto.', accent: 'La atención es la forma más pura de amor que conozco. Todo lo que creo empieza ahí.' },
-      { body: 'Siempre ha estado ahí ese impulso casi irracional de construir cosas que todavía no existen. Proyectos, ideas, comunidades. Y cuanto más construía, más empezaba a entender hacia dónde quería ir realmente — y para quién. Prestar atención te cambia. Una vez que empiezas a ver, no puedes simplemente quedarte ahí sentada.', accent: 'Por eso no quiero trabajar para cualquiera. Creo que el camino más ético es el único que merece la pena tomar.' },
+      { body: 'Cada proyecto me enseñó algo que no esperaba aprender. Y cuanto más construía, más empezaba a entender hacia dónde quería ir realmente — y para quién. Prestar atención te cambia. Una vez que empiezas a ver, no puedes simplemente quedarte ahí sentada.', accent: 'Por eso no quiero trabajar para cualquiera. Creo que el camino más ético es el único que merece la pena tomar.' },
       { body: 'En algún momento me di cuenta de que la compasión deja de tener sentido en el momento en que empezamos a decidir quién la merece.', accent: 'El sufrimiento no se vuelve aceptable solo porque aprendamos a mirar hacia otro lado.' },
-      { body: 'Cuanto más entiendo lo que está mal en el mundo, más ferozmente quiero proteger lo que todavía queda de bueno en él. Eso no es contradicción — es supervivencia.', accent: 'Hay algo silenciosamente revolucionario en elegir la alegría de todos modos.' },
+      { body: 'Cuanto más entiendo lo que está mal en el mundo, más ferozmente quiero proteger lo que todavía queda de bueno en él. Eso no es contradicción — es supervivencia.' },
       { body: 'La gente asume que el activismo nace de la rabia. El mío nace del amor — por los animales, por las personas, por este planeta complicado que todos compartimos.', accent: 'No lucho porque odie lo que es. Lucho porque puedo ver lo que podría ser.' },
       { body: 'He pasado años construyendo junto a personas que creían, como yo, que otro mundo es realmente posible. Ninguno de esos proyectos fue nunca realmente sobre contenido o estrategia.', accent: 'Siempre fueron sobre ayudar a alguien a entender, sentir o que le importara algo. Ayudar a alguien.' },
       { body: 'A veces lo más importante que puedes hacer es presentarte. Sin un plan. Sin las palabras adecuadas. Simplemente — ahí.', accent: 'La presencia es un mensaje en sí misma.' },
@@ -77,6 +78,7 @@ const copy = {
     closing3: 'A menudo me preguntan a qué me dedico. Edito vídeos, escribo, diseño, cuento historias... pero esas son solo herramientas.',
     closingAccent2: 'Lo que realmente hago es prestar atención. Después intento transformar esa atención en algo que otra persona pueda sentir.',
     closing4: 'No creo que el contenido cambie el mundo. Creo que las personas lo hacen. Si las historias tienen algún poder, es porque nos recuerdan por qué merece la pena que nos importe, para empezar.',
+    signature: 'Soy Itxaso Muntión — todavía prestando atención, a propósito.',
     prev: '← Anterior',
     next: 'Siguiente →',
     close: 'Cerrar ✕',
@@ -340,6 +342,9 @@ function PurposePage() {
           <Body>{c.closing3}</Body>
           <Accent>{c.closingAccent2}</Accent>
           <Body>{c.closing4}</Body>
+          <div style={{ marginTop: '3rem' }}>
+            <Pull>{c.signature}</Pull>
+          </div>
         </div>
       </div>
     </div>
