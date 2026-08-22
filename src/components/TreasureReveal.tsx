@@ -28,18 +28,25 @@ function RevealOverlay({ onDone }: { onDone: () => void }) {
   }
 
   return (
-    <div
-      className={`mxo-treasure-overlay${dismissing ? ' is-dismissing' : ''}`}
-      onClick={dismiss}
-      role="button"
-      tabIndex={0}
-      aria-label="Continue"
-      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && dismiss()}
-    >
-      <div className="mxo-treasure-overlay-map" aria-hidden="true" />
-      <div className="mxo-treasure-overlay-inner">
-        <p className="mxo-treasure-overlay-text">You found it.</p>
-        <p className={`mxo-treasure-overlay-hint${showHint ? ' is-visible' : ''}`}>tap to continue</p>
+    // Wrapper carries no background of its own — a global inner-page rule
+    // forces #root's direct-child divs transparent (see MapBackground in
+    // __root.tsx for the full explanation), which would strip this
+    // overlay's opaque background too. Nesting one level deeper keeps the
+    // real, colored div outside that selector's reach.
+    <div className="mxo-treasure-portal">
+      <div
+        className={`mxo-treasure-overlay${dismissing ? ' is-dismissing' : ''}`}
+        onClick={dismiss}
+        role="button"
+        tabIndex={0}
+        aria-label="Continue"
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && dismiss()}
+      >
+        <div className="mxo-treasure-overlay-map" aria-hidden="true" />
+        <div className="mxo-treasure-overlay-inner">
+          <p className="mxo-treasure-overlay-text">You found it.</p>
+          <p className={`mxo-treasure-overlay-hint${showHint ? ' is-visible' : ''}`}>tap to continue</p>
+        </div>
       </div>
     </div>
   )
@@ -47,23 +54,26 @@ function RevealOverlay({ onDone }: { onDone: () => void }) {
 
 function NoteScreen({ onHome }: { onHome: () => void }) {
   return (
-    <div className="mxo-treasure-note-screen">
-      <div className="mxo-treasure-note-inner">
-        <div className="mxo-treasure-note-hearts" aria-hidden="true">
-          {Array.from({ length: CLUE_TOTAL }).map((_, i) => (
-            <PixelHeart key={i} filled size={12} />
-          ))}
+    // Same escape-hatch wrapper as RevealOverlay above.
+    <div className="mxo-treasure-portal">
+      <div className="mxo-treasure-note-screen">
+        <div className="mxo-treasure-note-inner">
+          <div className="mxo-treasure-note-hearts" aria-hidden="true">
+            {Array.from({ length: CLUE_TOTAL }).map((_, i) => (
+              <PixelHeart key={i} filled size={12} />
+            ))}
+          </div>
+          <p className="mxo-treasure-note-label">You found it.</p>
+          <p className="mxo-treasure-note-text">
+            Curiosity is a virtue — and a rare one. X marks the spot, and you found it. You stopped. Seven times. I
+            like people who look twice — that kind of attention is rare. Thank you for looking closely. Leave your
+            own grain of sand below, and share something with the others who stopped too, if you'd like.
+          </p>
+          <GuestbookPanel />
+          <button type="button" className="mxo-treasure-home-btn" onClick={onHome}>
+            ← Back to home
+          </button>
         </div>
-        <p className="mxo-treasure-note-label">You found it.</p>
-        <p className="mxo-treasure-note-text">
-          Curiosity is a virtue — and a rare one. X marks the spot, and you found it. You stopped. Seven times. I
-          like people who look twice — that kind of attention is rare. Thank you for looking closely. Leave your
-          own grain of sand below, and share something with the others who stopped too, if you'd like.
-        </p>
-        <GuestbookPanel />
-        <button type="button" className="mxo-treasure-home-btn" onClick={onHome}>
-          ← Back to home
-        </button>
       </div>
     </div>
   )
