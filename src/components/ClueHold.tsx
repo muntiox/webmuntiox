@@ -42,6 +42,7 @@ export default function ClueHold({
       onPointerUp={cancel}
       onPointerLeave={cancel}
       onPointerCancel={cancel}
+      className={solved ? undefined : 'mxo-clue-shine'}
       style={{
         position: 'relative',
         display: 'inline-block',

@@ -14,6 +14,7 @@ export default function ClueDoubleClick({ children, id }: { children: string; id
         setSolved(true)
         markClueFound(id)
       }}
+      className={solved ? undefined : 'mxo-clue-dbl-tick'}
       style={{
         color: '#d9737a',
         cursor: 'default',

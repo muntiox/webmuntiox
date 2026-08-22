@@ -1106,9 +1106,12 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
   gap: 1.2rem;
 }
 .mxo-treasure-overlay-text {
-  font-family: 'Bebas Neue', sans-serif;
+  /* !important: a global reset forces every <p> to Outfit (and, on
+     inner pages, to a fixed color) — this display moment needs to
+     win that fight everywhere it's shown. */
+  font-family: 'Bebas Neue', sans-serif !important;
   font-size: clamp(2.5rem, 6vw, 5rem);
-  color: #ffffff;
+  color: #ffffff !important;
   letter-spacing: 0.04em;
   opacity: 0;
   text-shadow: 0 0 30px rgba(217,115,122,0.6);
@@ -1162,13 +1165,15 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
   gap: 6px;
   margin-bottom: 1.6rem;
 }
-.mxo-treasure-note-label {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #d9737a;
+/* Two classes (not one) to out-specificity the global inner-page <p>
+   color override, which itself carries !important. */
+.mxo-treasure-note-screen .mxo-treasure-note-label {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #d9737a !important;
+  text-shadow: 0 0 20px rgba(217,115,122,0.45);
   margin-bottom: 1rem;
 }
 .mxo-treasure-note-text {
@@ -1352,4 +1357,28 @@ body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity:
 .mxo-plate-msg.is-right-msg {
   color: #d9737a;
   font-style: normal;
+}
+
+/* Clue hint: a soft, slow glow breathing on the word — nothing gives
+   away that it's clickable, just a little extra shine to make it
+   easier to notice if you're looking. Stops once the clue is found. */
+.mxo-clue-shine {
+  animation: mxo-clue-shine-pulse 2.6s ease-in-out infinite;
+}
+@keyframes mxo-clue-shine-pulse {
+  0%, 100% { text-shadow: 0 0 0 rgba(217,115,122,0); }
+  50% { text-shadow: 0 0 10px rgba(217,115,122,0.6); }
+}
+
+/* Clue hint: a brief, subtle nudge every 7 seconds — mostly still,
+   just enough of a tell for someone paying close attention. Stops
+   once the clue is found. */
+.mxo-clue-dbl-tick {
+  display: inline-block;
+  animation: mxo-clue-dbl-tick 7s ease-in-out infinite;
+}
+@keyframes mxo-clue-dbl-tick {
+  0%, 90%, 100% { transform: translateY(0); }
+  94% { transform: translateY(-3px); }
+  97% { transform: translateY(0); }
 }
