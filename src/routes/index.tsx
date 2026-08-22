@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { markClueFound } from '../lib/clues'
+import HeartbeatSound from '../components/HeartbeatSound'
 export const Route = createFileRoute('/')(
   { component: Portfolio }
 )
@@ -280,6 +281,7 @@ function Portfolio() {
         </div></Reveal>
         <Reveal><div className="mxo-video-section">
           <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
+          <HeartbeatSound />
           <div className="mxo-video-overlay">
             <div className="mxo-video-overlay-heading">
               <p className="mxo-eyebrow">The kind of work I dream about</p>

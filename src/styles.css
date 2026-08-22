@@ -557,6 +557,56 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 }
 .mxo-video-overlay-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.8rem; }
 .mxo-video-overlay-heading .mxo-eyebrow { margin-bottom: 0; }
+/* Ambient sound toggle — icon only, tucked in the video's top-right
+   corner. Bars bob gently at rest (the invitation) and pick up once
+   playing (the confirmation). No text anywhere. */
+.mxo-sound-toggle {
+  position: absolute;
+  top: clamp(1.1rem, 3vw, 1.8rem);
+  right: clamp(1.1rem, 3vw, 1.8rem);
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  background: rgba(5,5,6,0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(217,115,122,0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.mxo-sound-toggle:hover { border-color: #d9737a; background: rgba(217,115,122,0.14); }
+.mxo-sound-bar {
+  display: block;
+  width: 3px;
+  height: 30%;
+  background: rgba(237,234,226,0.55);
+  border-radius: 2px;
+  animation: mxo-sound-idle 2.4s ease-in-out infinite;
+  transition: background 0.3s ease;
+}
+.mxo-sound-bar:nth-child(1) { animation-delay: 0s; }
+.mxo-sound-bar:nth-child(2) { animation-delay: 0.3s; }
+.mxo-sound-bar:nth-child(3) { animation-delay: 0.15s; }
+.mxo-sound-bar:nth-child(4) { animation-delay: 0.45s; }
+@keyframes mxo-sound-idle {
+  0%, 100% { height: 22%; }
+  50% { height: 50%; }
+}
+.mxo-sound-toggle.is-playing .mxo-sound-bar {
+  background: #d9737a;
+  animation-name: mxo-sound-active;
+  animation-duration: 0.85s;
+}
+@keyframes mxo-sound-active {
+  0%, 100% { height: 18%; }
+  50% { height: 85%; }
+}
 .mxo-video-overlay-aside {
   font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 400;
   letter-spacing: 0.04em; color: rgba(237,234,226,0.5); font-style: italic;
