@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
+import LanguageSwitcher from '../../components/LanguageSwitcher'
 export const Route = createFileRoute('/work/rccoon')({
   component: RccoonProject,
 })
@@ -36,6 +37,7 @@ function FloatingNav() {
               </a>
             ))}
           </div>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', bottom: '5.2rem', zIndex: 2 }}><LanguageSwitcher /></div>
           <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
         </div>
       )}

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 import ClueLetter from '../components/ClueLetter'
 import ClueDraggablePolaroid from '../components/ClueDraggablePolaroid'
+import LanguageSwitcher from '../components/LanguageSwitcher'
 
 // The bottom-row photo that ships visibly out of place — drag it home to find it.
 const CLUE_PHOTO_INDEX = 5
@@ -44,6 +45,7 @@ function FloatingNav() {
               </a>
             ))}
           </div>
+          <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', bottom: '5.2rem', zIndex: 2 }}><LanguageSwitcher /></div>
           <p style={{ position: 'absolute', bottom: '2.5rem', fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', zIndex: 2 }}>Itxaso Muntión — Content Creator & Digital Strategist</p>
         </div>
       )}

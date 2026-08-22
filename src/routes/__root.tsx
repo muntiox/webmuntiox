@@ -4,14 +4,19 @@ import '../styles.css'
 import { CLUE_EVENT, CLUE_IDS, getFoundCount } from '../lib/clues'
 import PixelHeart from '../components/PixelHeart'
 import TreasureReveal from '../components/TreasureReveal'
+import { LanguageProvider, useLanguage } from '../lib/i18n'
 
 // ── Restart control — clears clue progress and the "seen the reveal"
 // flag, then reloads. A small circular-arrow icon, same faintness as
 // the hearts, so replaying the hunt is always one click away.
 function ResetHuntButton() {
   const [hover, setHover] = useState(false)
+  const { lang } = useLanguage()
+  const t = lang === 'es'
+    ? { confirm: '¿Reiniciar la búsqueda? Esto borra las pistas encontradas.', label: 'Reiniciar la búsqueda' }
+    : { confirm: 'Restart the hunt? This clears your found clues.', label: 'Restart the hunt' }
   const reset = () => {
-    if (!window.confirm('Restart the hunt? This clears your found clues.')) return
+    if (!window.confirm(t.confirm)) return
     try {
       Object.keys(localStorage).forEach((k) => {
         if (k.startsWith('mxo_clue_') || k === 'mxo_treasure_seen') localStorage.removeItem(k)
@@ -27,8 +32,8 @@ function ResetHuntButton() {
       onClick={reset}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      aria-label="Restart the hunt"
-      title="Restart the hunt"
+      aria-label={t.label}
+      title={t.label}
       style={{
         pointerEvents: 'auto',
         background: 'none',
@@ -165,6 +170,8 @@ function InstagramIcon() {
   )
 }
 function SiteFooter() {
+  const { lang } = useLanguage()
+  const privacyLabel = lang === 'es' ? 'Política de Privacidad' : 'Privacy Policy'
   return (
     <footer className="mxo-footer">
       <a href="/" className="mxo-footer-logo" aria-label="MUNTIOX — home">
@@ -173,7 +180,7 @@ function SiteFooter() {
       </a>
       <p className="mxo-footer-copy">© {new Date().getFullYear()} MUNTIOX — Itxaso Muntión</p>
       <div className="mxo-footer-links">
-        <a href="/privacy">Privacy Policy</a>
+        <a href="/privacy">{privacyLabel}</a>
         <a href="https://www.instagram.com/muntiox" target="_blank" rel="noopener noreferrer" className="mxo-footer-ig">
           <InstagramIcon /> Instagram
         </a>
@@ -388,7 +395,7 @@ function RootComponent() {
   }, [variant])
 
   return (
-    <>
+    <LanguageProvider>
       <Heartbeat variant={variant} />
       <MapBackground />
       <RoutePulse />
@@ -396,6 +403,6 @@ function RootComponent() {
       <TreasureReveal />
       <Outlet />
       <SiteFooter />
-    </>
+    </LanguageProvider>
   )
 }

@@ -2,9 +2,147 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { markClueFound } from '../lib/clues'
 import HeartbeatSound from '../components/HeartbeatSound'
+import { useLanguage } from '../lib/i18n'
+import LanguageSwitcher from '../components/LanguageSwitcher'
 export const Route = createFileRoute('/')(
   { component: Portfolio }
 )
+// ── Home page copy — English + Spanish. Every other language keeps
+// falling back to English until it gets its own entry here.
+const copy = {
+  en: {
+    nav: { purpose: 'Purpose', projects: 'Projects', blog: 'Blog', contact: 'Contact', openMenu: 'Open menu', close: 'Close', bottom: 'Itxaso Muntión — Content Creator & Digital Strategist' },
+    correction: { wrong: 'for brands', only: 'only for brands', onlyWord: 'only' },
+    hero: {
+      line1: 'Creative strategy',
+      line3: 'that want to make',
+      line4: 'a difference',
+      tagline: "Until 'responsible brand' becomes redundant.",
+      ctaProjects: 'Projects',
+      ctaContact: "Let's talk",
+    },
+    ticker: "Open to what's next",
+    manifesto: {
+      title1: 'This is a Portfolio...',
+      title2: "but I'm not looking to be chosen",
+      body1: 'The main purpose of this website is simple: to showcase my work and convince people to choose me. But I also want to choose my next job. Does that sound unusual?',
+      body2: "I don't believe in working with everyone. I believe in working with the right people. The projects we choose become part of who we are. They shape our perspective, influence our decisions, and define the impact we leave behind.",
+      body3: "That's why I choose to collaborate with brands and organisations whose values align with my own, or with those that genuinely want to make a more positive impact. Not because they're perfect, but because meaningful work starts with the willingness to grow.",
+      body4: "Every project is an opportunity to leave the world a little better than we found it. That's the kind of work I want to be part of.",
+      body5: "And that's why I want to choose you, too.",
+    },
+    video: {
+      eyebrow: 'The kind of work I dream about',
+      aside: "(though I'm open to what life teaches me)",
+      boxes: [
+        { title: 'Ethical brands, done right.', body: 'Ethical, lifestyle projects that deserve a voice as strong as their values.' },
+        { title: 'Travel with a conscience.', body: 'Responsible agencies and conscious stays — content that moves people to go, gently. I care about travelling quietly, and wish travel could always be this ethical.' },
+        { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
+        { title: 'Animal justice, non-negotiable.', body: 'NGOs and grassroots organisations fighting for the voiceless. Not an add-on to an ethics brief — a cause I show up for fully.' },
+        { title: 'A planet worth defending.', body: 'Environmental NGOs and organisations doing the work the planet actually needs — content and strategy for people fighting for it.' },
+      ],
+    },
+    skills: {
+      eyebrow: 'What I do',
+      years: 'years across audiovisual content',
+      yearsLine2: '& digital strategy',
+      groups: [
+        ['Content Strategy', 'Brand Identity', 'Digital Communities', 'Social Campaigns'],
+        ['Creative Direction', 'Storytelling', 'Photo & Video Content', 'Content Creation'],
+      ],
+    },
+    about: {
+      eyebrow: 'Not the LinkedIn version',
+      title: 'Not exactly according to plan.',
+      copyPre: "A few years ago I decided to run, badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, ",
+      copyStrong: 'try again, try again and try again',
+      copyPost: ", and somewhere in that mess, I prove to myself I can. We're never ready, and at the same time, we always are. I'm not the best, and at the same time, I for surely am.",
+      closing: "I don't wait for the right opportunity. I create it.",
+    },
+    featured: {
+      eyebrow: 'Featured',
+      rccoonSub: 'Citizen Action · Digital Strategy · Community · 2020—2026',
+      rccoonCta: 'Come snoop around →',
+      commo2Sub: 'Strategy · Branding · Digital Ecosystem · 2024—2025',
+      commo2Cta: 'Move in →',
+      ctaEyebrow: 'Not a project. Not yet.',
+      ctaTitle: 'Something you and I could build.',
+      ctaSub: "The best work doesn't always start as a brief — sometimes it starts with two people who see the world the same way. If you've got an idea, and values to match, I'd love to hear it. This could be the next one.",
+      ctaLink: 'Come find me →',
+    },
+    latest: {
+      eyebrow: 'Latest writing',
+      essay: 'Essay · 13/08/26',
+      read: 'Read →',
+    },
+  },
+  es: {
+    nav: { purpose: 'Propósito', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto', openMenu: 'Abrir menú', close: 'Cerrar', bottom: 'Itxaso Muntión — Creadora de Contenido y Estratega Digital' },
+    correction: { wrong: 'para marcas', only: 'solo para marcas', onlyWord: 'solo' },
+    hero: {
+      line1: 'Estrategia creativa',
+      line3: 'que quieren marcar',
+      line4: 'la diferencia',
+      tagline: "Hasta que 'marca responsable' sea redundante.",
+      ctaProjects: 'Proyectos',
+      ctaContact: 'Hablemos',
+    },
+    ticker: 'Abierta a lo que viene',
+    manifesto: {
+      title1: 'Esto es un Portfolio...',
+      title2: 'pero no busco que me elijan',
+      body1: 'El propósito principal de esta web es sencillo: mostrar mi trabajo y convencerte de que me elijas. Pero yo también quiero elegir mi próximo trabajo. ¿Suena raro?',
+      body2: 'No creo en trabajar con cualquiera. Creo en trabajar con las personas adecuadas. Los proyectos que elegimos forman parte de quiénes somos. Moldean nuestra perspectiva, influyen en nuestras decisiones y definen el impacto que dejamos.',
+      body3: 'Por eso elijo colaborar con marcas y organizaciones cuyos valores se alinean con los míos, o con aquellas que realmente quieren generar un impacto más positivo. No porque sean perfectas, sino porque el trabajo con sentido empieza con la voluntad de crecer.',
+      body4: 'Cada proyecto es una oportunidad de dejar el mundo un poco mejor de como lo encontramos. Ese es el tipo de trabajo del que quiero formar parte.',
+      body5: 'Y por eso yo también quiero elegirte a ti.',
+    },
+    video: {
+      eyebrow: 'El tipo de trabajo con el que sueño',
+      aside: '(aunque estoy abierta a lo que la vida me enseñe)',
+      boxes: [
+        { title: 'Marcas éticas, bien hechas.', body: 'Proyectos de estilo de vida y ética que merecen una voz tan fuerte como sus valores.' },
+        { title: 'Viajar con conciencia.', body: 'Agencias responsables y alojamientos conscientes: contenido que anima a viajar, con suavidad. Me importa viajar sin dejar huella, y ojalá viajar fuera siempre así de ético.' },
+        { title: 'Personas con algo que decir.', body: 'Ayudo a quienes impulsan el cambio y a quienes remueven las cosas en silencio a que se les vea y se les escuche.' },
+        { title: 'Justicia animal, innegociable.', body: 'ONGs y organizaciones de base que luchan por quienes no tienen voz. No es un añadido a un brief ético: es una causa a la que me entrego por completo.' },
+        { title: 'Un planeta que merece la pena defender.', body: 'ONGs y organizaciones ambientales que hacen el trabajo que el planeta realmente necesita: contenido y estrategia para quienes luchan por él.' },
+      ],
+    },
+    skills: {
+      eyebrow: 'A qué me dedico',
+      years: 'años entre contenido audiovisual',
+      yearsLine2: 'y estrategia digital',
+      groups: [
+        ['Estrategia de Contenido', 'Identidad de Marca', 'Comunidades Digitales', 'Campañas Sociales'],
+        ['Dirección Creativa', 'Storytelling', 'Contenido Foto y Vídeo', 'Creación de Contenido'],
+      ],
+    },
+    about: {
+      eyebrow: 'La versión que no está en LinkedIn',
+      title: 'No exactamente como estaba previsto.',
+      copyPre: 'Hace unos años decidí empezar a correr, mal, sin más razón para seguir que haber empezado. Resulta que así es como funciono: cuando algo pasa a formar parte de mi vida, no lo hago a medias. No espero a sentirme preparada. Me hago la pregunta obvia, me equivoco, ',
+      copyStrong: 'lo intento otra vez, y otra vez, y otra vez',
+      copyPost: ', y en algún punto de ese caos, me demuestro a mí misma que puedo. Nunca estamos preparadas, y al mismo tiempo, siempre lo estamos. No soy la mejor, y al mismo tiempo, claro que lo soy.',
+      closing: 'No espero a que llegue la oportunidad perfecta. La creo.',
+    },
+    featured: {
+      eyebrow: 'Destacado',
+      rccoonSub: 'Acción Ciudadana · Estrategia Digital · Comunidad · 2020—2026',
+      rccoonCta: 'Ven a curiosear →',
+      commo2Sub: 'Estrategia · Branding · Ecosistema Digital · 2024—2025',
+      commo2Cta: 'Múdate →',
+      ctaEyebrow: 'Todavía no es un proyecto.',
+      ctaTitle: 'Algo que tú y yo podríamos construir.',
+      ctaSub: 'El mejor trabajo no siempre empieza con un brief; a veces empieza con dos personas que ven el mundo de la misma manera. Si tienes una idea, y valores que encajen, me encantaría escucharla. Este podría ser el siguiente.',
+      ctaLink: 'Ven a buscarme →',
+    },
+    latest: {
+      eyebrow: 'Lo último que he escrito',
+      essay: 'Ensayo · 13/08/26',
+      read: 'Leer →',
+    },
+  },
+}
 // ── Clue: click every tag in "What I do" ────────────────────────────
 // Each tag becomes "selected" (and stays that way) the moment it's
 // clicked. Nothing hints that collecting all eight does anything —
@@ -59,10 +197,12 @@ function playKeyClick() {}
 // ── Correction animation ─────────────────────────────────────────────
 type CorrectionPhase = 'idle' | 'typing-wrong' | 'striking' | 'erasing' | 'typing-only' | 'done'
 function CorrectionOnly() {
+  const { lang } = useLanguage()
+  const c = copy[lang].correction
   const [phase, setPhase] = useState<CorrectionPhase>('idle')
   const [wrongText, setWrongText] = useState('')
   const [onlyText, setOnlyText] = useState('')
-  const wrong = 'for brands'; const only = 'only for brands'
+  const wrong = c.wrong; const only = c.only
   useEffect(() => {
     const t = setTimeout(() => setPhase('typing-wrong'), 600)
     return () => clearTimeout(t)
@@ -86,8 +226,8 @@ function CorrectionOnly() {
     }
   }, [phase])
   const showCursor = phase !== 'idle' && phase !== 'done'
-  // "only" (the first word) renders in the brand's pink; the rest stays white
-  const onlyWord = 'only'
+  // the "only" word (the first word) renders in the brand's pink; the rest stays white
+  const onlyWord = c.onlyWord
   const onlyPink = onlyText.slice(0, onlyWord.length)
   const onlyRest = onlyText.slice(onlyWord.length)
   return (
@@ -159,16 +299,18 @@ function Marquee() {
 }
 // ── Full-screen nav ──────────────────────────────────────────────────
 function Nav() {
+  const { lang } = useLanguage()
+  const c = copy[lang].nav
   const [open, setOpen] = useState(false)
   const links = [
-    { href: '/purpose', label: 'Purpose' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/purpose', label: c.purpose },
+    { href: '/projects', label: c.projects },
+    { href: '/blog', label: c.blog },
+    { href: '/contact', label: c.contact },
   ]
   return (
     <>
-      <button onClick={() => setOpen(true)} aria-label="Open menu"
+      <button onClick={() => setOpen(true)} aria-label={c.openMenu}
         style={{ position: 'fixed', top: '1.4rem', right: '1.8rem', zIndex: 100,
           background: 'none', border: 'none', cursor: 'pointer',
           display: 'flex', flexDirection: 'column', gap: '5px', padding: '8px' }}>
@@ -178,7 +320,7 @@ function Nav() {
       </button>
       {open && (
         <div className="mxo-fullnav" onClick={() => setOpen(false)}>
-          <button className="mxo-fullnav-close" onClick={() => setOpen(false)} aria-label="Close">&#x2715;</button>
+          <button className="mxo-fullnav-close" onClick={() => setOpen(false)} aria-label={c.close}>&#x2715;</button>
           <div className="mxo-fullnav-links" onClick={e => e.stopPropagation()}>
             {links.map((l, i) => (
               <a key={l.href} href={l.href} className="mxo-fullnav-link" onClick={() => setOpen(false)}
@@ -188,7 +330,10 @@ function Nav() {
               </a>
             ))}
           </div>
-          <p className="mxo-fullnav-bottom">Itxaso Muntión — Content Creator &amp; Digital Strategist</p>
+          <div onClick={e => e.stopPropagation()}>
+            <LanguageSwitcher />
+          </div>
+          <p className="mxo-fullnav-bottom">{c.bottom}</p>
         </div>
       )}
     </>
@@ -196,6 +341,8 @@ function Nav() {
 }
 // ── Hero con cabecera de foto a todo el ancho ─────────────────────────
 function Hero() {
+  const { lang } = useLanguage()
+  const c = copy[lang].hero
   const [ready, setReady] = useState(false)
   useEffect(() => {
     const t = setTimeout(() => setReady(true), 30)
@@ -212,19 +359,19 @@ function Hero() {
         {/* The "MUNTIOX — Itxaso Muntión" label now lives in __root.tsx as a
             fixed top-left badge (BrandBadge) so it stays put through scroll. */}
         <p className="mxo-statement" style={{ marginTop: '2.2rem' }}>
-          Creative strategy<br/>
+          {c.line1}<br/>
           <CorrectionOnly /><br/>
-          that want to make<br/>
-          a difference
+          {c.line3}<br/>
+          {c.line4}
         </p>
         <p className="mxo-tagline">
           <span className="highlighter">
-            <span className="highlighter__text">Until &apos;responsible brand&apos; becomes redundant.</span>
+            <span className="highlighter__text">{c.tagline}</span>
           </span>
         </p>
         <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>Projects</a>
-          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>Let&apos;s talk</a>
+          <a href="/projects" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaProjects}</a>
+          <a href="/contact" style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaContact}</a>
         </div>
       </div>
     </section>
@@ -255,6 +402,8 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 function Portfolio() {
+  const { lang } = useLanguage()
+  const c = copy[lang]
   return (
     <>
       <ElectricCursor/>
@@ -266,35 +415,29 @@ function Portfolio() {
           <div style={{ display: 'flex', width: 'max-content', animation: 'ticker 18s linear infinite' }}>
             {Array.from({length: 6}).map((_, i) => (
               <span key={i} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(242,238,231,0.35)', padding: '0 4rem', whiteSpace: 'nowrap' }}>
-                Open to what&apos;s next
+                {c.ticker}
               </span>
             ))}
           </div>
         </div>
         <Reveal><div className="mxo-manifesto">
-          <h2 className="mxo-manifesto-title">This is a Portfolio...<br/>but I&apos;m not looking to be chosen</h2>
-          <p className="mxo-manifesto-body">The main purpose of this website is simple: to showcase my work and convince people to choose me. But I also want to choose my next job. Does that sound unusual?</p>
-          <p className="mxo-manifesto-body">I don&apos;t believe in working with everyone. I believe in working with the right people. The projects we choose become part of who we are. They shape our perspective, influence our decisions, and define the impact we leave behind.</p>
-          <p className="mxo-manifesto-body">That&apos;s why I choose to collaborate with brands and organisations whose values align with my own, or with those that genuinely want to make a more positive impact. Not because they&apos;re perfect, but because meaningful work starts with the willingness to grow.</p>
-          <p className="mxo-manifesto-body">Every project is an opportunity to leave the world a little better than we found it. That&apos;s the kind of work I want to be part of.</p>
-          <p className="mxo-manifesto-body">And that&apos;s why I want to choose you, too.</p>
+          <h2 className="mxo-manifesto-title">{c.manifesto.title1}<br/>{c.manifesto.title2}</h2>
+          <p className="mxo-manifesto-body">{c.manifesto.body1}</p>
+          <p className="mxo-manifesto-body">{c.manifesto.body2}</p>
+          <p className="mxo-manifesto-body">{c.manifesto.body3}</p>
+          <p className="mxo-manifesto-body">{c.manifesto.body4}</p>
+          <p className="mxo-manifesto-body">{c.manifesto.body5}</p>
         </div></Reveal>
         <Reveal><div className="mxo-video-section">
           <video src="/videos/pruebavideoindex2.mp4" autoPlay muted loop playsInline aria-hidden="true" />
           <HeartbeatSound />
           <div className="mxo-video-overlay">
             <div className="mxo-video-overlay-heading">
-              <p className="mxo-eyebrow">The kind of work I dream about</p>
-              <span className="mxo-video-overlay-aside">(though I&apos;m open to what life teaches me)</span>
+              <p className="mxo-eyebrow">{c.video.eyebrow}</p>
+              <span className="mxo-video-overlay-aside">{c.video.aside}</span>
             </div>
             <div className="mxo-video-boxes">
-            {[
-              { title: 'Ethical brands, done right.', body: 'Ethical, lifestyle projects that deserve a voice as strong as their values.' },
-              { title: 'Travel with a conscience.', body: 'Responsible agencies and conscious stays — content that moves people to go, gently. I care about travelling quietly, and wish travel could always be this ethical.' },
-              { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
-              { title: 'Animal justice, non-negotiable.', body: 'NGOs and grassroots organisations fighting for the voiceless. Not an add-on to an ethics brief — a cause I show up for fully.' },
-              { title: 'A planet worth defending.', body: 'Environmental NGOs and organisations doing the work the planet actually needs — content and strategy for people fighting for it.' },
-            ].map(box => (
+            {c.video.boxes.map(box => (
               <div key={box.title} className="mxo-video-box">
                 <h3>{box.title}</h3>
                 <p>{box.body}</p>
@@ -304,24 +447,21 @@ function Portfolio() {
           </div>
         </div></Reveal>
         <Reveal><div className="mxo-skills">
-          <p className="mxo-eyebrow">What I do</p>
+          <p className="mxo-eyebrow">{c.skills.eyebrow}</p>
           <div style={{ display: 'flex', alignItems: 'stretch', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
             <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem, 8vw, 6rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.85, letterSpacing: '0.02em' }}>6+</span>
-            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(1.7rem, 3.4vw, 2.7rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.92, letterSpacing: '0.03em', display: 'block' }}>years across audiovisual content<br/>&amp; digital strategy</span>
+            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(1.7rem, 3.4vw, 2.7rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.92, letterSpacing: '0.03em', display: 'block' }}>{c.skills.years}<br/>{c.skills.yearsLine2}</span>
           </div>
-          <SkillsPicker groups={[
-            ['Content Strategy','Brand Identity','Digital Communities','Social Campaigns'],
-            ['Creative Direction','Storytelling','Photo & Video Content','Content Creation'],
-          ]} />
+          <SkillsPicker groups={c.skills.groups} />
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
           <div className="mxo-about-me-inner">
             <div className="mxo-about-me-card">
-              <p className="mxo-eyebrow">Not the LinkedIn version</p>
-              <h2 className="mxo-about-me-title">Not exactly according to plan.</h2>
+              <p className="mxo-eyebrow">{c.about.eyebrow}</p>
+              <h2 className="mxo-about-me-title">{c.about.title}</h2>
               <span className="mxo-about-me-rule" aria-hidden="true" />
-              <p className="mxo-about-me-copy">A few years ago I decided to run, badly, with no real reason to keep going except that I'd started. Turns out that's how I work: once something becomes part of my life, I don't do it by halves. I don't wait to feel ready. I ask the obvious question, get it wrong, <strong>try again, try again and try again</strong>, and somewhere in that mess, I prove to myself I can. We're never ready, and at the same time, we always are. I'm not the best, and at the same time, I for surely am.</p>
-              <p className="mxo-about-me-closing">I don't wait for the right opportunity. I create it.</p>
+              <p className="mxo-about-me-copy">{c.about.copyPre}<strong>{c.about.copyStrong}</strong>{c.about.copyPost}</p>
+              <p className="mxo-about-me-closing">{c.about.closing}</p>
             </div>
             <div className="mxo-about-me-photo-wrap">
               <img className="mxo-about-me-photo" src="/photos/me-index.jpg" alt="Itxaso Muntión" />
@@ -329,38 +469,38 @@ function Portfolio() {
           </div>
         </section></Reveal>
         <Reveal><div className="mxo-featured">
-          <p className="mxo-eyebrow">Featured</p>
+          <p className="mxo-eyebrow">{c.featured.eyebrow}</p>
           <div className="mxo-featured-grid">
             <a href="/work/rccoon" className="mxo-featured-item">
               <img src="/photos/rccoon-logo.png" alt="RCCOON" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">RCCOON</h3>
-              <p className="mxo-featured-sub">Citizen Action · Digital Strategy · Community · 2020—2026</p>
-              <span className="mxo-featured-cta">Come snoop around →</span>
+              <p className="mxo-featured-sub">{c.featured.rccoonSub}</p>
+              <span className="mxo-featured-cta">{c.featured.rccoonCta}</span>
             </a>
             <a href="/work/commo2" onClick={e => { e.preventDefault(); window.location.href='/work/commo2' }} className="mxo-featured-item">
               <img src="/photos/commo2-logo.png" alt="Commo2" style={{ width: '80px', height: '80px', objectFit: 'contain', display: 'block', marginBottom: '1.2rem' }} />
               <h3 className="mxo-featured-title">Commo2</h3>
-              <p className="mxo-featured-sub">Strategy · Branding · Digital Ecosystem · 2024—2025</p>
-              <span className="mxo-featured-cta">Move in →</span>
+              <p className="mxo-featured-sub">{c.featured.commo2Sub}</p>
+              <span className="mxo-featured-cta">{c.featured.commo2Cta}</span>
             </a>
             <a href="/purpose" className="mxo-featured-item mxo-featured-item--cta">
-              <p className="mxo-featured-item-eyebrow">Not a project. Not yet.</p>
-              <h3 className="mxo-featured-title">Something you and I could build.</h3>
-              <p className="mxo-featured-sub">The best work doesn&apos;t always start as a brief — sometimes it starts with two people who see the world the same way. If you&apos;ve got an idea, and values to match, I&apos;d love to hear it. This could be the next one.</p>
-              <span className="mxo-featured-cta">Come find me →</span>
+              <p className="mxo-featured-item-eyebrow">{c.featured.ctaEyebrow}</p>
+              <h3 className="mxo-featured-title">{c.featured.ctaTitle}</h3>
+              <p className="mxo-featured-sub">{c.featured.ctaSub}</p>
+              <span className="mxo-featured-cta">{c.featured.ctaLink}</span>
             </a>
           </div>
         </div></Reveal>
         <Reveal><div className="mxo-latest-post" style={{ position: 'relative', zIndex: 2, borderTop: '1px solid rgba(237,234,226,0.08)', paddingTop: '5rem' }}>
-          <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>Latest writing</p>
+          <p className="mxo-eyebrow" style={{ display: 'block', paddingLeft: 'clamp(1.5rem, 5vw, 5rem)', marginBottom: '2rem' }}>{c.latest.eyebrow}</p>
           <a href="/blog" className="mxo-latest-post-link"
             style={{ textDecoration: 'none', color: 'inherit', display: 'grid', gridTemplateColumns: '40% 1fr', alignItems: 'stretch', background: 'rgba(7,7,9,0.55)', border: '1px solid rgba(237,234,226,0.08)', width: '100%' }}>
             <img src="/photos/who-am-i/activist-me.jpg" alt="" style={{ width: '100%', height: '100%', minHeight: '420px', objectFit: 'cover', display: 'block', filter: 'brightness(0.9) contrast(1.05)' }} />
             <div style={{ padding: '4rem clamp(2rem, 6vw, 6rem)' }}>
-              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>Essay · 13/08/26</p>
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)', marginBottom: '1rem' }}>{c.latest.essay}</p>
               <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(2.5rem, 5vw, 5rem)', fontWeight: 400, color: '#edeae2', lineHeight: 1.0, letterSpacing: '0.02em', marginBottom: '1.5rem' }}>Make your time count</h3>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(237,234,226,0.72)', lineHeight: '34.96px', marginBottom: '2rem' }}>We are going to spend a huge portion of our lives working. So why not point that time at something that actually matters?</p>
-              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>Read →</span>
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(237,234,226,0.4)' }}>{c.latest.read}</span>
             </div>
           </a>
         </div></Reveal>
