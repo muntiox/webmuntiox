@@ -260,7 +260,7 @@ export function BlogPage() {
             <div key={post.id} onClick={() => setSelectedId(post.id)}
               style={{ cursor: 'pointer', display: 'block', padding: '2.5rem', border: '1px solid rgba(255,255,255,0.18)', background: 'rgba(0,0,0,0.25)', backdropFilter: 'blur(4px)', transition: 'border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = '#8a2333'; e.currentTarget.style.background = 'rgba(217,115,122,0.12)'; e.currentTarget.style.boxShadow = '0 0 24px rgba(255,255,255,0.15)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; e.currentTarget.style.background = 'rgba(255,255,255,0.55)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; e.currentTarget.style.background = 'rgba(0,0,0,0.25)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'translateY(0)' }}>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>{post.date}</p>
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '2.5rem', fontWeight: 400, color: '#ffffff', lineHeight: 1.1, letterSpacing: '0.02em', marginBottom: '1rem' }}>{post.title}</h2>
               <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', maxWidth: '600px' }}>{post.description}</p>
