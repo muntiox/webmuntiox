@@ -8,17 +8,28 @@ import { useLanguage } from '../lib/i18n'
 // nothing. Drag across it (mouse or finger) and it wears away like a
 // scratch card, revealing a solid coral panel underneath. Past about
 // half cleared, it finishes itself and counts.
+const REVEAL_QUOTE = {
+  en: {
+    text: 'If you would convince a man that he does wrong, do right. But do not care to convince him. Men will believe what they see. Let them see.',
+    author: '— Henry David Thoreau',
+  },
+  es: {
+    text: 'Si quieres convencer a alguien de que se equivoca, haz lo correcto. Pero no te empeñes en convencerlo. La gente creerá lo que ve. Deja que lo vea.',
+    author: '— Henry David Thoreau',
+  },
+}
+
 export default function ClueScratch({
   id,
-  width = 168,
-  height = 104,
+  width = 320,
+  height = 200,
 }: {
   id: ClueId
   width?: number
   height?: number
 }) {
   const { lang } = useLanguage()
-  const foundLabel = lang === 'es' ? 'Encontrado.' : 'Found it.'
+  const quote = REVEAL_QUOTE[lang]
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const drawing = useRef(false)
   const [solved, setSolved] = useState(false)
@@ -73,12 +84,19 @@ export default function ClueScratch({
           inset: 0,
           background: '#d9737a',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
+          gap: '0.9rem',
+          padding: '1.6rem',
+          textAlign: 'center',
         }}
       >
-        <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.04em', color: '#2a0c12' }}>
-          {foundLabel}
+        <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.82rem', fontWeight: 400, lineHeight: 1.55, color: '#2a0c12', margin: 0 }}>
+          "{quote.text}"
+        </p>
+        <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '0.75rem', letterSpacing: '0.08em', color: 'rgba(42,12,18,0.7)' }}>
+          {quote.author}
         </span>
       </div>
       {!solved && (
