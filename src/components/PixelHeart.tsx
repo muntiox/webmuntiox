@@ -36,6 +36,42 @@ CELLS.forEach(({ x, y }) => {
   if (!atCell(x + 1, y)) OUTLINE_SEGMENTS.push({ x1: x + 1, y1: y, x2: x + 1, y2: y + 1 })
 })
 
+// Walk the outline segments into a single ordered loop, so the heart can
+// render as one continuous <polygon> instead of ~30 independent <rect>/
+// <line> primitives. At small pixel sizes, crisp-edge-rendering that many
+// separate primitives snaps each one individually, and the inconsistent
+// snapping can open a visible gap in the outline — a single closed shape
+// never has that seam.
+function buildOutlinePoints(): string {
+  const key = (x: number, y: number) => `${x},${y}`
+  const adjacency = new Map<string, string[]>()
+  OUTLINE_SEGMENTS.forEach(({ x1, y1, x2, y2 }) => {
+    const a = key(x1, y1)
+    const b = key(x2, y2)
+    if (!adjacency.has(a)) adjacency.set(a, [])
+    if (!adjacency.has(b)) adjacency.set(b, [])
+    adjacency.get(a)!.push(b)
+    adjacency.get(b)!.push(a)
+  })
+  const start = [...adjacency.keys()].sort((a, b) => {
+    const [ax, ay] = a.split(',').map(Number)
+    const [bx, by] = b.split(',').map(Number)
+    return ay - by || ax - bx
+  })[0]
+  const path = [start]
+  let prev: string | null = null
+  let current = start
+  while (true) {
+    const next = adjacency.get(current)!.find((n) => n !== prev)
+    if (next === undefined || next === start) break
+    path.push(next)
+    prev = current
+    current = next
+  }
+  return path.join(' ')
+}
+const OUTLINE_POINTS = buildOutlinePoints()
+
 export default function PixelHeart({
   filled,
   size = 14,
@@ -59,16 +95,13 @@ export default function PixelHeart({
         transition: 'transform 0.45s cubic-bezier(0.2,0.8,0.2,1.4), filter 0.4s ease',
       }}
     >
-      <g fill={filled ? 'rgba(217,115,122,0.55)' : 'rgba(255,255,255,0.05)'}>
-        {CELLS.map((c) => (
-          <rect key={`${c.x}-${c.y}`} x={c.x} y={c.y} width={1} height={1} />
-        ))}
-      </g>
-      <g stroke={filled ? 'rgba(217,115,122,0.75)' : 'rgba(255,255,255,0.32)'} strokeWidth={0.16} strokeLinecap="square">
-        {OUTLINE_SEGMENTS.map((s, i) => (
-          <line key={i} x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2} />
-        ))}
-      </g>
+      <polygon
+        points={OUTLINE_POINTS}
+        fill={filled ? 'rgba(217,115,122,0.55)' : 'rgba(255,255,255,0.05)'}
+        stroke={filled ? 'rgba(217,115,122,0.75)' : 'rgba(255,255,255,0.32)'}
+        strokeWidth={0.16}
+        strokeLinejoin="miter"
+      />
     </svg>
   )
 }
