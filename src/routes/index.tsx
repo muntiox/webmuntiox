@@ -368,7 +368,7 @@ function Hero() {
             fixed top-left badge (BrandBadge) so it stays put through scroll. */}
         <p className="mxo-statement" style={{ marginTop: '2.2rem' }}>
           {c.line1}<br/>
-          <CorrectionOnly /><br/>
+          <CorrectionOnly key={lang} /><br/>
           {c.line3}<br/>
           {c.line4}
         </p>
