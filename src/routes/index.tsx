@@ -44,6 +44,7 @@ const copy = {
         { title: 'Animal justice, non-negotiable.', body: 'NGOs and grassroots organisations fighting for the voiceless. Not an add-on to an ethics brief — a cause I show up for fully.' },
         { title: 'A planet worth defending.', body: 'Environmental NGOs and organisations doing the work the planet actually needs — content and strategy for people fighting for it.' },
       ],
+      closing: "And if none of this crosses my path, there's a good chance you'll still find me on something purely creative — that pull never really goes away.",
     },
     skills: {
       eyebrow: 'What I do',
@@ -114,6 +115,7 @@ const copy = {
         { title: 'Justicia animal, innegociable.', body: 'ONGs y organizaciones de base que luchan por quienes no tienen voz. No es un añadido a un brief ético: es una causa a la que me entrego por completo.' },
         { title: 'Un planeta que merece la pena defender.', body: 'ONGs y organizaciones ambientales que hacen el trabajo que el planeta realmente necesita: contenido y estrategia para quienes luchan por él.' },
       ],
+      closing: 'Y si no encuentro nada de esto, es muy probable que igualmente me veáis en algún proyecto puramente creativo: ese tirón nunca desaparece del todo.',
     },
     skills: {
       eyebrow: 'A qué me dedico',
@@ -453,6 +455,7 @@ export function Portfolio() {
               </div>
             ))}
             </div>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.95rem', fontWeight: 300, fontStyle: 'italic', color: 'rgba(237,234,226,0.75)', lineHeight: 1.7, maxWidth: 640, marginTop: '2rem' }}>{c.video.closing}</p>
           </div>
         </div></Reveal>
         <Reveal><div className="mxo-skills">
