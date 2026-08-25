@@ -38,7 +38,7 @@ const copy = {
       eyebrow: 'The kind of work I dream about',
       aside: "(though I'm open to what life teaches me)",
       boxes: [
-        { title: 'Ethical brands, done right.', body: 'Ethical, lifestyle projects that deserve a voice as strong as their values.' },
+        { title: 'Ethical brands, done right.', body: "Ethical, lifestyle projects that deserve a voice as strong as their values. I'm especially drawn to the wildly creative briefs — the kind that make me want to say yes on the spot, once I've looked at what's behind the brand." },
         { title: 'Travel with a conscience.', body: 'Responsible agencies and conscious stays — content that moves people to go, gently. I care about travelling quietly, and wish travel could always be this ethical.' },
         { title: 'People with something to say.', body: 'Helping changemakers and quiet disruptors get seen, and heard.' },
         { title: 'Animal justice, non-negotiable.', body: 'NGOs and grassroots organisations fighting for the voiceless. Not an add-on to an ethics brief — a cause I show up for fully.' },
@@ -108,7 +108,7 @@ const copy = {
       eyebrow: 'El tipo de trabajo con el que sueño',
       aside: '(aunque estoy abierta a lo que la vida me enseñe)',
       boxes: [
-        { title: 'Marcas éticas, bien hechas.', body: 'Proyectos de estilo de vida y ética que merecen una voz tan fuerte como sus valores.' },
+        { title: 'Marcas éticas, bien hechas.', body: 'Proyectos de estilo de vida y ética que merecen una voz tan fuerte como sus valores. Me atraen especialmente los briefs muy creativos: del tipo que me dan ganas de aceptar al momento, una vez que he mirado bien qué hay detrás de la marca.' },
         { title: 'Viajar con conciencia.', body: 'Agencias responsables y alojamientos conscientes: contenido que anima a viajar, con suavidad. Me importa viajar sin dejar huella, y ojalá viajar fuera siempre así de ético.' },
         { title: 'Personas con algo que decir.', body: 'Ayudo a quienes impulsan el cambio y a quienes remueven las cosas en silencio a que se les vea y se les escuche.' },
         { title: 'Justicia animal, innegociable.', body: 'ONGs y organizaciones de base que luchan por quienes no tienen voz. No es un añadido a un brief ético: es una causa a la que me entrego por completo.' },
