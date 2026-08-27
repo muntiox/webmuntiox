@@ -57,6 +57,16 @@ const copy = {
         ['Creative Direction', 'Storytelling', 'Photo & Video Content', 'Content Creation'],
       ],
     },
+    labels: {
+      title1: "I'm not just one thing,",
+      title2: "and I'm tired of pretending I am.",
+      body1: "It genuinely bothers me to say I'm 'just' a content creator, because I'm also good at leading, at talking to people, at designing things, organising, coming up with ideas, picking up new technology, running a team, social media, and a hundred other things I haven't even discovered yet.",
+      body2: "I don't understand why we have to pick one label when I feel capable of doing almost anything, obviously within some direction, but I know I can grow and learn more from one day to the next, and whatever title I'm given today will feel too small for me tomorrow.",
+      body3: "Maybe right now I'm brilliant at editing a video. Give me a whole team to lead instead and I promise you I'd be just as good at that too, even having never done it before.",
+      body4: "So no, I won't shrink myself down to a single box just to make me easier to file. I'm many things, and I keep becoming more of them every day.",
+      body5: "Sometimes it feels like we get made smaller every time we're simplified down to one thing. I don't plan on letting that happen to me.",
+      closing: "Maybe one day I'll invent a job title that's everything I am, without shrinking any of it down. And I'll wear it like a flag.",
+    },
     about: {
       eyebrow: 'Not the LinkedIn version',
       title: 'Not exactly according to plan.',
@@ -129,6 +139,16 @@ const copy = {
         ['Estrategia de Contenido', 'Identidad de Marca', 'Comunidades Digitales', 'Campañas Sociales'],
         ['Dirección Creativa', 'Storytelling', 'Contenido Foto y Vídeo', 'Creación de Contenido'],
       ],
+    },
+    labels: {
+      title1: 'No soy solo una cosa,',
+      title2: 'y estoy cansada de fingir que sí.',
+      body1: 'Me jode decir que solo soy creadora de contenido, porque también se me da genial liderar, hablar con las personas, diseñar, organizar, dar ideas, manejarme con la tecnología, llevar un equipo, las redes sociales, y otras mil cosas que ni siquiera he descubierto todavía.',
+      body2: 'No entiendo por qué tenemos que ponernos una sola etiqueta cuando me siento capaz de hacer casi cualquier cosa, obviamente dentro de una dirección, pero sé que puedo crecer y saber más de un día para otro, y cualquier puesto que me den hoy se me quedará corto mañana.',
+      body3: 'Puede que ahora mismo sepa editar un vídeo de muerte. Dame un equipo entero que liderar y te prometo que lo haría igual de bien, aunque no lo haya hecho en mi vida.',
+      body4: 'Así que no, no pienso reducirme a una sola casilla para que sea más fácil clasificarme. Soy muchas cosas, y cada día soy un poco más.',
+      body5: 'Es como que siento que nos empequeñecen cada vez que nos simplifican a una sola cosa. Y no pienso dejar que eso me pase a mí.',
+      closing: 'Puede que algún día me invente un puesto de trabajo que sea todo lo que soy, sin simplificarme nada. Y pienso llevarlo por bandera.',
     },
     about: {
       eyebrow: 'La versión que no está en LinkedIn',
@@ -469,6 +489,15 @@ export function Portfolio() {
             <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(1.7rem, 3.4vw, 2.7rem)', fontWeight: 400, color: '#edeae2', lineHeight: 0.92, letterSpacing: '0.03em', display: 'block' }}>{c.skills.years}<br/>{c.skills.yearsLine2}</span>
           </div>
           <SkillsPicker groups={c.skills.groups} />
+        </div></Reveal>
+        <Reveal><div className="mxo-manifesto">
+          <h2 className="mxo-manifesto-title">{c.labels.title1}<br/>{c.labels.title2}</h2>
+          <p className="mxo-manifesto-body">{c.labels.body1}</p>
+          <p className="mxo-manifesto-body">{c.labels.body2}</p>
+          <p className="mxo-manifesto-body">{c.labels.body3}</p>
+          <p className="mxo-manifesto-body">{c.labels.body4}</p>
+          <p className="mxo-manifesto-body">{c.labels.body5}</p>
+          <p className="mxo-about-me-closing">{c.labels.closing}</p>
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
           <div className="mxo-about-me-inner">
