@@ -60,12 +60,15 @@ const copy = {
     labels: {
       title1: "I'm not just one thing,",
       title2: "and I'm tired of pretending I am.",
-      body1: "It genuinely bothers me to say I'm 'just' a content creator, because I'm also good at leading, at talking to people, at designing things, organising, coming up with ideas, picking up new technology, running a team, social media, and a hundred other things I haven't even discovered yet.",
-      body2: "I don't understand why we have to pick one label when I feel capable of doing almost anything, obviously within some direction, but I know I can grow and learn more from one day to the next, and whatever title I'm given today will feel too small for me tomorrow.",
-      body3: "Maybe right now I'm brilliant at editing a video. Give me a whole team to lead instead and I promise you I'd be just as good at that too, even having never done it before.",
-      body4: "So no, I won't shrink myself down to a single box just to make me easier to file. I'm many things, and I keep becoming more of them every day.",
-      body5: "Sometimes it feels like we get made smaller every time we're simplified down to one thing. I don't plan on letting that happen to me.",
-      closing: "Maybe one day I'll invent a job title that's everything I am, without shrinking any of it down. And I'll wear it like a flag.",
+      body1: "Somewhere along the way we started treating job titles like cages instead of doors. Content creator, community manager, video editor: I've been called all of these, and none of them are wrong, but none of them are the whole picture either.",
+      body2: "What I actually do is notice what a situation needs and become that. Sometimes it's editing a video until the rhythm feels right. Sometimes it's talking someone through an idea until it clicks. Sometimes it's organising the chaos nobody else wants to touch, or leading people through something I've genuinely never done before and figuring it out as I go. Sometimes it's learning an entire new language from scratch because the project needed it.",
+      body3: "Give me something I've never done and a week to prepare, and I'll show up ready to nail it anyway. That's not bravado, it's just how I'm built: I don't wait to be qualified before I try.",
+      body4: "Maybe that's what actually bothers me about being simplified down to one label: it's not really about me, it's about how easily we let people get shrunk down to something manageable and call it clarity.",
+      closingPre: 'One day I’ll call myself: ',
+      closingPost: ". And I'll wear it like a flag.",
+      shuffleWords: ['Content Creator', 'Community Manager', 'Video Editor', 'Project Coordinator', 'Team Lead', 'Copywriter'],
+      finalTitle: 'All In Creative Strategist',
+      shuffleHint: '(click to try labelling me again)',
     },
     about: {
       eyebrow: 'Not the LinkedIn version',
@@ -143,12 +146,15 @@ const copy = {
     labels: {
       title1: 'No soy solo una cosa,',
       title2: 'y estoy cansada de fingir que sí.',
-      body1: 'Me jode decir que solo soy creadora de contenido, porque también se me da genial liderar, hablar con las personas, diseñar, organizar, dar ideas, manejarme con la tecnología, llevar un equipo, las redes sociales, y otras mil cosas que ni siquiera he descubierto todavía.',
-      body2: 'No entiendo por qué tenemos que ponernos una sola etiqueta cuando me siento capaz de hacer casi cualquier cosa, obviamente dentro de una dirección, pero sé que puedo crecer y saber más de un día para otro, y cualquier puesto que me den hoy se me quedará corto mañana.',
-      body3: 'Puede que ahora mismo sepa editar un vídeo de muerte. Dame un equipo entero que liderar y te prometo que lo haría igual de bien, aunque no lo haya hecho en mi vida.',
-      body4: 'Así que no, no pienso reducirme a una sola casilla para que sea más fácil clasificarme. Soy muchas cosas, y cada día soy un poco más.',
-      body5: 'Es como que siento que nos empequeñecen cada vez que nos simplifican a una sola cosa. Y no pienso dejar que eso me pase a mí.',
-      closing: 'Puede que algún día me invente un puesto de trabajo que sea todo lo que soy, sin simplificarme nada. Y pienso llevarlo por bandera.',
+      body1: 'En algún momento empezamos a tratar los puestos de trabajo como jaulas en vez de puertas. Creadora de contenido, community manager, editora de vídeo: me han llamado todas esas cosas, y ninguna está mal, pero ninguna es tampoco la foto completa.',
+      body2: 'Lo que realmente hago es fijarme en lo que hace falta en cada momento y convertirme en eso. A veces es editar un vídeo hasta que el ritmo encaja. A veces es hablar con alguien hasta que le hace clic una idea. A veces es poner orden en el caos que nadie más quiere tocar, o liderar a gente en algo que de verdad nunca he hecho antes, improvisando sobre la marcha. A veces es aprender un idioma entero desde cero porque el proyecto lo pedía.',
+      body3: 'Dame algo que nunca haya hecho y una semana para prepararlo, y me presentaré lista para bordarlo igualmente. No es chulería, es simplemente cómo soy: no espero a estar cualificada para intentarlo.',
+      body4: 'Puede que eso sea lo que realmente me molesta de que me simplifiquen a una sola etiqueta: en realidad no va de mí, va de lo fácil que nos resulta empequeñecer a alguien hasta algo manejable y llamarlo claridad.',
+      closingPre: 'Algún día me llamaré a mí misma: ',
+      closingPost: '. Y lo llevaré por bandera.',
+      shuffleWords: ['Creadora de Contenido', 'Community Manager', 'Editora de Vídeo', 'Coordinadora de Proyectos', 'Líder de Equipo', 'Copywriter'],
+      finalTitle: 'All In Creative Strategist',
+      shuffleHint: '(haz clic para intentar etiquetarme otra vez)',
     },
     about: {
       eyebrow: 'La versión que no está en LinkedIn',
@@ -279,6 +285,78 @@ function CorrectionOnly() {
           {showCursor && <span className="correction-cursor" />}
         </>
       )}
+    </span>
+  )
+}
+// ── Label shuffle: types out a series of "wrong" labels, strikes each
+// through, then lands on the real one. Click to replay once it's done. ──
+type ShufflePhase = 'idle' | 'typing' | 'striking' | 'erasing' | 'typing-final' | 'done'
+function LabelShuffle({ words, finalTitle, hint }: { words: string[]; finalTitle: string; hint: string }) {
+  const [phase, setPhase] = useState<ShufflePhase>('idle')
+  const [index, setIndex] = useState(0)
+  const [text, setText] = useState('')
+  const [runId, setRunId] = useState(0)
+  useEffect(() => {
+    const t = setTimeout(() => setPhase('typing'), 500)
+    return () => clearTimeout(t)
+  }, [runId])
+  useEffect(() => {
+    if (phase === 'typing') {
+      const word = words[index]
+      let i = 0
+      const iv = setInterval(() => {
+        i++; setText(word.slice(0, i))
+        if (i >= word.length) { clearInterval(iv); setTimeout(() => setPhase('striking'), 450) }
+      }, 55)
+      return () => clearInterval(iv)
+    }
+    if (phase === 'striking') {
+      const t = setTimeout(() => setPhase('erasing'), 500)
+      return () => clearTimeout(t)
+    }
+    if (phase === 'erasing') {
+      const word = words[index]
+      let i = word.length
+      const iv = setInterval(() => {
+        i--; setText(word.slice(0, Math.max(i, 0)))
+        if (i <= 0) {
+          clearInterval(iv)
+          const nextIndex = index + 1
+          if (nextIndex < words.length) { setIndex(nextIndex); setTimeout(() => setPhase('typing'), 200) }
+          else { setTimeout(() => setPhase('typing-final'), 250) }
+        }
+      }, 30)
+      return () => clearInterval(iv)
+    }
+    if (phase === 'typing-final') {
+      let i = 0
+      const iv = setInterval(() => {
+        i++; setText(finalTitle.slice(0, i))
+        if (i >= finalTitle.length) { clearInterval(iv); setTimeout(() => setPhase('done'), 200) }
+      }, 55)
+      return () => clearInterval(iv)
+    }
+  }, [phase, index, words, finalTitle])
+  const replay = () => {
+    if (phase !== 'done') return
+    setIndex(0); setText(''); setPhase('idle'); setRunId(r => r + 1)
+  }
+  const isFinal = phase === 'typing-final' || phase === 'done'
+  const showCursor = phase !== 'idle'
+  return (
+    <span
+      className={`mxo-label-shuffle${phase === 'done' ? ' is-done' : ''}`}
+      onClick={replay}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter') replay() }}
+    >
+      <span className="mxo-label-shuffle-text">
+        {!isFinal && text && <span className={phase === 'striking' ? 'correction-strike' : ''}>{text}</span>}
+        {isFinal && text && <span className="correction-only">{text}</span>}
+        {showCursor && <span className="correction-cursor" />}
+      </span>
+      {phase === 'done' && <span className="mxo-label-shuffle-hint">{hint}</span>}
     </span>
   )
 }
@@ -490,14 +568,17 @@ export function Portfolio() {
           </div>
           <SkillsPicker groups={c.skills.groups} />
         </div></Reveal>
-        <Reveal><div className="mxo-manifesto">
+        <Reveal><div className="mxo-manifesto mxo-manifesto--labels">
           <h2 className="mxo-manifesto-title">{c.labels.title1}<br/>{c.labels.title2}</h2>
           <p className="mxo-manifesto-body">{c.labels.body1}</p>
           <p className="mxo-manifesto-body">{c.labels.body2}</p>
           <p className="mxo-manifesto-body">{c.labels.body3}</p>
           <p className="mxo-manifesto-body">{c.labels.body4}</p>
-          <p className="mxo-manifesto-body">{c.labels.body5}</p>
-          <p className="mxo-about-me-closing">{c.labels.closing}</p>
+          <p className="mxo-about-me-closing">
+            {c.labels.closingPre}
+            <LabelShuffle words={c.labels.shuffleWords} finalTitle={c.labels.finalTitle} hint={c.labels.shuffleHint} />
+            {c.labels.closingPost}
+          </p>
         </div></Reveal>
         <Reveal><section className="mxo-about-me">
           <div className="mxo-about-me-inner">

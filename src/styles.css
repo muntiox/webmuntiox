@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
+/* Self-hosted fonts (was a Google Fonts @import) — serving these from
+   our own domain avoids sending every visitor's IP to Google's CDN,
+   which is a real GDPR concern (see Munich LG ruling, 2022). */
+@import "@fontsource/outfit/300.css";
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/500.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/outfit/700.css";
+@import "@fontsource/bebas-neue/400.css";
 @import "tailwindcss";
 @source "./";
 @plugin "tailwindcss-animate";
@@ -692,6 +700,12 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-manifesto-body { color: rgba(237,234,226,0.72); margin-bottom: 1.6rem; font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 1.6vw, 1.15rem); font-weight: 300; line-height: 1.9; }
 .mxo-manifesto-closing { color: rgba(237,234,226,0.9); letter-spacing: 0.02em; margin-top: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 3.5vw, 2.5rem); line-height: 1.1; }
 .mxo-manifesto-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; }
+.mxo-manifesto--labels { border: 1px dashed rgba(217,115,122,0.35); border-radius: 22px; background: rgba(217,115,122,0.045); margin: 3rem clamp(1.5rem, 5vw, 5rem); padding: 3.5rem clamp(1.5rem, 4vw, 3.5rem); max-width: 1250px; }
+.mxo-label-shuffle { position: relative; display: inline-block; cursor: pointer; }
+.mxo-label-shuffle-text { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; font-size: inherit; color: #edeae2; }
+.mxo-label-shuffle.is-done .mxo-label-shuffle-text { text-shadow: 0 0 22px rgba(217,115,122,0.4); }
+.mxo-label-shuffle-hint { position: absolute; left: 0; top: 100%; white-space: nowrap; font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(237,234,226,0.38); margin-top: 0.4rem; }
+.mxo-label-shuffle:hover .mxo-label-shuffle-hint { color: #d9737a; }
 .mxo-cv-cta { z-index: 2; padding: 0 clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1300px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills-groups { grid-template-columns: 1fr 1fr; gap: 1rem 3rem; max-width: 100%; display: grid; }
