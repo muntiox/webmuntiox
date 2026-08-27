@@ -290,73 +290,72 @@ function CorrectionOnly() {
 }
 // ── Label shuffle: types out a series of "wrong" labels, strikes each
 // through, then lands on the real one. Click to replay once it's done. ──
-type ShufflePhase = 'idle' | 'typing' | 'striking' | 'erasing' | 'typing-final' | 'done'
 function LabelShuffle({ words, finalTitle, hint }: { words: string[]; finalTitle: string; hint: string }) {
-  const [phase, setPhase] = useState<ShufflePhase>('idle')
-  const [index, setIndex] = useState(0)
-  const [text, setText] = useState('')
+  const [display, setDisplay] = useState('')
+  const [struck, setStruck] = useState(false)
+  const [done, setDone] = useState(false)
+  const [booming, setBooming] = useState(false)
   const [runId, setRunId] = useState(0)
+  // Single cancellable sequence per run — immune to React StrictMode's
+  // dev-only double-invoke (which would otherwise retype the first word twice).
   useEffect(() => {
-    const t = setTimeout(() => setPhase('typing'), 500)
-    return () => clearTimeout(t)
-  }, [runId])
-  useEffect(() => {
-    if (phase === 'typing') {
-      const word = words[index]
-      let i = 0
-      const iv = setInterval(() => {
-        i++; setText(word.slice(0, i))
-        if (i >= word.length) { clearInterval(iv); setTimeout(() => setPhase('striking'), 450) }
-      }, 55)
-      return () => clearInterval(iv)
-    }
-    if (phase === 'striking') {
-      const t = setTimeout(() => setPhase('erasing'), 500)
-      return () => clearTimeout(t)
-    }
-    if (phase === 'erasing') {
-      const word = words[index]
-      let i = word.length
-      const iv = setInterval(() => {
-        i--; setText(word.slice(0, Math.max(i, 0)))
-        if (i <= 0) {
-          clearInterval(iv)
-          const nextIndex = index + 1
-          if (nextIndex < words.length) { setIndex(nextIndex); setTimeout(() => setPhase('typing'), 200) }
-          else { setTimeout(() => setPhase('typing-final'), 250) }
+    let cancelled = false
+    const timers: ReturnType<typeof setTimeout>[] = []
+    const wait = (ms: number) => new Promise<void>((resolve) => { timers.push(setTimeout(resolve, ms)) })
+    async function run() {
+      await wait(500)
+      for (const word of words) {
+        if (cancelled) return
+        setStruck(false)
+        for (let i = 1; i <= word.length; i++) {
+          if (cancelled) return
+          setDisplay(word.slice(0, i))
+          await wait(45)
         }
-      }, 30)
-      return () => clearInterval(iv)
+        if (cancelled) return
+        await wait(400)
+        if (cancelled) return
+        setStruck(true)
+        await wait(450)
+        for (let i = word.length; i >= 0; i--) {
+          if (cancelled) return
+          setDisplay(word.slice(0, i))
+          await wait(22)
+        }
+        if (cancelled) return
+        setStruck(false)
+        await wait(150)
+      }
+      for (let i = 1; i <= finalTitle.length; i++) {
+        if (cancelled) return
+        setDisplay(finalTitle.slice(0, i))
+        await wait(45)
+      }
+      if (cancelled) return
+      setDone(true)
     }
-    if (phase === 'typing-final') {
-      let i = 0
-      const iv = setInterval(() => {
-        i++; setText(finalTitle.slice(0, i))
-        if (i >= finalTitle.length) { clearInterval(iv); setTimeout(() => setPhase('done'), 200) }
-      }, 55)
-      return () => clearInterval(iv)
-    }
-  }, [phase, index, words, finalTitle])
+    setDisplay(''); setStruck(false); setDone(false)
+    run()
+    return () => { cancelled = true; timers.forEach(clearTimeout) }
+  }, [runId, words, finalTitle])
   const replay = () => {
-    if (phase !== 'done') return
-    setIndex(0); setText(''); setPhase('idle'); setRunId(r => r + 1)
+    if (!done) return
+    setBooming(true)
+    setTimeout(() => { setBooming(false); setRunId((r) => r + 1) }, 380)
   }
-  const isFinal = phase === 'typing-final' || phase === 'done'
-  const showCursor = phase !== 'idle'
   return (
     <span
-      className={`mxo-label-shuffle${phase === 'done' ? ' is-done' : ''}`}
+      className={`mxo-label-shuffle${done ? ' is-done' : ''}${booming ? ' is-booming' : ''}`}
       onClick={replay}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter') replay() }}
     >
       <span className="mxo-label-shuffle-text">
-        {!isFinal && text && <span className={phase === 'striking' ? 'correction-strike' : ''}>{text}</span>}
-        {isFinal && text && <span className="correction-only">{text}</span>}
-        {showCursor && <span className="correction-cursor" />}
+        <span className={struck ? 'mxo-label-strike' : done ? 'mxo-label-final' : ''}>{display}</span>
+        {!done && <span className="correction-cursor" />}
       </span>
-      {phase === 'done' && <span className="mxo-label-shuffle-hint">{hint}</span>}
+      {done && <span className="mxo-label-shuffle-hint">{hint}</span>}
     </span>
   )
 }

@@ -702,10 +702,20 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-manifesto-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; }
 .mxo-manifesto--labels { border: 1px dashed rgba(217,115,122,0.35); border-radius: 22px; background: rgba(217,115,122,0.045); margin: 3rem clamp(1.5rem, 5vw, 5rem); padding: 3.5rem clamp(1.5rem, 4vw, 3.5rem); max-width: 1250px; }
 .mxo-label-shuffle { position: relative; display: inline-block; cursor: pointer; }
-.mxo-label-shuffle-text { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; font-size: inherit; color: #edeae2; }
+.mxo-label-shuffle-text { font-family: 'Outfit', sans-serif !important; font-weight: 400; font-size: inherit; color: rgba(237,234,226,0.9); display: inline-block; transform-origin: left center; }
+.mxo-label-strike { position: relative; }
+.mxo-label-strike::after { content: ''; position: absolute; left: -0.05em; right: -0.05em; top: 52%; height: 2px; background: #d9737a; }
+.mxo-label-final { color: #d9737a; }
 .mxo-label-shuffle.is-done .mxo-label-shuffle-text { text-shadow: 0 0 22px rgba(217,115,122,0.4); }
 .mxo-label-shuffle-hint { position: absolute; left: 0; top: 100%; white-space: nowrap; font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(237,234,226,0.38); margin-top: 0.4rem; }
 .mxo-label-shuffle:hover .mxo-label-shuffle-hint { color: #d9737a; }
+@keyframes mxoLabelBoom {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.22); text-shadow: 0 0 10px rgba(217,115,122,0.9), 0 0 40px rgba(217,115,122,0.6); }
+  65% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+.mxo-label-shuffle.is-booming .mxo-label-shuffle-text { animation: mxoLabelBoom 0.38s ease-out; }
 .mxo-cv-cta { z-index: 2; padding: 0 clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1300px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills-groups { grid-template-columns: 1fr 1fr; gap: 1rem 3rem; max-width: 100%; display: grid; }
