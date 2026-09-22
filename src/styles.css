@@ -1,12 +1,4 @@
-/* Self-hosted fonts (was a Google Fonts @import) — serving these from
-   our own domain avoids sending every visitor's IP to Google's CDN,
-   which is a real GDPR concern (see Munich LG ruling, 2022). */
-@import "@fontsource/outfit/300.css";
-@import "@fontsource/outfit/400.css";
-@import "@fontsource/outfit/500.css";
-@import "@fontsource/outfit/600.css";
-@import "@fontsource/outfit/700.css";
-@import "@fontsource/bebas-neue/400.css";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
 @import "tailwindcss";
 @source "./";
 @plugin "tailwindcss-animate";
@@ -460,27 +452,7 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-contact[style*="opacity: 1"] .mxo-eyebrow::before { width: 32px; margin-right: 1rem; }
 .mxo-body { color: rgba(237,234,226,0.72); margin-bottom: 1.4rem; font-size: clamp(0.88rem, 1.4vw, 1rem); font-weight: 300; line-height: 1.85; }
 .mxo-tagline { color: #fff !important; font-size: clamp(0.9rem, 1.6vw, 1.1rem) !important; font-weight: 300; }
-/* ─── Highlighter sweep (brand phrase, no static underline) ────────
-   No mark at rest. Hover = pink highlighter marker sweeps
-   left→right under every letter, like drawing with a pen. */
-.highlighter { position: relative; display: inline-block; cursor: default; }
-.highlighter__text { position: relative; z-index: 1; }
-.highlighter::after {
-  content: ''; position: absolute; left: 0; bottom: -0.08em;
-  width: 100%; height: 0.32em;
-  background: transparent;
-  transform: scaleX(0); transform-origin: left;
-  z-index: 0; transition: background 0.3s ease;
-}
-.highlighter:hover::after {
-  background: #d9737a;
-  animation: highlighterSweep 0.5s ease forwards;
-}
-@keyframes highlighterSweep {
-  0%   { transform: scaleX(0); transform-origin: left; }
-  100% { transform: scaleX(1); transform-origin: left; }
-}
-.mxo-tagline .highlighter__text { color: #fff !important; }
+.mxo-tagline .highlighter__text { color: #fff !important; text-decoration-color: rgba(217,115,122,0.8) !important; }
 .mxo-title-accent { letter-spacing: 0.5em; text-transform: uppercase; color: #d9737a; margin-bottom: -0.5rem; margin-left: 0.15em; font-family: 'Bebas Neue', sans-serif; font-size: 0.6rem; font-weight: 500; display: block; }
 .mxo-vert-text { display: none !important; }
 .mxo-about { padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 5rem); position: relative; overflow: hidden; }
@@ -522,142 +494,8 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .contact-form .form-textarea:focus { outline: none; border-bottom-color: #d9737a !important; box-shadow: 0 1px 0 rgba(217,115,122,0.5) !important; }
 .contact-form .form-submit { background: #d9737a !important; animation: none !important; }
 .contact-form .form-submit:hover { box-shadow: 0 0 20px rgba(217,115,122,0.5) !important; }
-/* Three zones: logo (left) · copyright (center) · legal/social (right) */
-.mxo-footer {
-  border-top: 1px solid rgba(237,234,226,0.08);
-  padding: 2.5rem clamp(1.5rem, 5vw, 5rem);
-  display: grid; grid-template-columns: 1fr auto 1fr;
-  align-items: center; gap: 1.5rem;
-}
-.mxo-footer-copy {
-  grid-column: 2; justify-self: center;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(237,234,226,0.4); font-size: 0.62rem; text-align: center;
-}
-.mxo-footer-links { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 1.6rem; }
-.mxo-footer-links a {
-  display: inline-flex; align-items: center; gap: 0.4em;
-  font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(237,234,226,0.5); text-decoration: none;
-  transition: color 0.25s ease;
-}
-.mxo-footer-links a:hover { color: #d9737a; }
-.mxo-footer-ig svg { transition: transform 0.25s ease; }
-.mxo-footer-ig:hover svg { transform: scale(1.1); }
-/* Logo lockup — icon + wordmark, bottom-left of footer, sized up */
-.mxo-footer-logo { grid-column: 1; justify-self: start; display: inline-flex; align-items: center; gap: 0.6em; text-decoration: none; }
-.mxo-footer-logo img { width: 28px; height: 28px; object-fit: contain; display: block; }
-.mxo-footer-logo span { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.14em; font-size: 1.5rem; color: #d9737a; }
-@media (max-width: 640px) {
-  .mxo-footer { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-  .mxo-footer-logo, .mxo-footer-copy, .mxo-footer-links { grid-column: 1; justify-self: center; }
-}
-/* ─── Video section (note 6) — shorter/more compact, with a row of
-   short-copy boxes overlaid on the bottom ───────────────────────── */
-.mxo-video-section { position: relative; width: 100%; overflow: hidden; line-height: 0; border: 1px solid rgba(217,115,122,0.35); }
-.mxo-video-section video { width: 100%; height: clamp(460px, 62vw, 760px); object-fit: cover; display: block; }
-.mxo-video-overlay {
-  position: absolute; left: 0; right: 0; bottom: clamp(2rem, 5vw, 4rem);
-  display: flex; flex-direction: column; gap: 1.1rem;
-  padding: 0 clamp(1.5rem, 5vw, 4rem);
-  line-height: normal;
-}
-.mxo-video-overlay-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.8rem; }
-.mxo-video-overlay-heading .mxo-eyebrow { margin-bottom: 0; }
-/* Ambient sound toggle — icon only, tucked in the video's top-right
-   corner. Bars bob gently at rest (the invitation) and pick up once
-   playing (the confirmation). No text anywhere. */
-.mxo-sound-toggle {
-  position: absolute;
-  top: clamp(1.1rem, 3vw, 1.8rem);
-  right: clamp(1.1rem, 3vw, 1.8rem);
-  z-index: 3;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 3px;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  background: rgba(5,5,6,0.5);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(217,115,122,0.4);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: border-color 0.3s ease, background 0.3s ease;
-}
-.mxo-sound-toggle:hover { border-color: #d9737a; background: rgba(217,115,122,0.14); }
-.mxo-sound-bar {
-  display: block;
-  width: 3px;
-  height: 30%;
-  background: rgba(237,234,226,0.55);
-  border-radius: 2px;
-  animation: mxo-sound-idle 2.4s ease-in-out infinite;
-  transition: background 0.3s ease;
-}
-.mxo-sound-bar:nth-child(1) { animation-delay: 0s; }
-.mxo-sound-bar:nth-child(2) { animation-delay: 0.3s; }
-.mxo-sound-bar:nth-child(3) { animation-delay: 0.15s; }
-.mxo-sound-bar:nth-child(4) { animation-delay: 0.45s; }
-@keyframes mxo-sound-idle {
-  0%, 100% { height: 22%; }
-  50% { height: 50%; }
-}
-.mxo-sound-toggle.is-playing .mxo-sound-bar {
-  background: #d9737a;
-  animation-name: mxo-sound-active;
-  animation-duration: 0.85s;
-}
-@keyframes mxo-sound-active {
-  0%, 100% { height: 18%; }
-  50% { height: 85%; }
-}
-.mxo-video-overlay-aside {
-  font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 400;
-  letter-spacing: 0.04em; color: rgba(237,234,226,0.5); font-style: italic;
-}
-.mxo-video-boxes { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-.mxo-video-box {
-  flex: 1 1 260px; min-width: 240px;
-  background: rgba(5,5,6,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(217,115,122,0.35);
-  padding: clamp(1.6rem, 3vw, 2.3rem) clamp(1.5rem, 2.6vw, 1.9rem);
-}
-.mxo-video-box h3 {
-  font-family: 'Bebas Neue', sans-serif; font-weight: 400; letter-spacing: 0.02em;
-  font-size: clamp(1.3rem, 2.1vw, 1.7rem); color: #edeae2; line-height: 1.1;
-  margin-bottom: 0.7rem;
-}
-.mxo-video-box p {
-  font-family: 'Outfit', sans-serif; font-weight: 300;
-  font-size: clamp(0.82rem, 1.15vw, 0.92rem); line-height: 1.65;
-  color: rgba(237,234,226,0.75);
-}
-@media (max-width: 640px) {
-  .mxo-video-section video { height: clamp(420px, 90vw, 560px); }
-  .mxo-video-overlay { position: static; padding: 1.2rem; margin-top: -0.5rem; }
-  .mxo-video-boxes { flex-direction: column; }
-  .mxo-video-box { flex: 1 1 auto; }
-}
-/* ─── Heart-pulse route transition (note 3) ─────────────────────── */
-.mxo-route-pulse {
-  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
-  display: flex; align-items: center; justify-content: center;
-}
-.mxo-route-pulse::before {
-  content: ''; width: 60vmax; height: 60vmax; border-radius: 50%;
-  background: radial-gradient(circle, rgba(217,115,122,0.9) 0%, rgba(138,35,51,0.4) 45%, rgba(138,35,51,0) 72%);
-  opacity: 0; transform: scale(0);
-}
-.mxo-route-pulse.is-active::before { animation: routePulse 0.55s cubic-bezier(0.2,0.8,0.3,1) forwards; }
-@keyframes routePulse {
-  0%   { opacity: 0.95; transform: scale(0); }
-  45%  { opacity: 0.6; transform: scale(0.8); }
-  100% { opacity: 0; transform: scale(1.5); }
-}
+.mxo-footer { border-top: 1px solid rgba(237,234,226,0.08); padding: 2.5rem clamp(1.5rem, 5vw, 5rem); }
+.mxo-footer-copy { letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,234,226,0.22); font-size: 0.62rem; }
 .mxo-marquee-outer { z-index: 3; background: rgba(217,115,122,0.06); border-top: 1px solid rgba(217,115,122,0.25); border-bottom: 1px solid rgba(217,115,122,0.25); width: 100%; padding: 1rem 0; position: relative; overflow: hidden; }
 .mxo-marquee-track { width: max-content; animation: marquee-scroll 22s linear infinite; display: flex; }
 .mxo-marquee-track:hover { animation-play-state: paused; }
@@ -695,103 +533,18 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-about-video { opacity: 0.5; object-position: right center; }
 .mxo-contact-video { opacity: 0.5; object-position: center center; }
 .mxo-about-text, .mxo-contact-inner { z-index: 2; position: relative; }
-.mxo-manifesto { z-index: 2; max-width: 1300px; margin: 0; padding: 4rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-manifesto { z-index: 2; max-width: 100%; margin: 0; padding: 4rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-manifesto-question { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.1; }
 .mxo-manifesto-body { color: rgba(237,234,226,0.72); margin-bottom: 1.6rem; font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 1.6vw, 1.15rem); font-weight: 300; line-height: 1.9; }
 .mxo-manifesto-closing { color: rgba(237,234,226,0.9); letter-spacing: 0.02em; margin-top: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 3.5vw, 2.5rem); line-height: 1.1; }
 .mxo-manifesto-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 3rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; }
-.mxo-manifesto--labels { border: 1px dashed rgba(217,115,122,0.35); border-radius: 22px; background: rgba(217,115,122,0.045); margin: 3rem clamp(1.5rem, 5vw, 5rem); padding: 3.5rem clamp(1.5rem, 4vw, 3.5rem); max-width: 1250px; }
-.mxo-label-shuffle { position: relative; display: inline-block; cursor: pointer; }
-.mxo-label-shuffle-text { font-family: 'Outfit', sans-serif !important; font-weight: 400; font-size: inherit; color: rgba(237,234,226,0.9); display: inline-block; transform-origin: left center; }
-.mxo-label-strike { position: relative; }
-.mxo-label-strike::after { content: ''; position: absolute; left: -0.05em; right: -0.05em; top: 52%; height: 2px; background: #d9737a; }
-.mxo-label-final { color: #d9737a; }
-.mxo-label-shuffle.is-done .mxo-label-shuffle-text { text-shadow: 0 0 22px rgba(217,115,122,0.4); }
-.mxo-label-shuffle-hint { position: absolute; left: 0; top: 100%; white-space: nowrap; font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(237,234,226,0.38); margin-top: 0.4rem; }
-.mxo-label-shuffle:hover .mxo-label-shuffle-hint { color: #d9737a; }
-@keyframes mxoLabelBoom {
-  0% { transform: scale(1); }
-  35% { transform: scale(1.22); text-shadow: 0 0 10px rgba(217,115,122,0.9), 0 0 40px rgba(217,115,122,0.6); }
-  65% { transform: scale(0.94); }
-  100% { transform: scale(1); }
-}
-.mxo-label-shuffle.is-booming .mxo-label-shuffle-text { animation: mxoLabelBoom 0.38s ease-out; }
 .mxo-cv-cta { z-index: 2; padding: 0 clamp(1.5rem, 5vw, 5rem); position: relative; }
-.mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1300px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-skills { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 100%; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-skills-groups { grid-template-columns: 1fr 1fr; gap: 1rem 3rem; max-width: 100%; display: grid; }
 .mxo-skills-group { flex-direction: column; gap: 0.6rem; display: flex; }
 .mxo-skill-tag { letter-spacing: 0.15em; text-transform: uppercase; color: rgba(237,234,226,0.72); cursor: default; border: 1px solid rgba(237,234,226,0.15); padding: 0.8rem 1.2rem; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 400; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
 .mxo-skill-tag:hover { color: #fff; background: rgba(217,115,122,0.08); border-color: #d9737a; transform: translateY(-2px); box-shadow: 0 0 20px rgba(217,115,122,0.25); }
-/* ─── About-me editorial pause — card joined to the whole photo ────
-   Card and photo sit as one continuous block, touching edge to edge,
-   stretched to the same height so both read as equidistant from the
-   section's top and bottom padding — no overlap, no tilt, no stray
-   gaps. Photo uses object-fit:contain (not cover) so it's shown
-   whole, never cropped; any letterbox space blends into the wrap's
-   dark background. Stacks on mobile, photo first, full width. ───── */
-.mxo-about-me {
-  position: relative; z-index: 2;
-  background: rgba(5,5,6,0.4);
-  border-top: 1px solid rgba(237,234,226,0.08);
-}
-.mxo-about-me-inner {
-  width: 100%;
-  display: flex; align-items: stretch;
-  min-height: clamp(520px, 56vw, 820px);
-}
-.mxo-about-me-card {
-  width: min(560px, 44%); flex-shrink: 0;
-  background: rgba(5,5,6,0.94);
-  border: 1px solid rgba(217,115,122,0.3);
-  border-top: none; border-bottom: none; border-left: none;
-  padding: clamp(2.2rem, 4vw, 3.4rem);
-  display: flex; flex-direction: column; justify-content: center;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
-  z-index: 2;
-}
-.mxo-about-me-photo-wrap {
-  position: relative;
-  flex: 1 1 auto; min-width: 0;
-  background: rgba(5,5,6,0.94);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-}
-.mxo-about-me-photo {
-  width: 100%; height: 100%; object-fit: cover; object-position: 72% 22%; display: block;
-  filter: grayscale(1) contrast(1.05);
-}
-/* Garnet blend on the left edge of the photo, where it meets the card */
-.mxo-about-me-photo-wrap::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(138,35,51,0.55) 0%, rgba(138,35,51,0.28) 16%, rgba(138,35,51,0.08) 32%, transparent 46%);
-  z-index: 1;
-  pointer-events: none;
-}
-.mxo-about-me-title {
-  font-family: 'Bebas Neue', sans-serif; font-weight: 400;
-  font-size: clamp(2.1rem, 4vw, 3rem); line-height: 1.05;
-  color: #edeae2; letter-spacing: 0.02em; margin-bottom: 0;
-}
-.mxo-about-me-rule { display: block; width: 48px; height: 2px; background: #d9737a; margin: 1.1rem 0 1.2rem; }
-.mxo-about-me-copy {
-  font-family: 'Outfit', sans-serif; font-weight: 300;
-  font-size: clamp(0.9rem, 1.2vw, 1.02rem); line-height: 1.75;
-  color: rgba(237,234,226,0.85); margin-bottom: 1.1rem;
-}
-.mxo-about-me-copy strong { font-weight: 700; color: #edeae2; }
-.mxo-about-me-closing {
-  font-family: 'Bebas Neue', sans-serif; font-weight: 400;
-  font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.15;
-  color: #d9737a; letter-spacing: 0.01em; margin-bottom: 0;
-}
-@media (max-width: 768px) {
-  .mxo-about-me-inner { flex-direction: column; min-height: auto; }
-  .mxo-about-me-photo-wrap { width: 100%; order: -1; box-shadow: none; min-height: 380px; }
-  .mxo-about-me-card { width: auto; box-shadow: none; border: 1px solid rgba(217,115,122,0.3); }
-}
-.mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); max-width: 1300px; margin: 0 auto; padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
+.mxo-featured { z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); padding: 5rem clamp(1.5rem, 5vw, 5rem); position: relative; }
 .mxo-featured-card { color: inherit; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 900px; text-decoration: none; display: grid; }
 .mxo-featured-video { aspect-ratio: 16/9; object-fit: cover; width: 100%; display: block; }
 .mxo-featured-title { color: #edeae2; letter-spacing: 0.02em; margin-bottom: 1rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; }
@@ -801,17 +554,9 @@ body.nav-lit .mxo-nav { background: rgba(38,8,72,0.94) !important; border-bottom
 .mxo-featured-grid { grid-template-columns: 1fr 1fr; gap: 2rem; display: grid; }
 .mxo-featured-item { color: inherit; border: 1px solid rgba(237,234,226,0.08); padding: 2rem; text-decoration: none; transition: color 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s, transform 0.3s; display: block; }
 .mxo-featured-item:hover { background: rgba(217,115,122,0.08); border-color: #d9737a; transform: translateY(-2px); box-shadow: 0 0 24px rgba(217,115,122,0.25); }
-/* Third "featured" slot — an open invitation, not a past project. Spans
-   both columns as a wide banner beneath the two case studies, with a
-   dashed border so it visually reads as "unwritten yet". */
-.mxo-featured-item--cta { grid-column: 1 / -1; border-style: dashed; border-color: rgba(217,115,122,0.3); background: rgba(217,115,122,0.03); }
-.mxo-featured-item--cta:hover { border-style: dashed; }
-.mxo-featured-item-eyebrow { letter-spacing: 0.3em; text-transform: uppercase; color: #d9737a; font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 600; margin-bottom: 0.8rem; display: block; }
 .mxo-latest-post { position: relative; z-index: 2; border-top: 1px solid rgba(237,234,226,0.08); padding-top: 5rem; }
 .mxo-latest-post .mxo-eyebrow { padding-left: clamp(1.5rem, 5vw, 5rem); display: block; margin-bottom: 2rem; }
-/* Same glow language as .mxo-featured-item / .mxo-skill-tag */
-.mxo-latest-post-link { transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
-.mxo-latest-post-link:hover { background: rgba(217,115,122,0.08) !important; border-color: #d9737a !important; transform: translateY(-2px); box-shadow: 0 0 24px rgba(217,115,122,0.25); }
+.mxo-latest-post a:hover { box-shadow: 0 0 24px rgba(217,115,122,0.2); }
 /* Font override — always Outfit for body text, Bebas for headings */
 p, li, label, input, textarea,
 a:not(.mxo-nav-brand):not(.mxo-fullnav-link):not(.mxo-mobile-link),
@@ -823,10 +568,6 @@ button:not(.mxo-nav-trigger),
 .form-label, .form-input, .form-textarea,
 .success-title, .success-text, .mxo-fullnav-bottom { font-family: 'Outfit', sans-serif !important; }
 .correction-wrapper, .correction-wrapper span, .correction-strike { font-family: 'Bebas Neue', sans-serif !important; }
-.correction-strike { position: relative; }
-.correction-strike::after { content: ''; position: absolute; left: -0.05em; right: -0.05em; top: 52%; height: 2px; background: #d9737a; transform: scaleX(1); }
-.correction-cursor { display: inline-block; width: 0.06em; height: 0.85em; margin-left: 0.05em; background: #d9737a; vertical-align: -0.05em; animation: blink 0.9s step-end infinite; }
-.correction-only { color: #d9737a !important; -webkit-text-fill-color: #d9737a !important; }
 /* Override nav for dark site */
 .mar-nav, .mxo-nav,
 body.nav-lit .mxo-nav,
@@ -1141,318 +882,11 @@ body[data-page="inner"] .mxo-nav {
 body[data-page="inner"] .mxo-fullnav-bottom,
 body[data-page="home"] .mxo-fullnav-bottom { color: #ffffff !important; opacity: 1 !important; }
 
-/* ═══════════════════════════════════════════════════════════════════
-   TREASURE REVEAL — the payoff once all 6 clues are found, anywhere
-   on the site. Fully self-contained: never touches page content
-   underneath (the contact page stays exactly the contact page).
-═══════════════════════════════════════════════════════════════════ */
 
-/* Stage 1 — full-screen unfurl, waits for a click ─────────────────── */
-.mxo-treasure-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  background: #04020a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 0.45s ease;
-}
-.mxo-treasure-overlay.is-dismissing { opacity: 0; }
-.mxo-treasure-overlay-map {
-  position: absolute;
-  inset: 0;
-  background-image: url('/photos/mapafondo.png');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.95;
-  clip-path: circle(0% at 50% 50%);
-  animation: mxo-treasure-unfurl 1.3s cubic-bezier(0.16,1,0.3,1) forwards;
-}
-.mxo-treasure-overlay-inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-}
-.mxo-treasure-overlay-text {
-  /* !important: a global reset forces every <p> to Outfit (and, on
-     inner pages, to a fixed color) — this display moment needs to
-     win that fight everywhere it's shown. */
-  font-family: 'Bebas Neue', sans-serif !important;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  color: #ffffff !important;
-  letter-spacing: 0.04em;
-  opacity: 0;
-  text-shadow: 0 0 30px rgba(217,115,122,0.6);
-  animation: mxo-overlay-text-in 1s ease 0.5s forwards;
-}
-.mxo-treasure-overlay-hint {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-.mxo-treasure-overlay-hint.is-visible { opacity: 1; animation: mxo-hint-pulse 2.4s ease-in-out infinite; }
-@keyframes mxo-treasure-unfurl {
-  to { clip-path: circle(75% at 50% 50%); }
-}
-@keyframes mxo-overlay-text-in {
-  0% { opacity: 0; transform: translateY(12px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes mxo-hint-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.9; }
-}
-
-/* Stage 2 — the note + guestbook, its own screen ──────────────────── */
-.mxo-treasure-note-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  background: radial-gradient(ellipse at 50% 0%, rgba(150,28,42,0.35) 0%, transparent 60%), #04020a;
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  padding: 5rem 1.5rem 4rem;
-}
-.mxo-treasure-note-inner {
-  width: 100%;
-  max-width: 560px;
-  animation: mxo-note-content-in 0.7s ease 0.1s both;
-}
-@keyframes mxo-note-content-in {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-.mxo-treasure-note-hearts {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 1.6rem;
-}
-/* Two classes (not one) to out-specificity the global inner-page <p>
-   color override, which itself carries !important. */
-.mxo-treasure-note-screen .mxo-treasure-note-label {
-  font-family: 'Bebas Neue', sans-serif !important;
-  font-size: 1.6rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: #d9737a !important;
-  text-shadow: 0 0 20px rgba(217,115,122,0.45);
-  margin-bottom: 1rem;
-}
-.mxo-treasure-note-text {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.9);
-  line-height: 1.9;
-  padding-left: 1.2rem;
-  border-left: 2px solid rgba(217,115,122,0.5);
-  margin-bottom: 2.8rem;
-}
-.mxo-treasure-home-btn {
-  margin-top: 3rem;
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.55);
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 0.5rem 0;
-  transition: color 0.2s ease;
-}
-.mxo-treasure-home-btn:hover { color: #d9737a; }
-
-/* Guestbook — deliberately unlike the contact form: boxed fields,
-   pixel-heart accents, a "sign the log" feel rather than "send a
-   message". ──────────────────────────────────────────────────────── */
-.mxo-guestbook { margin-top: 0.5rem; }
-.mxo-guestbook-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #d9737a;
-  margin-bottom: 1.1rem;
-}
-.mxo-guestbook-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-bottom: 2.2rem;
-  padding: 1.3rem;
-  background: rgba(217,115,122,0.05);
-  border: 1px dashed rgba(217,115,122,0.4);
-}
-.mxo-guestbook-submit {
-  align-self: flex-start;
-  background: #d9737a;
-  border: none;
-  color: #1a0509;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 0.75rem 1.6rem;
-  cursor: pointer;
-  margin-top: 0.2rem;
-}
-.mxo-guestbook-submit:disabled { opacity: 0.6; cursor: default; }
-.mxo-guestbook-sent {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 1.6rem;
-}
-.mxo-guestbook-error {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.76rem;
-  color: rgba(255,255,255,0.5);
-}
-.mxo-guestbook-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-.mxo-guestbook-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
-}
-.mxo-guestbook-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.05rem;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-}
-.mxo-guestbook-message {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.6);
-  margin-top: 0.2rem;
-}
-.mxo-guestbook-empty {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.45);
-}
-
-/* Clue: pick a plate — someone, or something */
-.mxo-plate {
-  margin: 3rem 0;
-}
-.mxo-plate-label {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 1.1rem;
-}
-.mxo-plate-options {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.mxo-plate-opt {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  width: 112px;
-  padding: 1.3rem 1rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 12px;
-  cursor: pointer;
-  font-family: 'Outfit', sans-serif;
-  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
-}
-.mxo-plate-opt:hover:not(:disabled) {
-  border-color: rgba(217,115,122,0.45);
-  transform: translateY(-2px);
-}
-.mxo-plate-opt:disabled {
-  cursor: default;
-}
-.mxo-plate-emoji {
-  font-size: 1.9rem;
-  line-height: 1;
-}
-.mxo-plate-caption {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.55);
-}
-.mxo-plate-opt.is-right {
-  border-color: #d9737a;
-  background: rgba(217,115,122,0.1);
-}
-.mxo-plate-opt.is-right .mxo-plate-caption {
-  color: #d9737a;
-}
-.mxo-plate-opt.is-wrong {
-  opacity: 0.5;
-}
-.mxo-plate-msg {
-  margin: 1rem 0 0;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  font-style: italic;
-  color: rgba(255,255,255,0.55);
-  min-height: 1.2em;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.mxo-plate-msg.is-visible {
-  opacity: 1;
-}
-.mxo-plate-msg.is-right-msg {
-  color: #d9737a;
-  font-style: normal;
-}
-
-/* Clue hint: the word visibly shimmers — shifting to the accent color
-   with a real glow behind it — so it reads as "something about this
-   word is different" at a glance. Stops once the clue is found. */
-.mxo-clue-shine {
-  animation: mxo-clue-shine-pulse 1.8s ease-in-out infinite;
-}
-@keyframes mxo-clue-shine-pulse {
-  0%, 100% { color: inherit; text-shadow: 0 0 0 rgba(217,115,122,0); }
-  50% { color: #d9737a; text-shadow: 0 0 18px rgba(217,115,122,0.95), 0 0 5px rgba(217,115,122,0.9); }
-}
-
-/* Clue hint: a brief, subtle nudge every 7 seconds — mostly still,
-   just enough of a tell for someone paying close attention. Stops
-   once the clue is found. */
-.mxo-clue-dbl-tick {
-  display: inline-block;
-  animation: mxo-clue-dbl-tick 3s ease-in-out infinite;
-}
-@keyframes mxo-clue-dbl-tick {
-  0%, 90%, 100% { transform: translateY(0); }
-  94% { transform: translateY(-3px); }
-  97% { transform: translateY(0); }
+/* ═══ Manifesto ("I'm not just one thing…") — block centered, text left ═══ */
+.mxo-manifesto {
+  max-width: 760px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: left !important;
 }
