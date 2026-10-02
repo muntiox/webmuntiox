@@ -206,6 +206,23 @@ const tools = ['Premiere Pro', 'Canva', 'Metricool', 'Adobe Suite']
             ))}
           </div>
         </section>
+        <section style={{ marginTop: '5rem', paddingTop: '4rem', borderTop: '1px solid rgba(255,255,255,0.12)' }}>
+          <p style={{ fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.35em', textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ display: 'inline-block', width: 28, height: 1, background: '#d9737a' }} />
+            Featured campaign
+          </p>
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '18.4px', fontWeight: 300, color: 'rgba(255,255,255,0.9)', lineHeight: '34.96px', maxWidth: 720, marginBottom: '2.5rem' }}>
+            One of the campaign videos — concept, edit and message in one piece.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <iframe
+              src="https://www.tiktok.com/player/v1/7566017073147579703"
+              style={{ width: '325px', height: '578px', maxWidth: '100%', border: 'none', borderRadius: '8px' }}
+              allow="autoplay; fullscreen"
+              title="RCCOON campaign video"
+            />
+          </div>
+        </section>
         <blockquote style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.2)', borderLeft: '3px solid #d9737a', padding: '2.5rem 2.5rem', fontSize: '1.35rem', fontStyle: 'italic', fontWeight: 300, color: '#ffffff', lineHeight: 1.5, margin: '5rem 0 4rem', maxWidth: 720 }}>
           Turn empathy into responsibility, and responsibility into action.
         </blockquote>
