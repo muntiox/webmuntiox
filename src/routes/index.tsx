@@ -23,6 +23,7 @@ const copy = {
       tagline: "Until 'responsible brand' becomes redundant.",
       ctaProjects: 'Projects',
       ctaContact: "Let's talk",
+      ctaCV: 'My CV',
     },
     ticker: "Open to what's next",
     manifesto: {
@@ -109,6 +110,7 @@ const copy = {
       tagline: "Hasta que 'marca responsable' sea redundante.",
       ctaProjects: 'Proyectos',
       ctaContact: 'Hablemos',
+      ctaCV: 'Mi CV',
     },
     ticker: 'Abierta a lo que viene',
     manifesto: {
@@ -483,6 +485,7 @@ function Hero() {
         <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
           <a href={langPath(lang, '/projects')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaProjects}</a>
           <a href={langPath(lang, '/contact')} style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#ffffff', background: '#d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block' }}>{c.ctaContact}</a>
+          <a href="/docs/ItxasoMuntion_CV_ATS.pdf" download style={{ fontFamily: "'Outfit', sans-serif", fontSize: '0.7rem', fontWeight: 500, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#d9737a', background: 'transparent', border: '1px solid #d9737a', padding: '1rem 2.5rem', textDecoration: 'none', minWidth: '190px', textAlign: 'center', display: 'inline-block', boxSizing: 'border-box' }}>{c.ctaCV}</a>
         </div>
       </div>
     </section>
